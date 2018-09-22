@@ -1,0 +1,7 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    // Default asks to drop '.js', but once dropped, browser can't find file.
+    "import/extensions": "ignorePackages"
+  }
+}
