@@ -54,7 +54,13 @@ export default class TestHarness {
   }
 
   shuffle() {
-    // this.queue.push();
+    // Fisher-Yates shuffle
+    for (let i = this.queue.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = this.queue[i];
+      this.queue[i] = this.queue[j];
+      this.queue[j] = temp;
+    }
   }
 
   perform() {
