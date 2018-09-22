@@ -19,7 +19,7 @@ export default class Tests {
 }
 
 // Run tests on import
-const seed = new Date();
+const seed = new Date().toLocaleString();
 console.info(seed); // eslint-disable-line
 console.info('--------------------'); // eslint-disable-line
 console.info('START RUNNING TESTS:'); // eslint-disable-line

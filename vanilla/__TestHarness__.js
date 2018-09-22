@@ -4,7 +4,7 @@
 
 export default class TestHarness {
   constructor(seed) {
-    this.seed = seed;
+    this.seed = seed; // E.g '9/22/2018, 3:00:19 PM'.
     this.queue = [];
   }
 
