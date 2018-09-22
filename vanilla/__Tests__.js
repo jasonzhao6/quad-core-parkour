@@ -20,11 +20,11 @@ export default class Tests {
 
 // Run tests on import
 const seed = new Date();
-console.log(seed); // eslint-disable-line
-console.log('--------------------'); // eslint-disable-line
-console.log('START RUNNING TESTS:'); // eslint-disable-line
+console.info(seed); // eslint-disable-line
+console.info('--------------------'); // eslint-disable-line
+console.info('START RUNNING TESTS:'); // eslint-disable-line
 const th = new __TestHarness__(seed);
 Tests.run(th);
 th.executeAssertions();
-console.log('FINISH RUNNING TESTS'); // eslint-disable-line
-console.log('--------------------'); // eslint-disable-line
+console.info('FINISH RUNNING TESTS'); // eslint-disable-line
+console.info('--------------------'); // eslint-disable-line
