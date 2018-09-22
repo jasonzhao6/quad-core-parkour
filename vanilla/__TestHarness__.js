@@ -1,6 +1,23 @@
 //
 // This test harness enqueues assertions, shuffles them, then executes them.
+// All assertions must be accompanied by `module > method > context`, like so:
+// ```
+//   th = new TestHarness(seed);
+//   th.module('Matrix', () => {
+//     th.method('#hello', () => {
+//       th.context('When ...', () => {
+//         th.assert('It ...', () => true);
+//         th.assert('It ...', () => false);
+//       });
 //
+//       th.context('When ...', () => {
+//         th.assert('It ...', () => true);
+//         th.assert('It ...', () => false);
+//       });
+//     });
+//   });
+//   th.executeAssertions();
+// ```
 
 export default class TestHarness {
   constructor(seed) {
