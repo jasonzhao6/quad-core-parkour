@@ -22,7 +22,7 @@ export default class TestHarness {
   //
 
   enqueue(method, message, expectation) {
-    console.log('!!!', method, message); // eslint-disable-line
+    console.log(method, message); // eslint-disable-line
     this.queue.push(expectation);
   }
 

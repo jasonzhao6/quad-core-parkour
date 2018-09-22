@@ -4,7 +4,7 @@ export default class MatrixTest {
   static run(th) {
     th.assert(
       '#hello',
-      'It says hello',
+      'Matrix says hello',
       () => Matrix.hello() === 'hello matrix',
     );
   }
