@@ -8,13 +8,13 @@ export default class CoreTest {
           const subject = new Core();
 
           th.assert(
-            'It initializes accumulator to 0',
-            () => subject.accumulator === 0,
+            'It initializes accumulator to default value',
+            () => subject.accumulator === Core.DEFAULT_VALUE,
           );
 
           th.assert(
-            'It initializes backup to 0',
-            () => subject.backup === 0,
+            'It initializes backup to default value',
+            () => subject.backup === Core.DEFAULT_VALUE,
           );
         });
       });

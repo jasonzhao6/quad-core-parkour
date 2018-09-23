@@ -51,7 +51,7 @@ export default class MatrixTest {
               const valuesAfter = subject.flat().map(el => el.accumulator);
 
               return [
-                valuesBefore.every(value => value === 0),
+                valuesBefore.every(value => value === Core.DEFAULT_VALUE),
 
                 valuesAfter[0] === _00,
                 valuesAfter[1] === _01,
