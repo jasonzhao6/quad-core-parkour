@@ -19,14 +19,16 @@
 //   th.executeAssertions();
 // ```
 
-import TestCasePrinter from './__TestCasePrinter__.js';
+import __TestCasePrinter__ from './__TestCasePrinter__.js';
+
+import './lib/js/seedrandom.js';
 
 export default class TestHarness {
   constructor(seed) {
     this.seed = seed; // E.g '9/22/2018, 3:00:19 PM'.
 
     this.moduleName = null; // E.g 'Matrix', 'Core'.
-    this.methodName = null; // '#instanceMethod' or '.classMethod'.
+    this.methodName = null; // Either '#instanceMethod' or '.classMethod'.
     this.contextString = null; // 'When ...'. Note: Nesting is not supported.
     this.assertionString = null; // 'It ...'.
 
@@ -75,6 +77,8 @@ export default class TestHarness {
   }
 
   shuffle() {
+    Math.seedrandom(this.seed);
+
     // Fisher-Yates shuffle
     for (let i = this.queue.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -98,6 +102,6 @@ export default class TestHarness {
   }
 
   print() {
-    new TestCasePrinter(this.failures.sort()).print();
+    new __TestCasePrinter__(this.failures).print();
   }
 }
