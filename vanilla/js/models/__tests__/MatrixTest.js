@@ -37,13 +37,35 @@ export default class MatrixTest {
           );
 
           th.assert(
-            'Elements are unique',
+            'Every element is a unique instance',
             () => {
               subject[0][0].accumulator = 999;
+              subject[0][1].accumulator = 1;
+              subject[1][0].accumulator = -1;
               subject[1][1].accumulator = -999;
               const values = subject.flat().map(el => el.accumulator);
               const uniques = new Set(values);
-              return uniques.size === 3;
+              return uniques.size === 4;
+            },
+          );
+
+          th.assert(
+            'Every element knows its position and parent matrix',
+            () => {
+              return [
+                subject[0][0].i === 0,
+                subject[0][0].j === 0,
+                subject[0][0].matrix.arrOfArr === subject,
+                subject[0][1].i === 0,
+                subject[0][1].j === 1,
+                subject[0][1].matrix.arrOfArr === subject,
+                subject[1][0].i === 1,
+                subject[1][0].j === 0,
+                subject[1][0].matrix.arrOfArr === subject,
+                subject[1][1].i === 1,
+                subject[1][1].j === 1,
+                subject[1][1].matrix.arrOfArr === subject,
+              ].every(assertion => assertion === true);
             },
           );
         });

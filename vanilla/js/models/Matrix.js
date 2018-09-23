@@ -12,7 +12,7 @@ export default class Matrix {
       // Populate each element with a unique `Class` instances.
       if (this.Class) {
         [...this.arrOfArr[i].keys()].forEach((j) => {
-          this.arrOfArr[i][j] = new this.Class();
+          this.arrOfArr[i][j] = new this.Class({ i, j, matrix: this });
         });
       }
     });
