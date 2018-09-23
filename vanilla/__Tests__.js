@@ -18,15 +18,26 @@ export default class Tests {
   }
 }
 
+//
 // Run tests on import
-const seed = new Date().toLocaleString();
-console.info(seed); // eslint-disable-line
-console.info('--------------------'); // eslint-disable-line
-console.info('START RUNNING TESTS:'); // eslint-disable-line
-console.info('--------------------'); // eslint-disable-line
+//
+
+const seed = new Date().toLocaleTimeString();
+
+/* eslint-disable no-console */
+console.info('--------------------');
+console.info('START RUNNING TESTS:');
+console.info('--------------------');
+/* eslint-enable no-console */
+
 const th = new __TestHarness__(seed);
 Tests.run(th);
 th.executeAssertions();
-console.info('--------------------'); // eslint-disable-line
-console.info('FINISH RUNNING TESTS'); // eslint-disable-line
-console.info('--------------------'); // eslint-disable-line
+
+/* eslint-disable no-console */
+console.info(`${th.failures.length} / ${th.queue.length} failed`);
+console.info(seed);
+console.info('--------------------');
+console.info('FINISH RUNNING TESTS');
+console.info('--------------------');
+/* eslint-enable no-console */

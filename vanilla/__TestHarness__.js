@@ -25,7 +25,7 @@ import './lib/js/seedrandom.js';
 
 export default class TestHarness {
   constructor(seed) {
-    this.seed = seed; // E.g '9/22/2018, 3:00:19 PM'.
+    this.seed = seed; // E.g '3:00:19 PM'.
 
     this.klassName = null; // E.g 'Matrix', 'Core'.
     this.methodName = null; // Either '#instanceMethod' or '.classMethod'.
