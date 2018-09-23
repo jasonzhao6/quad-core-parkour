@@ -1,7 +1,10 @@
+/* global window */
+
 export default class TestCasePrinter {
-  constructor(failures) {
+  constructor(failures, consoleOverride) {
     // Format: [[className, methodName, contextString, assertionString], ...].
     this.failures = failures;
+    this.console = consoleOverride || window.console;
 
     this.lastClassName = null;
     this.lastMethodName = null;
@@ -14,7 +17,7 @@ export default class TestCasePrinter {
       this.printClassName(className);
       this.printMethodName(methodName);
       this.printContextString(contextString);
-      TestCasePrinter.printAssertionString(assertionString);
+      this.printAssertionString(assertionString);
     });
 
     this.closeLastClass();
@@ -28,7 +31,7 @@ export default class TestCasePrinter {
     if (this.lastClassName !== className) {
       if (this.lastClassName !== null) this.closeLastClass();
       this.lastClassName = className;
-      console.group(className); // eslint-disable-line
+      this.console.group(className); // eslint-disable-line
     }
   }
 
@@ -36,7 +39,7 @@ export default class TestCasePrinter {
     if (this.lastMethodName !== methodName) {
       if (this.lastMethodName !== null) this.closeLastMethod();
       this.lastMethodName = methodName;
-      console.group(methodName); // eslint-disable-line
+      this.console.group(methodName); // eslint-disable-line
     }
   }
 
@@ -44,28 +47,28 @@ export default class TestCasePrinter {
     if (this.lastContextString !== contextString) {
       if (this.lastContextString !== null) this.closeLastContext();
       this.lastContextString = contextString;
-      console.group(contextString); // eslint-disable-line
+      this.console.group(contextString); // eslint-disable-line
     }
   }
 
-  static printAssertionString(assertionString) {
-    console.info(assertionString); // eslint-disable-line
+  printAssertionString(assertionString) {
+    this.console.info(assertionString); // eslint-disable-line
   }
 
   closeLastClass() {
     this.closeLastMethod();
     this.lastClassName = null;
-    console.groupEnd(); // eslint-disable-line
+    this.console.groupEnd(); // eslint-disable-line
   }
 
   closeLastMethod() {
     this.closeLastContext();
     this.lastMethodName = null;
-    console.groupEnd(); // eslint-disable-line
+    this.console.groupEnd(); // eslint-disable-line
   }
 
   closeLastContext() {
     this.lastContextString = null;
-    console.groupEnd(); // eslint-disable-line
+    this.console.groupEnd(); // eslint-disable-line
   }
 }
