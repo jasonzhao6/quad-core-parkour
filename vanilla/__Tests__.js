@@ -23,8 +23,10 @@ const seed = new Date().toLocaleString();
 console.info(seed); // eslint-disable-line
 console.info('--------------------'); // eslint-disable-line
 console.info('START RUNNING TESTS:'); // eslint-disable-line
+console.info('--------------------'); // eslint-disable-line
 const th = new __TestHarness__(seed);
 Tests.run(th);
 th.executeAssertions();
+console.info('--------------------'); // eslint-disable-line
 console.info('FINISH RUNNING TESTS'); // eslint-disable-line
 console.info('--------------------'); // eslint-disable-line

@@ -19,16 +19,19 @@
 //   th.executeAssertions();
 // ```
 
+import TestCasePrinter from './__TestCasePrinter__.js';
+
 export default class TestHarness {
   constructor(seed) {
     this.seed = seed; // E.g '9/22/2018, 3:00:19 PM'.
 
     this.moduleName = null; // E.g 'Matrix', 'Core'.
-    this.methodName = null; // E.g '#instanceMethod', '.classMethod'.
-    this.contextString = null; // E.g 'When ...'. Note: No support for nesting.
-    this.assertionString = null; // E.g 'It ...'. Note: No support for nesting.
+    this.methodName = null; // '#instanceMethod' or '.classMethod'.
+    this.contextString = null; // 'When ...'. Note: Nesting is not supported.
+    this.assertionString = null; // 'It ...'.
 
-    this.queue = [];
+    this.queue = []; // [{ moduleName, methodName, etc }, ...] for easy access.
+    this.failures = []; // [[moduleName, methodName, etc], ...] for sorting.
   }
 
   module(name, block) {
@@ -54,6 +57,7 @@ export default class TestHarness {
   executeAssertions() {
     this.shuffle();
     this.perform();
+    this.print();
   }
 
   //
@@ -81,9 +85,19 @@ export default class TestHarness {
   }
 
   perform() {
-    // console.log(this.queue);
     this.queue.forEach((testCase) => {
-      testCase.block();
+      if (!testCase.block()) {
+        this.failures.push([
+          testCase.moduleName,
+          testCase.methodName,
+          testCase.contextString,
+          testCase.assertionString,
+        ]);
+      }
     });
+  }
+
+  print() {
+    new TestCasePrinter(this.failures.sort()).print();
   }
 }
