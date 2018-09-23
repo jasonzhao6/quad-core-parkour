@@ -1,5 +1,6 @@
 export default class Core {
-  static hello() {
-    return 'hello core';
+  constructor() {
+    this.accumulator = 0;
+    this.backup = 0;
   }
 }

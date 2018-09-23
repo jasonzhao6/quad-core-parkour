@@ -1,9 +1,9 @@
 //
 // This test harness enqueues assertions, shuffles them, then executes them.
-// All assertions must be accompanied by `module > method > context`, like so:
+// All assertions must be accompanied by `Class > method > context`, like so:
 // ```
 //   th = new TestHarness(seed);
-//   th.klass('Matrix', () => {
+//   th.Class(Matrix, () => {
 //     th.method('#hello', () => {
 //       th.context('When ...', () => {
 //         th.assert('It ...', () => true);
@@ -27,17 +27,17 @@ export default class TestHarness {
   constructor(seed) {
     this.seed = seed; // E.g '3:00:19 PM'.
 
-    this.klassName = null; // E.g 'Matrix', 'Core'.
+    this.className = null; // E.g 'Matrix', 'Core'.
     this.methodName = null; // Either '#instanceMethod' or '.classMethod'.
     this.contextString = null; // 'When ...'. Note: Nesting is not supported.
     this.assertionString = null; // 'It ...'.
 
-    this.queue = []; // [{ klassName, methodName, etc }, ...] for easy access.
-    this.failures = []; // [[klassName, methodName, etc], ...] for sorting.
+    this.queue = []; // [{ className, methodName, etc }, ...] for easy access.
+    this.failures = []; // [[className, methodName, etc], ...] for sorting.
   }
 
-  klass(name, block) {
-    this.klassName = name;
+  Class(Class, block) {
+    this.className = Class.name;
     block();
   }
 
@@ -68,7 +68,7 @@ export default class TestHarness {
 
   enqueue(block) {
     this.queue.push({
-      klassName: this.klassName,
+      className: this.className,
       methodName: this.methodName,
       contextString: this.contextString,
       assertionString: this.assertionString,
@@ -92,7 +92,7 @@ export default class TestHarness {
     this.queue.forEach((testCase) => {
       if (!testCase.block()) {
         this.failures.push([
-          testCase.klassName,
+          testCase.className,
           testCase.methodName,
           testCase.contextString,
           testCase.assertionString,

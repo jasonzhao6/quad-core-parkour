@@ -1,33 +1,34 @@
 export default class TestCasePrinter {
   constructor(failures) {
-    this.failures = failures; // [[klassName, methodName, etc], ...].
+    // Format: [[className, methodName, contextString, assertionString], ...].
+    this.failures = failures;
 
-    this.lastKlassName = null;
+    this.lastClassName = null;
     this.lastMethodName = null;
     this.lastContextString = null;
   }
 
   print() {
     this.failures.forEach((failure) => {
-      const [klassName, methodName, contextString, assertionString] = failure;
-      this.printKlassName(klassName);
+      const [className, methodName, contextString, assertionString] = failure;
+      this.printClassName(className);
       this.printMethodName(methodName);
       this.printContextString(contextString);
       TestCasePrinter.printAssertionString(assertionString);
     });
 
-    this.closeLastModule();
+    this.closeLastClass();
   }
 
   //
   // Private
   //
 
-  printKlassName(klassName) {
-    if (this.lastKlassName !== klassName) {
-      if (this.lastKlassName !== null) this.closeLastModule();
-      this.lastKlassName = klassName;
-      console.group(klassName); // eslint-disable-line
+  printClassName(className) {
+    if (this.lastClassName !== className) {
+      if (this.lastClassName !== null) this.closeLastClass();
+      this.lastClassName = className;
+      console.group(className); // eslint-disable-line
     }
   }
 
@@ -51,9 +52,9 @@ export default class TestCasePrinter {
     console.info(assertionString); // eslint-disable-line
   }
 
-  closeLastModule() {
+  closeLastClass() {
     this.closeLastMethod();
-    this.lastKlassName = null;
+    this.lastClassName = null;
     console.groupEnd(); // eslint-disable-line
   }
 
