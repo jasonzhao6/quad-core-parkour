@@ -2,7 +2,7 @@ import Matrix from '../Matrix.js';
 
 export default class MatrixTest {
   static run(th) {
-    th.module('Matrix', () => {
+    th.klass('Matrix', () => {
       th.method('#hello', () => {
         th.context('When 10...', () => {
           th.assert('It 1...', () => 1 === 1);

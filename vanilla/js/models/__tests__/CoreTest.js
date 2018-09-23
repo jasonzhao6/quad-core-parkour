@@ -2,7 +2,7 @@ import Core from '../Core.js';
 
 export default class CoreTest {
   static run(th) {
-    th.module('Core', () => {
+    th.klass('Core', () => {
       th.method('#hello', () => {
         th.context('When A...', () => {
           th.assert('It a...', () => 1 !== 1);
