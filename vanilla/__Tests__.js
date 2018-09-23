@@ -1,16 +1,25 @@
 import __TestHarness__ from './__TestHarness__.js';
 
+// Testing framework tests
+import TestCasePrinterTest from './__tests__/TestCasePrinterTest.js';
+
+// Model tests
 import CoreTest from './js/models/__tests__/CoreTest.js';
 import MatrixTest from './js/models/__tests__/MatrixTest.js';
 
 export default class Tests {
   static run(th) {
+    this.runTestingFrameworkTests(th);
     this.runModelTests(th);
   }
 
   //
   // Private
   //
+
+  static runTestingFrameworkTests(th) {
+    TestCasePrinterTest.run(th);
+  }
 
   static runModelTests(th) {
     CoreTest.run(th);
