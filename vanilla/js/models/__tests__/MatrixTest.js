@@ -16,12 +16,14 @@ export default class MatrixTest {
 
           th.assert(
             `Every row has ${columnCount} columns`,
-            () => !subject.includes(undefined) &&
+            () => [
+              !subject.includes(undefined),
               subject.every(row => row.length === columnCount),
+            ],
           );
         });
 
-        th.context('When creating a Core matrix', () => {
+        th.context('When creating a 2x2 Core matrix', () => {
           const [rowCount, columnCount] = [2, 2];
           const Class = Core;
           const subject = new Matrix({ rowCount, columnCount, Class }).arrOfArr;
@@ -39,34 +41,45 @@ export default class MatrixTest {
           th.assert(
             'Every element is a unique instance',
             () => {
-              subject[0][0].accumulator = 999;
-              subject[0][1].accumulator = 1;
-              subject[1][0].accumulator = -1;
-              subject[1][1].accumulator = -999;
-              const values = subject.flat().map(el => el.accumulator);
-              const uniques = new Set(values);
-              return uniques.size === 4;
+              const valuesBefore = subject.flat().map(el => el.accumulator);
+
+              const [_00, _01, _10, _11] = [2, 1, -1, -2];
+              subject[0][0].accumulator = _00;
+              subject[0][1].accumulator = _01;
+              subject[1][0].accumulator = _10;
+              subject[1][1].accumulator = _11;
+              const valuesAfter = subject.flat().map(el => el.accumulator);
+
+              return [
+                valuesBefore.every(value => value === 0),
+
+                valuesAfter[0] === _00,
+                valuesAfter[1] === _01,
+                valuesAfter[2] === _10,
+                valuesAfter[3] === _11,
+              ];
             },
           );
 
           th.assert(
             'Every element knows its position and parent matrix',
-            () => {
-              return [
-                subject[0][0].i === 0,
-                subject[0][0].j === 0,
-                subject[0][0].matrix.arrOfArr === subject,
-                subject[0][1].i === 0,
-                subject[0][1].j === 1,
-                subject[0][1].matrix.arrOfArr === subject,
-                subject[1][0].i === 1,
-                subject[1][0].j === 0,
-                subject[1][0].matrix.arrOfArr === subject,
-                subject[1][1].i === 1,
-                subject[1][1].j === 1,
-                subject[1][1].matrix.arrOfArr === subject,
-              ].every(assertion => assertion === true);
-            },
+            () => [
+              subject[0][0].i === 0,
+              subject[0][0].j === 0,
+              subject[0][0].matrix.arrOfArr === subject,
+
+              subject[0][1].i === 0,
+              subject[0][1].j === 1,
+              subject[0][1].matrix.arrOfArr === subject,
+
+              subject[1][0].i === 1,
+              subject[1][0].j === 0,
+              subject[1][0].matrix.arrOfArr === subject,
+
+              subject[1][1].i === 1,
+              subject[1][1].j === 1,
+              subject[1][1].matrix.arrOfArr === subject,
+            ],
           );
         });
       });

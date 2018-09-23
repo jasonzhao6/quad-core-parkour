@@ -7,11 +7,10 @@
 //     th.method('#hello', () => {
 //       th.context('When ...', () => {
 //         th.assert('It ...', () => true);
-//         th.assert('It ...', () => false);
+//         th.assert('It ...', () => [true, true, ...]);
 //       });
 //
 //       th.context('When ...', () => {
-//         th.assert('It ...', () => true);
 //         th.xassert('It ...', () => false);
 //       });
 //     });
@@ -52,9 +51,9 @@ export default class TestHarness {
     block();
   }
 
-  assert(string, block) {
+  assert(string, assertion) {
     this.assertionString = string;
-    this.enqueue(block);
+    this.enqueue(assertion);
   }
 
   xassert() {
@@ -71,13 +70,13 @@ export default class TestHarness {
   // Private
   //
 
-  enqueue(block) {
+  enqueue(assertion) {
     this.queue.push({
       className: this.className,
       methodName: this.methodName,
       contextString: this.contextString,
       assertionString: this.assertionString,
-      block,
+      assertion,
     });
   }
 
@@ -95,7 +94,9 @@ export default class TestHarness {
 
   perform() {
     this.queue.forEach((testCase) => {
-      if (!testCase.block()) {
+      const assertions = [testCase.assertion()].flat();
+      const allTrue = assertions.every(assertion => assertion === true);
+      if (!allTrue) {
         this.failures.push([
           testCase.className,
           testCase.methodName,
