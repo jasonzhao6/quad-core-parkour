@@ -12,7 +12,7 @@
 //
 //       th.context('When ...', () => {
 //         th.assert('It ...', () => true);
-//         th.assert('It ...', () => false);
+//         th.xassert('It ...', () => false);
 //       });
 //     });
 //   });
@@ -34,6 +34,7 @@ export default class TestHarness {
 
     this.queue = []; // [{ className, methodName, etc }, ...] for easy access.
     this.failures = []; // [[className, methodName, etc], ...] for sorting.
+    this.pendingCount = 0;
   }
 
   Class(Class, block) {
@@ -54,6 +55,10 @@ export default class TestHarness {
   assert(string, block) {
     this.assertionString = string;
     this.enqueue(block);
+  }
+
+  xassert() {
+    this.pendingCount += 1;
   }
 
   executeAssertions() {
