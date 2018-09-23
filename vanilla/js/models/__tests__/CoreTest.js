@@ -4,6 +4,33 @@ export default class CoreTest {
   static run(th) {
     th.Class(Core, () => {
       th.method('#constructor', () => {
+        th.context('When creating a core without matrix params', () => {
+          const subject = new Core();
+
+          th.assert(
+            'It initializes each matrix property to null',
+            () => [
+              subject.i === null,
+              subject.j === null,
+              subject.matrix === null,
+            ],
+          );
+        });
+
+        th.context('When creating a core with matrix params', () => {
+          const [i, j, matrix] = [1, 2, {}];
+          const subject = new Core({ i, j, matrix });
+
+          th.assert(
+            'It initializes each matrix property',
+            () => [
+              subject.i === i,
+              subject.j === j,
+              subject.matrix === matrix,
+            ],
+          );
+        });
+
         th.context('When creating a core', () => {
           const subject = new Core();
 

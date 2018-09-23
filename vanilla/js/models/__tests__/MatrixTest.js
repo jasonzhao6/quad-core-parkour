@@ -5,6 +5,20 @@ export default class MatrixTest {
   static run(th) {
     th.Class(Matrix, () => {
       th.method('#constructor', () => {
+        th.context('When creating a matrix', () => {
+          const [rowCount, columnCount, Class] = [1, 2, {}.constructor];
+          const subject = new Matrix({ rowCount, columnCount, Class });
+
+          th.assert(
+            'It initializes each property',
+            () => [
+              subject.rowCount === rowCount,
+              subject.columnCount === columnCount,
+              subject.Class === Class,
+            ],
+          );
+        });
+
         th.context('When creating a 2x3 matrix', () => {
           const [rowCount, columnCount] = [2, 3];
           const subject = new Matrix({ rowCount, columnCount }).arrOfArr;
