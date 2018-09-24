@@ -1,17 +1,21 @@
 //
 // This test harness enqueues assertions, shuffles them, then executes them.
-// All assertions must be accompanied by `Class > method > context`, like so:
+// All assertions must have a `Class`, a `method`, and an optional `context`.
+//
+// USAGE AND EXAMPLES:
 // ```
 //   th = new TestHarness(seed);
 //   th.Class(Matrix, () => {
 //     th.method('#hello', () => {
-//       th.context('When ...', () => {
-//         th.assert('It ...', () => true);
-//         th.assert('It ...', () => [true, true, ...]);
+//       th.assert('It supports context-free assertions', () => true);
+//       th.assert('It supports multiple assertions', () => true);
+//
+//       th.context('When an assertion has multiple sub-conditions', () => {
+//         th.assert('It can take them as an array', () => [true, true, ...]);
 //       });
 //
-//       th.context('When ...', () => {
-//         th.xassert('It ...', () => false);
+//       th.context('When an assertion is temporarily pending', () => {
+//         th.xassert('It can skip with [x]assert', () => true);
 //       });
 //     });
 //   });
@@ -43,6 +47,7 @@ export default class TestHarness {
 
   method(name, block) {
     this.methodName = name;
+    this.contextString = null;
     block();
   }
 
