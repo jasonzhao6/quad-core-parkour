@@ -46,6 +46,22 @@ export default class TestCasePrinterTest {
           );
         });
       });
+
+      th.method('#print', () => {
+        const failures = [[1, 2, 3, 4]];
+        const consoleProxy = TestProxy.wrap(console);
+        const subject = new TestCasePrinter(failures, consoleProxy);
+        subject.print();
+
+        th.assert(
+          'It does its thing, then it resets `last*` states',
+          () => [
+            subject.lastClassName === null,
+            subject.lastMethodName === null,
+            subject.lastContextString === null,
+          ],
+        );
+      });
     });
   }
 }
