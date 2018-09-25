@@ -37,30 +37,42 @@ export default class TestCasePrinterTest {
 
         th.context('When creating a printer with console override', () => {
           const failures = [[1, 2, 3, 4]];
-          const consoleProxy = TestProxy.wrap(console);
-          const subject = new TestCasePrinter(failures, consoleProxy);
+          const consoleOverride = {};
+          const subject = new TestCasePrinter(failures, consoleOverride);
 
           th.assert(
             'It initializes the `console` property',
-            () => subject.console === consoleProxy,
+            () => subject.console === consoleOverride,
           );
         });
       });
 
       th.method('#print', () => {
-        const failures = [[1, 2, 3, 4]];
-        const consoleProxy = TestProxy.wrap(console);
-        const subject = new TestCasePrinter(failures, consoleProxy);
+        const subject = new TestCasePrinter([[1, 2, 3, 4]], TestProxy.noop());
         subject.print();
 
         th.assert(
-          'It does its thing, then it resets `last*` states',
+          'It does its thing, then it resets all the `last*` states',
           () => [
             subject.lastClassName === null,
             subject.lastMethodName === null,
             subject.lastContextString === null,
           ],
         );
+
+        th.context('When there is one failure to print', () => {
+          const consoleProxy = new TestProxy(console);
+          consoleProxy.expectMethod('group').andReturn().nTimes(3);
+          consoleProxy.expectMethod('info').andReturn().nTimes(1);
+          consoleProxy.expectMethod('groupEnd').andReturn().nTimes(3);
+
+          new TestCasePrinter([[1, 2, 3, 4]], consoleProxy).print();
+
+          th.assert(
+            'It prints the expected number of times',
+            () => consoleProxy.asExpected(),
+          );
+        });
       });
     });
   }
