@@ -52,7 +52,7 @@ export default class TestCasePrinterTest {
         subject.print();
 
         th.assert(
-          'It does its thing, then it resets all the `last*` states',
+          'It resets all the `last*` states when done',
           () => [
             subject.lastClassName === null,
             subject.lastMethodName === null,

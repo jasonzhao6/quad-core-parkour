@@ -28,27 +28,30 @@ export default class TestCasePrinter {
   //
 
   printClassName(className) {
-    if (this.lastClassName !== className) {
-      if (this.lastClassName !== null) this.closeLastClass();
-      this.lastClassName = className;
-      this.console.group(className); // eslint-disable-line
-    }
+    if (this.lastClassName === className) return;
+    if (this.lastClassName !== null) this.closeLastClass();
+    if (className === null) return;
+
+    this.lastClassName = className;
+    this.console.group(className); // eslint-disable-line
   }
 
   printMethodName(methodName) {
-    if (this.lastMethodName !== methodName) {
-      if (this.lastMethodName !== null) this.closeLastMethod();
-      this.lastMethodName = methodName;
-      this.console.group(methodName); // eslint-disable-line
-    }
+    if (this.lastMethodName === methodName) return;
+    if (this.lastMethodName !== null) this.closeLastMethod();
+    if (methodName === null) return;
+
+    this.lastMethodName = methodName;
+    this.console.group(methodName); // eslint-disable-line
   }
 
   printContextString(contextString) {
-    if (this.lastContextString !== contextString) {
-      if (this.lastContextString !== null) this.closeLastContext();
-      this.lastContextString = contextString;
-      this.console.group(contextString); // eslint-disable-line
-    }
+    if (this.lastContextString === contextString) return;
+    if (this.lastContextString !== null) this.closeLastContext();
+    if (contextString === null) return;
+
+    this.lastContextString = contextString;
+    this.console.group(contextString); // eslint-disable-line
   }
 
   printAssertionString(assertionString) {
@@ -56,14 +59,14 @@ export default class TestCasePrinter {
   }
 
   closeLastClass() {
-    this.closeLastMethod();
     this.lastClassName = null;
+    this.closeLastMethod();
     this.console.groupEnd(); // eslint-disable-line
   }
 
   closeLastMethod() {
-    this.closeLastContext();
     this.lastMethodName = null;
+    this.closeLastContext();
     this.console.groupEnd(); // eslint-disable-line
   }
 
