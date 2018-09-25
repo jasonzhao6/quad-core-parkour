@@ -43,22 +43,25 @@ export default class TestHarness {
   Class(Class, block) {
     this.className = Class.name;
     block();
+    this.className = null;
   }
 
   method(name, block) {
     this.methodName = name;
-    this.contextString = null;
     block();
+    this.methodName = null;
   }
 
   context(string, block) {
     this.contextString = string;
     block();
+    this.contextString = null;
   }
 
   assert(string, assertion) {
     this.assertionString = string;
     this.enqueue(assertion);
+    this.assertionString = null;
   }
 
   xassert() {
