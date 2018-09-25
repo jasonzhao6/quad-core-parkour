@@ -27,7 +27,7 @@ export default class TestCasePrinterTest {
         });
 
         th.context('When creating a printer without console override', () => {
-          const subject = new TestCasePrinter();
+          const subject = new TestCasePrinter([]);
 
           th.assert(
             'It initializes the `console` property to `window.console`',

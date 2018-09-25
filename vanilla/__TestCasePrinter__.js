@@ -3,7 +3,7 @@
 export default class TestCasePrinter {
   constructor(failures, consoleOverride) {
     // Format: [[className, methodName, contextString, assertionString], ...].
-    this.failures = failures;
+    this.failures = failures.sort();
     this.console = consoleOverride || window.console;
 
     this.lastClassName = null;
