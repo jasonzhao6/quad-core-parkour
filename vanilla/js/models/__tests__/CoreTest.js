@@ -5,7 +5,7 @@ export default class CoreTest {
     th.Class(Core, () => {
       th.method('#constructor', () => {
         th.context('When creating a core without matrix params', () => {
-          const subject = new Core();
+          const subject = new th.DescribedClass();
 
           th.assert(
             'It initializes each matrix property to null',
@@ -19,7 +19,7 @@ export default class CoreTest {
 
         th.context('When creating a core with matrix params', () => {
           const [i, j, matrix] = [1, 2, {}];
-          const subject = new Core({ i, j, matrix });
+          const subject = new th.DescribedClass({ i, j, matrix });
 
           th.assert(
             'It initializes each matrix property',
@@ -32,7 +32,7 @@ export default class CoreTest {
         });
 
         th.context('When creating a core', () => {
-          const subject = new Core();
+          const subject = new th.DescribedClass();
 
           th.assert(
             'It initializes accumulator to default value',

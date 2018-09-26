@@ -7,7 +7,8 @@ export default class MatrixTest {
       th.method('#constructor', () => {
         th.context('When creating a matrix', () => {
           const [rowCount, columnCount, Class] = [1, 2, {}.constructor];
-          const subject = new Matrix({ rowCount, columnCount, Class });
+          const args = { rowCount, columnCount, Class };
+          const subject = new th.DescribedClass(args);
 
           th.assert(
             'It initializes each property',
@@ -21,7 +22,8 @@ export default class MatrixTest {
 
         th.context('When creating a 2x3 matrix', () => {
           const [rowCount, columnCount] = [2, 3];
-          const subject = new Matrix({ rowCount, columnCount }).arrOfArr;
+          const args = { rowCount, columnCount };
+          const subject = new th.DescribedClass(args).arrOfArr;
 
           th.assert(
             `It has ${rowCount} rows`,
@@ -40,7 +42,8 @@ export default class MatrixTest {
         th.context('When creating a 2x2 Core matrix', () => {
           const [rowCount, columnCount] = [2, 2];
           const Class = Core;
-          const subject = new Matrix({ rowCount, columnCount, Class }).arrOfArr;
+          const args = { rowCount, columnCount, Class };
+          const subject = new th.DescribedClass(args).arrOfArr;
 
           th.assert(
             'It has `rowCount * columnCount` elements',

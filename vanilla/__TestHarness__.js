@@ -30,6 +30,7 @@ export default class TestHarness {
   constructor(seed) {
     this.seed = seed; // E.g '3:00:19 PM'.
 
+    this.DescribedClass = null; // E.g Matrix, Core.
     this.className = null; // E.g 'Matrix', 'Core'.
     this.methodName = null; // Either '#instanceMethod' or '.classMethod'.
     this.contextString = null; // 'When ...'. Note: Nesting is not supported.
@@ -41,6 +42,7 @@ export default class TestHarness {
   }
 
   Class(Class, block) {
+    this.DescribedClass = Class;
     this.className = Class.name;
     block();
     this.className = null;
