@@ -23,6 +23,7 @@
 // ```
 
 import __TestCasePrinter__ from './__TestCasePrinter__.js';
+import __TestProxy__ from './__TestProxy__.js';
 
 import './lib/js/seedrandom.js';
 
@@ -38,6 +39,7 @@ export default class TestHarness {
 
     this.queue = []; // [{ className, methodName, etc }, ...] for easy access.
     this.failures = []; // [[className, methodName, etc], ...] for sorting.
+    this.proxies = {}; // { [__TestProxyId__]: proxy, ... }
     this.pendingCount = 0;
   }
 
@@ -79,6 +81,24 @@ export default class TestHarness {
   //
   // Delegated
   //
+
+  allow(instance) {
+    if (instance.__TestProxyId__ !== undefined) { // eslint-disable-line
+      return this.proxy(instance);
+    }
+
+    const proxy = new __TestProxy__(instance);
+    this.proxies[instance.__TestProxyId__] = proxy; // eslint-disable-line
+    return proxy;
+  }
+
+  proxy(instance) {
+    return this.proxies[instance.__TestProxyId__]; // eslint-disable-line
+  }
+
+  expect(instance) {
+    return this.allow(instance);
+  }
 
   noop() { // eslint-disable-line
     return __TestProxy__.noop();

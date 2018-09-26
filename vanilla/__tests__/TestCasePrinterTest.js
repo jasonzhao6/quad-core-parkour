@@ -1,7 +1,6 @@
 /* global window */
 
 import TestCasePrinter from '../__TestCasePrinter__.js';
-import TestProxy from '../__TestProxy__.js';
 
 export default class TestCasePrinterTest {
   static run(th) {
@@ -62,16 +61,15 @@ export default class TestCasePrinterTest {
         );
 
         th.context('When there is one failure to print', () => {
-          const consoleProxy = new TestProxy(console);
-          consoleProxy.expectMethod('group').andReturn().nTimes(3);
-          consoleProxy.expectMethod('info').andReturn().nTimes(1);
-          consoleProxy.expectMethod('groupEnd').andReturn().nTimes(3);
+          th.expect(console).expectMethod('group').andReturn().nTimes(3);
+          th.expect(console).expectMethod('info').andReturn().nTimes(1);
+          th.expect(console).expectMethod('groupEnd').andReturn().nTimes(3);
 
-          new th.DescribedClass([[1, 2, 3, 4]], consoleProxy).print();
+          new th.DescribedClass([[1, 2, 3, 4]], th.proxy(console)).print();
 
           th.assert(
             'It prints the expected number of times',
-            () => consoleProxy.asExpected(),
+            () => th.proxy(console).asExpected(),
           );
         });
       });

@@ -71,6 +71,7 @@ class TestHandler {
 
 export default class TestProxy {
   constructor(instance) {
+    instance.__TestProxyId__ = new Date().getTime(); // eslint-disable-line
     return new Proxy(instance, new TestHandler());
   }
 
