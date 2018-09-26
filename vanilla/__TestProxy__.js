@@ -10,8 +10,9 @@ class TestHandler {
   }
 
   get(instance, method) {
-    if (method === 'expectMethod') return this.expectMethod.bind(this);
-    if (method === 'asExpected') return this.asExpected.bind(this);
+    if (method === 'toReceive') return this.toReceive.bind(this);
+    if (method === 'toHaveReceived') return this.toHaveReceived.bind(this);
+    if (method === 'isAsExpected') return this.isAsExpected.bind(this);
 
     if (method in this.expectations) {
       this.expectations[method].callsActual += 1;
@@ -28,16 +29,20 @@ class TestHandler {
   // Proxied
   //
 
-  expectMethod(method) {
+  toReceive(method) {
     this.currentMethod = method;
-    this.expectations[method] = {
-      callsExpected: 1,
-      callsActual: 0,
-    };
+    this.expectations[method] = { callsActual: 0 }; // Initialize method hash
+    this.andReturn();
     return this;
   }
 
-  asExpected() {
+  toHaveReceived(method) {
+    this.currentMethod = method;
+    this.expectations[method].callsExpected = 1;
+    return this;
+  }
+
+  isAsExpected() {
     return Object.values(this.expectations).every((methodExpectations) => {
       const { callsExpected, callsActual } = methodExpectations;
       const { argsExpected, argsActual } = methodExpectations;
@@ -49,7 +54,7 @@ class TestHandler {
   }
 
   //
-  // `.expect.[chainable]`
+  // `.toReceive.[chainable]` / `.toHaveReceived.[chainable]`
   //
 
   // TODO Track actual args

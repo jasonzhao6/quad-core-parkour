@@ -61,15 +61,19 @@ export default class TestCasePrinterTest {
         );
 
         th.context('When there is one failure to print', () => {
-          th.expect(console).expectMethod('group').andReturn().nTimes(3);
-          th.expect(console).expectMethod('info').andReturn().nTimes(1);
-          th.expect(console).expectMethod('groupEnd').andReturn().nTimes(3);
+          th.allow(console).toReceive('group');
+          th.allow(console).toReceive('info');
+          th.allow(console).toReceive('groupEnd');
 
           new th.DescribedClass([[1, 2, 3, 4]], th.proxy(console)).print();
 
+          th.expect(console).toHaveReceived('group').nTimes(3);
+          th.expect(console).toHaveReceived('groupEnd').nTimes(3);
+          th.expect(console).toHaveReceived('info');
+
           th.assert(
-            'It prints the expected number of times',
-            () => th.proxy(console).asExpected(),
+            'Its methods were called the expected number of times',
+            () => th.proxy(console).isAsExpected(),
           );
         });
       });
