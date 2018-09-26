@@ -45,7 +45,7 @@ th.executeAssertions();
 
 /* eslint-disable no-console */
 if (th.pendingCount > 0) console.info(`(${th.pendingCount} pending to do)`);
-console.info(`${th.failures.length} / ${th.queue.length} failed`);
+console.info(`${th.failures.length} failed out of ${th.queue.length}`);
 console.info(seed);
 console.info('--------------------');
 console.info('FINISH RUNNING TESTS');
