@@ -48,6 +48,7 @@ export default class TestCasePrinterTest {
       });
 
       th.method('#print', () => {
+        const consoleNoop = th.noop();
         const subject = new th.DescribedClass([[1, 2, 3, 4]], consoleNoop);
         subject.print();
 

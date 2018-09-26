@@ -75,6 +75,10 @@ export default class TestProxy {
   }
 
   static noop() {
-    return new Proxy({}, { get: () => () => {} });
+    if (this.noopSingleton === undefined) {
+      this.noopSingleton = new Proxy({}, { get: () => () => {} });
+    }
+
+    return this.noopSingleton;
   }
 }

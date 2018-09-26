@@ -77,6 +77,14 @@ export default class TestHarness {
   }
 
   //
+  // Delegated
+  //
+
+  noop() { // eslint-disable-line
+    return __TestProxy__.noop();
+  }
+
+  //
   // Private
   //
 
