@@ -32,7 +32,6 @@ class TestHandler {
   toReceive(method) {
     this.currentMethod = method;
     this.expectations[method] = { callsActual: 0 }; // Initialize method hash
-    this.andReturn();
     return this;
   }
 
@@ -65,6 +64,8 @@ class TestHandler {
   // }
 
   andReturn(value) {
+    // Wrap return value in a function as the proxy handler takes a method name
+    // and returns the corresponding function.
     this.expectations[this.currentMethod].returnValue = () => value;
     return this;
   }

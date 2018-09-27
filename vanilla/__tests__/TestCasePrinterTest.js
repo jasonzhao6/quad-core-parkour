@@ -61,9 +61,9 @@ export default class TestCasePrinterTest {
         );
 
         th.context('When there is one failure to print', () => {
-          th.allow(console).toReceive('group');
-          th.allow(console).toReceive('info');
-          th.allow(console).toReceive('groupEnd');
+          th.allow(console).toReceive('group').andReturn();
+          th.allow(console).toReceive('info').andReturn();
+          th.allow(console).toReceive('groupEnd').andReturn();
 
           new th.DescribedClass([[1, 2, 3, 4]], th.proxy(console)).print();
 
