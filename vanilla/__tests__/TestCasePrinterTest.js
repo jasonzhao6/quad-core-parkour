@@ -18,9 +18,9 @@ export default class TestCasePrinterTest {
           th.assert(
             'It initializes each `last*` property to null',
             () => [
-              subject.lastClassName === null,
-              subject.lastMethodName === null,
-              subject.lastContextString === null,
+              subject.lastClass === null,
+              subject.lastMethod === null,
+              subject.lastContext === null,
             ],
           );
         });
@@ -54,9 +54,9 @@ export default class TestCasePrinterTest {
         th.assert(
           'It resets all the `last*` states when done',
           () => [
-            subject.lastClassName === null,
-            subject.lastMethodName === null,
-            subject.lastContextString === null,
+            subject.lastClass === null,
+            subject.lastMethod === null,
+            subject.lastContext === null,
           ],
         );
 

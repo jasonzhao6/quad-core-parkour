@@ -63,40 +63,40 @@ export default class TestHarness {
     this.seed = seed; // E.g '3:00:19 PM'.
 
     this.DescribedClass = null; // E.g Matrix, Core.
-    this.className = null; // E.g 'Matrix', 'Core'.
-    this.methodName = null; // Either '#instanceMethod' or '.classMethod'.
-    this.contextString = null; // 'When ...'. Note: Nesting is not supported.
-    this.assertionString = null; // 'It ...'.
+    this.currentClass = null; // E.g 'Matrix', 'Core'.
+    this.currentMethod = null; // Either '#instanceMethod' or '.classMethod'.
+    this.currentContext = null; // 'When ...'. Note: Nesting is not supported.
+    this.currentAssertion = null; // 'It ...'.
 
-    this.queue = []; // [{ className, methodName, etc }, ...] for easy access.
-    this.failures = []; // [[className, methodName, etc], ...] for sorting.
+    this.queue = []; // [{ currentClass, etc }, ...] for easy access.
+    this.failures = []; // [[currentClass, etc], ...] for easy sorting.
     this.proxies = {}; // { [__TestProxyId__]: proxy, ... }
     this.pendingCount = 0;
   }
 
   Class(Class, block) {
     this.DescribedClass = Class;
-    this.className = Class.name;
+    this.currentClass = Class.name;
     block();
-    this.className = null;
+    this.currentClass = null;
   }
 
   method(name, block) {
-    this.methodName = name;
+    this.currentMethod = name;
     block();
-    this.methodName = null;
+    this.currentMethod = null;
   }
 
   context(string, block) {
-    this.contextString = string;
+    this.currentContext = string;
     block();
-    this.contextString = null;
+    this.currentContext = null;
   }
 
   assert(string, assertion) {
-    this.assertionString = string;
+    this.currentAssertion = string;
     this.enqueue(assertion);
-    this.assertionString = null;
+    this.currentAssertion = null;
   }
 
   xassert() {
@@ -145,10 +145,10 @@ export default class TestHarness {
 
   enqueue(assertion) {
     this.queue.push({
-      className: this.className,
-      methodName: this.methodName,
-      contextString: this.contextString,
-      assertionString: this.assertionString,
+      currentClass: this.currentClass,
+      currentMethod: this.currentMethod,
+      currentContext: this.currentContext,
+      currentAssertion: this.currentAssertion,
       assertion,
     });
   }
@@ -171,10 +171,10 @@ export default class TestHarness {
       const allTrue = assertions.every(assertion => assertion === true);
       if (!allTrue) {
         this.failures.push([
-          testCase.className,
-          testCase.methodName,
-          testCase.contextString,
-          testCase.assertionString,
+          testCase.currentClass,
+          testCase.currentMethod,
+          testCase.currentContext,
+          testCase.currentAssertion,
         ]);
       }
     });
