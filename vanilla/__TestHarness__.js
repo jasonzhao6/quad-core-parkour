@@ -83,24 +83,28 @@ export default class TestHarness {
   //
 
   allow(instance) {
-    if (instance.__TestProxyId__ !== undefined) { // eslint-disable-line
+    // eslint-disable-next-line no-underscore-dangle
+    if (instance.__TestProxyId__ !== undefined) {
       return this.proxy(instance);
     }
 
     const proxy = new __TestProxy__(instance);
-    this.proxies[instance.__TestProxyId__] = proxy; // eslint-disable-line
+    // eslint-disable-next-line no-underscore-dangle
+    this.proxies[instance.__TestProxyId__] = proxy;
     return proxy;
   }
 
   proxy(instance) {
-    return this.proxies[instance.__TestProxyId__]; // eslint-disable-line
+    // eslint-disable-next-line no-underscore-dangle
+    return this.proxies[instance.__TestProxyId__];
   }
 
   expect(instance) {
     return this.allow(instance);
   }
 
-  noop() { // eslint-disable-line
+  // eslint-disable-next-line class-methods-use-this
+  noop() {
     return __TestProxy__.noop();
   }
 

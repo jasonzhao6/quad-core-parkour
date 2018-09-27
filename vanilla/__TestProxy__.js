@@ -77,8 +77,9 @@ class TestHandler {
 
 export default class TestProxy {
   constructor(instance) {
-    instance.__TestProxyId__ = new Date().getTime(); // eslint-disable-line
-    return new Proxy(instance, new TestHandler());
+    // eslint-disable-next-line no-underscore-dangle, no-param-reassign
+    instance.__TestProxyId__ = new Date().getTime();
+    return new Proxy(instance, new TestHandler(instance));
   }
 
   static noop() {
