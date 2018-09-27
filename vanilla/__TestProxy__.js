@@ -1,18 +1,13 @@
-// TODO Documentation, call toReceive first
-
 class TestHandler {
   constructor(instance) {
     this.instance = instance;
-
-    // Format: { [method]: { callsExpected, callsActual, etc }, ... }.
-    this.expectations = {};
-
-    // This state is set by expect() and used by methods chained after it.
     this.currentMethod = null;
+    this.expectations = {}; // { [method]: { callsActual: 0, etc }, ... }.
   }
 
   get(instance, method) {
-    // Proxying methods
+    // Proxy methods
+    if (method === 'debug') return this.debug.bind(this);
     if (method === 'toReceive') return this.toReceive.bind(this);
     if (method === 'toHaveReceived') return this.toHaveReceived.bind(this);
     if (method === 'isAsExpected') return this.isAsExpected.bind(this);
@@ -21,45 +16,59 @@ class TestHandler {
     if (method in this.expectations) {
       this.expectations[method].callsActual += 1;
 
-      if (this.expectations[method].returnValue) {
-        return this.expectations[method].returnValue;
+      if (this.expectations[method].returnValue !== undefined) {
+        return () => this.expectations[method].returnValue;
       }
     }
 
     return instance[method];
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  debug() {
+    debugger; // eslint-disable-line no-debugger
+  }
+
   //
-  // Proxying
+  // Allow `proxy.toReiceive(method)[.andReturn(response)]`
   //
 
   toReceive(method) {
-    // Verify that method to proxy exists in the underlying instance.
-    if (!(method in this.instance)) {
-      // eslint-disable-next-line no-console
-      console.error(`Not allowed to proxy '${method}' b/c it doesn't exist on`);
-      throw this.instance;
-    }
-
-    // Set `currentMethod` for reference by chained methods.
+    this.verify(method);
     this.currentMethod = method;
-
-    // Initialize method-specific hash, to be appended to by chained methods.
     this.expectations[method] = { callsActual: 0 };
-
     return this;
   }
 
+  andReturn(value = null) {
+    this.expectations[this.currentMethod].returnValue = value;
+    return this;
+  }
+
+  //
+  // Expect `proxy.toHaveReceived(method)[.nTimes(n)]`
+  //
+
   toHaveReceived(method) {
+    this.verify(method);
     this.currentMethod = method;
     this.expectations[method].callsExpected = 1;
     return this;
   }
 
+  nTimes(n) {
+    this.expectations[this.currentMethod].callsExpected = n;
+  }
+
+  //
+  // Assert `proxy.isAsExpected()`
+  //
+
   isAsExpected() {
-    return Object.values(this.expectations).every((methodExpectations) => {
+    return Object.values(this.expectations).map((methodExpectations) => {
       const { callsExpected, callsActual } = methodExpectations;
       const { argsExpected, argsActual } = methodExpectations;
+
       return [
         callsExpected === undefined || callsExpected === callsActual,
         argsExpected === undefined || argsExpected === argsActual,
@@ -68,25 +77,15 @@ class TestHandler {
   }
 
   //
-  // Chained (to `.toReceive` and `.toHaveReceived`)
+  // Private
   //
 
-  // TODO Track actual args
-  // toReceive(...args) {
-  //   this.expectations[this.currentMethod].argsExpected = args;
-  //   this.expectations[this.currentMethod].argsActual = null;
-  //   return this;
-  // }
-
-  andReturn(value) {
-    // Wrap return value in a function as the proxy handler takes a method name
-    // and returns the corresponding function.
-    this.expectations[this.currentMethod].returnValue = () => value;
-    return this;
-  }
-
-  nTimes(n) {
-    this.expectations[this.currentMethod].callsExpected = n;
+  verify(method) {
+    if (!(method in this.instance)) {
+      const msg = `Not allowed to proxy '.${method}()' b/c it doesn't exist on`;
+      console.error(msg); // eslint-disable-line
+      throw this.instance;
+    }
   }
 }
 

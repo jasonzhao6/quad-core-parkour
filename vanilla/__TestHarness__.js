@@ -1,25 +1,56 @@
 //
 // This test harness enqueues assertions, shuffles them, then executes them.
-// All assertions must have a `Class`, a `method`, and an optional `context`.
 //
 // USAGE AND EXAMPLES:
+//
 // ```
-//   th = new TestHarness(seed);
-//   th.Class(Matrix, () => {
-//     th.method('#hello', () => {
-//       th.assert('It supports context-free assertions', () => true);
-//       th.assert('It supports multiple assertions', () => true);
 //
-//       th.context('When an assertion has multiple sub-conditions', () => {
-//         th.assert('It can take them as an array', () => [true, true, ...]);
-//       });
+//   class Person {
+//     sayHi(person) {
+//       person.hello();
+//       // person.goodbye();
+//     }
 //
-//       th.context('When an assertion is temporarily pending', () => {
-//         th.xassert('It can skip with [x]assert', () => true);
-//       });
+//     hello() {}
+//
+//     goodbye() {}
+//   }
+//
+//   const seed = new Date().toLocaleTimeString();
+//   const th = new TestHarness(seed);
+//
+//   th.Class(Person, () => {
+//     th.method('#sayHi', () => {
+//       const me = new th.DescribedClass();
+//       const friend = new th.DescribedClass();
+//
+//       th.allow(friend).toReceive('hello'); // And call through.
+//       th.allow(friend).toReceive('goodbye').andReturn('See ya!');
+//
+//       me.sayHi(th.proxy(friend));
+//
+//       th.expect(friend).toHaveReceived('hello'); // Once
+//       th.expect(friend).toHaveReceived('goodbye').nTimes(0);
+//
+//       th.assert('It says only hello', () => th.proxy(friend).isAsExpected());
 //     });
 //   });
+//
+//   th.Class(TestHarness, () => {
+//     th.assert('It can and does test itself.', () => true);
+//     th.assert('It supports multiple assertions in a row', () => true);
+//
+//     th.context('When an assertion has multiple sub-conditions', () => {
+//       th.assert('It can take them as an array', () => [true, true, ...]);
+//     });
+//
+//     th.context('When an assertion is temporarily pending', () => {
+//       th.xassert('It can be skipped with [x]assert', () => true);
+//     });
+//   });
+//
 //   th.executeAssertions();
+//
 // ```
 
 import __TestCasePrinter__ from './__TestCasePrinter__.js';
