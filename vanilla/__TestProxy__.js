@@ -1,7 +1,9 @@
-// TODO Documentation
+// TODO Documentation, call toReceive first
 
 class TestHandler {
-  constructor() {
+  constructor(instance) {
+    this.instance = instance;
+
     // Format: { [method]: { callsExpected, callsActual, etc }, ... }.
     this.expectations = {};
 
@@ -10,10 +12,12 @@ class TestHandler {
   }
 
   get(instance, method) {
+    // Proxying methods
     if (method === 'toReceive') return this.toReceive.bind(this);
     if (method === 'toHaveReceived') return this.toHaveReceived.bind(this);
     if (method === 'isAsExpected') return this.isAsExpected.bind(this);
 
+    // Proxied methods
     if (method in this.expectations) {
       this.expectations[method].callsActual += 1;
 
@@ -26,12 +30,23 @@ class TestHandler {
   }
 
   //
-  // Proxied
+  // Proxying
   //
 
   toReceive(method) {
+    // Verify that method to proxy exists in the underlying instance.
+    if (!(method in this.instance)) {
+      // eslint-disable-next-line no-console
+      console.error(`Not allowed to proxy '${method}' b/c it doesn't exist on`);
+      throw this.instance;
+    }
+
+    // Set `currentMethod` for reference by chained methods.
     this.currentMethod = method;
-    this.expectations[method] = { callsActual: 0 }; // Initialize method hash
+
+    // Initialize method-specific hash, to be appended to by chained methods.
+    this.expectations[method] = { callsActual: 0 };
+
     return this;
   }
 
@@ -53,7 +68,7 @@ class TestHandler {
   }
 
   //
-  // `.toReceive.[chainable]` / `.toHaveReceived.[chainable]`
+  // Chained (to `.toReceive` and `.toHaveReceived`)
   //
 
   // TODO Track actual args
