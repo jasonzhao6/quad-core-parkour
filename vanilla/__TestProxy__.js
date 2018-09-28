@@ -1,3 +1,6 @@
+/* eslint class-methods-use-this: ['error', { exceptMethods: ['debug'] }] */
+/* eslint no-console: ['error', { allow: ['error'] }] */
+
 class TestHandler {
   constructor(instance) {
     this.instance = instance;
@@ -6,7 +9,7 @@ class TestHandler {
   }
 
   get(instance, method) {
-    // Proxy methods
+    // Handler methods
     if (method === 'debug') return this.debug.bind(this);
     if (method === 'toReceive') return this.toReceive.bind(this);
     if (method === 'toHaveReceived') return this.toHaveReceived.bind(this);
@@ -24,7 +27,6 @@ class TestHandler {
     return instance[method];
   }
 
-  // eslint-disable-next-line class-methods-use-this
   debug() {
     debugger; // eslint-disable-line no-debugger
   }
@@ -83,7 +85,7 @@ class TestHandler {
   verify(method) {
     if (!(method in this.instance)) {
       const msg = `Not allowed to proxy '.${method}()' b/c it doesn't exist on`;
-      console.error(msg); // eslint-disable-line
+      console.error(msg);
       throw this.instance;
     }
   }
@@ -91,8 +93,6 @@ class TestHandler {
 
 export default class TestProxy {
   constructor(instance) {
-    // eslint-disable-next-line no-underscore-dangle, no-param-reassign
-    instance.__TestProxyId__ = new Date().getTime();
     return new Proxy(instance, new TestHandler(instance));
   }
 

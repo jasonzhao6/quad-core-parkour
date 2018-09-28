@@ -1,9 +1,7 @@
-/* global window */
-
 export default class TestCasePrinter {
   constructor(failures, consoleOverride) {
     this.failures = failures; // [[class, method, context, assertion], ...].
-    this.console = consoleOverride || window.console;
+    this.console = consoleOverride || console;
 
     this.lastClass = null;
     this.lastMethod = null;
@@ -38,7 +36,7 @@ export default class TestCasePrinter {
     if (currentClass === null) return;
 
     this.lastClass = currentClass;
-    this.console.group(currentClass); // eslint-disable-line
+    this.console.group(currentClass);
   }
 
   printMethodName(currentMethod) {
@@ -47,7 +45,7 @@ export default class TestCasePrinter {
     if (currentMethod === null) return;
 
     this.lastMethod = currentMethod;
-    this.console.group(currentMethod); // eslint-disable-line
+    this.console.group(currentMethod);
   }
 
   printContextString(currentContext) {
@@ -56,27 +54,27 @@ export default class TestCasePrinter {
     if (currentContext === null) return;
 
     this.lastContext = currentContext;
-    this.console.group(currentContext); // eslint-disable-line
+    this.console.group(currentContext);
   }
 
   printAssertionString(currentAssertion) {
-    this.console.info(currentAssertion); // eslint-disable-line
+    this.console.info(currentAssertion);
   }
 
   closeLastClass() {
     this.lastClass = null;
     this.closeLastMethod();
-    this.console.groupEnd(); // eslint-disable-line
+    this.console.groupEnd();
   }
 
   closeLastMethod() {
     this.lastMethod = null;
     this.closeLastContext();
-    this.console.groupEnd(); // eslint-disable-line
+    this.console.groupEnd();
   }
 
   closeLastContext() {
     this.lastContext = null;
-    this.console.groupEnd(); // eslint-disable-line
+    this.console.groupEnd();
   }
 }

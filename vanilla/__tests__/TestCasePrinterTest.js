@@ -1,5 +1,3 @@
-/* global window */
-
 import TestCasePrinter from '../__TestCasePrinter__.js';
 
 export default class TestCasePrinterTest {
@@ -29,8 +27,8 @@ export default class TestCasePrinterTest {
           const subject = new th.DescribedClass([]);
 
           th.assert(
-            'It initializes the `console` property to `window.console`',
-            () => subject.console === window.console,
+            'It initializes the `console` property',
+            () => subject.console === console,
           );
         });
 

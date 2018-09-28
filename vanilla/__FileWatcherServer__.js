@@ -1,3 +1,5 @@
+/* eslint no-console: ['error', { allow: ['info'] }] */
+
 const FSEvents = require('fsevents');
 const WebSocket = require('ws');
 
@@ -6,11 +8,11 @@ const watcher = FSEvents(__dirname);
 
 server.on('connection', (client) => {
   client.on('message', (message) => {
-    console.info('[Incoming]', message); // eslint-disable-line
+    console.info('[Incoming]', message);
 
     const reply = 'FileWatcher: Pong';
     client.send(reply);
-    console.info('[Outgoing]', reply); // eslint-disable-line
+    console.info('[Outgoing]', reply);
   });
 });
 
@@ -21,7 +23,7 @@ watcher.on('change', (path) => {
   server.clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
       client.send(message);
-      console.info('[Outgoing]', message); // eslint-disable-line
+      console.info('[Outgoing]', message);
     }
   });
 });

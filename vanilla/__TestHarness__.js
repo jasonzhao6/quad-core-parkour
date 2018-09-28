@@ -1,3 +1,7 @@
+/* eslint class-methods-use-this: ['error', { exceptMethods: ['noop'] }] */
+/* eslint no-param-reassign:
+     ['error', { props: true, ignorePropertyModificationsFor: ['instance'] }] */
+
 //
 // This test harness enqueues assertions, shuffles them, then executes them.
 //
@@ -114,7 +118,6 @@ export default class TestHarness {
   //
 
   proxy(instance) {
-    // eslint-disable-next-line no-param-reassign
     instance.TEST_PROXY_ID = new Date().getTime(); // Auto propagated to proxy.
     this.proxies[instance.TEST_PROXY_ID] = new __TestProxy__(instance);
     return this.proxies[instance.TEST_PROXY_ID];
@@ -128,7 +131,6 @@ export default class TestHarness {
     return this.proxies[instanceProxy.TEST_PROXY_ID];
   }
 
-  // eslint-disable-next-line class-methods-use-this
   noop() {
     return __TestProxy__.noop();
   }
