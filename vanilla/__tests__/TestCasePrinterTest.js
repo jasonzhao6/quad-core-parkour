@@ -1,19 +1,19 @@
 import TestCasePrinter from '../__TestCasePrinter__.js';
 
 export default class TestCasePrinterTest {
-  static run(th) {
-    th.Class(TestCasePrinter, () => {
-      th.method('#constructor', () => {
-        th.context('When creating a printer', () => {
+  static run(__) {
+    __.Class(TestCasePrinter, () => {
+      __.method('#constructor', () => {
+        __.context('When creating a printer', () => {
           const failures = [];
-          const subject = new th.DescribedClass(failures);
+          const subject = new __.DescribedClass(failures);
 
-          th.assert(
+          __.assert(
             'It initializes the `failures` property',
             () => subject.failures === failures,
           );
 
-          th.assert(
+          __.assert(
             'It initializes each `last*` property to null',
             () => [
               subject.lastClass === null,
@@ -23,34 +23,34 @@ export default class TestCasePrinterTest {
           );
         });
 
-        th.context('When creating a printer without console override', () => {
-          const subject = new th.DescribedClass([]);
+        __.context('When creating a printer without console override', () => {
+          const subject = new __.DescribedClass([]);
 
-          th.assert(
+          __.assert(
             'It initializes the `console` property',
             () => subject.console === console,
           );
         });
 
-        th.context('When creating a printer with console override', () => {
+        __.context('When creating a printer with console override', () => {
           const failures = [[1, 2, 3, 4]];
           const consoleOverride = {};
-          const subject = new th.DescribedClass(failures, consoleOverride);
+          const subject = new __.DescribedClass(failures, consoleOverride);
 
-          th.assert(
+          __.assert(
             'It initializes the `console` property',
             () => subject.console === consoleOverride,
           );
         });
       });
 
-      th.method('#print', () => {
-        const consoleNoop = th.noop();
-        const subject = new th.DescribedClass([[1, 2, 3, 4]], consoleNoop);
+      __.method('#print', () => {
+        const consoleNoop = __.noop();
+        const subject = new __.DescribedClass([[1, 2, 3, 4]], consoleNoop);
 
         subject.print();
 
-        th.assert(
+        __.assert(
           'It resets all the `last*` states when done',
           () => [
             subject.lastClass === null,
@@ -59,20 +59,20 @@ export default class TestCasePrinterTest {
           ],
         );
 
-        th.context('When there is one failure to print', () => {
-          const consoleProxy = th.proxy(console);
+        __.context('When there is one failure to print', () => {
+          const consoleProxy = __.proxy(console);
 
-          th.allow(consoleProxy).toReceive('group').andReturn();
-          th.allow(consoleProxy).toReceive('groupEnd').andReturn();
-          th.allow(consoleProxy).toReceive('info').andReturn();
+          __.allow(consoleProxy).toReceive('group').andReturn();
+          __.allow(consoleProxy).toReceive('groupEnd').andReturn();
+          __.allow(consoleProxy).toReceive('info').andReturn();
 
-          new th.DescribedClass([[1, 2, 3, 4]], consoleProxy).print();
+          new __.DescribedClass([[1, 2, 3, 4]], consoleProxy).print();
 
-          th.expect(consoleProxy).toHaveReceived('group').nTimes(3);
-          th.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(3);
-          th.expect(consoleProxy).toHaveReceived('info');
+          __.expect(consoleProxy).toHaveReceived('group').nTimes(3);
+          __.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(3);
+          __.expect(consoleProxy).toHaveReceived('info');
 
-          th.assert(
+          __.assert(
             'Its methods were called the expected number of times',
             () => consoleProxy.isAsExpected(),
           );

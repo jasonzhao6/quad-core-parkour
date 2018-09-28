@@ -2,15 +2,15 @@ import Core from '../Core.js';
 import Matrix from '../Matrix.js';
 
 export default class MatrixTest {
-  static run(th) {
-    th.Class(Matrix, () => {
-      th.method('#constructor', () => {
-        th.context('When creating a matrix', () => {
+  static run(__) {
+    __.Class(Matrix, () => {
+      __.method('#constructor', () => {
+        __.context('When creating a matrix', () => {
           const [rowCount, columnCount, Class] = [1, 2, {}.constructor];
           const args = { rowCount, columnCount, Class };
-          const subject = new th.DescribedClass(args);
+          const subject = new __.DescribedClass(args);
 
-          th.assert(
+          __.assert(
             'It initializes each property',
             () => [
               subject.rowCount === rowCount,
@@ -20,17 +20,17 @@ export default class MatrixTest {
           );
         });
 
-        th.context('When creating a 2x3 matrix', () => {
+        __.context('When creating a 2x3 matrix', () => {
           const [rowCount, columnCount] = [2, 3];
           const args = { rowCount, columnCount };
-          const subject = new th.DescribedClass(args).arrOfArr;
+          const subject = new __.DescribedClass(args).arrOfArr;
 
-          th.assert(
+          __.assert(
             `It has ${rowCount} rows`,
             () => subject.length === rowCount,
           );
 
-          th.assert(
+          __.assert(
             `Every row has ${columnCount} columns`,
             () => [
               !subject.includes(undefined),
@@ -39,23 +39,23 @@ export default class MatrixTest {
           );
         });
 
-        th.context('When creating a 2x2 Core matrix', () => {
+        __.context('When creating a 2x2 Core matrix', () => {
           const [rowCount, columnCount] = [2, 2];
           const Class = Core;
           const args = { rowCount, columnCount, Class };
-          const subject = new th.DescribedClass(args).arrOfArr;
+          const subject = new __.DescribedClass(args).arrOfArr;
 
-          th.assert(
+          __.assert(
             'It has `rowCount * columnCount` elements',
             () => subject.flat().length === rowCount * columnCount,
           );
 
-          th.assert(
+          __.assert(
             'Every element is an instance of Core',
             () => subject.flat().every(el => el instanceof Core),
           );
 
-          th.assert(
+          __.assert(
             'Every element is a unique instance',
             () => {
               const valuesBefore = subject.flat().map(el => el.accumulator);
@@ -78,7 +78,7 @@ export default class MatrixTest {
             },
           );
 
-          th.assert(
+          __.assert(
             'Every element knows its position and parent matrix',
             () => [
               subject[0][0].i === 0,
