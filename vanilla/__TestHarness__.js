@@ -181,6 +181,6 @@ export default class TestHarness {
   }
 
   print() {
-    new __TestCasePrinter__(this.failures).print();
+    new __TestCasePrinter__(this.failures.sort()).print();
   }
 }

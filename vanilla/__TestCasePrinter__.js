@@ -2,7 +2,7 @@
 
 export default class TestCasePrinter {
   constructor(failures, consoleOverride) {
-    this.failures = failures.sort(); // [[currentClass, etc], ...].
+    this.failures = failures; // [[class, method, context, assertion], ...].
     this.console = consoleOverride || window.console;
 
     this.lastClass = null;
