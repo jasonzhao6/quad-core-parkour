@@ -8,7 +8,7 @@
 //   class Person {
 //     sayHi(person) {
 //       person.hello();
-//       // person.goodbye();
+//       // person.goodbye(); // Try uncommenting this line.
 //     }
 //
 //     hello() {}
@@ -22,17 +22,17 @@
 //   th.Class(Person, () => {
 //     th.method('#sayHi', () => {
 //       const me = new th.DescribedClass();
-//       const friend = new th.DescribedClass();
+//       const friendProxy = th.proxy(new th.DescribedClass());
 //
-//       th.allow(friend).toReceive('hello'); // And call through.
-//       th.allow(friend).toReceive('goodbye').andReturn('See ya!');
+//       th.allow(friendProxy).toReceive('hello'); // And call through.
+//       th.allow(friendProxy).toReceive('goodbye').andReturn('See ya!');
 //
-//       me.sayHi(th.proxy(friend));
+//       me.sayHi(friendProxy);
 //
-//       th.expect(friend).toHaveReceived('hello'); // Once
-//       th.expect(friend).toHaveReceived('goodbye').nTimes(0);
+//       th.expect(friendProxy).toHaveReceived('hello'); // Once
+//       th.expect(friendProxy).toHaveReceived('goodbye').nTimes(0);
 //
-//       th.assert('It says only hello', () => th.proxy(friend).isAsExpected());
+//       th.assert('It says only hello', () => friendProxy.isAsExpected());
 //     });
 //   });
 //
@@ -70,7 +70,7 @@ export default class TestHarness {
 
     this.queue = []; // [{ currentClass, etc }, ...] for easy access.
     this.failures = []; // [[currentClass, etc], ...] for easy sorting.
-    this.proxies = {}; // { [__TestProxyId__]: proxy, ... }
+    this.proxies = {}; // { [TEST_PROXY_ID]: proxy, ... }
     this.pendingCount = 0;
   }
 
@@ -113,25 +113,19 @@ export default class TestHarness {
   // Delegated
   //
 
-  allow(instance) {
-    // eslint-disable-next-line no-underscore-dangle
-    if (instance.__TestProxyId__ !== undefined) {
-      return this.proxy(instance);
-    }
-
-    const proxy = new __TestProxy__(instance);
-    // eslint-disable-next-line no-underscore-dangle
-    this.proxies[instance.__TestProxyId__] = proxy;
-    return proxy;
-  }
-
   proxy(instance) {
-    // eslint-disable-next-line no-underscore-dangle
-    return this.proxies[instance.__TestProxyId__];
+    // eslint-disable-next-line no-param-reassign
+    instance.TEST_PROXY_ID = new Date().getTime(); // Auto propagated to proxy.
+    this.proxies[instance.TEST_PROXY_ID] = new __TestProxy__(instance);
+    return this.proxies[instance.TEST_PROXY_ID];
   }
 
-  expect(instance) {
-    return this.allow(instance);
+  allow(instanceProxy) {
+    return this.proxies[instanceProxy.TEST_PROXY_ID];
+  }
+
+  expect(instanceProxy) {
+    return this.proxies[instanceProxy.TEST_PROXY_ID];
   }
 
   // eslint-disable-next-line class-methods-use-this

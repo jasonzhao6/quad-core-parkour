@@ -49,6 +49,7 @@ export default class TestCasePrinterTest {
       th.method('#print', () => {
         const consoleNoop = th.noop();
         const subject = new th.DescribedClass([[1, 2, 3, 4]], consoleNoop);
+
         subject.print();
 
         th.assert(
@@ -61,19 +62,21 @@ export default class TestCasePrinterTest {
         );
 
         th.context('When there is one failure to print', () => {
-          th.allow(console).toReceive('group').andReturn();
-          th.allow(console).toReceive('info').andReturn();
-          th.allow(console).toReceive('groupEnd').andReturn();
+          const consoleProxy = th.proxy(console);
 
-          new th.DescribedClass([[1, 2, 3, 4]], th.proxy(console)).print();
+          th.allow(consoleProxy).toReceive('group').andReturn();
+          th.allow(consoleProxy).toReceive('groupEnd').andReturn();
+          th.allow(consoleProxy).toReceive('info').andReturn();
 
-          th.expect(console).toHaveReceived('group').nTimes(3);
-          th.expect(console).toHaveReceived('groupEnd').nTimes(3);
-          th.expect(console).toHaveReceived('info');
+          new th.DescribedClass([[1, 2, 3, 4]], consoleProxy).print();
+
+          th.expect(consoleProxy).toHaveReceived('group').nTimes(3);
+          th.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(3);
+          th.expect(consoleProxy).toHaveReceived('info');
 
           th.assert(
             'Its methods were called the expected number of times',
-            () => th.proxy(console).isAsExpected(),
+            () => consoleProxy.isAsExpected(),
           );
         });
       });
