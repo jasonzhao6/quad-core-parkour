@@ -10,6 +10,7 @@ class TestHandler {
 
   get(instance, method) {
     // Handler methods
+    if (method === 'isProxy') return true;
     if (method === 'debug') return this.debug.bind(this);
     if (method === 'toReceive') return this.toReceive.bind(this);
     if (method === 'toHaveReceived') return this.toHaveReceived.bind(this);
@@ -83,11 +84,10 @@ class TestHandler {
   //
 
   verify(method) {
-    if (!(method in this.instance)) {
-      const msg = `Not allowed to proxy '.${method}()' b/c it doesn't exist on`;
-      console.error(msg);
-      throw this.instance;
-    }
+    if (method in this.instance) return;
+
+    console.error(`Not allowed to proxy '${method}' method b/c it's not in:`);
+    throw this.instance;
   }
 }
 

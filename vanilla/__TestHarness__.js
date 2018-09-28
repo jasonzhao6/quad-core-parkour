@@ -1,4 +1,5 @@
 /* eslint class-methods-use-this: ['error', { exceptMethods: ['noop'] }] */
+/* eslint no-console: ['error', { allow: ['error'] }] */
 /* eslint no-param-reassign:
      ['error', { props: true, ignorePropertyModificationsFor: ['instance'] }] */
 
@@ -124,11 +125,14 @@ export default class TestHarness {
   }
 
   allow(instanceProxy) {
-    return this.proxies[instanceProxy.TEST_PROXY_ID];
+    if (instanceProxy.isProxy) return this.proxies[instanceProxy.TEST_PROXY_ID];
+
+    console.error('Expecting a proxy:');
+    throw instanceProxy;
   }
 
   expect(instanceProxy) {
-    return this.proxies[instanceProxy.TEST_PROXY_ID];
+    return this.allow(instanceProxy);
   }
 
   noop() {
