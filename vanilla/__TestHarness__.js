@@ -1,7 +1,3 @@
-/* eslint class-methods-use-this: ['error', { exceptMethods: ['noop'] }] */
-/* eslint no-param-reassign:
-     ['error', { props: true, ignorePropertyModificationsFor: ['instance'] }] */
-
 //
 // This test harness enqueues assertions, shuffles them, then executes them.
 //
@@ -56,6 +52,10 @@
 //   __.executeAssertions();
 //
 // ```
+
+/* eslint class-methods-use-this: ['error', { exceptMethods: ['noop'] }] */
+/* eslint no-param-reassign:
+     ['error', { props: true, ignorePropertyModificationsFor: ['instance'] }] */
 
 import __TestCasePrinter__ from './__TestCasePrinter__.js';
 import __TestException__ from './__TestException__.js';
