@@ -17,39 +17,39 @@
 //   }
 //
 //   const seed = new Date().toLocaleTimeString();
-//   const __ = new TestHarness(seed);
+//   const _ = new TestHarness(seed);
 //
-//   __.Class(Person, () => {
-//     __.method('#sayHi', () => {
-//       const me = new __.DescribedClass();
-//       const friendProxy = __.proxy(new __.DescribedClass());
+//   _.Class(Person, () => {
+//     _.method('#sayHi', () => {
+//       const me = new _.DescribedClass();
+//       const friendProxy = _.proxy(new _.DescribedClass());
 //
-//       __.allow(friendProxy).toReceive('hello'); // And call through.
-//       __.allow(friendProxy).toReceive('goodbye').andReturn('See ya!');
+//       _.allow(friendProxy).toReceive('hello'); // And call through.
+//       _.allow(friendProxy).toReceive('goodbye').andReturn('See ya!');
 //
 //       me.sayHi(friendProxy);
 //
-//       __.expect(friendProxy).toHaveReceived('hello'); // Once
-//       __.expect(friendProxy).toHaveReceived('goodbye').nTimes(0);
+//       _.expect(friendProxy).toHaveReceived('hello'); // Once
+//       _.expect(friendProxy).toHaveReceived('goodbye').nTimes(0);
 //
-//       __.assert('It says only hello', () => friendProxy.isAsExpected());
+//       _.assert('It says only hello', () => friendProxy.isAsExpected());
 //     });
 //   });
 //
-//   __.Class(TestHarness, () => {
-//     __.assert('It can and does test itself.', () => true);
-//     __.assert('It supports multiple assertions in a row', () => true);
+//   _.Class(TestHarness, () => {
+//     _.assert('It can and does test itself.', () => true);
+//     _.assert('It supports multiple assertions in a row', () => true);
 //
-//     __.context('When an assertion has multiple sub-conditions', () => {
-//       __.assert('It can take them as an array', () => [true, true, ...]);
+//     _.context('When an assertion has multiple sub-conditions', () => {
+//       _.assert('It can take them as an array', () => [true, true, ...]);
 //     });
 //
-//     __.context('When an assertion is temporarily pending', () => {
-//       __.xassert('It can be skipped with [x]assert', () => true);
+//     _.context('When an assertion is temporarily pending', () => {
+//       _.xassert('It can be skipped with [x]assert', () => true);
 //     });
 //   });
 //
-//   __.executeAssertions();
+//   _.executeAssertions();
 //
 // ```
 

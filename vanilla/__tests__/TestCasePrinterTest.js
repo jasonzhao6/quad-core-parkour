@@ -1,19 +1,19 @@
 import TestCasePrinter from '../__TestCasePrinter__.js';
 
 export default class TestCasePrinterTest {
-  static run(__) {
-    __.Class(TestCasePrinter, () => {
-      __.method('#constructor', () => {
-        __.context('When creating a printer', () => {
+  static run(_) {
+    _.Class(TestCasePrinter, () => {
+      _.method('#constructor', () => {
+        _.context('When creating a printer', () => {
           const failures = [];
-          const subject = new __.DescribedClass(failures);
+          const subject = new _.DescribedClass(failures);
 
-          __.assert(
+          _.assert(
             'It initializes the `failures` property',
             () => subject.failures === failures,
           );
 
-          __.assert(
+          _.assert(
             'It initializes each `last*` property to null',
             () => [
               subject.lastClass === null,
@@ -23,34 +23,34 @@ export default class TestCasePrinterTest {
           );
         });
 
-        __.context('When creating a printer without console override', () => {
-          const subject = new __.DescribedClass([]);
+        _.context('When creating a printer without console override', () => {
+          const subject = new _.DescribedClass([]);
 
-          __.assert(
+          _.assert(
             'It initializes the `console` property',
             () => subject.console === console,
           );
         });
 
-        __.context('When creating a printer with console override', () => {
+        _.context('When creating a printer with console override', () => {
           const failures = [[1, 2, 3, 4]];
           const consoleOverride = {};
-          const subject = new __.DescribedClass(failures, consoleOverride);
+          const subject = new _.DescribedClass(failures, consoleOverride);
 
-          __.assert(
+          _.assert(
             'It initializes the `console` property',
             () => subject.console === consoleOverride,
           );
         });
       });
 
-      __.method('#print', () => {
-        const consoleNoop = __.noop();
-        const subject = new __.DescribedClass([[1, 2, 3, 4]], consoleNoop);
+      _.method('#print', () => {
+        const consoleNoop = _.noop();
+        const subject = new _.DescribedClass([[1, 2, 3, 4]], consoleNoop);
 
         subject.print();
 
-        __.assert(
+        _.assert(
           'It resets all the `last*` states when done',
           () => [
             subject.lastClass === null,
@@ -59,20 +59,20 @@ export default class TestCasePrinterTest {
           ],
         );
 
-        __.context('When there is one failure to print', () => {
-          const consoleProxy = __.proxy(console);
+        _.context('When there is one failure to print', () => {
+          const consoleProxy = _.proxy(console);
 
-          __.allow(consoleProxy).toReceive('group').andReturn();
-          __.allow(consoleProxy).toReceive('groupEnd').andReturn();
-          __.allow(consoleProxy).toReceive('info').andReturn();
+          _.allow(consoleProxy).toReceive('group').andReturn();
+          _.allow(consoleProxy).toReceive('groupEnd').andReturn();
+          _.allow(consoleProxy).toReceive('info').andReturn();
 
-          new __.DescribedClass([[1, 2, 3, 4]], consoleProxy).print();
+          new _.DescribedClass([[1, 2, 3, 4]], consoleProxy).print();
 
-          __.expect(consoleProxy).toHaveReceived('group').nTimes(3);
-          __.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(3);
-          __.expect(consoleProxy).toHaveReceived('info');
+          _.expect(consoleProxy).toHaveReceived('group').nTimes(3);
+          _.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(3);
+          _.expect(consoleProxy).toHaveReceived('info');
 
-          __.assert(
+          _.assert(
             'Its methods were called the expected number of times',
             () => consoleProxy.isAsExpected(),
           );

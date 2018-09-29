@@ -1,13 +1,13 @@
 import Core from '../Core.js';
 
 export default class CoreTest {
-  static run(__) {
-    __.Class(Core, () => {
-      __.method('#constructor', () => {
-        __.context('When creating a core without matrix params', () => {
-          const subject = new __.DescribedClass();
+  static run(_) {
+    _.Class(Core, () => {
+      _.method('#constructor', () => {
+        _.context('When creating a core without matrix params', () => {
+          const subject = new _.DescribedClass();
 
-          __.assert(
+          _.assert(
             'It initializes each matrix property to null',
             () => [
               subject.i === null,
@@ -17,11 +17,11 @@ export default class CoreTest {
           );
         });
 
-        __.context('When creating a core with matrix params', () => {
+        _.context('When creating a core with matrix params', () => {
           const [i, j, matrix] = [1, 2, {}];
-          const subject = new __.DescribedClass({ i, j, matrix });
+          const subject = new _.DescribedClass({ i, j, matrix });
 
-          __.assert(
+          _.assert(
             'It initializes each matrix property',
             () => [
               subject.i === i,
@@ -31,15 +31,15 @@ export default class CoreTest {
           );
         });
 
-        __.context('When creating a core', () => {
-          const subject = new __.DescribedClass();
+        _.context('When creating a core', () => {
+          const subject = new _.DescribedClass();
 
-          __.assert(
+          _.assert(
             'It initializes accumulator to default value',
             () => subject.accumulator === Core.DEFAULT_VALUE,
           );
 
-          __.assert(
+          _.assert(
             'It initializes backup to default value',
             () => subject.backup === Core.DEFAULT_VALUE,
           );

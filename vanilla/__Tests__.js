@@ -1,5 +1,4 @@
 /* eslint no-console: ['error', { allow: ['info'] }] */
-/* eslint no-underscore-dangle: ['error', { allow: ['__'] }] */
 
 // Testing framework
 import TestHarness from './__TestHarness__.js';
@@ -12,22 +11,22 @@ import CoreTest from './js/models/__tests__/CoreTest.js';
 import MatrixTest from './js/models/__tests__/MatrixTest.js';
 
 export default class Tests {
-  static run(__) {
-    this.runTestingFrameworkTests(__);
-    this.runModelTests(__);
+  static run(_) {
+    this.runTestingFrameworkTests(_);
+    this.runModelTests(_);
   }
 
   //
   // Private
   //
 
-  static runTestingFrameworkTests(__) {
-    TestCasePrinterTest.run(__);
+  static runTestingFrameworkTests(_) {
+    TestCasePrinterTest.run(_);
   }
 
-  static runModelTests(__) {
-    CoreTest.run(__);
-    MatrixTest.run(__);
+  static runModelTests(_) {
+    CoreTest.run(_);
+    MatrixTest.run(_);
   }
 }
 
@@ -36,17 +35,17 @@ export default class Tests {
 //
 
 const seed = new Date().toLocaleTimeString();
-const __ = new TestHarness(seed);
+const _ = new TestHarness(seed);
 
 console.info('--------------------');
 console.info('START RUNNING TESTS:');
 console.info('--------------------');
 
-Tests.run(__);
-__.executeAssertions();
+Tests.run(_);
+_.executeAssertions();
 
-if (__.pendingCount > 0) console.info(`(${__.pendingCount} pending to do)`);
-console.info(`${__.failures.length} failed out of ${__.queue.length}`);
+if (_.pendingCount > 0) console.info(`(${_.pendingCount} pending to do)`);
+console.info(`${_.failures.length} failed out of ${_.queue.length}`);
 console.info(seed);
 console.info('--------------------');
 console.info('FINISH RUNNING TESTS');
