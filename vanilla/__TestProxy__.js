@@ -48,7 +48,7 @@ class TestHandler {
   andReturn(value = null) {
     if (this.currentMode !== TestHandler.MODES.ALLOW) {
       throw new TestException({
-        type: TestException.CHAIN,
+        type: TestException.TYPES.CHAIN,
         message: 'Expecting `.toReiceive(method)` then `.andReturn(response)`',
       });
     }
@@ -72,7 +72,7 @@ class TestHandler {
   nTimes(n) {
     if (this.currentMode !== TestHandler.MODES.EXPECT) {
       throw new TestException({
-        type: TestException.CHAIN,
+        type: TestException.TYPES.CHAIN,
         message: 'Expecting `.toHaveReceived(method)` then `.nTimes(n)`',
       });
     }

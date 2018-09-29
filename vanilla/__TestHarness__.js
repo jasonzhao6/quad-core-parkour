@@ -126,7 +126,7 @@ export default class TestHarness {
     if (instanceProxy.isProxy) return instanceProxy;
 
     throw new TestException({
-      type: TestException.ARG,
+      type: TestException.TYPES.ARG,
       message: 'Expecting an instance proxy:',
       argument: instanceProxy,
     });
