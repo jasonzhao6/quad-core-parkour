@@ -53,9 +53,8 @@
 //
 // ```
 
-/* eslint class-methods-use-this: ['error', { exceptMethods: ['noop'] }] */
-/* eslint no-param-reassign:
-     ['error', { props: true, ignorePropertyModificationsFor: ['instance'] }] */
+/* eslint class-methods-use-this: ['error', { exceptMethods:
+     ['proxy', 'allow', 'noop'] }] */
 
 import __TestCasePrinter__ from './__TestCasePrinter__.js';
 import __TestException__ from './__TestException__.js';
@@ -75,7 +74,6 @@ export default class TestHarness {
 
     this.queue = []; // [{ currentClass, etc }, ...] for easy access.
     this.failures = []; // [[currentClass, etc], ...] for easy sorting.
-    this.proxies = {}; // { [TEST_PROXY_ID]: proxy, ... }
     this.pendingCount = 0;
   }
 
@@ -119,13 +117,11 @@ export default class TestHarness {
   //
 
   proxy(instance) {
-    instance.TEST_PROXY_ID = new Date().getTime(); // Auto propagated to proxy.
-    this.proxies[instance.TEST_PROXY_ID] = new __TestProxy__(instance);
-    return this.proxies[instance.TEST_PROXY_ID];
+    return new __TestProxy__(instance);
   }
 
   allow(instanceProxy) {
-    if (instanceProxy.isProxy) return this.proxies[instanceProxy.TEST_PROXY_ID];
+    if (instanceProxy.isProxy) return instanceProxy;
 
     throw new __TestException__({
       type: __TestException__.ARG,
