@@ -66,14 +66,17 @@ import './lib/js/seedrandom.js';
 
 export default class TestHarness {
   constructor(seed) {
+    // Props
     this.seed = seed; // E.g '3:00:19 PM'.
 
+    // Current context
     this.DescribedClass = null; // E.g Matrix, Core.
     this.currentClass = null; // E.g 'Matrix', 'Core'.
     this.currentMethod = null; // Either '#instanceMethod' or '.classMethod'.
     this.currentContext = null; // 'When ...'. Note: Nesting is not supported.
     this.currentAssertion = null; // 'It ...'.
 
+    // States
     this.queue = []; // [{ currentClass, etc }, ...] for easy access.
     this.failures = []; // [[currentClass, etc], ...] for easy sorting.
     this.pendingCount = 0;

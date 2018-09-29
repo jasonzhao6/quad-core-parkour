@@ -1,8 +1,10 @@
 export default class TestCasePrinter {
   constructor(failures, consoleOverride) {
+    // Props
     this.failures = failures; // [[class, method, context, assertion], ...].
     this.console = consoleOverride || console;
 
+    // States
     this.lastClass = null;
     this.lastMethod = null;
     this.lastContext = null;

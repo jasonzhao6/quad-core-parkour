@@ -4,9 +4,14 @@ class TestHandler {
   static get MODES() { return { ALLOW: 'allow', EXPECT: 'expect' }; }
 
   constructor(instance) {
+    // Props
     this.instance = instance;
+
+    // Current context
     this.currentMethod = null;
     this.currentMode = null; // Either MODES.ALLOW or MODES.EXPECT.
+
+    // States
     this.expectations = {}; // { [method]: { callsActual: 0, etc }, ... }.
   }
 

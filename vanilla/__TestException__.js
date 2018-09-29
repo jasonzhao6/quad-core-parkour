@@ -12,6 +12,7 @@ export default class TestException {
   constructor({ type, message, inspect }) {
     console.error('Stack trace');
 
+    // Props
     this.type = type;
     this.message = message;
     if (inspect !== undefined) this.inspect = inspect;

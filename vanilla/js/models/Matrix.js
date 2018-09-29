@@ -1,5 +1,6 @@
 export default class Matrix {
   constructor({ rowCount, columnCount, Class }) {
+    // Props
     this.rowCount = rowCount;
     this.columnCount = columnCount;
     this.Class = Class;
