@@ -1,4 +1,3 @@
-/* eslint class-methods-use-this: ['error', { exceptMethods: ['debug'] }] */
 /* eslint no-console: ['error', { allow: ['error'] }] */
 
 class TestHandler {
@@ -9,14 +8,16 @@ class TestHandler {
   }
 
   get(instance, method) {
-    // Handler methods
-    if (method === 'isProxy') return true;
-    if (method === 'debug') return this.debug.bind(this);
+    // Setup methods (See each method's comment for usage.)
     if (method === 'toReceive') return this.toReceive.bind(this);
     if (method === 'toHaveReceived') return this.toHaveReceived.bind(this);
     if (method === 'isAsExpected') return this.isAsExpected.bind(this);
 
-    // Proxied methods
+    // Getters
+    if (method === 'isProxy') return true;
+    if (method === 'debugger') debugger; // eslint-disable-line no-debugger
+
+    // Proxy logic
     if (method in this.expectations) {
       this.expectations[method].callsActual += 1;
 
@@ -26,10 +27,6 @@ class TestHandler {
     }
 
     return instance[method];
-  }
-
-  debug() {
-    debugger; // eslint-disable-line no-debugger
   }
 
   //
