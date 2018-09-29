@@ -1,9 +1,12 @@
-/* eslint no-console: ['error', { allow: ['error'] }] */
+import __TestException__ from './__TestException__.js';
 
 class TestHandler {
+  static get MODES() { return { ALLOW: 'allow', EXPECT: 'expect' }; }
+
   constructor(instance) {
     this.instance = instance;
     this.currentMethod = null;
+    this.currentMode = null; // Either MODES.ALLOW or MODES.EXPECT.
     this.expectations = {}; // { [method]: { callsActual: 0, etc }, ... }.
   }
 
@@ -14,6 +17,7 @@ class TestHandler {
     if (method === 'isAsExpected') return this.isAsExpected.bind(this);
 
     // Getters
+    if (method === 'MODES') return TestHandler.MODES;
     if (method === 'isProxy') return true;
     if (method === 'debugger') debugger; // eslint-disable-line no-debugger
 
@@ -36,11 +40,19 @@ class TestHandler {
   toReceive(method) {
     this.verify(method);
     this.currentMethod = method;
+    this.currentMode = TestHandler.MODES.ALLOW;
     this.expectations[method] = { callsActual: 0 };
     return this;
   }
 
   andReturn(value = null) {
+    if (this.currentMode !== TestHandler.MODES.ALLOW) {
+      throw new __TestException__({
+        type: __TestException__.CHAIN,
+        message: 'Expecting `.toReiceive(method)` then `.andReturn(response)`',
+      });
+    }
+
     this.expectations[this.currentMethod].returnValue = value;
     return this;
   }
@@ -52,11 +64,19 @@ class TestHandler {
   toHaveReceived(method) {
     this.verify(method);
     this.currentMethod = method;
+    this.currentMode = TestHandler.MODES.EXPECT;
     this.expectations[method].callsExpected = 1;
     return this;
   }
 
   nTimes(n) {
+    if (this.currentMode !== TestHandler.MODES.EXPECT) {
+      throw new __TestException__({
+        type: __TestException__.CHAIN,
+        message: 'Expecting `.toHaveReceived(method)` then `.nTimes(n)`',
+      });
+    }
+
     this.expectations[this.currentMethod].callsExpected = n;
   }
 
@@ -83,8 +103,10 @@ class TestHandler {
   verify(method) {
     if (method in this.instance) return;
 
-    console.error(`Not allowed to proxy '${method}' method b/c it's not in:`);
-    throw this.instance;
+    throw new __TestException__({
+      instance: this.instance,
+      message: `Not allowed to proxy '${method}' method b/c it's not in:`,
+    });
   }
 }
 
