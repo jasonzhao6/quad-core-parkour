@@ -49,7 +49,7 @@ class TestHandler {
     if (this.currentMode !== TestHandler.MODES.ALLOW) {
       throw new TestException({
         type: TestException.TYPES.CHAIN,
-        message: 'Expecting `.toReiceive(method)` then `.andReturn(response)`',
+        message: 'Expected .toReiceive(method).andReturn(response)',
       });
     }
 
@@ -73,7 +73,7 @@ class TestHandler {
     if (this.currentMode !== TestHandler.MODES.EXPECT) {
       throw new TestException({
         type: TestException.TYPES.CHAIN,
-        message: 'Expecting `.toHaveReceived(method)` then `.nTimes(n)`',
+        message: 'Expected .toHaveReceived(method).nTimes(n)',
       });
     }
 
@@ -104,8 +104,9 @@ class TestHandler {
     if (method in this.instance) return;
 
     throw new TestException({
-      instance: this.instance,
-      message: `Not allowed to proxy '${method}' method b/c it's not in:`,
+      type: TestException.TYPES.VERIFY,
+      message: `${method}()`,
+      inspect: this.instance,
     });
   }
 }

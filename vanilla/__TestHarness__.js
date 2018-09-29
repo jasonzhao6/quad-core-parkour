@@ -127,8 +127,8 @@ export default class TestHarness {
 
     throw new TestException({
       type: TestException.TYPES.ARG,
-      message: 'Expecting an instance proxy:',
-      argument: instanceProxy,
+      message: 'Expected a proxy',
+      inspect: instanceProxy,
     });
   }
 
