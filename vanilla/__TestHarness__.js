@@ -56,10 +56,12 @@
 /* eslint class-methods-use-this: ['error', { exceptMethods:
      ['proxy', 'allow', 'noop'] }] */
 
-import __TestCasePrinter__ from './__TestCasePrinter__.js';
-import __TestException__ from './__TestException__.js';
-import __TestProxy__ from './__TestProxy__.js';
+// Testing framework
+import TestCasePrinter from './__TestCasePrinter__.js';
+import TestException from './__TestException__.js';
+import TestProxy from './__TestProxy__.js';
 
+// Libs
 import './lib/js/seedrandom.js';
 
 export default class TestHarness {
@@ -117,14 +119,14 @@ export default class TestHarness {
   //
 
   proxy(instance) {
-    return new __TestProxy__(instance);
+    return new TestProxy(instance);
   }
 
   allow(instanceProxy) {
     if (instanceProxy.isProxy) return instanceProxy;
 
-    throw new __TestException__({
-      type: __TestException__.ARG,
+    throw new TestException({
+      type: TestException.ARG,
       message: 'Expecting an instance proxy:',
       argument: instanceProxy,
     });
@@ -135,7 +137,7 @@ export default class TestHarness {
   }
 
   noop() {
-    return __TestProxy__.noop();
+    return TestProxy.noop();
   }
 
   //
@@ -180,6 +182,6 @@ export default class TestHarness {
   }
 
   print() {
-    new __TestCasePrinter__(this.failures.sort()).print();
+    new TestCasePrinter(this.failures.sort()).print();
   }
 }

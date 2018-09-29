@@ -1,10 +1,13 @@
 /* eslint no-console: ['error', { allow: ['info'] }] */
 /* eslint no-underscore-dangle: ['error', { allow: ['__'] }] */
 
-import __TestHarness__ from './__TestHarness__.js';
+// Testing framework
+import TestHarness from './__TestHarness__.js';
 
+// Testing framework tests
 import TestCasePrinterTest from './__tests__/TestCasePrinterTest.js';
 
+// Model tests
 import CoreTest from './js/models/__tests__/CoreTest.js';
 import MatrixTest from './js/models/__tests__/MatrixTest.js';
 
@@ -33,7 +36,7 @@ export default class Tests {
 //
 
 const seed = new Date().toLocaleTimeString();
-const __ = new __TestHarness__(seed);
+const __ = new TestHarness(seed);
 
 console.info('--------------------');
 console.info('START RUNNING TESTS:');

@@ -1,4 +1,4 @@
-import __TestException__ from './__TestException__.js';
+import TestException from './__TestException__.js';
 
 class TestHandler {
   static get MODES() { return { ALLOW: 'allow', EXPECT: 'expect' }; }
@@ -47,8 +47,8 @@ class TestHandler {
 
   andReturn(value = null) {
     if (this.currentMode !== TestHandler.MODES.ALLOW) {
-      throw new __TestException__({
-        type: __TestException__.CHAIN,
+      throw new TestException({
+        type: TestException.CHAIN,
         message: 'Expecting `.toReiceive(method)` then `.andReturn(response)`',
       });
     }
@@ -71,8 +71,8 @@ class TestHandler {
 
   nTimes(n) {
     if (this.currentMode !== TestHandler.MODES.EXPECT) {
-      throw new __TestException__({
-        type: __TestException__.CHAIN,
+      throw new TestException({
+        type: TestException.CHAIN,
         message: 'Expecting `.toHaveReceived(method)` then `.nTimes(n)`',
       });
     }
@@ -103,7 +103,7 @@ class TestHandler {
   verify(method) {
     if (method in this.instance) return;
 
-    throw new __TestException__({
+    throw new TestException({
       instance: this.instance,
       message: `Not allowed to proxy '${method}' method b/c it's not in:`,
     });
