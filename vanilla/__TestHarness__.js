@@ -1,5 +1,4 @@
 /* eslint class-methods-use-this: ['error', { exceptMethods: ['noop'] }] */
-/* eslint no-console: ['error', { allow: ['error'] }] */
 /* eslint no-param-reassign:
      ['error', { props: true, ignorePropertyModificationsFor: ['instance'] }] */
 
@@ -59,6 +58,7 @@
 // ```
 
 import __TestCasePrinter__ from './__TestCasePrinter__.js';
+import __TestException__ from './__TestException__.js';
 import __TestProxy__ from './__TestProxy__.js';
 
 import './lib/js/seedrandom.js';
@@ -127,8 +127,11 @@ export default class TestHarness {
   allow(instanceProxy) {
     if (instanceProxy.isProxy) return this.proxies[instanceProxy.TEST_PROXY_ID];
 
-    console.error('Expecting a proxy:');
-    throw instanceProxy;
+    throw new __TestException__({
+      type: __TestException__.ARG,
+      message: 'Expecting an instance proxy:',
+      argument: instanceProxy,
+    });
   }
 
   expect(instanceProxy) {
