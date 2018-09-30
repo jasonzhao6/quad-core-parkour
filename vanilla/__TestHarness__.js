@@ -64,9 +64,10 @@ import TestProxy from './__TestProxy__.js';
 import './lib/js/seedrandom.js';
 
 export default class TestHarness {
-  constructor(seed) {
+  constructor(seed, PrinterOverride) {
     // Props
     this.seed = seed; // E.g '3:00:19 PM'.
+    this.Printer = PrinterOverride || TestCasePrinter;
 
     // Current context
     this.DescribedClass = null; // E.g Matrix, Core.
@@ -82,7 +83,9 @@ export default class TestHarness {
   }
 
   Class(Class, block) {
+    // Set it then leave it as it may still be refereneced by queued assertions.
     this.DescribedClass = Class;
+
     this.currentClass = Class.name;
     block();
     this.currentClass = null;
@@ -180,6 +183,6 @@ export default class TestHarness {
   }
 
   print() {
-    new TestCasePrinter(this.failures.sort()).print();
+    new this.Printer(this.failures.sort()).print();
   }
 }

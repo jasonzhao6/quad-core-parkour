@@ -24,7 +24,7 @@ export default class TestProxyTest {
       });
 
       _.method('.verify', () => {
-        _.context('When instance is not a TestProxy', () => {
+        _.context('When instance is not from described class', () => {
           const errors = [];
 
           try {
@@ -39,11 +39,11 @@ export default class TestProxyTest {
           }
         });
 
-        _.context('When instance is a TestProxy', () => {
+        _.context('When instance is from described class', () => {
           const errors = [];
 
           try {
-            _.DescribedClass.verify(new TestProxy({}));
+            _.DescribedClass.verify(new _.DescribedClass({}));
           } catch (error) {
             errors.push(error);
           } finally {
@@ -59,8 +59,8 @@ export default class TestProxyTest {
         const subject = new _.DescribedClass({});
 
         _.assert(
-          'It returns a Proxy, which is not a TestProxy',
-          () => !(subject instanceof TestProxy),
+          'It returns a Proxy, which is not from described class',
+          () => !(subject instanceof _.DescribedClass),
         );
       });
 

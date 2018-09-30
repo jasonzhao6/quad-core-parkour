@@ -1,0 +1,242 @@
+import TestHarness from '../__TestHarness__.js';
+
+export default class TestHarnessTest {
+  static enqueue(_) {
+    _.Class(TestHarness, () => {
+      _.method('#constructor', () => {
+        _.context('When creating a test harness with `seed` arg', () => {
+          const seed = 'foo';
+          const subject = new _.DescribedClass(seed);
+
+          _.assert(
+            'It initializes the `seed` property',
+            () => subject.seed === seed,
+          );
+        });
+
+        _.context('When creating a test harness', () => {
+          const subject = new _.DescribedClass();
+
+          _.assert(
+            'It initializes all of the current context',
+            () => [
+              subject.DescribedClass === null,
+              subject.currentClass === null,
+              subject.currentMethod === null,
+              subject.currentContext === null,
+              subject.currentAssertion === null,
+            ],
+          );
+
+          _.assert(
+            'It initializes all the states',
+            () => [
+              subject.queue instanceof Array,
+              subject.queue.length === 0,
+              subject.failures instanceof Array,
+              subject.failures.length === 0,
+              subject.pendingCount === 0,
+            ],
+          );
+        });
+      });
+
+      _.method('#Class', () => {
+        const Class = 'Class';
+        const subject = new _.DescribedClass();
+        let callCount = 0;
+
+        subject.Class(Class, () => { callCount += 1; });
+
+        _.assert(
+          'It sets `DescribedClass` and leaves it set when done',
+          () => subject.DescribedClass === Class,
+        );
+
+        _.assert(
+          'It executes `block`',
+          () => callCount === 1,
+        );
+
+        _.assert(
+          'It resets `currentClass` when done',
+          () => subject.currentClass === null,
+        );
+      });
+
+      _.method('#method', () => {
+        const subject = new _.DescribedClass();
+        let callCount = 0;
+
+        subject.method('#method', () => { callCount += 1; });
+
+        _.assert(
+          'It executes `block`',
+          () => callCount === 1,
+        );
+
+        _.assert(
+          'It resets `currentMethod` when done',
+          () => subject.currentMethod === null,
+        );
+      });
+
+      _.method('#context', () => {
+        const subject = new _.DescribedClass();
+        let callCount = 0;
+
+        subject.method('When ...', () => { callCount += 1; });
+
+        _.assert(
+          'It executes `block`',
+          () => callCount === 1,
+        );
+
+        _.assert(
+          'It resets `currentContext` when done',
+          () => subject.currentContext === null,
+        );
+      });
+
+      _.method('#assert', () => {
+        const subject = new _.DescribedClass();
+        const assertion = 'Assertion';
+
+        subject.assert('It ...', assertion);
+
+        _.assert(
+          'It enqueues `assertion`',
+          () => [
+            subject.queue.length === 1,
+            subject.queue[0].assertion === assertion,
+          ],
+        );
+
+        _.assert(
+          'It resets `currentAssertion` when done',
+          () => subject.currentAssertion === null,
+        );
+      });
+
+      _.method('#xassert', () => {
+        const subject = new _.DescribedClass();
+        const assertion = 'Assertion';
+
+        subject.xassert('It ...', assertion);
+
+        _.assert(
+          'It dosen not enqueues `assertion`',
+          () => subject.queue.length === 0,
+        );
+
+        _.assert(
+          'It increments `pendingCount`',
+          () => subject.pendingCount === 1,
+        );
+      });
+
+      _.method('#executeAssertions', () => {
+        let printed = false;
+        let failures = null;
+
+        class Printer {
+          constructor(arg) {
+            failures = arg;
+          }
+
+          print() { // eslint-disable-line class-methods-use-this
+            printed = true;
+          }
+        }
+
+        let executedCount = 0;
+        const queue = [];
+        const successFn = () => { executedCount += 1; return true; };
+        const failureFn = () => { executedCount += 1; return false; };
+
+        // 1 in 13!, or 6 billion, chance of getting same array after shuffle.
+        const assertionCount = 13;
+        const failureCount = 10;
+        new Array(assertionCount).fill().forEach((_undefined, index) => {
+          queue.push({
+            currentClass: `Class-${index}`,
+            currentMethod: `method-${index}`,
+            currentContext: `context-${index}`,
+            currentAssertion: `assertion-${index}`,
+            assertion: index < failureCount ? failureFn : successFn,
+          });
+        });
+
+
+        const subject = new _.DescribedClass('seed', Printer);
+        subject.queue = queue.slice();
+        subject.executeAssertions();
+
+        _.assert(
+          'It shuffles the `queue`',
+          () => [
+            subject.queue.length === queue.length,
+            subject.queue.map(test => test.currentClass).join() !==
+               queue.map(test => test.currentClass).join(),
+          ],
+        );
+
+        _.assert(
+          'It performs all assertions',
+          () => executedCount === assertionCount,
+        );
+
+        _.assert(
+          'It sends all failures, sorted, to printer',
+          () => [
+            failures.length === failureCount,
+            failures.join() === failures.sort().join(),
+          ],
+        );
+
+        _.assert(
+          'It prints',
+          () => printed === true,
+        );
+      });
+
+      _.method('#proxy', () => {
+        const subject = new _.DescribedClass();
+
+        _.assert(
+          'It delegates and returns a proxy',
+          () => subject.proxy({}).isProxy,
+        );
+      });
+
+      _.method('#allow', () => {
+        const subject = new _.DescribedClass();
+        const instanceProxy = subject.proxy({});
+
+        _.assert(
+          'It delegates to `allowIt` method on the proxy',
+          () => subject.allow(instanceProxy) === instanceProxy.allowIt(),
+        );
+      });
+
+      _.method('#expect', () => {
+        const subject = new _.DescribedClass();
+        const instanceProxy = subject.proxy({});
+
+        _.assert(
+          'It delegates to `expectIt` method on the proxy',
+          () => subject.expect(instanceProxy) === instanceProxy.expectIt(),
+        );
+      });
+
+      _.method('#noop', () => {
+        const subject = new _.DescribedClass();
+
+        _.assert(
+          'It delegates and returns a proxy that noops on any method call',
+          () => subject.noop().toString() === undefined,
+        );
+      });
+    });
+  }
+}

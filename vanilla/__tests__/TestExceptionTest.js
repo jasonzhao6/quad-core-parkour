@@ -6,7 +6,7 @@ export default class TestExceptionTest {
       _.method('#constructor', () => {
         _.context('When creating an exception with args', () => {
           const args = {
-            type: TestException.TYPES.ARG,
+            type: _.DescribedClass.TYPES.ARG,
             message: 'Hello world',
             inspect: {},
           };
