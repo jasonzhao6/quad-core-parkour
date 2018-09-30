@@ -54,11 +54,10 @@
 // ```
 
 /* eslint class-methods-use-this: ['error', { exceptMethods:
-     ['proxy', 'allow', 'noop'] }] */
+     ['proxy', 'allow', 'expect', 'noop'] }] */
 
 // Testing framework
 import TestCasePrinter from './__TestCasePrinter__.js';
-import TestException from './__TestException__.js';
 import TestProxy from './__TestProxy__.js';
 
 // Libs
@@ -126,17 +125,13 @@ export default class TestHarness {
   }
 
   allow(instanceProxy) {
-    if (instanceProxy.isProxy) return instanceProxy;
-
-    throw new TestException({
-      type: TestException.TYPES.ARG,
-      message: 'Expected a proxy',
-      inspect: instanceProxy,
-    });
+    TestProxy.verify(instanceProxy);
+    return instanceProxy.allowIt();
   }
 
   expect(instanceProxy) {
-    return this.allow(instanceProxy);
+    TestProxy.verify(instanceProxy);
+    return instanceProxy.expectIt();
   }
 
   noop() {

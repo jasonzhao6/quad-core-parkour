@@ -2,10 +2,10 @@
 
 export default class TestException {
   static get TYPES() {
-    return {
-      ARG: 'Unexpected argument', // E.g message 'Expected a ...'.
-      CHAIN: 'Unexpected method chain', // E.g message 'Expected .foo().bar()'.
-      VERIFY: 'Method not in instance', // E.g message 'foo()'.
+    return { // TODO Consider turning these into methods that construct output.
+      ARG: 'Unexpected argument',
+      CHAIN: 'Broken method chain',
+      VERIFY: 'Method not in instance',
     };
   }
 
