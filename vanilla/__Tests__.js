@@ -6,6 +6,7 @@ import TestHarness from './__TestHarness__.js';
 // Testing framework tests
 import TestCasePrinterTest from './__tests__/TestCasePrinterTest.js';
 import TestExceptionTest from './__tests__/TestExceptionTest.js';
+import TestProxyTest from './__tests__/TestProxyTest.js';
 
 // Model tests
 import CoreTest from './js/models/__tests__/CoreTest.js';
@@ -24,6 +25,7 @@ export default class Tests {
   static enqueueTestingFrameworkTests(_) {
     TestCasePrinterTest.enqueue(_);
     TestExceptionTest.enqueue(_);
+    TestProxyTest.enqueue(_);
   }
 
   static enqueueModelTests(_) {

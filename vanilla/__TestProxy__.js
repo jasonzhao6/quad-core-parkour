@@ -1,11 +1,22 @@
+/* eslint class-methods-use-this: ['error', { exceptMethods: ['has'] }] */
+
 import TestException from './__TestException__.js';
 
 class TestHandler {
+  static get SETUP_METHODS() {
+    return { // See usage above each method's definition.
+      ALLOW_IT: 'allowIt',
+      EXPECT_IT: 'expectIt',
+      IS_AS_EXPECTED: 'isAsExpected',
+    };
+  }
   static get MODES() { return { ALLOW: 'allow', EXPECT: 'expect' }; }
+  static get GETTERS() { return { IS_PROXY: 'isProxy', DEBUGGER: 'debugger' }; }
 
-  constructor(instance) {
+  constructor(instance, consoleOverride) {
     // Props
     this.instance = instance;
+    this.console = consoleOverride || console;
 
     // Current context
     this.currentMode = null; // Either MODES.ALLOW or MODES.EXPECT.
@@ -15,18 +26,25 @@ class TestHandler {
     this.expectations = {}; // { [method]: { callsActual: 0, etc }, ... }.
   }
 
+  has(instance, method) {
+    if (Object.values(TestHandler.SETUP_METHODS).includes(method)) return true;
+    if (Object.values(TestHandler.GETTERS).includes(method)) return true;
+
+    return method in instance;
+  }
+
   get(instance, method) {
-    // Setup methods (See each method's comment for usage.)
-    if (method === 'allowIt') return this.allowIt.bind(this);
-    if (method === 'expectIt') return this.expectIt.bind(this);
-    if (method === 'isAsExpected') return this.isAsExpected.bind(this);
+    // Route setup methods
+    if (Object.values(TestHandler.SETUP_METHODS).includes(method)) {
+      return this[method].bind(this);
+    }
 
-    // Getters
-    if (method === 'MODES') return TestHandler.MODES;
-    if (method === 'isProxy') return true;
-    if (method === 'debugger') debugger; // eslint-disable-line no-debugger
+    // Route getters
+    if (method === TestHandler.GETTERS.IS_PROXY) return true;
+    // eslint-disable-next-line no-debugger
+    if (method === TestHandler.GETTERS.DEBUGGER) debugger;
 
-    // Proxy logic
+    // Route proxied methods
     if (method in this.expectations) {
       this.expectations[method].callsActual += 1;
 
@@ -35,11 +53,12 @@ class TestHandler {
       }
     }
 
+    // Route original methods
     return instance[method];
   }
 
   //
-  // `proxy.allowIt().toReceive(method)[.andReturn(response)]`
+  // Usage: `proxy.allowIt().toReceive(method)[.andReturn(response)]`
   //
 
   allowIt() {
@@ -61,7 +80,7 @@ class TestHandler {
   }
 
   //
-  // `proxy.expectIt().toHaveReceived(method)[.nTimes(n)]`
+  // Usage: `proxy.expectIt().toHaveReceived(method)[.nTimes(n)]`
   //
 
   expectIt() {
@@ -83,7 +102,7 @@ class TestHandler {
   }
 
   //
-  // Assert `proxy.isAsExpected()`
+  // Usage: Assert `proxy.isAsExpected()`
   //
 
   isAsExpected() {
@@ -123,25 +142,25 @@ class TestHandler {
 }
 
 export default class TestProxy {
-  constructor(instance) {
-    return new Proxy(instance, new TestHandler(instance));
-  }
-
-  static verify(instance) {
-    if (instance.isProxy) return;
-
-    throw new TestException({
-      type: TestException.TYPES.ARG,
-      message: 'Expected a proxy',
-      inspect: instance,
-    });
-  }
-
   static noop() {
     if (this.noopSingleton === undefined) {
       this.noopSingleton = new Proxy({}, { get: () => () => {} });
     }
 
     return this.noopSingleton;
+  }
+
+  static verify(instance, consoleOverride) {
+    if (instance && instance.isProxy) return;
+
+    throw new TestException({
+      type: TestException.TYPES.ARG,
+      message: 'Expected a proxy',
+      inspect: instance,
+    }, consoleOverride);
+  }
+
+  constructor(instance, consoleOverride) {
+    return new Proxy(instance, new TestHandler(instance, consoleOverride));
   }
 }
