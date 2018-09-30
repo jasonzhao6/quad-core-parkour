@@ -11,22 +11,22 @@ import CoreTest from './js/models/__tests__/CoreTest.js';
 import MatrixTest from './js/models/__tests__/MatrixTest.js';
 
 export default class Tests {
-  static run(_) {
-    this.runTestingFrameworkTests(_);
-    this.runModelTests(_);
+  static enqueue(_) {
+    this.enqueueTestingFrameworkTests(_);
+    this.enqueueModelTests(_);
   }
 
   //
   // Private
   //
 
-  static runTestingFrameworkTests(_) {
-    TestCasePrinterTest.run(_);
+  static enqueueTestingFrameworkTests(_) {
+    TestCasePrinterTest.enqueue(_);
   }
 
-  static runModelTests(_) {
-    CoreTest.run(_);
-    MatrixTest.run(_);
+  static enqueueModelTests(_) {
+    CoreTest.enqueue(_);
+    MatrixTest.enqueue(_);
   }
 }
 
@@ -41,7 +41,7 @@ console.info('--------------------');
 console.info('START RUNNING TESTS:');
 console.info('--------------------');
 
-Tests.run(_);
+Tests.enqueue(_);
 _.executeAssertions();
 
 if (_.pendingCount > 0) console.info(`(${_.pendingCount} pending to do)`);

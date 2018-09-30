@@ -2,7 +2,7 @@ import Core from '../Core.js';
 import Matrix from '../Matrix.js';
 
 export default class MatrixTest {
-  static run(_) {
+  static enqueue(_) {
     _.Class(Matrix, () => {
       _.method('#constructor', () => {
         _.context('When creating a matrix', () => {

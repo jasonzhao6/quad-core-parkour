@@ -1,7 +1,7 @@
 import TestCasePrinter from '../__TestCasePrinter__.js';
 
 export default class TestCasePrinterTest {
-  static run(_) {
+  static enqueue(_) {
     _.Class(TestCasePrinter, () => {
       _.method('#constructor', () => {
         _.context('When creating a printer with failures arg', () => {

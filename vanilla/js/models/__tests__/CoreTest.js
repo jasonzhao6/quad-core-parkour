@@ -1,7 +1,7 @@
 import Core from '../Core.js';
 
 export default class CoreTest {
-  static run(_) {
+  static enqueue(_) {
     _.Class(Core, () => {
       _.method('#constructor', () => {
         _.context('When creating a core without matrix params', () => {
