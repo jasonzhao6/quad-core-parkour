@@ -38,7 +38,8 @@ export default class Tests {
 // Run on import
 //
 
-const seed = new Date().toLocaleTimeString();
+const startTime = new Date();
+const seed = startTime.toLocaleTimeString();
 const _ = new TestHarness(seed);
 
 console.info('--------------------');
@@ -50,7 +51,7 @@ _.executeAssertions();
 
 if (_.pendingCount > 0) console.info(`(${_.pendingCount} pending to do)`);
 console.info(`${_.failures.length} failed out of ${_.queue.length}`);
-console.info(seed);
+console.info(`${seed} | ${new Date() - startTime} ms`);
 console.info('--------------------');
 console.info('FINISH RUNNING TESTS');
 console.info('--------------------');
