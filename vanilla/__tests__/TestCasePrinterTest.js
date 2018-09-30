@@ -4,7 +4,7 @@ export default class TestCasePrinterTest {
   static run(_) {
     _.Class(TestCasePrinter, () => {
       _.method('#constructor', () => {
-        _.context('When creating a printer', () => {
+        _.context('When creating a printer with failures arg', () => {
           const failures = [];
           const subject = new _.DescribedClass(failures);
 
@@ -12,6 +12,29 @@ export default class TestCasePrinterTest {
             'It initializes the `failures` property',
             () => subject.failures === failures,
           );
+        });
+
+        _.context('When creating a printer without console override', () => {
+          const subject = new _.DescribedClass();
+
+          _.assert(
+            'It initializes the `console` property',
+            () => subject.console === console,
+          );
+        });
+
+        _.context('When creating a printer with console override', () => {
+          const consoleOverride = {};
+          const subject = new _.DescribedClass([], consoleOverride);
+
+          _.assert(
+            'It initializes the `console` property with override',
+            () => subject.console === consoleOverride,
+          );
+        });
+
+        _.context('When creating a printer', () => {
+          const subject = new _.DescribedClass();
 
           _.assert(
             'It initializes each `last*` property to null',
@@ -22,31 +45,11 @@ export default class TestCasePrinterTest {
             ],
           );
         });
-
-        _.context('When creating a printer without console override', () => {
-          const subject = new _.DescribedClass([]);
-
-          _.assert(
-            'It initializes the `console` property',
-            () => subject.console === console,
-          );
-        });
-
-        _.context('When creating a printer with console override', () => {
-          const failures = [[1, 2, 3, 4]];
-          const consoleOverride = {};
-          const subject = new _.DescribedClass(failures, consoleOverride);
-
-          _.assert(
-            'It initializes the `console` property',
-            () => subject.console === consoleOverride,
-          );
-        });
       });
 
       _.method('#print', () => {
         const consoleNoop = _.noop();
-        const subject = new _.DescribedClass([[1, 2, 3, 4]], consoleNoop);
+        const subject = new _.DescribedClass([], consoleNoop);
 
         subject.print();
 
@@ -59,21 +62,122 @@ export default class TestCasePrinterTest {
           ],
         );
 
-        _.context('When there is one failure to print', () => {
+        const newConsoleProxy = () => {
           const consoleProxy = _.proxy(console);
 
           _.allow(consoleProxy).toReceive('group').andReturn();
           _.allow(consoleProxy).toReceive('groupEnd').andReturn();
           _.allow(consoleProxy).toReceive('info').andReturn();
 
-          new _.DescribedClass([[1, 2, 3, 4]], consoleProxy).print();
+          return consoleProxy;
+        };
+
+        _.context('When there is 1 failure', () => {
+          const failures = [[1, 2, 3, 4]];
+          const consoleProxy = newConsoleProxy();
+
+          new _.DescribedClass(failures, consoleProxy).print();
 
           _.expect(consoleProxy).toHaveReceived('group').nTimes(3);
           _.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(3);
           _.expect(consoleProxy).toHaveReceived('info');
 
           _.assert(
-            'Its methods were called the expected number of times',
+            'It calls print methods the expected number of times',
+            () => consoleProxy.isAsExpected(),
+          );
+        });
+
+        _.context('When there is 1 failure without context', () => {
+          const failures = [[1, 2, null, 4]];
+          const consoleProxy = newConsoleProxy();
+
+          new _.DescribedClass(failures, consoleProxy).print();
+
+          _.expect(consoleProxy).toHaveReceived('group').nTimes(2);
+          _.expect(consoleProxy).toHaveReceived('info');
+
+          _.assert(
+            'It calls print methods the expected number of times',
+            () => consoleProxy.isAsExpected(),
+          );
+        });
+
+        _.context('When there is 1 failure without context nor method', () => {
+          const failures = [[1, null, null, 4]];
+          const consoleProxy = newConsoleProxy();
+
+          new _.DescribedClass(failures, consoleProxy).print();
+
+          _.expect(consoleProxy).toHaveReceived('group');
+          _.expect(consoleProxy).toHaveReceived('info');
+
+          _.assert(
+            'It calls print methods the expected number of times',
+            () => consoleProxy.isAsExpected(),
+          );
+        });
+
+        _.context('When there are 2 failures in the same context', () => {
+          const failures = [[1, 2, 3, 40], [1, 2, 3, 41]];
+          const consoleProxy = newConsoleProxy();
+
+          new _.DescribedClass(failures, consoleProxy).print();
+
+          _.expect(consoleProxy).toHaveReceived('group').nTimes(3);
+          _.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(3);
+          _.expect(consoleProxy).toHaveReceived('info').nTimes(2);
+
+          _.assert(
+            'It calls print methods the expected number of times',
+            () => consoleProxy.isAsExpected(),
+          );
+        });
+
+        _.context('When there are 2 failures in different contexts', () => {
+          const failures = [[1, 2, 30, 40], [1, 2, 31, 41]];
+          const consoleProxy = newConsoleProxy();
+
+          new _.DescribedClass(failures, consoleProxy).print();
+
+          _.expect(consoleProxy).toHaveReceived('group').nTimes(4);
+          _.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(4);
+          _.expect(consoleProxy).toHaveReceived('info').nTimes(2);
+
+          _.assert(
+            'It calls print methods the expected number of times',
+            () => consoleProxy.isAsExpected(),
+          );
+        });
+
+        _.context('When there are 2 failures in different methods', () => {
+          const failures = [[1, 20, 30, 40], [1, 21, 31, 41]];
+          const consoleProxy = newConsoleProxy();
+
+          new _.DescribedClass(failures, consoleProxy).print();
+
+          _.expect(consoleProxy).toHaveReceived('group').nTimes(5);
+          _.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(5);
+          _.expect(consoleProxy).toHaveReceived('info').nTimes(2);
+
+          _.assert(
+            'It calls print methods the expected number of times',
+            () => consoleProxy.isAsExpected(),
+          );
+        });
+
+        _.context('When there are 2 failures in different classes', () => {
+          const failures = [[10, 20, 30, 40], [11, 21, 31, 41]];
+          const consoleProxy = newConsoleProxy();
+
+          new _.DescribedClass(failures, consoleProxy).print();
+
+          _.expect(consoleProxy).toHaveReceived('group').nTimes(6);
+          _.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(6);
+          _.expect(consoleProxy).toHaveReceived('info').nTimes(2);
+
+          _.assert(
+            'It calls print methods the expected number of times',
             () => consoleProxy.isAsExpected(),
           );
         });
