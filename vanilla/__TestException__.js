@@ -1,5 +1,3 @@
-/* eslint no-console: ['error', { allow: ['error'] }] */
-
 export default class TestException {
   static get TYPES() {
     return { // TODO Consider turning these into methods that construct output.
@@ -9,8 +7,8 @@ export default class TestException {
     };
   }
 
-  constructor({ type, message, inspect }) {
-    console.error('Stack trace');
+  constructor({ type, message, inspect }, consoleOverride) {
+    (consoleOverride || console).error('Stack trace');
 
     // Props
     this.type = type;

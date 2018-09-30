@@ -4,7 +4,7 @@ export default class TestCasePrinterTest {
   static enqueue(_) {
     _.Class(TestCasePrinter, () => {
       _.method('#constructor', () => {
-        _.context('When creating a printer with failures arg', () => {
+        _.context('When creating a printer with `failures` arg', () => {
           const failures = [];
           const subject = new _.DescribedClass(failures);
 
@@ -33,23 +33,20 @@ export default class TestCasePrinterTest {
           );
         });
 
-        _.context('When creating a printer', () => {
-          const subject = new _.DescribedClass();
+        const subject = new _.DescribedClass();
 
-          _.assert(
-            'It initializes each `last*` property to null',
-            () => [
-              subject.lastClass === null,
-              subject.lastMethod === null,
-              subject.lastContext === null,
-            ],
-          );
-        });
+        _.assert(
+          'It initializes each `last*` property to null',
+          () => [
+            subject.lastClass === null,
+            subject.lastMethod === null,
+            subject.lastContext === null,
+          ],
+        );
       });
 
       _.method('#print', () => {
-        const consoleNoop = _.noop();
-        const subject = new _.DescribedClass([], consoleNoop);
+        const subject = new _.DescribedClass([], _.noop());
 
         subject.print();
 
