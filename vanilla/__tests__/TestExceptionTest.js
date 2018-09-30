@@ -32,11 +32,9 @@ export default class TestExceptionTest {
         });
 
         const consoleProxy = _.proxy(console);
-
         _.allow(consoleProxy).toReceive('error').andReturn();
 
         new _.DescribedClass({}, consoleProxy); // eslint-disable-line no-new
-
         _.expect(consoleProxy).toHaveReceived('error');
 
         _.assert(

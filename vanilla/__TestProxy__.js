@@ -127,7 +127,7 @@ class TestHandler {
     throw new TestException({
       type: TestException.TYPES.CHAIN,
       message: `Cannot call ${method}() in '${this.currentMode}' mode`,
-    });
+    }, this.console);
   }
 
   verifyMethod(method) {
@@ -137,7 +137,7 @@ class TestHandler {
       type: TestException.TYPES.VERIFY,
       message: `${method}()`,
       inspect: this.instance,
-    });
+    }, this.console);
   }
 }
 
