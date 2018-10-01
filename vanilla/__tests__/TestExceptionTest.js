@@ -6,11 +6,11 @@ export default class TestExceptionTest {
       _.method('#constructor', () => {
         _.context('When creating an exception with args', () => {
           const args = {
-            type: _.DescribedClass.TYPES.ARG,
+            type: TestException.TYPES.ARG,
             message: 'Hello world',
             inspect: {},
           };
-          const subject = new _.DescribedClass(args, _.noop());
+          const subject = new TestException(args, _.noop());
 
           _.assert(
             'It initializes the corresponding properties',
@@ -23,7 +23,7 @@ export default class TestExceptionTest {
         });
 
         _.context('When creating an exception without `inspect` arg', () => {
-          const subject = new _.DescribedClass({}, _.noop());
+          const subject = new TestException({}, _.noop());
 
           _.assert(
             'It does not initialize the `inspect` properties',
@@ -34,7 +34,7 @@ export default class TestExceptionTest {
         const consoleProxy = _.proxy(console);
         _.allow(consoleProxy).toReceive('error').andReturn();
 
-        new _.DescribedClass({}, consoleProxy); // eslint-disable-line no-new
+        new TestException({}, consoleProxy); // eslint-disable-line no-new
         _.expect(consoleProxy).toHaveReceived('error');
 
         _.assert(

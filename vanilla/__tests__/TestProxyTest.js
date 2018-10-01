@@ -5,7 +5,7 @@ export default class TestProxyTest {
   static enqueue(_) {
     _.Class(TestProxy, () => {
       _.method('.noop', () => {
-        const subject = _.DescribedClass.noop();
+        const subject = TestProxy.noop();
 
         _.assert(
           'It does not respond to anything',
@@ -13,8 +13,8 @@ export default class TestProxyTest {
         );
 
         _.context('When creating 2 noops', () => {
-          const subject1 = _.DescribedClass.noop();
-          const subject2 = _.DescribedClass.noop();
+          const subject1 = TestProxy.noop();
+          const subject2 = TestProxy.noop();
 
           _.assert(
             'They are singletons',
@@ -28,7 +28,7 @@ export default class TestProxyTest {
           const errors = [];
 
           try {
-            _.DescribedClass.verify(null, _.noop());
+            TestProxy.verify(null, _.noop());
           } catch (error) {
             errors.push(error);
           } finally {
@@ -43,7 +43,7 @@ export default class TestProxyTest {
           const errors = [];
 
           try {
-            _.DescribedClass.verify(new _.DescribedClass({}));
+            TestProxy.verify(new TestProxy({}));
           } catch (error) {
             errors.push(error);
           } finally {
@@ -56,17 +56,17 @@ export default class TestProxyTest {
       });
 
       _.method('#constructor', () => {
-        const subject = new _.DescribedClass({});
+        const subject = new TestProxy({});
 
         _.assert(
           'It returns a Proxy, which is not from described class',
-          () => !(subject instanceof _.DescribedClass),
+          () => !(subject instanceof TestProxy),
         );
       });
 
       _.method('#allowIt', () => {
         _.context('When used to stub return value', () => {
-          const subject = new _.DescribedClass({}, _.noop());
+          const subject = new TestProxy({}, _.noop());
           const returnValue = 'abc';
 
           subject.allowIt().toReceive('toString').andReturn(returnValue);
@@ -78,7 +78,7 @@ export default class TestProxyTest {
         });
 
         _.context('When used to stub a method that does not exist', () => {
-          const subject = new _.DescribedClass({}, _.noop());
+          const subject = new TestProxy({}, _.noop());
           const errors = [];
 
           try {
@@ -98,7 +98,7 @@ export default class TestProxyTest {
         });
 
         _.context('When chained with expect method: `toHaveReceived`', () => {
-          const subject = new _.DescribedClass({}, _.noop());
+          const subject = new TestProxy({}, _.noop());
           const errors = [];
 
           try {
@@ -118,7 +118,7 @@ export default class TestProxyTest {
         });
 
         _.context('When chained with expect method: `nTimes`', () => {
-          const subject = new _.DescribedClass({}, _.noop());
+          const subject = new TestProxy({}, _.noop());
           const errors = [];
 
           try {
@@ -140,7 +140,7 @@ export default class TestProxyTest {
 
       _.method('#expectIt / #isAsExpected', () => {
         _.context('When used to expect a method was called once', () => {
-          const subject = new _.DescribedClass({}, _.noop());
+          const subject = new TestProxy({}, _.noop());
           subject.allowIt().toReceive('toString');
 
           subject.toString();
@@ -153,7 +153,7 @@ export default class TestProxyTest {
         });
 
         _.context('When used to expect a method was called N times', () => {
-          const subject = new _.DescribedClass({}, _.noop());
+          const subject = new TestProxy({}, _.noop());
           subject.allowIt().toReceive('toString');
 
           const nTimes = 4;
@@ -167,7 +167,7 @@ export default class TestProxyTest {
         });
 
         _.context('When used to expect 2 methods was called N, M times', () => {
-          const subject = new _.DescribedClass({}, _.noop());
+          const subject = new TestProxy({}, _.noop());
           subject.allowIt().toReceive('toString');
           subject.allowIt().toReceive('valueOf');
 
@@ -185,7 +185,7 @@ export default class TestProxyTest {
         });
 
         _.context('When used to test a method that does not exist', () => {
-          const subject = new _.DescribedClass({}, _.noop());
+          const subject = new TestProxy({}, _.noop());
           const errors = [];
 
           try {
@@ -205,7 +205,7 @@ export default class TestProxyTest {
         });
 
         _.context('When chained with allow method: `toReceive`', () => {
-          const subject = new _.DescribedClass({}, _.noop());
+          const subject = new TestProxy({}, _.noop());
           const errors = [];
 
           try {
@@ -225,7 +225,7 @@ export default class TestProxyTest {
         });
 
         _.context('When chained with allowIt method: `andReturn`', () => {
-          const subject = new _.DescribedClass({}, _.noop());
+          const subject = new TestProxy({}, _.noop());
           const errors = [];
 
           try {
@@ -246,7 +246,7 @@ export default class TestProxyTest {
       });
 
       _.method('#isProxy', () => {
-        const subject = new _.DescribedClass({});
+        const subject = new TestProxy({});
 
         _.assert(
           'It responds to `isProxy` and returns true',
@@ -255,7 +255,7 @@ export default class TestProxyTest {
       });
 
       _.method('#debugger', () => {
-        const subject = new _.DescribedClass({});
+        const subject = new TestProxy({});
 
         _.assert(
           'It responds to `debugger`',

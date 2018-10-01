@@ -6,7 +6,7 @@ export default class TestHarnessTest {
       _.method('#constructor', () => {
         _.context('When creating a test harness with `seed` arg', () => {
           const seed = 'foo';
-          const subject = new _.DescribedClass(seed);
+          const subject = new TestHarness(seed);
 
           _.assert(
             'It initializes the `seed` property',
@@ -15,12 +15,11 @@ export default class TestHarnessTest {
         });
 
         _.context('When creating a test harness', () => {
-          const subject = new _.DescribedClass();
+          const subject = new TestHarness();
 
           _.assert(
             'It initializes all of the current context',
             () => [
-              subject.DescribedClass === null,
               subject.currentClass === null,
               subject.currentMethod === null,
               subject.currentContext === null,
@@ -43,15 +42,10 @@ export default class TestHarnessTest {
 
       _.method('#Class', () => {
         const Class = 'Class';
-        const subject = new _.DescribedClass();
+        const subject = new TestHarness();
         let callCount = 0;
 
         subject.Class(Class, () => { callCount += 1; });
-
-        _.assert(
-          'It sets `DescribedClass` and leaves it set when done',
-          () => subject.DescribedClass === Class,
-        );
 
         _.assert(
           'It executes `block`',
@@ -65,7 +59,7 @@ export default class TestHarnessTest {
       });
 
       _.method('#method', () => {
-        const subject = new _.DescribedClass();
+        const subject = new TestHarness();
         let callCount = 0;
 
         subject.method('#method', () => { callCount += 1; });
@@ -82,7 +76,7 @@ export default class TestHarnessTest {
       });
 
       _.method('#context', () => {
-        const subject = new _.DescribedClass();
+        const subject = new TestHarness();
         let callCount = 0;
 
         subject.method('When ...', () => { callCount += 1; });
@@ -99,7 +93,7 @@ export default class TestHarnessTest {
       });
 
       _.method('#assert', () => {
-        const subject = new _.DescribedClass();
+        const subject = new TestHarness();
         const assertion = 'Assertion';
 
         subject.assert('It ...', assertion);
@@ -119,7 +113,7 @@ export default class TestHarnessTest {
       });
 
       _.method('#xassert', () => {
-        const subject = new _.DescribedClass();
+        const subject = new TestHarness();
         const assertion = 'Assertion';
 
         subject.xassert('It ...', assertion);
@@ -168,7 +162,7 @@ export default class TestHarnessTest {
         });
 
 
-        const subject = new _.DescribedClass('seed', Printer);
+        const subject = new TestHarness('seed', Printer);
         subject.queue = queue.slice();
         subject.executeAssertions();
 
@@ -201,7 +195,7 @@ export default class TestHarnessTest {
       });
 
       _.method('#proxy', () => {
-        const subject = new _.DescribedClass();
+        const subject = new TestHarness();
 
         _.assert(
           'It delegates and returns a proxy',
@@ -210,7 +204,7 @@ export default class TestHarnessTest {
       });
 
       _.method('#allow', () => {
-        const subject = new _.DescribedClass();
+        const subject = new TestHarness();
         const instanceProxy = subject.proxy({});
 
         _.assert(
@@ -220,7 +214,7 @@ export default class TestHarnessTest {
       });
 
       _.method('#expect', () => {
-        const subject = new _.DescribedClass();
+        const subject = new TestHarness();
         const instanceProxy = subject.proxy({});
 
         _.assert(
@@ -230,7 +224,7 @@ export default class TestHarnessTest {
       });
 
       _.method('#noop', () => {
-        const subject = new _.DescribedClass();
+        const subject = new TestHarness();
 
         _.assert(
           'It delegates and returns a proxy that noops on any method call',

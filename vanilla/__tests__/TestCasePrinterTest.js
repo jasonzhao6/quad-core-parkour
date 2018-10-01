@@ -6,7 +6,7 @@ export default class TestCasePrinterTest {
       _.method('#constructor', () => {
         _.context('When creating a printer with `failures` arg', () => {
           const failures = [];
-          const subject = new _.DescribedClass(failures);
+          const subject = new TestCasePrinter(failures);
 
           _.assert(
             'It initializes the `failures` property',
@@ -15,7 +15,7 @@ export default class TestCasePrinterTest {
         });
 
         _.context('When creating a printer without console override', () => {
-          const subject = new _.DescribedClass();
+          const subject = new TestCasePrinter();
 
           _.assert(
             'It initializes the `console` property',
@@ -25,7 +25,7 @@ export default class TestCasePrinterTest {
 
         _.context('When creating a printer with console override', () => {
           const consoleOverride = {};
-          const subject = new _.DescribedClass([], consoleOverride);
+          const subject = new TestCasePrinter([], consoleOverride);
 
           _.assert(
             'It initializes the `console` property with override',
@@ -33,7 +33,7 @@ export default class TestCasePrinterTest {
           );
         });
 
-        const subject = new _.DescribedClass();
+        const subject = new TestCasePrinter();
 
         _.assert(
           'It initializes each `last*` property to null',
@@ -46,7 +46,7 @@ export default class TestCasePrinterTest {
       });
 
       _.method('#print', () => {
-        const subject = new _.DescribedClass([], _.noop());
+        const subject = new TestCasePrinter([], _.noop());
 
         subject.print();
 
@@ -73,7 +73,7 @@ export default class TestCasePrinterTest {
           const failures = [[1, 2, 3, 4]];
           const consoleProxy = newConsoleProxy();
 
-          new _.DescribedClass(failures, consoleProxy).print();
+          new TestCasePrinter(failures, consoleProxy).print();
 
           _.expect(consoleProxy).toHaveReceived('group').nTimes(3);
           _.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(3);
@@ -89,7 +89,7 @@ export default class TestCasePrinterTest {
           const failures = [[1, 2, null, 4]];
           const consoleProxy = newConsoleProxy();
 
-          new _.DescribedClass(failures, consoleProxy).print();
+          new TestCasePrinter(failures, consoleProxy).print();
 
           _.expect(consoleProxy).toHaveReceived('group').nTimes(2);
           _.expect(consoleProxy).toHaveReceived('info');
@@ -104,7 +104,7 @@ export default class TestCasePrinterTest {
           const failures = [[1, null, null, 4]];
           const consoleProxy = newConsoleProxy();
 
-          new _.DescribedClass(failures, consoleProxy).print();
+          new TestCasePrinter(failures, consoleProxy).print();
 
           _.expect(consoleProxy).toHaveReceived('group');
           _.expect(consoleProxy).toHaveReceived('info');
@@ -119,7 +119,7 @@ export default class TestCasePrinterTest {
           const failures = [[1, 2, 3, 40], [1, 2, 3, 41]];
           const consoleProxy = newConsoleProxy();
 
-          new _.DescribedClass(failures, consoleProxy).print();
+          new TestCasePrinter(failures, consoleProxy).print();
 
           _.expect(consoleProxy).toHaveReceived('group').nTimes(3);
           _.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(3);
@@ -135,7 +135,7 @@ export default class TestCasePrinterTest {
           const failures = [[1, 2, 30, 40], [1, 2, 31, 41]];
           const consoleProxy = newConsoleProxy();
 
-          new _.DescribedClass(failures, consoleProxy).print();
+          new TestCasePrinter(failures, consoleProxy).print();
 
           _.expect(consoleProxy).toHaveReceived('group').nTimes(4);
           _.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(4);
@@ -151,7 +151,7 @@ export default class TestCasePrinterTest {
           const failures = [[1, 20, 30, 40], [1, 21, 31, 41]];
           const consoleProxy = newConsoleProxy();
 
-          new _.DescribedClass(failures, consoleProxy).print();
+          new TestCasePrinter(failures, consoleProxy).print();
 
           _.expect(consoleProxy).toHaveReceived('group').nTimes(5);
           _.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(5);
@@ -167,7 +167,7 @@ export default class TestCasePrinterTest {
           const failures = [[10, 20, 30, 40], [11, 21, 31, 41]];
           const consoleProxy = newConsoleProxy();
 
-          new _.DescribedClass(failures, consoleProxy).print();
+          new TestCasePrinter(failures, consoleProxy).print();
 
           _.expect(consoleProxy).toHaveReceived('group').nTimes(6);
           _.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(6);

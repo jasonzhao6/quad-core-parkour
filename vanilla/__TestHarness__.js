@@ -21,8 +21,8 @@
 //
 //   _.Class(Person, () => {
 //     _.method('#sayHi', () => {
-//       const me = new _.DescribedClass();
-//       const friendProxy = _.proxy(new _.DescribedClass());
+//       const me = new Person();
+//       const friendProxy = _.proxy(new Person());
 //
 //       _.allow(friendProxy).toReceive('hello'); // And call through.
 //       _.allow(friendProxy).toReceive('goodbye').andReturn('See ya!');
@@ -70,7 +70,6 @@ export default class TestHarness {
     this.Printer = PrinterOverride || TestCasePrinter;
 
     // Current context
-    this.DescribedClass = null; // E.g Matrix, Core.
     this.currentClass = null; // E.g 'Matrix', 'Core'.
     this.currentMethod = null; // Either '#instanceMethod' or '.classMethod'.
     this.currentContext = null; // 'When ...'. Note: Nesting is not supported.
@@ -83,9 +82,6 @@ export default class TestHarness {
   }
 
   Class(Class, block) {
-    // Set it then leave it as it may still be refereneced by queued assertions.
-    this.DescribedClass = Class;
-
     this.currentClass = Class.name;
     block();
     this.currentClass = null;

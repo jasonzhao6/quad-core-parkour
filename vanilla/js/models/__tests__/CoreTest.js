@@ -5,7 +5,7 @@ export default class CoreTest {
     _.Class(Core, () => {
       _.method('#constructor', () => {
         _.context('When creating a core without matrix params', () => {
-          const subject = new _.DescribedClass();
+          const subject = new Core();
 
           _.assert(
             'It initializes each matrix property to null',
@@ -19,7 +19,7 @@ export default class CoreTest {
 
         _.context('When creating a core with matrix params', () => {
           const [i, j, matrix] = [1, 2, {}];
-          const subject = new _.DescribedClass({ i, j, matrix });
+          const subject = new Core({ i, j, matrix });
 
           _.assert(
             'It initializes each matrix property',
@@ -32,7 +32,7 @@ export default class CoreTest {
         });
 
         _.context('When creating a core', () => {
-          const subject = new _.DescribedClass();
+          const subject = new Core();
 
           _.assert(
             'It initializes accumulator to default value',

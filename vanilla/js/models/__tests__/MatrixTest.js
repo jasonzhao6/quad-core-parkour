@@ -8,7 +8,7 @@ export default class MatrixTest {
         _.context('When creating a matrix', () => {
           const [rowCount, columnCount, Class] = [1, 2, {}.constructor];
           const args = { rowCount, columnCount, Class };
-          const subject = new _.DescribedClass(args);
+          const subject = new Matrix(args);
 
           _.assert(
             'It initializes each property',
@@ -23,7 +23,7 @@ export default class MatrixTest {
         _.context('When creating a 2x3 matrix', () => {
           const [rowCount, columnCount] = [2, 3];
           const args = { rowCount, columnCount };
-          const subject = new _.DescribedClass(args).arrOfArr;
+          const subject = new Matrix(args).arrOfArr;
 
           _.assert(
             `It has ${rowCount} rows`,
@@ -43,7 +43,7 @@ export default class MatrixTest {
           const [rowCount, columnCount] = [2, 2];
           const Class = Core;
           const args = { rowCount, columnCount, Class };
-          const subject = new _.DescribedClass(args);
+          const subject = new Matrix(args);
 
           _.assert(
             'It has `rowCount * columnCount` elements',
@@ -97,7 +97,7 @@ export default class MatrixTest {
       _.method('#get', () => {
         const [rowCount, columnCount, Class] = [1, 2, {}.constructor];
         const args = { rowCount, columnCount, Class };
-        const subject = new _.DescribedClass(args);
+        const subject = new Matrix(args);
         const [i, j] = [0, 1];
 
         _.assert(
@@ -109,7 +109,7 @@ export default class MatrixTest {
       _.method('#getAll', () => {
         const [rowCount, columnCount, Class] = [1, 2, {}.constructor];
         const args = { rowCount, columnCount, Class };
-        const subject = new _.DescribedClass(args);
+        const subject = new Matrix(args);
 
         _.assert(
           'It returns all the elements',
