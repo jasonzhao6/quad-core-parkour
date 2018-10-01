@@ -1,5 +1,11 @@
+/* eslint object-curly-newline:
+      ['error', { consistent: true, minProperties: 5 }] */
+
 export default class Core {
   static get DEFAULT_VALUE() { return 0; }
+  static get DIRECTIONS() {
+    return { UP: 'up', DOWN: 'down', LEFT: 'left', RIGHT: 'right' };
+  }
 
   constructor({ i, j, matrix } = { i: null, j: null, matrix: null }) {
     // Props
@@ -8,12 +14,18 @@ export default class Core {
     this.matrix = matrix;
 
     // States
+    this.ins = {
+      [Core.DIRECTIONS.UP]: null,
+      [Core.DIRECTIONS.DOWN]: null,
+      [Core.DIRECTIONS.LEFT]: null,
+      [Core.DIRECTIONS.RIGHT]: null,
+    };
     this.accumulator = Core.DEFAULT_VALUE;
     this.backup = Core.DEFAULT_VALUE;
   }
 
   //
-  // Neighbors
+  // Directions
   //
 
   up() {
@@ -50,5 +62,32 @@ export default class Core {
     if (neighborJ === this.matrix.columnCount) return null;
 
     return this.matrix.get(neighborI, neighborJ);
+  }
+
+  //
+  // Commands
+  //
+
+  move(source, destination) {
+    const value = this.ins[source];
+
+    // Reset source
+    this.ins[source] = null;
+
+    // Set destination
+    this[destination]().ins[Core.reverse(destination)] = value;
+  }
+
+  //
+  // Private
+  //
+
+  static reverse(direction) {
+    if (direction === Core.DIRECTIONS.UP) return Core.DIRECTIONS.DOWN;
+    if (direction === Core.DIRECTIONS.DOWN) return Core.DIRECTIONS.UP;
+    if (direction === Core.DIRECTIONS.LEFT) return Core.DIRECTIONS.RIGHT;
+
+    // if (direction === Core.DIRECTIONS.RIGHT)
+    return Core.DIRECTIONS.LEFT;
   }
 }
