@@ -43,62 +43,82 @@ export default class MatrixTest {
           const [rowCount, columnCount] = [2, 2];
           const Class = Core;
           const args = { rowCount, columnCount, Class };
-          const subject = new _.DescribedClass(args).arrOfArr;
+          const subject = new _.DescribedClass(args);
 
           _.assert(
             'It has `rowCount * columnCount` elements',
-            () => subject.flat().length === rowCount * columnCount,
+            () => subject.getAll().length === rowCount * columnCount,
           );
 
           _.assert(
             'Every element is an instance of Core',
-            () => subject.flat().every(el => el instanceof Core),
+            () => subject.getAll().every(el => el instanceof Class),
           );
 
           _.assert(
             'Every element is a unique instance',
             () => {
-              const valuesBefore = subject.flat().map(el => el.accumulator);
+              const uniqueValues = [2, 1, -1, -2];
+              const [_00, _01, _10, _11] = uniqueValues;
 
-              const [_00, _01, _10, _11] = [2, 1, -1, -2];
-              subject[0][0].accumulator = _00;
-              subject[0][1].accumulator = _01;
-              subject[1][0].accumulator = _10;
-              subject[1][1].accumulator = _11;
-              const valuesAfter = subject.flat().map(el => el.accumulator);
+              subject.get(0, 0).accumulator = _00;
+              subject.get(0, 1).accumulator = _01;
+              subject.get(1, 0).accumulator = _10;
+              subject.get(1, 1).accumulator = _11;
 
-              return [
-                valuesBefore.every(value => value === Core.DEFAULT_VALUE),
-
-                valuesAfter[0] === _00,
-                valuesAfter[1] === _01,
-                valuesAfter[2] === _10,
-                valuesAfter[3] === _11,
-              ];
+              const assignedValues = subject.getAll().map(el => el.accumulator);
+              return assignedValues.join() === uniqueValues.join();
             },
           );
 
           _.assert(
             'Every element knows its position and parent matrix',
             () => [
-              subject[0][0].i === 0,
-              subject[0][0].j === 0,
-              subject[0][0].matrix.arrOfArr === subject,
+              subject.get(0, 0).i === 0,
+              subject.get(0, 0).j === 0,
+              subject.get(0, 0).matrix === subject,
 
-              subject[0][1].i === 0,
-              subject[0][1].j === 1,
-              subject[0][1].matrix.arrOfArr === subject,
+              subject.get(0, 1).i === 0,
+              subject.get(0, 1).j === 1,
+              subject.get(0, 1).matrix === subject,
 
-              subject[1][0].i === 1,
-              subject[1][0].j === 0,
-              subject[1][0].matrix.arrOfArr === subject,
+              subject.get(1, 0).i === 1,
+              subject.get(1, 0).j === 0,
+              subject.get(1, 0).matrix === subject,
 
-              subject[1][1].i === 1,
-              subject[1][1].j === 1,
-              subject[1][1].matrix.arrOfArr === subject,
+              subject.get(1, 1).i === 1,
+              subject.get(1, 1).j === 1,
+              subject.get(1, 1).matrix === subject,
             ],
           );
         });
+      });
+
+      _.method('#get', () => {
+        const [rowCount, columnCount, Class] = [1, 2, {}.constructor];
+        const args = { rowCount, columnCount, Class };
+        const subject = new _.DescribedClass(args);
+        const [i, j] = [0, 1];
+
+        _.assert(
+          'It returns element at `i` and `j`',
+          () => subject.get(i, j) === subject.arrOfArr[i][j],
+        );
+      });
+
+      _.method('#getAll', () => {
+        const [rowCount, columnCount, Class] = [1, 2, {}.constructor];
+        const args = { rowCount, columnCount, Class };
+        const subject = new _.DescribedClass(args);
+
+        _.assert(
+          'It returns all the elements',
+          () => [
+            subject.getAll().length === 2,
+            subject.getAll()[0] === subject.get(0, 0),
+            subject.getAll()[1] === subject.get(0, 1),
+          ],
+        );
       });
     });
   }

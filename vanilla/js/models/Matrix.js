@@ -18,4 +18,12 @@ export default class Matrix {
       }
     });
   }
+
+  get(i, j) {
+    return this.arrOfArr[i][j];
+  }
+
+  getAll() {
+    return this.arrOfArr.flat();
+  }
 }
