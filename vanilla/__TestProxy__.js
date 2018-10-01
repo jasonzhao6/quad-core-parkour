@@ -3,13 +3,8 @@
 import TestException from './__TestException__.js';
 
 class TestHandler {
-  static get SETUP_METHODS() {
-    return { // See usage above each method's definition.
-      ALLOW_IT: 'allowIt',
-      EXPECT_IT: 'expectIt',
-      IS_AS_EXPECTED: 'isAsExpected',
-    };
-  }
+  // For each setup method, see its usage above its method definition.
+  static get SETUP_METHODS() { return ['allowIt', 'expectIt', 'isAsExpected']; }
   static get MODES() { return { ALLOW: 'allow', EXPECT: 'expect' }; }
   static get GETTERS() { return { IS_PROXY: 'isProxy', DEBUGGER: 'debugger' }; }
 
@@ -27,7 +22,7 @@ class TestHandler {
   }
 
   has(instance, method) {
-    if (Object.values(TestHandler.SETUP_METHODS).includes(method)) return true;
+    if (TestHandler.SETUP_METHODS.includes(method)) return true;
     if (Object.values(TestHandler.GETTERS).includes(method)) return true;
 
     return method in instance;
@@ -35,7 +30,7 @@ class TestHandler {
 
   get(instance, method) {
     // Route setup methods
-    if (Object.values(TestHandler.SETUP_METHODS).includes(method)) {
+    if (TestHandler.SETUP_METHODS.includes(method)) {
       return this[method].bind(this);
     }
 
