@@ -2,19 +2,13 @@
       ['error', { consistent: true, minProperties: 5 }] */
 
 export default class Director {
-  static get DIRECTIONS() {
-    return { UP: 'up', DOWN: 'down', LEFT: 'left', RIGHT: 'right' };
-  }
-
   static reverse(direction) {
-    const { UP, DOWN, LEFT, RIGHT } = Director.DIRECTIONS;
+    if (direction === 'up') return 'down';
+    if (direction === 'down') return 'up';
+    if (direction === 'left') return 'right';
 
-    if (direction === UP) return DOWN;
-    if (direction === DOWN) return UP;
-    if (direction === LEFT) return RIGHT;
-
-    // ... if (direction === RIGHT)
-    return LEFT;
+    // ... if (direction === 'right')
+    return 'left';
   }
 
   constructor({ i, j, matrix }) {
