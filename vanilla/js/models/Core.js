@@ -4,11 +4,9 @@
 export default class Core {
   static get DEFAULT_VALUE() { return 0; }
 
-  constructor({ i, j, matrix } = { i: null, j: null, matrix: null }) {
+  constructor(director) {
     // Props
-    this.i = i;
-    this.j = j;
-    this.matrix = matrix;
+    this.director = director;
 
     // States
     // this.ins = {

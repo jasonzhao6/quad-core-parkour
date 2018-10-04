@@ -5,44 +5,13 @@ export default class CoreTest {
   static enqueue(_) {
     _.Class(Core, () => {
       _.method('#constructor', () => {
-        _.context('When creating a core without matrix args', () => {
-          const subject = new Core();
-
-          _.assert(
-            'It initializes each matrix property to null',
-            () => [
-              subject.i === null,
-              subject.j === null,
-              subject.matrix === null,
-            ],
-          );
-        });
-
-        _.context('When creating a core with matrix args', () => {
-          const [i, j, matrix] = [1, 2, {}];
-          const subject = new Core({ i, j, matrix });
-
-          _.assert(
-            'It initializes each matrix property',
-            () => [
-              subject.i === i,
-              subject.j === j,
-              subject.matrix === matrix,
-            ],
-          );
-        });
-
         _.context('When creating a core', () => {
-          const subject = new Core();
+          const director = 'director';
+          const subject = new Core(director);
 
-          _.xassert(
-            'It initializes each `ins` state to null',
-            () => [
-              subject.ins.up === null,
-              subject.ins.down === null,
-              subject.ins.left === null,
-              subject.ins.down === null,
-            ],
+          _.assert(
+            'It initializes the `director` prop',
+            () => subject.director === director,
           );
 
           _.assert(
