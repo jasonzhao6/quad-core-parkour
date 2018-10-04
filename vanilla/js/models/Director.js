@@ -23,4 +23,24 @@ export default class Director {
     this.j = j;
     this.matrix = matrix;
   }
+
+  up() {
+    if (this.i - 1 === -1) return null;
+    return this.matrix.get(this.i - 1, this.j);
+  }
+
+  down() {
+    if (this.i + 1 === this.matrix.rowCount) return null;
+    return this.matrix.get(this.i + 1, this.j);
+  }
+
+  left() {
+    if (this.j - 1 === -1) return null;
+    return this.matrix.get(this.i, this.j - 1);
+  }
+
+  right() {
+    if (this.j + 1 === this.matrix.columnCount) return null;
+    return this.matrix.get(this.i, this.j + 1);
+  }
 }
