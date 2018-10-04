@@ -94,16 +94,44 @@ export default class MatrixTest {
         });
       });
 
+      _.method('#alias', () => {
+        const [rowCount, columnCount, Class] = [1, 2, {}.constructor];
+        const args = { rowCount, columnCount, Class };
+        const subject = new Matrix(args);
+        const [i, j, alias] = [0, 1, 'tail'];
+
+        subject.alias(i, j, alias);
+
+        _.assert(
+          'It sets the `aliases` state',
+          () => [
+            subject.aliases[alias].i === i,
+            subject.aliases[alias].j === j,
+          ],
+        );
+      });
+
       _.method('#get', () => {
         const [rowCount, columnCount, Class] = [1, 2, {}.constructor];
         const args = { rowCount, columnCount, Class };
         const subject = new Matrix(args);
-        const [i, j] = [0, 1];
+        const [i, j, alias] = [0, 1, 'tail'];
 
-        _.assert(
-          'It returns element at `i` and `j`',
-          () => subject.get(i, j) === subject.arrOfArr[i][j],
-        );
+        subject.alias(i, j, alias);
+
+        _.context('When getting an element via `i` and `j`', () => {
+          _.assert(
+            'It returns element at `i` and `j`',
+            () => subject.get(i, j) === subject.arrOfArr[i][j],
+          );
+        });
+
+        _.context('When getting an element via `alias`', () => {
+          _.assert(
+            'It returns element at `i` and `j`',
+            () => subject.get(alias) === subject.arrOfArr[i][j],
+          );
+        });
       });
 
       _.method('#getAll', () => {
