@@ -1,3 +1,5 @@
+import Director from './Director.js';
+
 export default class Matrix {
   constructor({ rowCount, columnCount, Class }) {
     // Props
@@ -16,7 +18,9 @@ export default class Matrix {
       // Populate each element with a unique `Class` instance.
       if (this.Class) {
         [...this.arrOfArr[i].keys()].forEach((j) => {
-          this.arrOfArr[i][j] = new this.Class({ i, j, matrix: this });
+          // Inject director to help element find neighboring elements.
+          const director = new Director({ i, j, matrix: this });
+          this.arrOfArr[i][j] = new this.Class(director);
         });
       }
     });

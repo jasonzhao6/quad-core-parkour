@@ -56,15 +56,15 @@ export default class MatrixTest {
           );
 
           _.assert(
-            'Every element is a unique instance',
+            'Every element is a unique instance of Core',
             () => {
               const uniqueValues = [2, 1, -1, -2];
-              const [_00, _01, _10, _11] = uniqueValues;
+              const [oo, oi, io, ii] = uniqueValues;
 
-              subject.get(0, 0).accumulator = _00;
-              subject.get(0, 1).accumulator = _01;
-              subject.get(1, 0).accumulator = _10;
-              subject.get(1, 1).accumulator = _11;
+              subject.get(0, 0).accumulator = oo;
+              subject.get(0, 1).accumulator = oi;
+              subject.get(1, 0).accumulator = io;
+              subject.get(1, 1).accumulator = ii;
 
               const assignedValues = subject.getAll().map(el => el.accumulator);
               return assignedValues.join() === uniqueValues.join();
@@ -72,23 +72,27 @@ export default class MatrixTest {
           );
 
           _.assert(
-            'Every element knows its position and parent matrix',
+            'Every element can find its neighboring elements via `director`',
             () => [
-              subject.get(0, 0).i === 0,
-              subject.get(0, 0).j === 0,
-              subject.get(0, 0).matrix === subject,
+              subject.get(0, 0).director.up() === null,
+              subject.get(0, 0).director.down() === subject.get(1, 0),
+              subject.get(0, 0).director.left() === null,
+              subject.get(0, 0).director.right() === subject.get(0, 1),
 
-              subject.get(0, 1).i === 0,
-              subject.get(0, 1).j === 1,
-              subject.get(0, 1).matrix === subject,
+              subject.get(0, 1).director.up() === null,
+              subject.get(0, 1).director.down() === subject.get(1, 1),
+              subject.get(0, 1).director.left() === subject.get(0, 0),
+              subject.get(0, 1).director.right() === null,
 
-              subject.get(1, 0).i === 1,
-              subject.get(1, 0).j === 0,
-              subject.get(1, 0).matrix === subject,
+              subject.get(1, 0).director.up() === subject.get(0, 0),
+              subject.get(1, 0).director.down() === null,
+              subject.get(1, 0).director.left() === null,
+              subject.get(1, 0).director.right() === subject.get(1, 1),
 
-              subject.get(1, 1).i === 1,
-              subject.get(1, 1).j === 1,
-              subject.get(1, 1).matrix === subject,
+              subject.get(1, 1).director.up() === subject.get(0, 1),
+              subject.get(1, 1).director.down() === null,
+              subject.get(1, 1).director.left() === subject.get(1, 0),
+              subject.get(1, 1).director.right() === null,
             ],
           );
         });
