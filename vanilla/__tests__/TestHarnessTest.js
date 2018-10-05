@@ -198,7 +198,7 @@ export default class TestHarnessTest {
         const subject = new TestHarness();
 
         _.assert(
-          'It delegates and returns a proxy',
+          'It returns a proxy',
           () => subject.proxy({}).isProxy,
         );
       });
@@ -208,7 +208,7 @@ export default class TestHarnessTest {
         const instanceProxy = subject.proxy({});
 
         _.assert(
-          'It delegates to `allowIt` method on the proxy',
+          'It delegates to `allowIt` method',
           () => subject.allow(instanceProxy) === instanceProxy.allowIt(),
         );
       });
@@ -218,8 +218,17 @@ export default class TestHarnessTest {
         const instanceProxy = subject.proxy({});
 
         _.assert(
-          'It delegates to `expectIt` method on the proxy',
+          'It delegates to `expectIt` method',
           () => subject.expect(instanceProxy) === instanceProxy.expectIt(),
+        );
+      });
+
+      _.method('#echo', () => {
+        const subject = new TestHarness();
+
+        _.assert(
+          'It returns a proxy that echos the method name on any method call',
+          () => subject.echo().toString() === 'toString',
         );
       });
 
@@ -227,7 +236,7 @@ export default class TestHarnessTest {
         const subject = new TestHarness();
 
         _.assert(
-          'It delegates and returns a proxy that noops on any method call',
+          'It returns a proxy that noops on any method call',
           () => subject.noop().toString() === undefined,
         );
       });

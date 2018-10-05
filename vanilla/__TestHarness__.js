@@ -54,7 +54,7 @@
 // ```
 
 /* eslint class-methods-use-this: ['error', { exceptMethods:
-     ['proxy', 'allow', 'expect', 'noop'] }] */
+     ['proxy', 'allow', 'expect', 'echo', 'noop'] }] */
 
 // Testing framework
 import TestCasePrinter from './__TestCasePrinter__.js';
@@ -131,6 +131,10 @@ export default class TestHarness {
   expect(instanceProxy) {
     TestProxy.verify(instanceProxy);
     return instanceProxy.expectIt();
+  }
+
+  echo() {
+    return TestProxy.echo();
   }
 
   noop() {

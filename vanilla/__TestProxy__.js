@@ -137,6 +137,15 @@ class TestHandler {
 }
 
 export default class TestProxy {
+  static echo() {
+    if (this.echoSingleton === undefined) {
+      const handler = { get: (_instance, method) => () => method };
+      this.echoSingleton = new Proxy({}, handler);
+    }
+
+    return this.echoSingleton;
+  }
+
   static noop() {
     if (this.noopSingleton === undefined) {
       this.noopSingleton = new Proxy({}, { get: () => () => {} });

@@ -4,6 +4,25 @@ import TestProxy from '../__TestProxy__.js';
 export default class TestProxyTest {
   static enqueue(_) {
     _.Class(TestProxy, () => {
+      _.method('.echo', () => {
+        const subject = TestProxy.echo();
+
+        _.assert(
+          'It echos method names',
+          () => [subject.hi() === 'hi', subject.toString() === 'toString'],
+        );
+
+        _.context('When creating 2 echos', () => {
+          const subject1 = TestProxy.echo();
+          const subject2 = TestProxy.echo();
+
+          _.assert(
+            'They are singletons',
+            () => subject1 === subject2,
+          );
+        });
+      });
+
       _.method('.noop', () => {
         const subject = TestProxy.noop();
 
