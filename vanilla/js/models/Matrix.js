@@ -15,12 +15,14 @@ export default class Matrix {
     [...this.arrOfArr.keys()].forEach((i) => {
       this.arrOfArr[i] = new Array(this.columnCount);
 
-      // Populate each element with a unique `Class` instance.
+      // Populate each element with a new `Class` instance.
       if (this.Class) {
         [...this.arrOfArr[i].keys()].forEach((j) => {
-          // Inject director to help element find neighboring elements.
+          // Create a director for each element, so they can find each other.
           const director = new Director({ i, j, matrix: this });
-          this.arrOfArr[i][j] = new this.Class(director);
+
+          // Inject 1) element-specific director and 2) matrix-wide queue.
+          this.arrOfArr[i][j] = new this.Class({ director, queue });
         });
       }
     });
@@ -30,7 +32,8 @@ export default class Matrix {
     this.aliases[alias] = { i, j };
   }
 
-  get(...args) { // Arguments: [i, j] or [alias].
+  // Arguments: [i, j] or [alias].
+  get(...args) {
     if (args.length === 2) return this.arrOfArr[args[0]][args[1]];
 
     // ... if (args.length === 1)

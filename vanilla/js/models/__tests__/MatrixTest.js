@@ -18,10 +18,17 @@ export default class MatrixTest {
               subject.Class === Class,
             ],
           );
+
+          _.assert(
+            'It initializes the `aliases` state',
+            () => [
+              typeof subject.aliases === 'object',
+            ],
+          );
         });
 
-        _.context('When creating a 2x3 matrix', () => {
-          const [rowCount, columnCount] = [2, 3];
+        _.context('When creating a 10x20 matrix', () => {
+          const [rowCount, columnCount] = [10, 20];
           const args = { rowCount, columnCount };
           const subject = new Matrix(args).arrOfArr;
 
@@ -38,12 +45,12 @@ export default class MatrixTest {
             ],
           );
         });
+      });
 
+      _.method('#constructor', () => { // Focus: Class
         _.context('When creating a 2x2 Core matrix', () => {
-          const [rowCount, columnCount] = [2, 2];
-          const Class = Core;
-          const args = { rowCount, columnCount, Class };
-          const subject = new Matrix(args);
+          const [rowCount, columnCount, Class] = [2, 2, Core];
+          const subject = new Matrix({ rowCount, columnCount, Class });
 
           _.assert(
             'It has `rowCount * columnCount` elements',
@@ -70,9 +77,16 @@ export default class MatrixTest {
               return assignedValues.join() === uniqueValues.join();
             },
           );
+        });
+      });
+
+      _.method('#constructor', () => { // Focus: Directions
+        _.context('When creating a 2x2 Core matrix', () => {
+          const [rowCount, columnCount, Class] = [2, 2, Core];
+          const subject = new Matrix({ rowCount, columnCount, Class });
 
           _.assert(
-            'Every element can find its neighboring elements via `director`',
+            'Every element can find its neighbors via their `director`',
             () => [
               subject.get(0, 0).director.up() === null,
               subject.get(0, 0).director.down() === subject.get(1, 0),

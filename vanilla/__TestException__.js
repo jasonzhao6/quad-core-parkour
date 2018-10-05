@@ -1,6 +1,7 @@
 export default class TestException {
   static get TYPES() {
-    return { // TODO Consider turning these into methods that construct output.
+    // TODO Consider turning these into methods that construct output.
+    return {
       ARG: 'Unexpected argument',
       CHAIN: 'Broken method chain',
       VERIFY: 'Method not in instance',

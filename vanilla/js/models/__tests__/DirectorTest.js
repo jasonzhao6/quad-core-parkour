@@ -20,7 +20,7 @@ export default class DirectorTest {
       });
     });
 
-    _.Class(Director, () => {
+    _.Class(Director, () => { // Focus: Directions
       const args = { rowCount: 2, columnCount: 2, Class: {}.constructor };
       const twoByTwo = new Matrix(args);
 

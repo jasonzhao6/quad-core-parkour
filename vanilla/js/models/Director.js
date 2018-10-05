@@ -2,6 +2,8 @@
       ['error', { consistent: true, minProperties: 5 }] */
 
 export default class Director {
+  // TODO maybe add back `get directions()` as an array for meta programming
+
   static reverse(direction) {
     if (direction === 'up') return 'down';
     if (direction === 'down') return 'up';

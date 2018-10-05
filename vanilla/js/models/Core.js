@@ -4,7 +4,7 @@
 export default class Core {
   static get DEFAULT_VALUE() { return 0; }
 
-  constructor(director) {
+  constructor({ director }) {
     // Props
     this.director = director;
 
@@ -23,6 +23,7 @@ export default class Core {
   // Delegated
   //
 
+  // Directions
   up() { return this.director.up(); }
   down() { return this.director.down(); }
   left() { return this.director.left(); }

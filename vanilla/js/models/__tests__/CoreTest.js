@@ -7,7 +7,7 @@ export default class CoreTest {
       _.method('#constructor', () => {
         _.context('When creating a core', () => {
           const director = 'director';
-          const subject = new Core(director);
+          const subject = new Core({ director });
 
           _.assert(
             'It initializes the `director` prop',
@@ -67,9 +67,9 @@ export default class CoreTest {
       });
     });
 
-    _.Class(Core, () => {
+    _.Class(Core, () => { // Focus: Directions
       const director = _.echo();
-      const subject = new Core(director);
+      const subject = new Core({ director });
 
       _.method('#up', () => {
         _.assert(
