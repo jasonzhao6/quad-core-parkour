@@ -20,6 +20,15 @@ export default class Core {
   }
 
   //
+  // Delegated
+  //
+
+  up() { return this.director.up(); }
+  down() { return this.director.down(); }
+  left() { return this.director.left(); }
+  right() { return this.director.right(); }
+
+  //
   // Commands
   //
 

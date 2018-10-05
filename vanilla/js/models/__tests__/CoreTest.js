@@ -66,5 +66,38 @@ export default class CoreTest {
         });
       });
     });
+
+    _.Class(Core, () => {
+      const director = _.echo();
+      const subject = new Core(director);
+
+      _.method('#up', () => {
+        _.assert(
+          'It delegated to the `director`',
+          () => subject.up() === subject.director.up(),
+        );
+      });
+
+      _.method('#down', () => {
+        _.assert(
+          'It delegated to the `director`',
+          () => subject.down() === subject.director.down(),
+        );
+      });
+
+      _.method('#left', () => {
+        _.assert(
+          'It delegated to the `director`',
+          () => subject.left() === subject.director.left(),
+        );
+      });
+
+      _.method('#right', () => {
+        _.assert(
+          'It delegated to the `director`',
+          () => subject.right() === subject.director.right(),
+        );
+      });
+    });
   }
 }
