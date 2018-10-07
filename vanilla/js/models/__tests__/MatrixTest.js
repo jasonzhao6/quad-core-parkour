@@ -112,6 +112,40 @@ export default class MatrixTest {
         });
       });
 
+      _.method('#constructor, matrix-wide escrow', () => {
+        console.log('TODO: Escrow');
+
+        _.context('When creating a 2x2 Core matrix', () => {
+          const [rowCount, columnCount, Class] = [2, 2, Core];
+          const subject = new Matrix({ rowCount, columnCount, Class });
+
+          _.assert(
+            'Every element can talk to its neighbors via the `escrow`',
+            () => [
+              // subject.get(0, 0).escrow.up() === null,
+              subject.get(0, 0).director.down() === subject.get(1, 0),
+              subject.get(0, 0).director.left() === null,
+              subject.get(0, 0).director.right() === subject.get(0, 1),
+
+              subject.get(0, 1).director.up() === null,
+              subject.get(0, 1).director.down() === subject.get(1, 1),
+              subject.get(0, 1).director.left() === subject.get(0, 0),
+              subject.get(0, 1).director.right() === null,
+
+              subject.get(1, 0).director.up() === subject.get(0, 0),
+              subject.get(1, 0).director.down() === null,
+              subject.get(1, 0).director.left() === null,
+              subject.get(1, 0).director.right() === subject.get(1, 1),
+
+              subject.get(1, 1).director.up() === subject.get(0, 1),
+              subject.get(1, 1).director.down() === null,
+              subject.get(1, 1).director.left() === subject.get(1, 0),
+              subject.get(1, 1).director.right() === null,
+            ],
+          );
+        });
+      });
+
       _.method('#alias', () => {
         const [rowCount, columnCount, Class] = [1, 2, {}.constructor];
         const args = { rowCount, columnCount, Class };

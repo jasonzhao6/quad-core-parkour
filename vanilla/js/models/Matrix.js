@@ -1,4 +1,5 @@
 import Director from './Director.js';
+import Escrow from './Escrow.js';
 
 export default class Matrix {
   constructor({ rowCount, columnCount, Class }) {
@@ -10,7 +11,10 @@ export default class Matrix {
     // States
     this.aliases = {};
 
-    // Create a `rowCount * columnCount` matrix.
+    // Create an escrow for holding messages that elements send to each other.
+    const escrow = new Escrow();
+
+    // Create a `rowCount` by `columnCount` matrix.
     this.arrOfArr = new Array(this.rowCount);
     [...this.arrOfArr.keys()].forEach((i) => {
       this.arrOfArr[i] = new Array(this.columnCount);
@@ -21,8 +25,8 @@ export default class Matrix {
           // Create a director for each element, so they can find each other.
           const director = new Director({ i, j, matrix: this });
 
-          // Inject 1) element-specific director and 2) matrix-wide queue.
-          this.arrOfArr[i][j] = new this.Class({ director, queue });
+          // Inject both 1) element-specific director and 2) matrix-wide escrow.
+          this.arrOfArr[i][j] = new this.Class({ director, escrow });
         });
       }
     });

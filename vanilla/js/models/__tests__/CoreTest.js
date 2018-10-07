@@ -1,5 +1,5 @@
 import Core from '../Core.js';
-import Matrix from '../Matrix.js';
+// import Matrix from '../Matrix.js';
 
 export default class CoreTest {
   static enqueue(_) {
@@ -7,11 +7,13 @@ export default class CoreTest {
       _.method('#constructor', () => {
         _.context('When creating a core', () => {
           const director = 'director';
-          const subject = new Core({ director });
+          const escrow = 'escrow';
+          const subject = new Core({ director, escrow });
 
           _.assert(
-            'It initializes the `director` prop',
+            'It initializes each property',
             () => subject.director === director,
+            () => subject.escrow === escrow,
           );
 
           _.assert(
@@ -26,45 +28,45 @@ export default class CoreTest {
         });
       });
 
-      const twoByTwo = new Matrix({ rowCount: 2, columnCount: 2, Class: Core });
-
-      _.method('#move', () => {
-        _.context('When moving a value from up to down', () => {
-          const subject = twoByTwo.get(0, 0);
-          const value = 10;
-
-          // subject.ins.up = value;
-          // subject.move('up', 'down');
-
-          _.xassert(
-            'It sets up to null',
-            () => subject.ins.up === null,
-          );
-
-          _.xassert(
-            'It sets down to the correct value',
-            () => subject.down().ins.up === value,
-          );
-        });
-
-        _.context('When moving a value from up to right', () => {
-          const subject = twoByTwo.get(0, 0);
-          const value = 10;
-
-          // subject.ins.up = value;
-          subject.move('up', 'right');
-
-          _.xassert(
-            'It sets up to null',
-            () => subject.ins.up === null,
-          );
-
-          _.xassert(
-            'It sets right to the correct value',
-            () => subject.right().ins.left === value,
-          );
-        });
-      });
+      // const twoByTwo = new Matrix({ rowCount: 2, columnCount: 2, Class: Core });
+      //
+      // _.method('#move', () => {
+      //   _.context('When moving a value from up to down', () => {
+      //     const subject = twoByTwo.get(0, 0);
+      //     const value = 10;
+      //
+      //     // subject.ins.up = value;
+      //     // subject.move('up', 'down');
+      //
+      //     _.xassert(
+      //       'It sets up to null',
+      //       () => subject.ins.up === null,
+      //     );
+      //
+      //     _.xassert(
+      //       'It sets down to the correct value',
+      //       () => subject.down().ins.up === value,
+      //     );
+      //   });
+      //
+      //   _.context('When moving a value from up to right', () => {
+      //     const subject = twoByTwo.get(0, 0);
+      //     const value = 10;
+      //
+      //     // subject.ins.up = value;
+      //     subject.move('up', 'right');
+      //
+      //     _.xassert(
+      //       'It sets up to null',
+      //       () => subject.ins.up === null,
+      //     );
+      //
+      //     _.xassert(
+      //       'It sets right to the correct value',
+      //       () => subject.right().ins.left === value,
+      //     );
+      //   });
+      // });
     });
 
     _.Class(Core, () => { // Focus: Directions

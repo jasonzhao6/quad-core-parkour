@@ -4,17 +4,12 @@
 export default class Core {
   static get DEFAULT_VALUE() { return 0; }
 
-  constructor({ director }) {
+  constructor({ director, escrow }) {
     // Props
     this.director = director;
+    this.escrow = escrow;
 
     // States
-    // this.ins = {
-    //   [Core.DIRECTIONS.UP]: null,
-    //   [Core.DIRECTIONS.DOWN]: null,
-    //   [Core.DIRECTIONS.LEFT]: null,
-    //   [Core.DIRECTIONS.RIGHT]: null,
-    // };
     this.accumulator = Core.DEFAULT_VALUE;
     this.backup = Core.DEFAULT_VALUE;
   }

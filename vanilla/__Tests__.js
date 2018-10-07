@@ -12,6 +12,7 @@ import TestProxyTest from './__tests__/TestProxyTest.js';
 // Model tests
 import CoreTest from './js/models/__tests__/CoreTest.js';
 import DirectorTest from './js/models/__tests__/DirectorTest.js';
+import EscrowTest from './js/models/__tests__/EscrowTest.js';
 import MatrixTest from './js/models/__tests__/MatrixTest.js';
 
 export default class Tests {
@@ -34,6 +35,7 @@ export default class Tests {
   static enqueueModelTests(_) {
     CoreTest.enqueue(_);
     DirectorTest.enqueue(_);
+    EscrowTest.enqueue(_);
     MatrixTest.enqueue(_);
   }
 }
