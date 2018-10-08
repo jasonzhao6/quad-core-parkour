@@ -1,4 +1,4 @@
-// Escrow for holding messages from sender to recipient.
+// Escrow for holding message between sender and recipient.
 // Allow only one message at a time per sender/recipient pair.
 export default class Escrow {
   constructor() {
@@ -21,8 +21,8 @@ export default class Escrow {
     return false;
   }
 
-  // Withdraw and clear the message for sender/recipient pair.
-  // Return the withdraw message, or else null.
+  // Withdraw and clear message for sender/recipient pair.
+  // Return the withdrawn message or `null`.
   withdraw(sender, recipient) {
     const key = Escrow.makeKey(sender, recipient);
     const message = this.messages[key];
@@ -33,6 +33,12 @@ export default class Escrow {
   //
   // Private
   //
+
+  // Peek at message for sender/recipient pair without clearing it.
+  // Return the withdrawn message or `null`.
+  peek(sender, recipient) {
+    return this.messages[Escrow.makeKey(sender, recipient)];
+  }
 
   static makeKey(sender, recipient) {
     return [sender, recipient].join('-');

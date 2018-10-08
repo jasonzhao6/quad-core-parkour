@@ -10,9 +10,7 @@ export default class Matrix {
 
     // States
     this.aliases = {};
-
-    // Create an escrow for holding messages that elements send to each other.
-    const escrow = new Escrow();
+    this.escrow = new Escrow();
 
     // Create a `rowCount` by `columnCount` matrix.
     this.arrOfArr = new Array(this.rowCount);
@@ -22,11 +20,10 @@ export default class Matrix {
       // Populate each element with a new `Class` instance.
       if (this.Class) {
         [...this.arrOfArr[i].keys()].forEach((j) => {
-          // Create a director for each element, so they can find each other.
+          // Inject each element with a director to help message each other.
           const director = new Director({ i, j, matrix: this });
 
-          // Inject both 1) element-specific director and 2) matrix-wide escrow.
-          this.arrOfArr[i][j] = new this.Class({ director, escrow });
+          this.arrOfArr[i][j] = new this.Class({ director });
         });
       }
     });

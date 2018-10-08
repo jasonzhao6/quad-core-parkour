@@ -21,6 +21,8 @@ export default class Director {
     this.matrix.alias(i, j, this.name());
   }
 
+  get escrow() { return this.matrix.escrow; }
+
   //
   // Directions
   //
@@ -44,6 +46,21 @@ export default class Director {
     if (this.j + 1 === this.matrix.columnCount) return null;
     return this.matrix.get(this.i, this.j + 1);
   }
+
+  //
+  // Messaging
+  //
+
+  send(direction, message) {
+    const sender = this.name();
+    const recipient = this[direction]() !== null
+      ? this[direction]().director.name()
+      : direction;
+
+    return this.escrow.deposit(sender, recipient, message);
+  }
+
+  // receive(direction) {}
 
   //
   // Private

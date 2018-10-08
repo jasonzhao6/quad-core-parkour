@@ -102,6 +102,17 @@ export default class DirectorTest {
           );
         });
       });
+
+      _.method('#escrow', () => {
+
+        const [i, j, matrix] = [0, 0, _.noop()];
+        const subject = new Director({ i, j, matrix });
+
+        _.assert(
+          'It delegates to the `matrix` property',
+          () => subject.escrow.toString() === subject.matrix.escrow.toString(),
+        );
+      });
     });
 
     _.Class('Director, direction methods', () => {
@@ -184,6 +195,37 @@ export default class DirectorTest {
           _.assert(
             'It returns null',
             () => subject.right() === null,
+          );
+        });
+      });
+    });
+
+    _.Class('Director, messaging methods', () => {
+      const message = 'message';
+      const args = { rowCount: 2, columnCount: 2, Class: {}.constructor };
+      const twoByTwo = new Matrix(args);
+      const subject = new Director({ i: 0, j: 0, matrix: twoByTwo });
+      const sender = subject.name();
+
+      _.method('#send', () => {
+        _.context('When sending message in the direction of an element', () => {
+          const direction = 'right';
+          const recipient = subject[direction]().director.name();
+          subject.send(direction, message);
+
+          _.assert(
+            'It populates the escrow',
+            () => subject.escrow.peek(sender, recipient) === message,
+          );
+        });
+
+        _.context('When sending message out of bound', () => {
+          const direction = 'left';
+          subject.send(direction, message);
+
+          _.assert(
+            'It populates the escrow with recipient name being the direction',
+            () => subject.escrow.peek(sender, direction) === message,
           );
         });
       });

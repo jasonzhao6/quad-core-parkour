@@ -7,13 +7,11 @@ export default class CoreTest {
       _.method('#constructor', () => {
         _.context('When creating a core', () => {
           const director = 'director';
-          const escrow = 'escrow';
-          const subject = new Core({ director, escrow });
+          const subject = new Core({ director });
 
           _.assert(
             'It initializes each property',
             () => subject.director === director,
-            () => subject.escrow === escrow,
           );
 
           _.assert(

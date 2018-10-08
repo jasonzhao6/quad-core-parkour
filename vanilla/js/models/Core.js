@@ -4,10 +4,9 @@
 export default class Core {
   static get DEFAULT_VALUE() { return 0; }
 
-  constructor({ director, escrow }) {
-    // Props
+  constructor({ director }) {
+    // Prop
     this.director = director;
-    this.escrow = escrow;
 
     // States
     this.accumulator = Core.DEFAULT_VALUE;
@@ -18,11 +17,15 @@ export default class Core {
   // Delegated
   //
 
-  // Directions
+  // Directions via `director`
   up() { return this.director.up(); }
   down() { return this.director.down(); }
   left() { return this.director.left(); }
   right() { return this.director.right(); }
+
+  // Messaging via `director`
+  // send(direction, message) {}
+  // receive(direction) {}
 
   //
   // Commands
