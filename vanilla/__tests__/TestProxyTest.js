@@ -136,6 +136,26 @@ export default class TestProxyTest {
           }
         });
 
+        _.context('When chained with expect method: `withArgs`', () => {
+          const subject = new TestProxy({}, _.noop());
+          const errors = [];
+
+          try {
+            subject.allowIt().toReceive('toString').withArgs();
+          } catch (error) {
+            errors.push(error);
+          } finally {
+            _.assert(
+              'It throws a `CHAIN` TestException',
+              () => [
+                errors.length === 1,
+                errors[0] instanceof TestException,
+                errors[0].type === TestException.TYPES.CHAIN,
+              ],
+            );
+          }
+        });
+
         _.context('When chained with expect method: `nTimes`', () => {
           const subject = new TestProxy({}, _.noop());
           const errors = [];
@@ -158,7 +178,7 @@ export default class TestProxyTest {
       });
 
       _.method('#expectIt / #isAsExpected', () => {
-        _.context('When used to expect a method was called once', () => {
+        _.context('When used to test a method was called once', () => {
           const subject = new TestProxy({}, _.noop());
           subject.allowIt().toReceive('toString');
 
@@ -171,7 +191,7 @@ export default class TestProxyTest {
           );
         });
 
-        _.context('When used to expect a method was called N times', () => {
+        _.context('When used to test a method was called N times', () => {
           const subject = new TestProxy({}, _.noop());
           subject.allowIt().toReceive('toString');
 
@@ -185,7 +205,7 @@ export default class TestProxyTest {
           );
         });
 
-        _.context('When used to expect 2 methods was called N, M times', () => {
+        _.context('When used to test 2 methods were called N, M times', () => {
           const subject = new TestProxy({}, _.noop());
           subject.allowIt().toReceive('toString');
           subject.allowIt().toReceive('valueOf');
@@ -199,6 +219,20 @@ export default class TestProxyTest {
 
           _.assert(
             'They were called N and M times',
+            () => subject.isAsExpected(),
+          );
+        });
+
+        _.context('When used to test a method was called with args', () => {
+          const args = 'args';
+          const subject = new TestProxy({}, _.noop());
+          subject.allowIt().toReceive('toString');
+
+          subject.toString(args);
+          subject.expectIt().toHaveReceived('toString').withArgs(args);
+
+          _.assert(
+            'It was called once',
             () => subject.isAsExpected(),
           );
         });
@@ -243,7 +277,7 @@ export default class TestProxyTest {
           }
         });
 
-        _.context('When chained with allowIt method: `andReturn`', () => {
+        _.context('When chained with allow method: `andReturn`', () => {
           const subject = new TestProxy({}, _.noop());
           const errors = [];
 

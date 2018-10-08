@@ -41,10 +41,15 @@ class TestHandler {
 
     // Route proxied methods
     if (method in this.expectations) {
-      this.expectations[method].callsActual += 1;
+      const expectation = this.expectations[method];
 
-      if (this.expectations[method].returnValue !== undefined) {
-        return () => this.expectations[method].returnValue;
+      return (...args) => {
+        expectation.callsActual += 1;
+        expectation.argsActual = args;
+
+        return expectation.returnValue !== undefined
+          ? expectation.returnValue
+          : instance[method].apply(instance, args);
       }
     }
 
@@ -91,6 +96,11 @@ class TestHandler {
     return this;
   }
 
+  withArgs(args) {
+    this.verifyMode(TestHandler.MODES.EXPECT, 'withArgs');
+    this.expectations[this.currentMethod].argsExpected = Array.of(args).flat();
+  }
+
   nTimes(n) {
     this.verifyMode(TestHandler.MODES.EXPECT, 'nTimes');
     this.expectations[this.currentMethod].callsExpected = n;
@@ -107,7 +117,7 @@ class TestHandler {
 
       return [
         callsExpected === undefined || callsExpected === callsActual,
-        argsExpected === undefined || argsExpected === argsActual,
+        argsExpected === undefined || argsExpected.join() === argsActual.join(),
       ].every(expectation => expectation === true);
     });
   }
