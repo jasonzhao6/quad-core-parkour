@@ -215,8 +215,8 @@ export default class DirectorTest {
           subject.send(direction, message);
 
           _.assert(
-            'It populates the escrow',
-            () => subject.escrow.peek(sender, recipient) === message,
+            'It populates the escrow with the message',
+            () => subject.escrow.withdraw(sender, recipient) === message,
           );
         });
 
@@ -225,8 +225,8 @@ export default class DirectorTest {
           subject.send(direction, message);
 
           _.assert(
-            'It populates the escrow with recipient name being the direction',
-            () => subject.escrow.peek(sender, direction) === message,
+            'It populates the escrow with direction as the recipient name',
+            () => subject.escrow.withdraw(sender, direction) === message,
           );
         });
       });

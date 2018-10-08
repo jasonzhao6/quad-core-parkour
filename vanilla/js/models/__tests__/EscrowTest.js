@@ -92,6 +92,35 @@ export default class EscrowTest {
           );
         });
       });
+
+      _.method('#has', () => {
+        const sender = 'sender';
+        const recipient = 'recipient';
+        const message = 'message';
+
+        const key = Escrow.makeKey(sender, recipient);
+
+        _.context('When there is no message for sender/recipient pair', () => {
+          const escrow = new Escrow();
+          const returnValue = escrow.has(sender, recipient);
+
+          _.assert(
+            'It returns `false`',
+            () => returnValue === false,
+          );
+        });
+
+        _.context('When there is message for sender/recipient pair', () => {
+          const escrow = new Escrow();
+          escrow.deposit(sender, recipient, message);
+          const returnValue = escrow.has(sender, recipient);
+
+          _.assert(
+            'It returns `true`',
+            () => returnValue === true,
+          );
+        });
+      });
     });
   }
 }

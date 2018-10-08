@@ -2,7 +2,7 @@
 // Allow only one message at a time per sender/recipient pair.
 export default class Escrow {
   constructor() {
-    // Set default value to `null`.
+    // Set all default values to `null`.
     this.messages = new Proxy({}, {
       get: (instance, method) => (method in instance ? instance[method] : null),
     });
@@ -30,15 +30,15 @@ export default class Escrow {
     return message;
   }
 
+  // Checks if there exists a message for sender/recipient pair.
+  // Returns `true` or `false`.
+  has(sender, recipient) {
+    return this.messages[Escrow.makeKey(sender, recipient)] !== null;
+  }
+
   //
   // Private
   //
-
-  // Peek at message for sender/recipient pair without clearing it.
-  // Return the withdrawn message or `null`.
-  peek(sender, recipient) {
-    return this.messages[Escrow.makeKey(sender, recipient)];
-  }
 
   static makeKey(sender, recipient) {
     return [sender, recipient].join('-');
