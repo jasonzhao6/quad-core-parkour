@@ -18,6 +18,32 @@ export default class DirectorTest {
           ],
         );
       });
+
+      _.method('#constructor', () => {
+        const args = { rowCount: 1, columnCount: 2, Class: {}.constructor };
+        const matrixProxy = _.proxy(new Matrix(args));
+
+        _.allow(matrixProxy).toReceive('alias');
+
+        const [i, j, matrix] = ['i', 'j', matrixProxy];
+        const subject = new Director({ i, j, matrix });
+
+        _.expect(matrixProxy).toHaveReceived('alias');
+
+        _.assert(
+          'It initializes each property',
+          () => [
+            subject.i === i,
+            subject.j === j,
+            subject.matrix === matrixProxy,
+          ],
+        );
+
+        _.assert(
+          'It calls the `alias` method on the `matrix` property',
+          () => matrixProxy.isAsExpected(),
+        );
+      });
     });
 
     _.Class('Director, direction methods', () => {
