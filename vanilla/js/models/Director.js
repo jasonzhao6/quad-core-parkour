@@ -53,21 +53,29 @@ export default class Director {
 
   send(direction, message) {
     const sender = this.name();
-    const recipient = this[direction]() !== null
-      ? this[direction]().director.name()
-      : direction;
-
+    const recipient = this.name(direction);
     return this.escrow.deposit(sender, recipient, message);
   }
 
-  // receive(direction) {}
+  receive(direction) {
+    const sender = this.name(direction);
+    const recipient = this.name();
+    return this.escrow.withdraw(sender, recipient);
+  }
 
   //
   // Private
   //
 
-  // Note: Designed specifically for a 2x2 matrix; does not work on bigger ones.
-  name() {
-    return [this.i, this.j].join('').replace(/0/g, 'o').replace(/1/g, 'i');
+  // Arguments: [undefined] or [direction].
+  name(direction) {
+    if (direction === undefined) {
+      // Note: This naming scheme is specifically meant for a 2x2 matrix.
+      return [this.i, this.j].join('').replace(/0/g, 'o').replace(/1/g, 'i');
+    }
+
+    return this[direction]() !== null
+      ? this[direction]().director.name()
+      : direction;
   }
 }

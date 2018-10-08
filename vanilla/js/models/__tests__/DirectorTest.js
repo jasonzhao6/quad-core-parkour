@@ -205,10 +205,11 @@ export default class DirectorTest {
       const args = { rowCount: 2, columnCount: 2, Class: {}.constructor };
       const twoByTwo = new Matrix(args);
       const subject = new Director({ i: 0, j: 0, matrix: twoByTwo });
-      const sender = subject.name();
 
       _.method('#send', () => {
-        _.context('When sending message in the direction of an element', () => {
+        const sender = subject.name();
+
+        _.context('When sending a message to another element', () => {
           const direction = 'right';
           const recipient = subject[direction]().director.name();
           subject.send(direction, message);
@@ -219,13 +220,36 @@ export default class DirectorTest {
           );
         });
 
-        _.context('When sending message out of bound', () => {
+        _.context('When sending message to out of bound', () => {
           const direction = 'left';
           subject.send(direction, message);
 
           _.assert(
             'It populates the escrow with recipient name being the direction',
             () => subject.escrow.peek(sender, direction) === message,
+          );
+        });
+      });
+
+      _.method('#receive', () => {
+        _.context('When receiving message from another element', () => {
+          const direction = 'down';
+          const sender = subject[direction]().director;
+          sender.send(Director.reverse(direction), message);
+
+          _.assert(
+            'It receives the message',
+            () => subject.receive(direction) === message,
+          );
+        });
+
+        _.context('When receiving message from out of bound', () => {
+          const direction = 'up';
+          subject.escrow.deposit(direction, subject.name(), message);
+
+          _.assert(
+            'It receives the message',
+            () => subject.receive(direction) === message,
           );
         });
       });
