@@ -49,8 +49,8 @@ class TestHandler {
 
         return expectation.returnValue !== undefined
           ? expectation.returnValue
-          : instance[method].apply(instance, args);
-      }
+          : instance[method].call(instance, ...args);
+      };
     }
 
     // Route original methods

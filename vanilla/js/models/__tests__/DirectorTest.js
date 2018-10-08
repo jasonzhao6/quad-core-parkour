@@ -20,29 +20,87 @@ export default class DirectorTest {
       });
 
       _.method('#constructor', () => {
-        const args = { rowCount: 1, columnCount: 2, Class: {}.constructor };
-        const matrixProxy = _.proxy(new Matrix(args));
-
-        _.allow(matrixProxy).toReceive('alias');
-
-        const [i, j, matrix] = ['i', 'j', matrixProxy];
+        const [i, j, matrix] = [0, 0, _.noop()];
         const subject = new Director({ i, j, matrix });
-
-        _.expect(matrixProxy).toHaveReceived('alias');
 
         _.assert(
           'It initializes each property',
           () => [
             subject.i === i,
             subject.j === j,
-            subject.matrix === matrixProxy,
+            subject.matrix === matrix,
           ],
         );
+      });
 
-        _.assert(
-          'It calls the `alias` method on the `matrix` property',
-          () => matrixProxy.isAsExpected(),
-        );
+      _.method('#constructor, naming', () => {
+        _.context('When element is at [0][0] inside a 2x2 matrix', () => {
+          const args = { rowCount: 0, columnCount: 0, Class: {}.constructor };
+          const matrixProxy = _.proxy(new Matrix(args));
+
+          _.allow(matrixProxy).toReceive('alias');
+
+          const [i, j, matrix] = [0, 0, matrixProxy];
+          new Director({ i, j, matrix }); // eslint-disable-line no-new
+
+          _.expect(matrixProxy).toHaveReceived('alias').withArgs([i, j, 'oo']);
+
+          _.assert(
+            'It calls `matrix.alias()` with element name',
+            () => matrixProxy.isAsExpected(),
+          );
+        });
+
+        _.context('When element is at [0][1] inside a 2x2 matrix', () => {
+          const args = { rowCount: 0, columnCount: 0, Class: {}.constructor };
+          const matrixProxy = _.proxy(new Matrix(args));
+
+          _.allow(matrixProxy).toReceive('alias');
+
+          const [i, j, matrix] = [0, 1, matrixProxy];
+          new Director({ i, j, matrix }); // eslint-disable-line no-new
+
+          _.expect(matrixProxy).toHaveReceived('alias').withArgs([i, j, 'oi']);
+
+          _.assert(
+            'It calls `matrix.alias()` with element name',
+            () => matrixProxy.isAsExpected(),
+          );
+        });
+
+        _.context('When element is at [1][0] inside a 2x2 matrix', () => {
+          const args = { rowCount: 0, columnCount: 0, Class: {}.constructor };
+          const matrixProxy = _.proxy(new Matrix(args));
+
+          _.allow(matrixProxy).toReceive('alias');
+
+          const [i, j, matrix] = [1, 0, matrixProxy];
+          new Director({ i, j, matrix }); // eslint-disable-line no-new
+
+          _.expect(matrixProxy).toHaveReceived('alias').withArgs([i, j, 'io']);
+
+          _.assert(
+            'It calls `matrix.alias()` with element name',
+            () => matrixProxy.isAsExpected(),
+          );
+        });
+
+        _.context('When element is at [1][1] inside a 2x2 matrix', () => {
+          const args = { rowCount: 0, columnCount: 0, Class: {}.constructor };
+          const matrixProxy = _.proxy(new Matrix(args));
+
+          _.allow(matrixProxy).toReceive('alias');
+
+          const [i, j, matrix] = [1, 1, matrixProxy];
+          new Director({ i, j, matrix }); // eslint-disable-line no-new
+
+          _.expect(matrixProxy).toHaveReceived('alias').withArgs([i, j, 'ii']);
+
+          _.assert(
+            'It calls `matrix.alias()` with element name',
+            () => matrixProxy.isAsExpected(),
+          );
+        });
       });
     });
 
