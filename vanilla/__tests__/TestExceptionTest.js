@@ -2,7 +2,7 @@ import TestException from '../__TestException__.js';
 
 export default class TestExceptionTest {
   static enqueue(_) {
-    _.Class(TestException, () => {
+    _.Class('TestException', () => {
       _.method('#constructor', () => {
         _.context('When creating an exception with args', () => {
           const args = {

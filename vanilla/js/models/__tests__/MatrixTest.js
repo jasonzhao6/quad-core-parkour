@@ -3,7 +3,7 @@ import Matrix from '../Matrix.js';
 
 export default class MatrixTest {
   static enqueue(_) {
-    _.Class(Matrix, () => {
+    _.Class('Matrix', () => {
       _.method('#constructor', () => {
         _.context('When creating a matrix', () => {
           const [rowCount, columnCount, Class] = [1, 2, {}.constructor];
@@ -47,7 +47,7 @@ export default class MatrixTest {
         });
       });
 
-      _.method('#constructor', () => { // Focus: Class
+      _.method('#constructor, Class prop', () => {
         _.context('When creating a 2x2 Core matrix', () => {
           const [rowCount, columnCount, Class] = [2, 2, Core];
           const subject = new Matrix({ rowCount, columnCount, Class });
@@ -80,7 +80,7 @@ export default class MatrixTest {
         });
       });
 
-      _.method('#constructor', () => { // Focus: Directions
+      _.method('#constructor, element-specific directors', () => {
         _.context('When creating a 2x2 Core matrix', () => {
           const [rowCount, columnCount, Class] = [2, 2, Core];
           const subject = new Matrix({ rowCount, columnCount, Class });

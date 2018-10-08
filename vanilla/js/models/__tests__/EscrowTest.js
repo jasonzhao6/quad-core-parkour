@@ -2,7 +2,7 @@ import Escrow from '../Escrow.js';
 
 export default class EscrowTest {
   static enqueue(_) {
-    _.Class(Escrow, () => {
+    _.Class('Escrow', () => {
       _.method('#constructor', () => {
         const escrow = new Escrow();
 
@@ -10,7 +10,7 @@ export default class EscrowTest {
           'It initializes the `messages` state, a hash that defaults to `null`',
           () => [
             typeof escrow.messages === 'object',
-            escrow.messages['anything'] === null
+            escrow.messages.anything === null,
           ],
         );
       });

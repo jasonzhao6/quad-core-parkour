@@ -4,7 +4,7 @@ import TestHarness from '../__TestHarness__.js';
 
 export default class TestHarnessTest {
   static enqueue(_) {
-    _.Class(TestHarness, () => {
+    _.Class('TestHarness', () => {
       _.method('#constructor', () => {
         _.context('When creating a test harness with `seed` arg', () => {
           const seed = 'foo';

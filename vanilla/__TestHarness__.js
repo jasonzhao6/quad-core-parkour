@@ -19,7 +19,7 @@
 //   const seed = new Date().toLocaleTimeString();
 //   const _ = new TestHarness(seed);
 //
-//   _.Class(Person, () => {
+//   _.Class('Person', () => {
 //     _.method('#sayHi', () => {
 //       const me = new Person();
 //       const friendProxy = _.proxy(new Person());
@@ -36,7 +36,7 @@
 //     });
 //   });
 //
-//   _.Class(TestHarness, () => {
+//   _.Class('TestHarness', () => {
 //     _.assert('It can and does test itself.', () => true);
 //     _.assert('It supports multiple assertions in a row', () => true);
 //
@@ -82,7 +82,7 @@ export default class TestHarness {
   }
 
   Class(Class, block) {
-    this.currentClass = Class.name;
+    this.currentClass = Class;
     block();
     this.currentClass = null;
   }

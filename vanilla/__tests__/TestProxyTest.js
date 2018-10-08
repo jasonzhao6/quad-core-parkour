@@ -3,7 +3,7 @@ import TestProxy from '../__TestProxy__.js';
 
 export default class TestProxyTest {
   static enqueue(_) {
-    _.Class(TestProxy, () => {
+    _.Class('TestProxy', () => {
       _.method('.echo', () => {
         const subject = TestProxy.echo();
 

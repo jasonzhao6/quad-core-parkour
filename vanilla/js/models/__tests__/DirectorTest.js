@@ -6,7 +6,7 @@ import Matrix from '../Matrix.js';
 
 export default class DirectorTest {
   static enqueue(_) {
-    _.Class(Director, () => {
+    _.Class('Director', () => {
       _.method('.reverse', () => {
         _.assert(
           'It reverses any given direction',
@@ -20,7 +20,7 @@ export default class DirectorTest {
       });
     });
 
-    _.Class(Director, () => { // Focus: Directions
+    _.Class('Director, direction methods', () => {
       const args = { rowCount: 2, columnCount: 2, Class: {}.constructor };
       const twoByTwo = new Matrix(args);
 
