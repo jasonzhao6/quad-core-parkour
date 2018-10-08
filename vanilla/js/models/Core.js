@@ -5,7 +5,7 @@ export default class Core {
   static get DEFAULT_VALUE() { return 0; }
 
   constructor({ director }) {
-    // Prop
+    // Props
     this.director = director;
 
     // States
@@ -24,24 +24,11 @@ export default class Core {
   right() { return this.director.right(); }
 
   // Messaging via `director`
+  // canSend(direction) {}
+  // canReceive(direction) {}
   // send(direction, message) {}
   // receive(direction) {}
 
-  //
-  // Commands
-  //
-
-  move(source, destination) {
-    // const value = this.ins[source];
-    //
-    // // Reset source
-    // this.ins[source] = null;
-    //
-    // // Set destination
-    // this[destination]().ins[Core.reverse(destination)] = value;
-  }
-
-  //
-  // Private
-  //
+  // Commands via `commander`
+  // move(source, destination) {}
 }

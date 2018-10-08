@@ -51,6 +51,18 @@ export default class Director {
   // Messaging
   //
 
+  canSend(direction) {
+    const sender = this.name();
+    const recipient = this.name(direction);
+    return !this.escrow.has(sender, recipient);
+  }
+
+  canReceive(direction) {
+    const sender = this.name(direction);
+    const recipient = this.name();
+    return this.escrow.has(sender, recipient);
+  }
+
   send(direction, message) {
     const sender = this.name();
     const recipient = this.name(direction);

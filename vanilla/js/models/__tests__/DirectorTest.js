@@ -104,7 +104,6 @@ export default class DirectorTest {
       });
 
       _.method('#escrow', () => {
-
         const [i, j, matrix] = [0, 0, _.noop()];
         const subject = new Director({ i, j, matrix });
 
@@ -203,11 +202,67 @@ export default class DirectorTest {
     _.Class('Director, messaging methods', () => {
       const message = 'message';
       const args = { rowCount: 2, columnCount: 2, Class: {}.constructor };
-      const twoByTwo = new Matrix(args);
-      const subject = new Director({ i: 0, j: 0, matrix: twoByTwo });
+      const subject = new Director({ i: 0, j: 0, matrix: new Matrix(args) });
+      // ^ Tests in this block share this subject but uses different directions.
+      // #canSend tests sending up and down.
+      // #canReceive tests receiving up and down.
+      // #send tests sending left and right.
+      // #receive tests receiving left and right.
+
+      _.method('#canSend', () => {
+        _.context('When there is no existing message to recipient', () => {
+          const direction = 'up';
+
+          _.assert(
+            'It returns `true`',
+            () => subject.canSend(direction) === true,
+          );
+        });
+
+        _.context('When there is already a message to recipient', () => {
+          const direction = 'down';
+          subject.send(direction, message);
+
+          _.assert(
+            'It returns `false`',
+            () => subject.canSend(direction) === false,
+          );
+        });
+      });
+
+      _.method('#canReceive', () => {
+        _.context('When there is a message to receive', () => {
+          const direction = 'up';
+          subject.escrow.deposit(direction, subject.name(), message);
+
+          _.assert(
+            'It returns `true`',
+            () => subject.canReceive(direction) === true,
+          );
+        });
+
+        _.context('When there is no message to receive', () => {
+          const direction = 'down';
+
+          _.assert(
+            'It returns `false`',
+            () => subject.canReceive(direction) === false,
+          );
+        });
+      });
 
       _.method('#send', () => {
         const sender = subject.name();
+
+        _.context('When sending message to out of bound', () => {
+          const direction = 'left';
+          subject.send(direction, message);
+
+          _.assert(
+            'It populates the escrow with direction as the recipient name',
+            () => subject.escrow.withdraw(sender, direction) === message,
+          );
+        });
 
         _.context('When sending a message to another element', () => {
           const direction = 'right';
@@ -219,23 +274,12 @@ export default class DirectorTest {
             () => subject.escrow.withdraw(sender, recipient) === message,
           );
         });
-
-        _.context('When sending message to out of bound', () => {
-          const direction = 'left';
-          subject.send(direction, message);
-
-          _.assert(
-            'It populates the escrow with direction as the recipient name',
-            () => subject.escrow.withdraw(sender, direction) === message,
-          );
-        });
       });
 
       _.method('#receive', () => {
-        _.context('When receiving message from another element', () => {
-          const direction = 'down';
-          const sender = subject[direction]().director;
-          sender.send(Director.reverse(direction), message);
+        _.context('When receiving message from out of bound', () => {
+          const direction = 'left';
+          subject.escrow.deposit(direction, subject.name(), message);
 
           _.assert(
             'It receives the message',
@@ -243,9 +287,10 @@ export default class DirectorTest {
           );
         });
 
-        _.context('When receiving message from out of bound', () => {
-          const direction = 'up';
-          subject.escrow.deposit(direction, subject.name(), message);
+        _.context('When receiving message from another element', () => {
+          const direction = 'right';
+          const sender = subject[direction]().director;
+          sender.send(Director.reverse(direction), message);
 
           _.assert(
             'It receives the message',

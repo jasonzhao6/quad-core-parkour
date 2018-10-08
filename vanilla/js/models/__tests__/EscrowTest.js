@@ -98,8 +98,6 @@ export default class EscrowTest {
         const recipient = 'recipient';
         const message = 'message';
 
-        const key = Escrow.makeKey(sender, recipient);
-
         _.context('When there is no message for sender/recipient pair', () => {
           const escrow = new Escrow();
           const returnValue = escrow.has(sender, recipient);
