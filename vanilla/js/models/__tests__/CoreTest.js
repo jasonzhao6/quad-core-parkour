@@ -25,46 +25,6 @@ export default class CoreTest {
           );
         });
       });
-
-      // const twoByTwo = new Matrix({ rowCount: 2, columnCount: 2, Class: Core });
-      //
-      // _.method('#move', () => {
-      //   _.context('When moving a value from up to down', () => {
-      //     const subject = twoByTwo.get(0, 0);
-      //     const value = 10;
-      //
-      //     // subject.ins.up = value;
-      //     // subject.move('up', 'down');
-      //
-      //     _.xassert(
-      //       'It sets up to null',
-      //       () => subject.ins.up === null,
-      //     );
-      //
-      //     _.xassert(
-      //       'It sets down to the correct value',
-      //       () => subject.down().ins.up === value,
-      //     );
-      //   });
-      //
-      //   _.context('When moving a value from up to right', () => {
-      //     const subject = twoByTwo.get(0, 0);
-      //     const value = 10;
-      //
-      //     // subject.ins.up = value;
-      //     subject.move('up', 'right');
-      //
-      //     _.xassert(
-      //       'It sets up to null',
-      //       () => subject.ins.up === null,
-      //     );
-      //
-      //     _.xassert(
-      //       'It sets right to the correct value',
-      //       () => subject.right().ins.left === value,
-      //     );
-      //   });
-      // });
     });
 
     _.Class('Core, delegated direction methods', () => {
@@ -96,6 +56,44 @@ export default class CoreTest {
         _.assert(
           'It delegates to the `director`',
           () => subject.right() === subject.director.right(),
+        );
+      });
+    });
+
+    _.Class('Core, delegated messaging methods', () => {
+      const director = _.echo();
+      const subject = new Core({ director });
+      const [direction, message] = ['direction', 'message'];
+
+      _.method('#canSend', () => {
+        _.assert(
+          'It delegates to the `director`',
+          () => subject.canSend(direction) ===
+            subject.director.canSend(direction),
+        );
+      });
+
+      _.method('#canReceive', () => {
+        _.assert(
+          'It delegates to the `director`',
+          () => subject.canReceive(direction) ===
+            subject.director.canReceive(direction),
+        );
+      });
+
+      _.method('#send', () => {
+        _.assert(
+          'It delegates to the `director`',
+          () => subject.send(direction, message) ===
+            subject.director.send(direction, message),
+        );
+      });
+
+      _.method('#receive', () => {
+        _.assert(
+          'It delegates to the `director`',
+          () => subject.receive(direction) ===
+            subject.director.receive(direction),
         );
       });
     });

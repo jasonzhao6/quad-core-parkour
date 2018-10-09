@@ -1,6 +1,3 @@
-/* eslint object-curly-newline:
-      ['error', { consistent: true, minProperties: 5 }] */
-
 export default class Core {
   static get DEFAULT_VALUE() { return 0; }
 
@@ -24,10 +21,10 @@ export default class Core {
   right() { return this.director.right(); }
 
   // Messaging via `director`
-  // canSend(direction) {}
-  // canReceive(direction) {}
-  // send(direction, message) {}
-  // receive(direction) {}
+  canSend(direction) { return this.director.canSend(direction); }
+  canReceive(direction) { return this.director.canReceive(direction); }
+  send(direction, message) { return this.director.send(direction, message); }
+  receive(direction) { return this.director.receive(direction); }
 
   // Commands via `commander`
   // move(source, destination) {}

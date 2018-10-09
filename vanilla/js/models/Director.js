@@ -1,6 +1,3 @@
-/* eslint object-curly-newline:
-      ['error', { consistent: true, minProperties: 5 }] */
-
 export default class Director {
   static reverse(direction) {
     if (direction === 'up') return 'down';

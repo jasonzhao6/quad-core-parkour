@@ -1,6 +1,3 @@
-/* eslint object-curly-newline:
-      ['error', { consistent: true, minProperties: 5 }] */
-
 import Director from '../Director.js';
 import Matrix from '../Matrix.js';
 
