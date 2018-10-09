@@ -21,6 +21,7 @@ class TestHandler {
     this.expectations = {}; // { [method]: { callsActual: 0, etc }, ... }.
   }
 
+  // A trap for the in operator.
   has(instance, method) {
     if (TestHandler.SETUP_METHODS.includes(method)) return true;
     if (Object.values(TestHandler.GETTERS).includes(method)) return true;
@@ -28,6 +29,7 @@ class TestHandler {
     return method in instance;
   }
 
+  // A trap for getting property values.
   get(instance, method) {
     // Route setup methods
     if (TestHandler.SETUP_METHODS.includes(method)) {

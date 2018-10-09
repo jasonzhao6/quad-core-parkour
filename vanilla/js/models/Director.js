@@ -13,12 +13,11 @@ export default class Director {
     this.i = i;
     this.j = j;
     this.matrix = matrix;
+    this.escrow = this.matrix.escrow;
 
     // Name the current element
     this.matrix.alias(i, j, this.name());
   }
-
-  get escrow() { return this.matrix.escrow; }
 
   //
   // Directions

@@ -17,10 +17,10 @@ export default class Matrix {
     [...this.arrOfArr.keys()].forEach((i) => {
       this.arrOfArr[i] = new Array(this.columnCount);
 
-      // Populate each element with a new `Class` instance.
+      // If `Class` is passed in, populate each element with an instance of it.
       if (this.Class) {
         [...this.arrOfArr[i].keys()].forEach((j) => {
-          // Inject each element with a director to help message each other.
+          // Inject into each instance a director to allow intra-communication.
           const director = new Director({ i, j, matrix: this });
           this.arrOfArr[i][j] = new this.Class({ director });
         });

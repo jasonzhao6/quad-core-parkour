@@ -99,16 +99,6 @@ export default class DirectorTest {
           );
         });
       });
-
-      _.method('#escrow', () => {
-        const [i, j, matrix] = [0, 0, _.noop()];
-        const subject = new Director({ i, j, matrix });
-
-        _.assert(
-          'It delegates to the `matrix` property',
-          () => subject.escrow.toString() === subject.matrix.escrow.toString(),
-        );
-      });
     });
 
     _.Class('Director, direction methods', () => {
