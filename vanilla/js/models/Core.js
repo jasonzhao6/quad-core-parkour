@@ -1,9 +1,12 @@
+import Commander from './Commander.js';
+
 export default class Core {
   static get DEFAULT_VALUE() { return 0; }
 
   constructor({ director }) {
     // Props
     this.director = director;
+    this.commander = new Commander({ core: this });
 
     // States
     this.accumulator = Core.DEFAULT_VALUE;
@@ -27,5 +30,5 @@ export default class Core {
   receive(direction) { return this.director.receive(direction); }
 
   // Commands via `commander`
-  // move(source, destination) {}
+  move(source, destination) { return this.commander.move(source, destination); }
 }

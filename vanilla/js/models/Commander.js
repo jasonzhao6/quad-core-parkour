@@ -1,21 +1,15 @@
 export default class Commander {
-  constructor(director) {
+  constructor({ core }) {
+    // Proprs
+    this.core = core;
   }
 
   move(source, destination) {
-    // TODO if cannot proceed
-    if (false) return false;
-
-    const value = this.ins[source];
+    if (this.core[source] && this.core[destination]) return false;
 
     // Reset source
-    this.ins[source] = null;
 
     // Set destination
-    this.outs[destination] = value;
-    if (this[destination]() !== null) {
-      this[destination]().ins[Core.reverse(destination)] = value;
-    }
 
     return true;
   }
