@@ -18,10 +18,10 @@ export default class Core {
   //
 
   // Directions via `director`
-  up() { return this.director.up(); }
-  down() { return this.director.down(); }
-  left() { return this.director.left(); }
-  right() { return this.director.right(); }
+  get up() { return this.director.up; }
+  get down() { return this.director.down; }
+  get left() { return this.director.left; }
+  get right() { return this.director.right; }
 
   // Messaging via `director`
   canSend(direction) { return this.director.canSend(direction); }

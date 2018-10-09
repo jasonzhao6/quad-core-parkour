@@ -88,25 +88,25 @@ export default class MatrixTest {
           _.assert(
             'Every element can find its neighbors via the `director`',
             () => [
-              subject.get(0, 0).director.up() === null,
-              subject.get(0, 0).director.down() === subject.get(1, 0),
-              subject.get(0, 0).director.left() === null,
-              subject.get(0, 0).director.right() === subject.get(0, 1),
+              subject.get(0, 0).director.up === null,
+              subject.get(0, 0).director.down === subject.get(1, 0),
+              subject.get(0, 0).director.left === null,
+              subject.get(0, 0).director.right === subject.get(0, 1),
 
-              subject.get(0, 1).director.up() === null,
-              subject.get(0, 1).director.down() === subject.get(1, 1),
-              subject.get(0, 1).director.left() === subject.get(0, 0),
-              subject.get(0, 1).director.right() === null,
+              subject.get(0, 1).director.up === null,
+              subject.get(0, 1).director.down === subject.get(1, 1),
+              subject.get(0, 1).director.left === subject.get(0, 0),
+              subject.get(0, 1).director.right === null,
 
-              subject.get(1, 0).director.up() === subject.get(0, 0),
-              subject.get(1, 0).director.down() === null,
-              subject.get(1, 0).director.left() === null,
-              subject.get(1, 0).director.right() === subject.get(1, 1),
+              subject.get(1, 0).director.up === subject.get(0, 0),
+              subject.get(1, 0).director.down === null,
+              subject.get(1, 0).director.left === null,
+              subject.get(1, 0).director.right === subject.get(1, 1),
 
-              subject.get(1, 1).director.up() === subject.get(0, 1),
-              subject.get(1, 1).director.down() === null,
-              subject.get(1, 1).director.left() === subject.get(1, 0),
-              subject.get(1, 1).director.right() === null,
+              subject.get(1, 1).director.up === subject.get(0, 1),
+              subject.get(1, 1).director.down === null,
+              subject.get(1, 1).director.left === subject.get(1, 0),
+              subject.get(1, 1).director.right === null,
             ],
           );
 

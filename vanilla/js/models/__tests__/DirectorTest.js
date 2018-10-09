@@ -111,7 +111,7 @@ export default class DirectorTest {
 
           _.assert(
             'It returns null',
-            () => subject.up() === null,
+            () => subject.up === null,
           );
         });
 
@@ -120,7 +120,7 @@ export default class DirectorTest {
 
           _.assert(
             'It returns the element above',
-            () => subject.up() === twoByTwo.get(0, 0),
+            () => subject.up === twoByTwo.get(0, 0),
           );
         });
       });
@@ -131,7 +131,7 @@ export default class DirectorTest {
 
           _.assert(
             'It returns the element below',
-            () => subject.down() === twoByTwo.get(1, 0),
+            () => subject.down === twoByTwo.get(1, 0),
           );
         });
 
@@ -140,7 +140,7 @@ export default class DirectorTest {
 
           _.assert(
             'It returns null',
-            () => subject.down() === null,
+            () => subject.down === null,
           );
         });
       });
@@ -151,7 +151,7 @@ export default class DirectorTest {
 
           _.assert(
             'It returns null',
-            () => subject.left() === null,
+            () => subject.left === null,
           );
         });
 
@@ -160,7 +160,7 @@ export default class DirectorTest {
 
           _.assert(
             'It returns the element to the left',
-            () => subject.left() === twoByTwo.get(0, 0),
+            () => subject.left === twoByTwo.get(0, 0),
           );
         });
       });
@@ -171,7 +171,7 @@ export default class DirectorTest {
 
           _.assert(
             'It returns the element to the right',
-            () => subject.right() === twoByTwo.get(0, 1),
+            () => subject.right === twoByTwo.get(0, 1),
           );
         });
 
@@ -180,7 +180,7 @@ export default class DirectorTest {
 
           _.assert(
             'It returns null',
-            () => subject.right() === null,
+            () => subject.right === null,
           );
         });
       });
@@ -253,7 +253,7 @@ export default class DirectorTest {
 
         _.context('When sending a message to another element', () => {
           const direction = 'right';
-          const recipient = subject[direction]().director.name();
+          const recipient = subject[direction].director.name();
           subject.send(direction, message);
 
           _.assert(
@@ -276,7 +276,7 @@ export default class DirectorTest {
 
         _.context('When receiving message from another element', () => {
           const direction = 'right';
-          const sender = subject[direction]().director;
+          const sender = subject[direction].director;
           sender.send(Director.reverse(direction), message);
 
           _.assert(

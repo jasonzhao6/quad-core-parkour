@@ -23,22 +23,22 @@ export default class Director {
   // Directions
   //
 
-  up() {
+  get up() {
     if (this.i - 1 === -1) return null;
     return this.matrix.get(this.i - 1, this.j);
   }
 
-  down() {
+  get down() {
     if (this.i + 1 === this.matrix.rowCount) return null;
     return this.matrix.get(this.i + 1, this.j);
   }
 
-  left() {
+  get left() {
     if (this.j - 1 === -1) return null;
     return this.matrix.get(this.i, this.j - 1);
   }
 
-  right() {
+  get right() {
     if (this.j + 1 === this.matrix.columnCount) return null;
     return this.matrix.get(this.i, this.j + 1);
   }
@@ -82,8 +82,8 @@ export default class Director {
       return [this.i, this.j].join('').replace(/0/g, 'o').replace(/1/g, 'i');
     }
 
-    return this[direction]() !== null
-      ? this[direction]().director.name()
+    return this[direction] !== null
+      ? this[direction].director.name()
       : direction;
   }
 }
