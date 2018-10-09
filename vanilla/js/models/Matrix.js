@@ -22,7 +22,6 @@ export default class Matrix {
         [...this.arrOfArr[i].keys()].forEach((j) => {
           // Inject each element with a director to help message each other.
           const director = new Director({ i, j, matrix: this });
-
           this.arrOfArr[i][j] = new this.Class({ director });
         });
       }

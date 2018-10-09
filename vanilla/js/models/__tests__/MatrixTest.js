@@ -86,7 +86,7 @@ export default class MatrixTest {
           const subject = new Matrix({ rowCount, columnCount, Class });
 
           _.assert(
-            'Every element can find its neighbors via their `director`',
+            'Every element can find its neighbors via the `director`',
             () => [
               subject.get(0, 0).director.up() === null,
               subject.get(0, 0).director.down() === subject.get(1, 0),
@@ -109,38 +109,29 @@ export default class MatrixTest {
               subject.get(1, 1).director.right() === null,
             ],
           );
-        });
-      });
-
-      _.method('#constructor, matrix-wide escrow', () => {
-        console.log('TODO: Escrow');
-
-        _.context('When creating a 2x2 Core matrix', () => {
-          const [rowCount, columnCount, Class] = [2, 2, Core];
-          const subject = new Matrix({ rowCount, columnCount, Class });
 
           _.assert(
-            'Every element can talk to its neighbors via the `escrow`',
+            'Every element can talk to its neighbors via the `director`',
             () => [
-              // subject.get(0, 0).escrow.up() === null,
-              subject.get(0, 0).director.down() === subject.get(1, 0),
-              subject.get(0, 0).director.left() === null,
-              subject.get(0, 0).director.right() === subject.get(0, 1),
+              subject.get(0, 0).director.send('down', 'aa') &&
+                subject.get(1, 0).director.receive('up') === 'aa',
+              subject.get(0, 0).director.send('right', 'bb') &&
+                subject.get(0, 1).director.receive('left') === 'bb',
 
-              subject.get(0, 1).director.up() === null,
-              subject.get(0, 1).director.down() === subject.get(1, 1),
-              subject.get(0, 1).director.left() === subject.get(0, 0),
-              subject.get(0, 1).director.right() === null,
+              subject.get(0, 1).director.send('down', 'cc') &&
+                subject.get(1, 1).director.receive('up') === 'cc',
+              subject.get(0, 1).director.send('left', 'dd') &&
+                subject.get(0, 0).director.receive('right') === 'dd',
 
-              subject.get(1, 0).director.up() === subject.get(0, 0),
-              subject.get(1, 0).director.down() === null,
-              subject.get(1, 0).director.left() === null,
-              subject.get(1, 0).director.right() === subject.get(1, 1),
+              subject.get(1, 0).director.send('up', 'ee') &&
+                subject.get(0, 0).director.receive('down') === 'ee',
+              subject.get(1, 0).director.send('right', 'ff') &&
+                subject.get(1, 1).director.receive('left') === 'ff',
 
-              subject.get(1, 1).director.up() === subject.get(0, 1),
-              subject.get(1, 1).director.down() === null,
-              subject.get(1, 1).director.left() === subject.get(1, 0),
-              subject.get(1, 1).director.right() === null,
+              subject.get(1, 1).director.send('up', 'gg') &&
+                subject.get(0, 1).director.receive('down') === 'gg',
+              subject.get(1, 1).director.send('left', 'hh') &&
+                subject.get(1, 0).director.receive('right') === 'hh',
             ],
           );
         });
