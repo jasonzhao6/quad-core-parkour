@@ -12,6 +12,16 @@ export default class TestProxyTest {
           () => [subject.hi() === 'hi', subject.toString() === 'toString'],
         );
 
+        _.assert(
+          'It echos method args',
+          () => subject.hi('hey', 'sup', 'yo') === 'hi,hey,sup,yo',
+        );
+
+        _.assert(
+          'It echos boolean method args',
+          () => subject.hi(true, false) === 'hi,true,false',
+        );
+
         _.context('When creating 2 echos', () => {
           const subject1 = TestProxy.echo();
           const subject2 = TestProxy.echo();

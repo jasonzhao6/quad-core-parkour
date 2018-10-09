@@ -149,8 +149,10 @@ class TestHandler {
 export default class TestProxy {
   static echo() {
     if (this.echoSingleton === undefined) {
-      const handler = { get: (_instance, method) => () => method };
-      this.echoSingleton = new Proxy({}, handler);
+      this.echoSingleton = new Proxy({}, {
+        get: (_instance, method) =>
+          (...args) => [method, args].filter(String).join(),
+      });
     }
 
     return this.echoSingleton;
