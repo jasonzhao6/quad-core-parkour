@@ -92,6 +92,23 @@ export default class TestCasePrinterTest {
           new TestCasePrinter(failures, consoleProxy).print();
 
           _.expect(consoleProxy).toHaveReceived('group').nTimes(2);
+          _.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(2);
+          _.expect(consoleProxy).toHaveReceived('info');
+
+          _.assert(
+            'It calls print methods the expected number of times',
+            () => consoleProxy.isAsExpected(),
+          );
+        });
+
+        _.context('When there is 1 failure without method', () => {
+          const failures = [[1, null, 3, 4]];
+          const consoleProxy = newConsoleProxy();
+
+          new TestCasePrinter(failures, consoleProxy).print();
+
+          _.expect(consoleProxy).toHaveReceived('group').nTimes(2);
+          _.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(2);
           _.expect(consoleProxy).toHaveReceived('info');
 
           _.assert(
@@ -107,7 +124,24 @@ export default class TestCasePrinterTest {
           new TestCasePrinter(failures, consoleProxy).print();
 
           _.expect(consoleProxy).toHaveReceived('group');
+          _.expect(consoleProxy).toHaveReceived('groupEnd');
           _.expect(consoleProxy).toHaveReceived('info');
+
+          _.assert(
+            'It calls print methods the expected number of times',
+            () => consoleProxy.isAsExpected(),
+          );
+        });
+
+        _.context('When there are 2 failures without context', () => {
+          const failures = [[1, 2, null, 40], [1, 2, null, 41]];
+          const consoleProxy = newConsoleProxy();
+
+          new TestCasePrinter(failures, consoleProxy).print();
+
+          _.expect(consoleProxy).toHaveReceived('group').nTimes(2);
+          _.expect(consoleProxy).toHaveReceived('groupEnd').nTimes(2);
+          _.expect(consoleProxy).toHaveReceived('info').nTimes(2);
 
           _.assert(
             'It calls print methods the expected number of times',

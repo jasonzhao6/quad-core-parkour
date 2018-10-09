@@ -64,18 +64,26 @@ export default class TestCasePrinter {
   }
 
   closeLastClass() {
-    this.lastClass = null;
     this.closeLastMethod();
+
+    if (this.lastClass === null) return;
+
+    this.lastClass = null;
     this.console.groupEnd();
   }
 
   closeLastMethod() {
-    this.lastMethod = null;
     this.closeLastContext();
+
+    if (this.lastMethod === null) return;
+
+    this.lastMethod = null;
     this.console.groupEnd();
   }
 
   closeLastContext() {
+    if (this.lastContext === null) return;
+
     this.lastContext = null;
     this.console.groupEnd();
   }
