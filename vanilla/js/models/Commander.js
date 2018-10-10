@@ -5,12 +5,9 @@ export default class Commander {
   }
 
   move(source, destination) {
-    if (this.core[source] && this.core[destination]) return false;
+    if (!this.core.canReceive(source)) return false;
+    if (!this.core.canSend(destination)) return false;
 
-    // Reset source
-
-    // Set destination
-
-    return true;
+    return this.core.send(destination, this.core.receive(source));
   }
 }

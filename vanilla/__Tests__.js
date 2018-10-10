@@ -10,6 +10,7 @@ import TestHarnessTest from './__tests__/TestHarnessTest.js';
 import TestProxyTest from './__tests__/TestProxyTest.js';
 
 // Model tests
+import CommanderTest from './js/models/__tests__/CommanderTest.js';
 import CoreTest from './js/models/__tests__/CoreTest.js';
 import DirectorTest from './js/models/__tests__/DirectorTest.js';
 import EscrowTest from './js/models/__tests__/EscrowTest.js';
@@ -33,6 +34,7 @@ export default class Tests {
   }
 
   static enqueueModelTests(_) {
+    CommanderTest.enqueue(_);
     CoreTest.enqueue(_);
     DirectorTest.enqueue(_);
     EscrowTest.enqueue(_);

@@ -66,12 +66,12 @@ export default class MatrixTest {
             'Every element is a unique instance of Core',
             () => {
               const uniqueValues = [2, 1, -1, -2];
-              const [oo, oi, io, ii] = uniqueValues;
+              const [aa, bb, cc, dd] = uniqueValues;
 
-              subject.get(0, 0).accumulator = oo;
-              subject.get(0, 1).accumulator = oi;
-              subject.get(1, 0).accumulator = io;
-              subject.get(1, 1).accumulator = ii;
+              subject.get(0, 0).accumulator = aa;
+              subject.get(0, 1).accumulator = bb;
+              subject.get(1, 0).accumulator = cc;
+              subject.get(1, 1).accumulator = dd;
 
               const assignedValues = subject.getAll().map(el => el.accumulator);
               return assignedValues.join() === uniqueValues.join();
