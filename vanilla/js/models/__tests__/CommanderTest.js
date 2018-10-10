@@ -17,22 +17,69 @@ export default class CommanderTest {
         });
       });
 
-      _.method('#move, ', () => {
-        const args = { rowCount: 2, columnCount: 2, Class: Core };
-        const twoByTwo = new Matrix(args);
-        const subject = twoByTwo.get(0, 0).commander;
+      _.method('#move', () => {
+        const matrixArgs = { rowCount: 2, columnCount: 2, Class: Core };
 
-        _.context('When moving value from one neighbor to another', () => {
+        _.context('When moving message from one neighbor to another', () => {
+          const twoByTwo = new Matrix(matrixArgs);
+          const subject = twoByTwo.get(0, 0).commander;
           const message = 'message';
           twoByTwo.get(0, 1).send('left', message);
 
           _.assert(
-            'It returns `true` after having moved the value',
+            'It returns `true` and recipient can receive the message',
             () => [
               subject.move('right', 'down') === true,
               twoByTwo.get(1, 0).receive('up') === message,
             ],
           );
+        });
+
+        _.context('When moving message from an empty neighbor', () => {
+          const twoByTwo = new Matrix(matrixArgs);
+          const subject = twoByTwo.get(0, 0).commander;
+
+          _.assert(
+            'It returns `false` and recipient cannot receive the message',
+            () => [
+              subject.move('right', 'down') === false,
+              twoByTwo.get(1, 0).receive('up') === null,
+            ],
+          );
+        });
+
+        _.context('When moving message to an already occupied neighbor', () => {
+          const twoByTwo = new Matrix(matrixArgs);
+          const subject = twoByTwo.get(0, 0).commander;
+          const existingMessage = 'existingMessage';
+          subject.core.send('down', existingMessage);
+
+          const newMessage = 'newMessage';
+          twoByTwo.get(0, 1).send('left', newMessage);
+
+          _.assert(
+            'It returns `false` and recipient receives the existing message',
+            () => [
+              subject.move('right', 'down') === false,
+              twoByTwo.get(1, 0).receive('up') === existingMessage,
+            ],
+          );
+        });
+
+        _.context('When moving message from accumulator to neighbor', () => {
+
+        });
+
+        _.context('When moving message from neighbor to accumulator', () => {
+
+        });
+
+        _.context('When moving number to neighbor', () => {
+
+        });
+
+        _.context('When moving number to accumulator', () => {
+
         });
       });
     });
