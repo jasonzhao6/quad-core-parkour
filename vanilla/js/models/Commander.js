@@ -5,9 +5,17 @@ export default class Commander {
   }
 
   move(source, destination) {
-    if (!this.core.canReceive(source)) return false;
+    let sourceValue = null;
+
+    if (source === 'acc') sourceValue = this.core.accumulator;
+
+    if (sourceValue === null) {
+      if (!this.core.canReceive(source)) return false;
+      sourceValue = this.core.receive(source);
+    }
+
     if (!this.core.canSend(destination)) return false;
 
-    return this.core.send(destination, this.core.receive(source));
+    return this.core.send(destination, sourceValue);
   }
 }
