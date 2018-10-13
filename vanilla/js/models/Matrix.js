@@ -20,7 +20,7 @@ export default class Matrix {
       // If `Class` is passed in, populate each element with an instance of it.
       if (this.Class) {
         [...this.arrOfArr[i].keys()].forEach((j) => {
-          // Inject into each instance a director to allow intra-communication.
+          // Inject into each instance a director to faciliate collaboration.
           const director = new Director({ i, j, matrix: this });
           this.arrOfArr[i][j] = new this.Class({ director });
         });

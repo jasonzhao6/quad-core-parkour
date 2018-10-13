@@ -2,7 +2,7 @@ import Director from './Director.js';
 
 export default class Commander {
   constructor({ core }) {
-    // Proprs
+    // Props
     this.core = core;
   }
 

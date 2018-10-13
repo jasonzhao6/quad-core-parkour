@@ -1,5 +1,6 @@
 import Core from '../Core.js';
 import Commander from '../Commander.js';
+import LineManager from '../LineManager.js';
 
 export default class CoreTest {
   static enqueue(_) {
@@ -41,6 +42,25 @@ export default class CoreTest {
           _.assert(
             'It initializes the `commander` property with override',
             () => subject.commander === commanderOverride,
+          );
+        });
+
+        _.context('When creating a core without line manager override', () => {
+          const subject = new Core();
+
+          _.assert(
+            'It initializes the `lineManager` property',
+            () => subject.lineManager instanceof LineManager,
+          );
+        });
+
+        _.context('When creating a core with line manager override', () => {
+          const lineManagerOverride = 'lineManagerOverride';
+          const subject = new Core({ lineManagerOverride });
+
+          _.assert(
+            'It initializes the `lineManager` property with override',
+            () => subject.lineManager === lineManagerOverride,
           );
         });
       });

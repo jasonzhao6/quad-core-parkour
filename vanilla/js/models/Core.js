@@ -1,12 +1,14 @@
 import Commander from './Commander.js';
+import LineManager from './LineManager.js';
 
 export default class Core {
   static get DEFAULT_VALUE() { return 0; }
 
-  constructor({ director, commanderOverride } = {}) {
+  constructor({ director, commanderOverride, lineManagerOverride } = {}) {
     // Props
     this.director = director;
     this.commander = commanderOverride || new Commander({ core: this });
+    this.lineManager = lineManagerOverride || new LineManager({ core: this });
 
     // States
     this.accumulator = Core.DEFAULT_VALUE;
