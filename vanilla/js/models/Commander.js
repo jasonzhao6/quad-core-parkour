@@ -12,20 +12,22 @@ export default class Commander {
       Director.isDirection(destination) && !this.core.canSend(destination),
     ].some(shortCircuit => shortCircuit === true)) return false;
 
-    let sourceValue = null;
-
-    if (Director.isDirection(source)) {
-      sourceValue = this.core.receive(source);
-    } else if (source === 'acc') {
-      sourceValue = this.core.accumulator;
-    }
-
     if (Director.isDirection(destination)) {
-      this.core.send(destination, sourceValue);
+      this.core.send(destination, this.sourceValue(source));
     } else if (destination === 'acc') {
-      this.core.accumulator = sourceValue;
+      this.core.accumulator = this.sourceValue(source);
     }
 
     return true;
+  }
+
+  //
+  // Private
+  //
+
+  sourceValue(source) {
+    if (Director.isDirection(source)) return this.core.receive(source);
+    if (source === 'acc') return this.core.accumulator;
+    return source;
   }
 }
