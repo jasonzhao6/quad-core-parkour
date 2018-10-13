@@ -123,6 +123,17 @@ export default class CommanderTest {
             ],
           );
         });
+
+        _.context('When moving message to an invalid destination', () => {
+          const twoByTwo = new Matrix(matrixArgs);
+          const subject = twoByTwo.get(0, 0).commander;
+          const message = 'message';
+
+          _.assert(
+            'It returns `false`',
+            () => subject.move(message, 'yo') === false,
+          );
+        });
       });
     });
   }

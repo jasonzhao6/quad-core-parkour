@@ -12,13 +12,17 @@ export default class Commander {
       Director.isDirection(destination) && !this.core.canSend(destination),
     ].some(shortCircuit => shortCircuit === true)) return false;
 
+    const sourceValue = this.sourceValue(source);
+
     if (Director.isDirection(destination)) {
-      this.core.send(destination, this.sourceValue(source));
+      return this.core.send(destination, sourceValue);
     } else if (destination === 'acc') {
-      this.core.accumulator = this.sourceValue(source);
+      this.core.accumulator = sourceValue;
+      return true;
     }
 
-    return true;
+    // In case destination is not valid
+    return false;
   }
 
   //
