@@ -1,14 +1,14 @@
-import Commander from '../Commander.js';
+import LineWorker from '../LineWorker.js';
 import Core from '../Core.js';
 import Matrix from '../Matrix.js';
 
-export default class CommanderTest {
+export default class LineWorkerTest {
   static enqueue(_) {
-    _.Class('Commander', () => {
+    _.Class('LineWorker', () => {
       _.method('#constructor', () => {
-        _.context('When creating a commander', () => {
+        _.context('When creating a worker', () => {
           const core = 'core';
-          const subject = new Commander({ core });
+          const subject = new LineWorker({ core });
 
           _.assert(
             'It initializes each property',
@@ -22,7 +22,7 @@ export default class CommanderTest {
 
         _.context('When moving message from one neighbor to another', () => {
           const twoByTwo = new Matrix(matrixArgs);
-          const subject = twoByTwo.get(0, 0).commander;
+          const subject = twoByTwo.get(0, 0).worker;
           const message = 'message';
           twoByTwo.get(0, 1).send('left', message);
 
@@ -37,7 +37,7 @@ export default class CommanderTest {
 
         _.context('When moving message from an empty neighbor', () => {
           const twoByTwo = new Matrix(matrixArgs);
-          const subject = twoByTwo.get(0, 0).commander;
+          const subject = twoByTwo.get(0, 0).worker;
 
           _.assert(
             'It returns `false` and recipient cannot receive the message',
@@ -50,7 +50,7 @@ export default class CommanderTest {
 
         _.context('When moving message to an already occupied neighbor', () => {
           const twoByTwo = new Matrix(matrixArgs);
-          const subject = twoByTwo.get(0, 0).commander;
+          const subject = twoByTwo.get(0, 0).worker;
           const existingMessage = 'existingMessage';
           subject.core.send('down', existingMessage);
 
@@ -68,7 +68,7 @@ export default class CommanderTest {
 
         _.context('When moving message from accumulator to neighbor', () => {
           const twoByTwo = new Matrix(matrixArgs);
-          const subject = twoByTwo.get(0, 0).commander;
+          const subject = twoByTwo.get(0, 0).worker;
           const message = 'message';
           subject.core.accumulator = message;
 
@@ -83,7 +83,7 @@ export default class CommanderTest {
 
         _.context('When moving message from neighbor to accumulator', () => {
           const twoByTwo = new Matrix(matrixArgs);
-          const subject = twoByTwo.get(0, 0).commander;
+          const subject = twoByTwo.get(0, 0).worker;
           const message = 'message';
           twoByTwo.get(1, 0).send('up', message);
 
@@ -98,7 +98,7 @@ export default class CommanderTest {
 
         _.context('When moving message directly to neighbor', () => {
           const twoByTwo = new Matrix(matrixArgs);
-          const subject = twoByTwo.get(0, 0).commander;
+          const subject = twoByTwo.get(0, 0).worker;
           const message = 'message';
 
           _.assert(
@@ -112,7 +112,7 @@ export default class CommanderTest {
 
         _.context('When moving message directly to accumulator', () => {
           const twoByTwo = new Matrix(matrixArgs);
-          const subject = twoByTwo.get(0, 0).commander;
+          const subject = twoByTwo.get(0, 0).worker;
           const message = 'message';
 
           _.assert(
@@ -126,7 +126,7 @@ export default class CommanderTest {
 
         _.context('When moving message to an invalid destination', () => {
           const twoByTwo = new Matrix(matrixArgs);
-          const subject = twoByTwo.get(0, 0).commander;
+          const subject = twoByTwo.get(0, 0).worker;
           const message = 'message';
 
           _.assert(

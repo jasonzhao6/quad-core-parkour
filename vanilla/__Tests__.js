@@ -10,11 +10,11 @@ import TestHarnessTest from './__tests__/TestHarnessTest.js';
 import TestProxyTest from './__tests__/TestProxyTest.js';
 
 // Model tests
-import CommanderTest from './js/models/__tests__/CommanderTest.js';
 import CoreTest from './js/models/__tests__/CoreTest.js';
 import DirectorTest from './js/models/__tests__/DirectorTest.js';
 import EscrowTest from './js/models/__tests__/EscrowTest.js';
 import LineManagerTest from './js/models/__tests__/LineManagerTest.js';
+import LineWorkerTest from './js/models/__tests__/LineWorkerTest.js';
 import MatrixTest from './js/models/__tests__/MatrixTest.js';
 
 export default class Tests {
@@ -35,11 +35,11 @@ export default class Tests {
   }
 
   static enqueueModelTests(_) {
-    CommanderTest.enqueue(_);
     CoreTest.enqueue(_);
     DirectorTest.enqueue(_);
     EscrowTest.enqueue(_);
     LineManagerTest.enqueue(_);
+    LineWorkerTest.enqueue(_);
     MatrixTest.enqueue(_);
   }
 }

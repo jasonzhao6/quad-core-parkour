@@ -1,5 +1,5 @@
 import Core from '../Core.js';
-import Commander from '../Commander.js';
+import LineWorker from '../LineWorker.js';
 import LineManager from '../LineManager.js';
 
 export default class CoreTest {
@@ -26,22 +26,22 @@ export default class CoreTest {
           );
         });
 
-        _.context('When creating a core without commander override', () => {
+        _.context('When creating a core without worker override', () => {
           const subject = new Core();
 
           _.assert(
-            'It initializes the `commander` property',
-            () => subject.commander instanceof Commander,
+            'It initializes the `worker` property',
+            () => subject.worker instanceof LineWorker,
           );
         });
 
-        _.context('When creating a core with commander override', () => {
-          const commanderOverride = 'commanderOverride';
-          const subject = new Core({ commanderOverride });
+        _.context('When creating a core with worker override', () => {
+          const lineWorkerOverride = 'lineWorkerOverride';
+          const subject = new Core({ lineWorkerOverride });
 
           _.assert(
-            'It initializes the `commander` property with override',
-            () => subject.commander === commanderOverride,
+            'It initializes the `worker` property with override',
+            () => subject.worker === lineWorkerOverride,
           );
         });
 
@@ -49,8 +49,8 @@ export default class CoreTest {
           const subject = new Core();
 
           _.assert(
-            'It initializes the `lineManager` property',
-            () => subject.lineManager instanceof LineManager,
+            'It initializes the `manager` property',
+            () => subject.manager instanceof LineManager,
           );
         });
 
@@ -59,8 +59,8 @@ export default class CoreTest {
           const subject = new Core({ lineManagerOverride });
 
           _.assert(
-            'It initializes the `lineManager` property with override',
-            () => subject.lineManager === lineManagerOverride,
+            'It initializes the `manager` property with override',
+            () => subject.manager === lineManagerOverride,
           );
         });
       });
@@ -138,15 +138,15 @@ export default class CoreTest {
     });
 
     _.Class('Core, delegated commands', () => {
-      const commanderOverride = _.echo();
-      const subject = new Core({ commanderOverride });
+      const workerOverride = _.echo();
+      const subject = new Core({ workerOverride });
       const [source, destination] = ['source', 'destination'];
 
       _.method('#move', () => {
         _.assert(
-          'It delegates to the `commander`',
+          'It delegates to the `worker`',
           () => subject.move(source, destination) ===
-            subject.commander.move(source, destination),
+            subject.worker.move(source, destination),
         );
       });
     });
@@ -157,8 +157,8 @@ export default class CoreTest {
 
       _.method('#next', () => {
         _.assert(
-          'It delegates to the `lineManager`',
-          () => subject.next() === subject.lineManager.next(),
+          'It delegates to the `manager`',
+          () => subject.next() === subject.manager.next(),
         );
       });
     });

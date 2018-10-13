@@ -1,6 +1,6 @@
 import Director from './Director.js';
 
-export default class Commander {
+export default class LineWorker {
   constructor({ core }) {
     // Props
     this.core = core;

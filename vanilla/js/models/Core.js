@@ -1,14 +1,14 @@
-import Commander from './Commander.js';
+import LineWorker from './LineWorker.js';
 import LineManager from './LineManager.js';
 
 export default class Core {
   static get DEFAULT_VALUE() { return 0; }
 
-  constructor({ director, commanderOverride, lineManagerOverride } = {}) {
+  constructor({ lineManagerOverride, lineWorkerOverride, director } = {}) {
     // Props
+    this.manager = lineManagerOverride || new LineManager({ core: this });
+    this.worker = lineWorkerOverride || new LineWorker({ core: this });
     this.director = director;
-    this.commander = commanderOverride || new Commander({ core: this });
-    this.lineManager = lineManagerOverride || new LineManager({ core: this });
 
     // States
     this.accumulator = Core.DEFAULT_VALUE;
@@ -19,21 +19,21 @@ export default class Core {
   // Delegated
   //
 
-  // Directions via `director`
+  // Manage work via `manager`
+  next() { return this.manager.next(); }
+
+  // Do work via `worker`
+  move(source, destination) { return this.worker.move(source, destination); }
+
+  // Get directions via `director`
   get up() { return this.director.up; }
   get down() { return this.director.down; }
   get left() { return this.director.left; }
   get right() { return this.director.right; }
 
-  // Messaging via `director`
+  // Send/receive messages via `director`
   canSend(direction) { return this.director.canSend(direction); }
   canReceive(direction) { return this.director.canReceive(direction); }
   send(direction, message) { return this.director.send(direction, message); }
   receive(direction) { return this.director.receive(direction); }
-
-  // Commands via `commander`
-  move(source, destination) { return this.commander.move(source, destination); }
-
-  // Manage work via `lineManager`
-  next() { return this.lineManager.next(); }
 }
