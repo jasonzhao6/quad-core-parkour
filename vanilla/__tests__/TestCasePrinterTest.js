@@ -33,16 +33,18 @@ export default class TestCasePrinterTest {
           );
         });
 
-        const subject = new TestCasePrinter();
+        _.context('When creating a printer', () => {
+          const subject = new TestCasePrinter();
 
-        _.assert(
-          'It initializes each `last*` property to null',
-          () => [
-            subject.lastClass === null,
-            subject.lastMethod === null,
-            subject.lastContext === null,
-          ],
-        );
+          _.assert(
+            'It initializes each `last*` property to null',
+            () => [
+              subject.lastClass === null,
+              subject.lastMethod === null,
+              subject.lastContext === null,
+            ],
+          );
+        });
       });
 
       _.method('#print', () => {
