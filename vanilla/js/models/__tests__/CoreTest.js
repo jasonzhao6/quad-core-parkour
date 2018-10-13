@@ -116,5 +116,19 @@ export default class CoreTest {
         );
       });
     });
+
+    _.Class('Core, delegated commands', () => {
+      const commanderOverride = _.echo();
+      const subject = new Core({ commanderOverride });
+      const [source, destination] = ['source', 'destination'];
+
+      _.method('#move', () => {
+        _.assert(
+          'It delegates to the `commander`',
+          () => subject.move(source, destination) ===
+            subject.commander.move(source, destination),
+        );
+      });
+    });
   }
 }
