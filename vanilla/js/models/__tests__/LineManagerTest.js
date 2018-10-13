@@ -15,31 +15,38 @@ export default class LineManagerTest {
           );
 
           _.assert(
-            'It initializes the `sourceCode` state to `[]`',
+            'It initializes the `lineItems` state to `[]`',
             () => [
-              subject.sourceCode.length === 0,
-              subject.sourceCode instanceof Array,
+              subject.lineItems.length === 0,
+              subject.lineItems instanceof Array,
+            ],
+          );
+
+          _.assert(
+            'It initializes the `priorities` state to a generator',
+            () => [
+              subject.priorities.next().value === undefined,
+              subject.priorities.next().done === false,
             ],
           );
         });
       });
 
       _.method('#load', () => {
-        const sourceCode = 'sourceCode';
+        const lineItems = 'lineItems';
         const subject = new LineManager();
 
-        subject.load(sourceCode);
+        subject.load(lineItems);
 
         _.assert(
-          'It sets the `sourceCode` state',
-          () => subject.sourceCode === sourceCode,
+          'It sets the `lineItems` state',
+          () => subject.lineItems === lineItems,
         );
       });
 
-      _.method('*lines', () => {
-        _.context('When there is no `sourceCode`', () => {
-          const lineManager = new LineManager();
-          const subject = lineManager.lines();
+      _.method('next', () => {
+        _.context('When there is no `lineItems`', () => {
+          const subject = new LineManager();
 
           _.assert(
             'It iterates and returns undefined',
@@ -50,11 +57,10 @@ export default class LineManagerTest {
           );
         });
 
-        _.context('When there is `sourceCode`', () => {
-          const lineManager = new LineManager();
-          const subject = lineManager.lines();
+        _.context('When there is `lineItems`', () => {
+          const subject = new LineManager();
           const [line1, line2, line3] = ['line 1', 'line 2', 'line 3'];
-          lineManager.load([line1, line2, line3]);
+          subject.load([line1, line2, line3]);
 
           _.assert(
             'It iterates',
@@ -78,14 +84,14 @@ export default class LineManagerTest {
           );
 
           _.assert(
-            'It repeats',
+            'It supports repeating the previous value',
             () => [
               subject.next().value === line1,
-              subject.next(false).value === line1,
+              subject.next({ repeatPrevious: true }).value === line1,
               subject.next().value === line2,
-              subject.next(false).value === line2,
+              subject.next({ repeatPrevious: true }).value === line2,
               subject.next().value === line3,
-              subject.next(false).value === line3,
+              subject.next({ repeatPrevious: true }).value === line3,
             ],
           );
         });

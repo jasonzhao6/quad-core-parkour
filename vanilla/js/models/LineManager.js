@@ -4,15 +4,24 @@ export default class LineManager {
     this.core = core;
 
     // States
-    this.sourceCode = [];
+    this.lineItems = [];
+    this.priorities = this.prioritize();
   }
 
-  load(sourceCode) { this.sourceCode = sourceCode; }
+  load(lineItems) { this.lineItems = lineItems; }
 
-  * lines() {
+  next({ repeatPrevious } = {}) {
+    return this.priorities.next(repeatPrevious);
+  }
+
+  //
+  // Private
+  //
+
+  * prioritize() {
     for (let i = 0; i < Infinity; i += 1) {
-      const lastResult = yield this.sourceCode[i % this.sourceCode.length];
-      if (lastResult === false) i -= 1;
+      const repeatPrevious = yield this.lineItems[i % this.lineItems.length];
+      if (repeatPrevious === true) i -= 1;
     }
   }
 }

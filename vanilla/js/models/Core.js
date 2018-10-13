@@ -11,7 +11,6 @@ export default class Core {
     this.lineManager = lineManagerOverride || new LineManager({ core: this });
 
     // States
-    this.lines = this.lineManager.lines();
     this.accumulator = Core.DEFAULT_VALUE;
     this.backup = Core.DEFAULT_VALUE;
   }

@@ -52,14 +52,6 @@ export default class CoreTest {
             'It initializes the `lineManager` property',
             () => subject.lineManager instanceof LineManager,
           );
-
-          _.assert(
-            'It initializes `lines` state to a generator',
-            () => [
-              subject.lines.next().value === undefined,
-              subject.lines.next().done === false,
-            ],
-          );
         });
 
         _.context('When creating a core with line manager override', () => {
@@ -69,18 +61,6 @@ export default class CoreTest {
           _.assert(
             'It initializes the `lineManager` property with override',
             () => subject.lineManager === lineManagerOverride,
-          );
-
-          _.assert(
-            'It initializes `lines` state to default value',
-            () => subject.accumulator === Core.DEFAULT_VALUE,
-          );
-
-          _.assert(
-            'It initializes `lines` state',
-            () => [
-              subject.lines === 'lines',
-            ],
           );
         });
       });
