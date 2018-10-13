@@ -170,5 +170,17 @@ export default class CoreTest {
         );
       });
     });
+
+    _.Class('Core, delegated manage-work methods', () => {
+      const lineManagerOverride = _.echo();
+      const subject = new Core({ lineManagerOverride });
+
+      _.method('#next', () => {
+        _.assert(
+          'It delegates to the `lineManager`',
+          () => subject.next() === subject.lineManager.next(),
+        );
+      });
+    });
   }
 }

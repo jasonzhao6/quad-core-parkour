@@ -34,4 +34,7 @@ export default class Core {
 
   // Commands via `commander`
   move(source, destination) { return this.commander.move(source, destination); }
+
+  // Manage work via `lineManager`
+  next() { return this.lineManager.next(); }
 }
