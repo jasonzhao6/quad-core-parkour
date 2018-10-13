@@ -4,6 +4,29 @@ import Matrix from '../Matrix.js';
 export default class DirectorTest {
   static enqueue(_) {
     _.Class('Director', () => {
+      _.method('.isDirection', () => {
+        _.assert(
+          'It returns `true` for all directions',
+          () => [
+            Director.isDirection('up') === true,
+            Director.isDirection('down') === true,
+            Director.isDirection('left') === true,
+            Director.isDirection('right') === true,
+          ],
+        );
+
+        _.assert(
+          'It returns `false` for non directions',
+          () => [
+            Director.isDirection('acc') === false,
+            Director.isDirection('message') === false,
+            Director.isDirection(0) === false,
+            Director.isDirection(1) === false,
+            Director.isDirection(-1) === false,
+          ],
+        );
+      });
+
       _.method('.reverse', () => {
         _.assert(
           'It reverses any given direction',

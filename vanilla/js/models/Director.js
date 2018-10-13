@@ -1,4 +1,8 @@
 export default class Director {
+  static isDirection(direction) {
+    return ['up', 'down', 'left', 'right'].includes(direction);
+  }
+
   static reverse(direction) {
     if (direction === 'up') return 'down';
     if (direction === 'down') return 'up';
