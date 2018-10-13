@@ -1,9 +1,13 @@
 export default class LineManager {
-  constructor({ core, sourceCode = [] } = {}) {
+  constructor({ core } = {}) {
     // Props
     this.core = core;
-    this.sourceCode = sourceCode;
+
+    // States
+    this.sourceCode = [];
   }
+
+  load(sourceCode) { this.sourceCode = sourceCode; }
 
   * lines() {
     for (let i = 0; i < Infinity; i += 1) {
