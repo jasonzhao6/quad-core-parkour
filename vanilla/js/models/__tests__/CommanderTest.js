@@ -82,7 +82,18 @@ export default class CommanderTest {
         });
 
         _.context('When moving message from neighbor to accumulator', () => {
+          const twoByTwo = new Matrix(matrixArgs);
+          const subject = twoByTwo.get(0, 0).commander;
+          const message = 'message';
+          twoByTwo.get(1, 0).send('up', message);
 
+          _.assert(
+            'It returns `true` and the message is in the accumulator',
+            () => [
+              subject.move('down', 'acc') === true,
+              subject.core.accumulator === message,
+            ],
+          );
         });
 
         _.context('When moving number to neighbor', () => {
