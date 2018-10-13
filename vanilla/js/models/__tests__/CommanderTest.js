@@ -111,7 +111,17 @@ export default class CommanderTest {
         });
 
         _.context('When moving message directly to accumulator', () => {
+          const twoByTwo = new Matrix(matrixArgs);
+          const subject = twoByTwo.get(0, 0).commander;
+          const message = 'message';
 
+          _.assert(
+            'It returns `true` and recipient can receive the message',
+            () => [
+              subject.move(message, 'acc') === true,
+              subject.core.accumulator === message,
+            ],
+          );
         });
       });
     });
