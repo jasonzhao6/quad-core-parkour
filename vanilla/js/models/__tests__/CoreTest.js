@@ -1,4 +1,5 @@
 import Core from '../Core.js';
+import Commander from '../Commander.js';
 
 export default class CoreTest {
   static enqueue(_) {
@@ -21,6 +22,25 @@ export default class CoreTest {
           _.assert(
             'It initializes `backup` state to default value',
             () => subject.backup === Core.DEFAULT_VALUE,
+          );
+        });
+
+        _.context('When creating a core without commander override', () => {
+          const subject = new Core();
+
+          _.assert(
+            'It initializes the `commander` property',
+            () => subject.commander instanceof Commander,
+          );
+        });
+
+        _.context('When creating a core with commander override', () => {
+          const commanderOverride = 'commanderOverride';
+          const subject = new Core({ commanderOverride });
+
+          _.assert(
+            'It initializes the `commander` property with override',
+            () => subject.commander === commanderOverride,
           );
         });
       });

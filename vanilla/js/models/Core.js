@@ -3,10 +3,10 @@ import Commander from './Commander.js';
 export default class Core {
   static get DEFAULT_VALUE() { return 0; }
 
-  constructor({ director }) {
+  constructor({ director, commanderOverride } = {}) {
     // Props
     this.director = director;
-    this.commander = new Commander({ core: this });
+    this.commander = commanderOverride || new Commander({ core: this });
 
     // States
     this.accumulator = Core.DEFAULT_VALUE;
