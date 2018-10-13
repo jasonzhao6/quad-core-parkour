@@ -19,43 +19,58 @@ export default class LineManagerTest {
       });
 
       _.method('*lines', () => {
-        const [line1, line2, line3] = ['line 1', 'line 2', 'line 3'];
-        const sourceCode = [line1, line2, line3];
-        const lineManager = new LineManager({ sourceCode });
-        const subject = lineManager.lines();
+        _.context('When there is no `sourceCode`', () => {
+          const lineManager = new LineManager();
+          const subject = lineManager.lines();
 
-        _.assert(
-          'It iterates',
-          () => [
-            subject.next().value === line1,
-            subject.next().value === line2,
-            subject.next().value === line3,
-          ],
-        );
+          _.assert(
+            'It iterates and returns undefined',
+            () => [
+              subject.next().value === undefined,
+              subject.next().value === undefined,
+            ],
+          );
+        });
 
-        _.assert(
-          'It loops',
-          () => [
-            subject.next().value === line1,
-            subject.next().value === line2,
-            subject.next().value === line3,
-            subject.next().value === line1,
-            subject.next().value === line2,
-            subject.next().value === line3,
-          ],
-        );
+        _.context('When there is `sourceCode`', () => {
+          const [line1, line2, line3] = ['line 1', 'line 2', 'line 3'];
+          const sourceCode = [line1, line2, line3];
+          const lineManager = new LineManager({ sourceCode });
+          const subject = lineManager.lines();
 
-        _.assert(
-          'It repeats',
-          () => [
-            subject.next().value === line1,
-            subject.next(false).value === line1,
-            subject.next().value === line2,
-            subject.next(false).value === line2,
-            subject.next().value === line3,
-            subject.next(false).value === line3,
-          ],
-        );
+          _.assert(
+            'It iterates',
+            () => [
+              subject.next().value === line1,
+              subject.next().value === line2,
+              subject.next().value === line3,
+            ],
+          );
+
+          _.assert(
+            'It loops',
+            () => [
+              subject.next().value === line1,
+              subject.next().value === line2,
+              subject.next().value === line3,
+              subject.next().value === line1,
+              subject.next().value === line2,
+              subject.next().value === line3,
+            ],
+          );
+
+          _.assert(
+            'It repeats',
+            () => [
+              subject.next().value === line1,
+              subject.next(false).value === line1,
+              subject.next().value === line2,
+              subject.next(false).value === line2,
+              subject.next().value === line3,
+              subject.next(false).value === line3,
+            ],
+          );
+        });
       });
     });
   }

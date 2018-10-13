@@ -1,5 +1,5 @@
 export default class LineManager {
-  constructor({ core, sourceCode } = {}) {
+  constructor({ core, sourceCode = [] } = {}) {
     // Props
     this.core = core;
     this.sourceCode = sourceCode;
