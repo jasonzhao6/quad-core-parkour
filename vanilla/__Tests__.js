@@ -14,6 +14,7 @@ import CommanderTest from './js/models/__tests__/CommanderTest.js';
 import CoreTest from './js/models/__tests__/CoreTest.js';
 import DirectorTest from './js/models/__tests__/DirectorTest.js';
 import EscrowTest from './js/models/__tests__/EscrowTest.js';
+import LineManagerTest from './js/models/__tests__/LineManagerTest.js';
 import MatrixTest from './js/models/__tests__/MatrixTest.js';
 
 export default class Tests {
@@ -38,6 +39,7 @@ export default class Tests {
     CoreTest.enqueue(_);
     DirectorTest.enqueue(_);
     EscrowTest.enqueue(_);
+    LineManagerTest.enqueue(_);
     MatrixTest.enqueue(_);
   }
 }
