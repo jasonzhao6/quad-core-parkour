@@ -141,17 +141,37 @@ export default class MatrixTest {
         const [rowCount, columnCount, Class] = [1, 2, {}.constructor];
         const args = { rowCount, columnCount, Class };
         const subject = new Matrix(args);
-        const [i, j, alias] = [0, 1, 'tail'];
 
-        subject.alias(i, j, alias);
+        _.context('When giving [0][0] one alias', () => {
+          const [i, j, alias] = [0, 0, 'head'];
 
-        _.assert(
-          'It sets the `aliases` state',
-          () => [
-            subject.aliases[alias].i === i,
-            subject.aliases[alias].j === j,
-          ],
-        );
+          subject.alias(i, j, alias);
+
+          _.assert(
+            'It sets the `aliases` state',
+            () => [
+              subject.aliases[alias].i === i,
+              subject.aliases[alias].j === j,
+            ],
+          );
+        });
+
+        _.context('When giving [0][1] two aliases', () => {
+          const [i, j, alias1, alias2] = [0, 1, 'tail', 'rest'];
+
+          subject.alias(i, j, alias1);
+          subject.alias(i, j, alias2);
+
+          _.assert(
+            'It sets the `aliases` states',
+            () => [
+              subject.aliases[alias1].i === i,
+              subject.aliases[alias1].j === j,
+              subject.aliases[alias2].i === i,
+              subject.aliases[alias2].j === j,
+            ],
+          );
+        });
       });
 
       _.method('#get', () => {
