@@ -15,6 +15,11 @@ export default class LevelTest {
           );
 
           _.assert(
+            'It initializes the `cycleCount` state to 0',
+            () => subject.cycleCount === 0,
+          );
+
+          _.assert(
             'It initializes the `matrix` state to an instance of Matrix',
             () => subject.matrix instanceof Matrix,
           );
@@ -94,6 +99,20 @@ export default class LevelTest {
               subject.outputX.length === 0,
               subject.outputY.length === 0,
             ],
+          );
+        });
+      });
+
+      _.method('#cycle', () => {
+        _.context('When there is no line item', () => {
+          const number = 0;
+          const subject = new Level({ number });
+
+          subject.cycle();
+
+          _.assert(
+            'It cycles until `MAX_CYCLE_COUNT` is reached',
+            () => subject.cycleCount === Level.MAX_CYCLE_COUNT,
           );
         });
       });
