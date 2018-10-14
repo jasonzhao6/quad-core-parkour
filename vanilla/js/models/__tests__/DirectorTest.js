@@ -63,7 +63,7 @@ export default class DirectorTest {
           const [i, j, matrix] = [0, 0, matrixProxy];
           new Director({ i, j, matrix }); // eslint-disable-line no-new
 
-          _.expect(matrixProxy).toHaveReceived('alias').withArgs([i, j, 'oo']);
+          _.expect(matrixProxy).toHaveReceived('alias').withArgs([i, j, '0,0']);
 
           _.assert(
             'It calls `matrix.alias()` with element name',
@@ -80,7 +80,7 @@ export default class DirectorTest {
           const [i, j, matrix] = [0, 1, matrixProxy];
           new Director({ i, j, matrix }); // eslint-disable-line no-new
 
-          _.expect(matrixProxy).toHaveReceived('alias').withArgs([i, j, 'oi']);
+          _.expect(matrixProxy).toHaveReceived('alias').withArgs([i, j, '0,1']);
 
           _.assert(
             'It calls `matrix.alias()` with element name',
@@ -97,7 +97,7 @@ export default class DirectorTest {
           const [i, j, matrix] = [1, 0, matrixProxy];
           new Director({ i, j, matrix }); // eslint-disable-line no-new
 
-          _.expect(matrixProxy).toHaveReceived('alias').withArgs([i, j, 'io']);
+          _.expect(matrixProxy).toHaveReceived('alias').withArgs([i, j, '1,0']);
 
           _.assert(
             'It calls `matrix.alias()` with element name',
@@ -114,7 +114,7 @@ export default class DirectorTest {
           const [i, j, matrix] = [1, 1, matrixProxy];
           new Director({ i, j, matrix }); // eslint-disable-line no-new
 
-          _.expect(matrixProxy).toHaveReceived('alias').withArgs([i, j, 'ii']);
+          _.expect(matrixProxy).toHaveReceived('alias').withArgs([i, j, '1,1']);
 
           _.assert(
             'It calls `matrix.alias()` with element name',

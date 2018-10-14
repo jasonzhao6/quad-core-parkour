@@ -81,13 +81,13 @@ export default class Director {
 
   // Arguments: [undefined] or [direction].
   name(direction) {
-    if (direction === undefined) {
-      // Note: This naming scheme is specifically meant for a 2x2 matrix.
-      return [this.i, this.j].join('').replace(/0/g, 'o').replace(/1/g, 'i');
-    }
+    // Return name of self.
+    if (direction === undefined) return [this.i, this.j].join(',');
 
-    return this[direction] !== null
-      ? this[direction].director.name()
-      : direction;
+    // Return name of neighboring element.
+    if (this[direction] !== null) return this[direction].director.name();
+
+    // Return direction itself since it's out of bound that way.
+    return direction;
   }
 }
