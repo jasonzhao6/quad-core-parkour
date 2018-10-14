@@ -30,13 +30,13 @@ export default class Level {
 
   cycle() {
     this.cycleCount += 1;
-    this.matrix.getAll().forEach(core => core.next());
+    this.matrix.getAll().forEach(element => element.next());
 
     if (this.shouldCycleAgain()) this.cycle();
   }
 
   //
-  // private
+  // Private
   //
 
   shouldCycleAgain() {
@@ -48,5 +48,18 @@ export default class Level {
     ].some(condition => condition === true);
   }
 
-  solve() {}
+  //
+  // Testing
+  //
+
+  solve() {
+    const solution = solutions[this.number];
+
+    Object.keys(solution).forEach((key) => {
+      const [i, j] = key.split(':');
+      const lineItems = solution[key];
+
+      this.matrix.get(i, j).load(lineItems);
+    });
+  }
 }

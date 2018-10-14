@@ -213,7 +213,7 @@ export default class DirectorTest {
       const message = 'message';
       const args = { rowCount: 2, columnCount: 2, Class: {}.constructor };
       const subject = new Director({ i: 0, j: 0, matrix: new Matrix(args) });
-      // ^ Tests in this block share this subject but uses different directions.
+      // ^ Tests in this block share one subject but use different directions.
       // #canSend tests sending up and down.
       // #canReceive tests receiving up and down.
       // #send tests sending left and right.

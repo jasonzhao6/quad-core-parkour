@@ -1,4 +1,3 @@
-import Core from '../Core.js';
 import LineManager from '../LineManager.js';
 
 export default class LineManagerTest {

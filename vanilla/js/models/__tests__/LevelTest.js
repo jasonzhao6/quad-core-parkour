@@ -116,6 +116,32 @@ export default class LevelTest {
           );
         });
       });
+
+      _.method('#solve', () => {
+        _.context('When not called', () => {
+          const number = 0;
+          const subject = new Level({ number });
+
+          _.assert(
+            'It has no `lineItem` in any of the Matrix elements',
+            () => subject.matrix.getAll().map(element =>
+              element.manager.lineItems.length === 0),
+          );
+        });
+
+        _.context('When called', () => {
+          const number = 0;
+          const subject = new Level({ number });
+
+          subject.solve();
+
+          _.assert(
+            'It has `lineItem` in all of the Matrix elements',
+            () => subject.matrix.getAll().map(element =>
+              element.manager.lineItems.length > 0),
+          );
+        });
+      });
     });
   }
 }
