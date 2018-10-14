@@ -41,6 +41,6 @@ export default class Escrow {
   //
 
   static makeKey(sender, recipient) {
-    return [sender, recipient].join('-');
+    return [sender, recipient].join('->');
   }
 }

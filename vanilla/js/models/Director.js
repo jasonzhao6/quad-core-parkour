@@ -82,7 +82,7 @@ export default class Director {
   // Arguments: [undefined] or [direction].
   name(direction) {
     // Return name of self.
-    if (direction === undefined) return [this.i, this.j].join(',');
+    if (direction === undefined) return [this.i, this.j].join(':');
 
     // Return name of neighboring element.
     if (this[direction] !== null) return this[direction].director.name();

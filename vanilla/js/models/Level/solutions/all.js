@@ -1,4 +1,4 @@
-import * as L0 from './00.js';
+import L0 from './00.js';
 
 const Levels = [
   L0

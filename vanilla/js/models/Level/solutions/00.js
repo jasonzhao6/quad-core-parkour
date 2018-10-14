@@ -1,15 +1,6 @@
-export const oo = [
-  'mov up down',
-];
-
-export const oi = [
-  'mov up down',
-];
-
-export const io = [
-  'mov up down',
-];
-
-export const ii = [
-  'mov up down',
-];
+export default {
+  '0:0': ['mov up down'],
+  '0:1': ['mov up down'],
+  '1:0': ['mov up down'],
+  '1:1': ['mov up down'],
+}
