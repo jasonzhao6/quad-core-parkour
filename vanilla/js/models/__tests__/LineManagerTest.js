@@ -87,11 +87,11 @@ export default class LineManagerTest {
             'It supports repeating the previous value',
             () => [
               subject.next().value === line1,
-              subject.next({ repeatPrevious: true }).value === line1,
+              subject.next(true).value === line1,
               subject.next().value === line2,
-              subject.next({ repeatPrevious: true }).value === line2,
+              subject.next(true).value === line2,
               subject.next().value === line3,
-              subject.next({ repeatPrevious: true }).value === line3,
+              subject.next(true).value === line3,
             ],
           );
         });

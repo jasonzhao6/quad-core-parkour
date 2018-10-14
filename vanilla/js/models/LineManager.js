@@ -10,8 +10,8 @@ export default class LineManager {
 
   load(lineItems) { this.lineItems = lineItems; }
 
-  next({ repeatPrevious } = {}) {
-    return this.priorities.next(repeatPrevious);
+  next(redoPrevious) {
+    return this.priorities.next(redoPrevious);
   }
 
   //
@@ -20,8 +20,8 @@ export default class LineManager {
 
   * prioritize() {
     for (let i = 0; i < Infinity; i += 1) {
-      const repeatPrevious = yield this.lineItems[i % this.lineItems.length];
-      if (repeatPrevious === true) i -= 1;
+      const redoPrevious = yield this.lineItems[i % this.lineItems.length];
+      if (redoPrevious === true) i -= 1;
     }
   }
 }

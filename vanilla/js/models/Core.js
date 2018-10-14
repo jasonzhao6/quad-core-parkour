@@ -20,7 +20,7 @@ export default class Core {
   //
 
   // Manage work via `manager`
-  next() { return this.manager.next(); }
+  next(redoPrevious) { return this.manager.next(redoPrevious); }
 
   // Do work via `worker`
   move(source, destination) { return this.worker.move(source, destination); }
