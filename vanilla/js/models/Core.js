@@ -20,6 +20,7 @@ export default class Core {
   //
 
   // Manage work via `manager`
+  load(lineItems) { return this.manager.load(lineItems); }
   next(redoPrevious) { return this.manager.next(redoPrevious); }
 
   // Do work via `worker`
