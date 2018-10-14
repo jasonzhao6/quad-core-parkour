@@ -13,6 +13,7 @@ import TestProxyTest from './__tests__/TestProxyTest.js';
 import CoreTest from './js/models/__tests__/CoreTest.js';
 import DirectorTest from './js/models/__tests__/DirectorTest.js';
 import EscrowTest from './js/models/__tests__/EscrowTest.js';
+import LevelTest from './js/models/__tests__/LevelTest.js';
 import LineManagerTest from './js/models/__tests__/LineManagerTest.js';
 import LineWorkerTest from './js/models/__tests__/LineWorkerTest.js';
 import MatrixTest from './js/models/__tests__/MatrixTest.js';
@@ -38,6 +39,7 @@ export default class Tests {
     CoreTest.enqueue(_);
     DirectorTest.enqueue(_);
     EscrowTest.enqueue(_);
+    LevelTest.enqueue(_);
     LineManagerTest.enqueue(_);
     LineWorkerTest.enqueue(_);
     MatrixTest.enqueue(_);
