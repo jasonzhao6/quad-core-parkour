@@ -30,7 +30,7 @@ export default class Level {
 
   cycle() {
     this.cycleCount += 1;
-    this.matrix.getAll().forEach(element => element.next());
+    this.matrix.getAll().forEach(element => element.nextLine());
 
     if (this.shouldCycleAgain()) this.cycle();
   }
@@ -57,9 +57,9 @@ export default class Level {
 
     Object.keys(solution).forEach((key) => {
       const [i, j] = key.split(':');
-      const lineItems = solution[key];
+      const lines = solution[key];
 
-      this.matrix.get(i, j).load(lineItems);
+      this.matrix.get(i, j).loadLines(lines);
     });
   }
 }

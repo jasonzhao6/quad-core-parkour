@@ -14,10 +14,10 @@ export default class LineManagerTest {
           );
 
           _.assert(
-            'It initializes the `lineItems` state to `[]`',
+            'It initializes the `lines` state to `[]`',
             () => [
-              subject.lineItems.length === 0,
-              subject.lineItems instanceof Array,
+              subject.lines.length === 0,
+              subject.lines instanceof Array,
             ],
           );
 
@@ -31,66 +31,66 @@ export default class LineManagerTest {
         });
       });
 
-      _.method('#load', () => {
-        const lineItems = 'lineItems';
+      _.method('#loadLines', () => {
+        const lines = 'lines';
         const subject = new LineManager();
 
-        subject.load(lineItems);
+        subject.loadLines(lines);
 
         _.assert(
-          'It sets the `lineItems` state',
-          () => subject.lineItems === lineItems,
+          'It sets the `lines` state',
+          () => subject.lines === lines,
         );
       });
 
-      _.method('next', () => {
-        _.context('When there is no `lineItems`', () => {
+      _.method('nextLine', () => {
+        _.context('When there is no `lines`', () => {
           const subject = new LineManager();
 
           _.assert(
             'It iterates and returns undefined',
             () => [
-              subject.next().value === undefined,
-              subject.next().value === undefined,
+              subject.nextLine().value === undefined,
+              subject.nextLine().value === undefined,
             ],
           );
         });
 
-        _.context('When there is `lineItems`', () => {
+        _.context('When there is `lines`', () => {
           const subject = new LineManager();
           const [line1, line2, line3] = ['line 1', 'line 2', 'line 3'];
-          subject.load([line1, line2, line3]);
+          subject.loadLines([line1, line2, line3]);
 
           _.assert(
             'It iterates',
             () => [
-              subject.next().value === line1,
-              subject.next().value === line2,
-              subject.next().value === line3,
+              subject.nextLine().value === line1,
+              subject.nextLine().value === line2,
+              subject.nextLine().value === line3,
             ],
           );
 
           _.assert(
             'It loops',
             () => [
-              subject.next().value === line1,
-              subject.next().value === line2,
-              subject.next().value === line3,
-              subject.next().value === line1,
-              subject.next().value === line2,
-              subject.next().value === line3,
+              subject.nextLine().value === line1,
+              subject.nextLine().value === line2,
+              subject.nextLine().value === line3,
+              subject.nextLine().value === line1,
+              subject.nextLine().value === line2,
+              subject.nextLine().value === line3,
             ],
           );
 
           _.assert(
             'It supports repeating the previous value',
             () => [
-              subject.next().value === line1,
-              subject.next(true).value === line1,
-              subject.next().value === line2,
-              subject.next(true).value === line2,
-              subject.next().value === line3,
-              subject.next(true).value === line3,
+              subject.nextLine().value === line1,
+              subject.nextLine(true).value === line1,
+              subject.nextLine().value === line2,
+              subject.nextLine(true).value === line2,
+              subject.nextLine().value === line3,
+              subject.nextLine(true).value === line3,
             ],
           );
         });

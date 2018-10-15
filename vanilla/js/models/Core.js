@@ -20,8 +20,8 @@ export default class Core {
   //
 
   // Manage work via `manager`
-  load(lineItems) { return this.manager.load(lineItems); }
-  next(redoPrevious) { return this.manager.next(redoPrevious); }
+  loadLines(lines) { return this.manager.loadLines(lines); }
+  nextLine(redoPrevious) { return this.manager.nextLine(redoPrevious); }
 
   // Do work via `worker`
   move(source, destination) { return this.worker.move(source, destination); }

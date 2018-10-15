@@ -125,7 +125,7 @@ export default class LevelTest {
           _.assert(
             'It has no `lineItem` in any of the Matrix elements',
             () => subject.matrix.getAll().map(element =>
-              element.manager.lineItems.length === 0),
+              element.manager.lines.length === 0),
           );
         });
 
@@ -138,7 +138,7 @@ export default class LevelTest {
           _.assert(
             'It has `lineItem` in all of the Matrix elements',
             () => subject.matrix.getAll().map(element =>
-              element.manager.lineItems.length > 0),
+              element.manager.lines.length > 0),
           );
         });
       });

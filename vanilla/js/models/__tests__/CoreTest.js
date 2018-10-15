@@ -156,22 +156,22 @@ export default class CoreTest {
       const subject = new Core({ lineManagerOverride });
       const argument = 'argument';
 
-      _.method('#load', () => {
+      _.method('#loadLines', () => {
         _.assert(
           'It delegates to the `manager`',
           () => [
-            subject.load() === subject.manager.load(),
-            subject.load(argument) === subject.manager.load(argument),
+            subject.loadLines() === subject.manager.loadLines(),
+            subject.loadLines(argument) === subject.manager.loadLines(argument),
           ],
         );
       });
 
-      _.method('#next', () => {
+      _.method('#nextLine', () => {
         _.assert(
           'It delegates to the `manager`',
           () => [
-            subject.next() === subject.manager.next(),
-            subject.next(argument) === subject.manager.next(argument),
+            subject.nextLine() === subject.manager.nextLine(),
+            subject.nextLine(argument) === subject.manager.nextLine(argument),
           ],
         );
       });

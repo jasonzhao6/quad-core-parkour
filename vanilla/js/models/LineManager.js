@@ -4,13 +4,13 @@ export default class LineManager {
     this.core = core;
 
     // States
-    this.lineItems = [];
+    this.lines = [];
     this.priorities = this.prioritize();
   }
 
-  load(lineItems) { this.lineItems = lineItems; }
+  loadLines(lines) { this.lines = lines; }
 
-  next(redoPrevious) {
+  nextLine(redoPrevious) {
     return this.priorities.next(redoPrevious);
   }
 
@@ -20,7 +20,7 @@ export default class LineManager {
 
   * prioritize() {
     for (let i = 0; i < Infinity; i += 1) {
-      const redoPrevious = yield this.lineItems[i % this.lineItems.length];
+      const redoPrevious = yield this.lines[i % this.lines.length];
       if (redoPrevious === true) i -= 1;
     }
   }
