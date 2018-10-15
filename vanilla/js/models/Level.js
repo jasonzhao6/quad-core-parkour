@@ -21,11 +21,11 @@ export default class Level {
 
     // States
     this.cycleCount = 0;
+    this.inputX = this.data.input.x === undefined ? [] : [...this.data.input.x];
+    this.inputY = this.data.input.y === undefined ? [] : [...this.data.input.y];
+    this.outputX = [];
+    this.outputY = [];
     this.matrix = new Matrix({ ...Level.MATRIX_SIZE, Class: Core });
-    this.inputX = this.data.input.x ? [...this.data.input.x] : null;
-    this.inputY = this.data.input.y ? [...this.data.input.y] : null;
-    this.outputX = this.data.output.x ? [] : null;
-    this.outputY = this.data.output.y ? [] : null;
   }
 
   cycle() {

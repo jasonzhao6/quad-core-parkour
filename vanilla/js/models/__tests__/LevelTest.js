@@ -57,12 +57,12 @@ export default class LevelTest {
           const subject = new Level({ number, dataOverride });
 
           _.assert(
-            'It initializes input and output states to `null`',
+            'It initializes input and output states to empty array',
             () => [
-              subject.inputX === null,
-              subject.inputY === null,
-              subject.outputX === null,
-              subject.outputY === null,
+              subject.inputX.length === 0,
+              subject.inputY.length === 0,
+              subject.outputX.length === 0,
+              subject.outputY.length === 0,
             ],
           );
         });
@@ -77,9 +77,9 @@ export default class LevelTest {
             'It initializes only one input and output states each',
             () => [
               subject.inputX.toString() === inputX.toString(),
-              subject.inputY === null,
+              subject.inputY.length === 0,
               subject.outputX.length === 0,
-              subject.outputY === null,
+              subject.outputY.length === 0,
             ],
           );
         });
