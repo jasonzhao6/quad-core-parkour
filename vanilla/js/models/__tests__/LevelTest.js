@@ -23,6 +23,16 @@ export default class LevelTest {
             'It initializes the `matrix` state to an instance of Matrix',
             () => subject.matrix instanceof Matrix,
           );
+
+          _.assert(
+            'It aliases the input/output x/y elements in the `matrix`',
+            () => [
+              typeof subject.matrix.get(Level.INPUT.X) === 'object',
+              typeof subject.matrix.get(Level.INPUT.Y) === 'object',
+              typeof subject.matrix.get(Level.OUTPUT.X) === 'object',
+              typeof subject.matrix.get(Level.OUTPUT.Y) === 'object',
+            ],
+          );
         });
 
         _.context('When creating a level without `dataOverride`', () => {

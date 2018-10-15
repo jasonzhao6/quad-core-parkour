@@ -10,7 +10,6 @@ export default class Level {
   static get MAX_CYCLE_COUNT() { return 100; }
 
   static get MATRIX_SIZE() { return { rowCount: 2, columnCount: 2 }; }
-
   static get INPUT() { return { X: 'input.x', Y: 'input.y' }; }
   static get OUTPUT() { return { X: 'output.x', Y: 'output.y' }; }
 
@@ -26,6 +25,11 @@ export default class Level {
     this.outputX = [];
     this.outputY = [];
     this.matrix = new Matrix({ ...Level.MATRIX_SIZE, Class: Core });
+    this.matrix.alias(0, 0, Level.INPUT.X);
+    this.matrix.alias(0, 1, Level.INPUT.Y);
+    this.matrix.alias(1, 0, Level.OUTPUT.X);
+    this.matrix.alias(1, 1, Level.OUTPUT.Y);
+    this.escrow = this.matrix.escrow;
   }
 
   cycle() {
