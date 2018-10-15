@@ -23,6 +23,18 @@ export default class Director {
     this.matrix.alias(i, j, this.name());
   }
 
+  // Arguments: [undefined] or [direction].
+  name(direction) {
+    // Return name of self.
+    if (direction === undefined) return [this.i, this.j].join(':');
+
+    // Return name of neighboring element.
+    if (this[direction] !== null) return this[direction].director.name();
+
+    // Return direction itself since it's out of bound that way.
+    return direction;
+  }
+
   //
   // Directions
   //
@@ -73,21 +85,5 @@ export default class Director {
     const sender = this.name(direction);
     const recipient = this.name();
     return this.escrow.withdraw(sender, recipient);
-  }
-
-  //
-  // Private
-  //
-
-  // Arguments: [undefined] or [direction].
-  name(direction) {
-    // Return name of self.
-    if (direction === undefined) return [this.i, this.j].join(':');
-
-    // Return name of neighboring element.
-    if (this[direction] !== null) return this[direction].director.name();
-
-    // Return direction itself since it's out of bound that way.
-    return direction;
   }
 }

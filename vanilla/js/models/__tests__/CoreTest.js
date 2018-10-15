@@ -66,6 +66,58 @@ export default class CoreTest {
       });
     });
 
+    _.Class('Core, delegated manage-work methods', () => {
+      const lineManagerOverride = _.echo();
+      const subject = new Core({ lineManagerOverride });
+      const argument = 'argument';
+
+      _.method('#loadLines', () => {
+        _.assert(
+          'It delegates to the `manager`',
+          () => [
+            subject.loadLines() === subject.manager.loadLines(),
+            subject.loadLines(argument) === subject.manager.loadLines(argument),
+          ],
+        );
+      });
+
+      _.method('#nextLine', () => {
+        _.assert(
+          'It delegates to the `manager`',
+          () => [
+            subject.nextLine() === subject.manager.nextLine(),
+            subject.nextLine(argument) === subject.manager.nextLine(argument),
+          ],
+        );
+      });
+    });
+
+    _.Class('Core, delegated do-work methods', () => {
+      const workerOverride = _.echo();
+      const subject = new Core({ workerOverride });
+      const [source, destination] = ['source', 'destination'];
+
+      _.method('#move', () => {
+        _.assert(
+          'It delegates to the `worker`',
+          () => subject.move(source, destination) ===
+            subject.worker.move(source, destination),
+        );
+      });
+    });
+
+    _.Class('Core, delegated name method', () => {
+      const director = _.echo();
+      const subject = new Core({ director });
+
+      _.method('#name', () => {
+        _.assert(
+          'It delegates to the `director`',
+          () => subject.name() === subject.director.name(),
+        );
+      });
+    });
+
     _.Class('Core, delegated direction methods', () => {
       const director = _.echo();
       const subject = new Core({ director });
@@ -133,46 +185,6 @@ export default class CoreTest {
           'It delegates to the `director`',
           () => subject.receive(direction) ===
             subject.director.receive(direction),
-        );
-      });
-    });
-
-    _.Class('Core, delegated commands', () => {
-      const workerOverride = _.echo();
-      const subject = new Core({ workerOverride });
-      const [source, destination] = ['source', 'destination'];
-
-      _.method('#move', () => {
-        _.assert(
-          'It delegates to the `worker`',
-          () => subject.move(source, destination) ===
-            subject.worker.move(source, destination),
-        );
-      });
-    });
-
-    _.Class('Core, delegated manage-work methods', () => {
-      const lineManagerOverride = _.echo();
-      const subject = new Core({ lineManagerOverride });
-      const argument = 'argument';
-
-      _.method('#loadLines', () => {
-        _.assert(
-          'It delegates to the `manager`',
-          () => [
-            subject.loadLines() === subject.manager.loadLines(),
-            subject.loadLines(argument) === subject.manager.loadLines(argument),
-          ],
-        );
-      });
-
-      _.method('#nextLine', () => {
-        _.assert(
-          'It delegates to the `manager`',
-          () => [
-            subject.nextLine() === subject.manager.nextLine(),
-            subject.nextLine(argument) === subject.manager.nextLine(argument),
-          ],
         );
       });
     });

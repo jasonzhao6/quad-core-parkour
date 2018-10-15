@@ -32,6 +32,9 @@ export default class Core {
   // Do work via `worker`
   move(source, destination) { return this.worker.move(source, destination); }
 
+  // Get name via `director`
+  name() { return this.director.name(); }
+
   // Get directions via `director`
   get up() { return this.director.up; }
   get down() { return this.director.down; }
