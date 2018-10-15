@@ -33,8 +33,12 @@ export default class Level {
   }
 
   cycle() {
+    // TODO Call next with correct redo argument
+
     this.cycleCount += 1;
+    this.depositInputs();
     this.matrix.getAll().forEach(element => element.nextLine());
+    this.withdrawOutputs();
 
     if (this.shouldCycleAgain()) this.cycle();
   }
@@ -43,12 +47,38 @@ export default class Level {
   // Private
   //
 
+  depositInputs() {
+    const inputX = this.matrix.get(Level.INPUT.X);
+    const inputY = this.matrix.get(Level.INPUT.Y);
+
+    if (this.inputX.length > 0 && !inputX.canReceive('up')) {
+      this.escrow.deposit('up', inputX.name(), this.inputX.shift());
+    }
+
+    if (this.inputY.length > 0 && !inputY.canReceive('up')) {
+      this.escrow.deposit('up', inputY.name(), this.inputY.shift());
+    }
+  }
+
+  withdrawOutputs() {
+    const outputX = this.matrix.get(Level.OUTPUT.X);
+    const outputY = this.matrix.get(Level.OUTPUT.Y);
+
+    if (!outputX.canSend('down')) {
+      this.outputX.push(this.escrow.withdraw(outputX.name(), 'down'));
+    }
+
+    if (!outputY.canSend('down')) {
+      this.outputY.push(this.escrow.withdraw(outputY.name(), 'down'));
+    }
+  }
+
   shouldCycleAgain() {
     if (this.cycleCount >= Level.MAX_CYCLE_COUNT) return false;
 
     return [
-      this.outputX !== null && this.outputX.length < this.data.output.x.length,
-      this.outputY !== null && this.outputY.length < this.data.output.y.length,
+      this.outputX.length < this.data.output.x.length,
+      this.outputY.length < this.data.output.y.length,
     ].some(condition => condition === true);
   }
 

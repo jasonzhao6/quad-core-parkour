@@ -125,6 +125,19 @@ export default class LevelTest {
             () => subject.cycleCount === Level.MAX_CYCLE_COUNT,
           );
         });
+
+        _.context('When line items contain the solution', () => {
+          const number = 0;
+          const subject = new Level({ number });
+
+          subject.solve();
+          subject.cycle();
+
+          _.assert(
+            'It finishes before `MAX_CYCLE_COUNT` is reached',
+            () => subject.cycleCount < Level.MAX_CYCLE_COUNT,
+          );
+        });
       });
 
       _.method('#solve', () => {
