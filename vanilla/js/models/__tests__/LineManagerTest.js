@@ -56,7 +56,7 @@ export default class LineManagerTest {
           );
         });
 
-        _.context('When there is `lines`', () => {
+        _.context('When there are `lines`', () => {
           const subject = new LineManager();
           const [line1, line2, line3] = ['line 1', 'line 2', 'line 3'];
           subject.loadLines([line1, line2, line3]);
@@ -92,6 +92,34 @@ export default class LineManagerTest {
               subject.nextLine() === line3,
               subject.nextLine(true) === line3,
             ],
+          );
+        });
+
+        _.context('When there is a `core`', () => {
+          const core = 'core';
+          const managerProxy = _.proxy(new LineManager({ core }));
+
+          _.allow(managerProxy).toReceive('executeLine');
+
+          managerProxy.nextLine();
+
+          _.expect(managerProxy).toHaveReceived('executeLine');
+
+          _.assert(
+            'It executes the line',
+            () => managerProxy.isAsExpected(),
+          );
+        });
+      });
+
+      _.method('nextLine, execution', () => {
+        _.context('When moving', () => {
+          const subject = new LineManager({ core: _.echo() });
+          subject.loadLines(['mov up down']);
+
+          _.assert(
+            'It executes the line',
+            () => subject.nextLine() === 'move,up,down',
           );
         });
       });

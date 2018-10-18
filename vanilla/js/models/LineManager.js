@@ -12,8 +12,8 @@ export default class LineManager {
 
   nextLine(redoPrevious) {
     const line = this.priorities.next(redoPrevious).value;
-    if (this.core !== undefined) this.executeLine(line);
-    return line;
+    if (this.core === undefined) return line;
+    return this.executeLine(line);
   }
 
   //
@@ -28,7 +28,14 @@ export default class LineManager {
   }
 
   executeLine(line) {
-    // TODO Implement parser
-    if (line) this.core.move('up', 'down');
+    if (line === undefined) return undefined;
+
+    const [command, arg1, arg2] = line.split(' ');
+
+    switch (command) {
+      case 'mov': return this.core.move(arg1, arg2);
+
+      default: return undefined;
+    }
   }
 }
