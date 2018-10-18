@@ -82,10 +82,6 @@ export default class Level {
     ].some(condition => condition === true);
   }
 
-  //
-  // Testing
-  //
-
   solve() {
     const solution = solutions[this.number];
 

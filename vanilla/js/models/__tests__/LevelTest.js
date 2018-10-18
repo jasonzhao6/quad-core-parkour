@@ -114,7 +114,7 @@ export default class LevelTest {
       });
 
       _.method('#cycle', () => {
-        _.context('When there is no line item', () => {
+        _.context('When playing Level 0, and there is no solution', () => {
           const number = 0;
           const subject = new Level({ number });
 
@@ -126,43 +126,19 @@ export default class LevelTest {
           );
         });
 
-        _.context('When line items contain the solution', () => {
-          const number = 0;
-          const subject = new Level({ number });
+        [...new Array(2).keys()].forEach((i) => {
+          _.context(`When playing Level ${i}, and there is a solution`, () => {
+            const number = 0;
+            const subject = new Level({ number });
 
-          subject.solve();
-          subject.cycle();
+            subject.solve();
+            subject.cycle();
 
-          _.assert(
-            'It finishes before `MAX_CYCLE_COUNT` is reached',
-            () => subject.cycleCount < Level.MAX_CYCLE_COUNT,
-          );
-        });
-      });
-
-      _.method('#solve', () => {
-        _.context('When not called', () => {
-          const number = 0;
-          const subject = new Level({ number });
-
-          _.assert(
-            'It has no `lineItem` in any of the Matrix elements',
-            () => subject.matrix.getAll().map(element =>
-              element.manager.lines.length === 0),
-          );
-        });
-
-        _.context('When called', () => {
-          const number = 0;
-          const subject = new Level({ number });
-
-          subject.solve();
-
-          _.assert(
-            'It has `lineItem` in all of the Matrix elements',
-            () => subject.matrix.getAll().map(element =>
-              element.manager.lines.length > 0),
-          );
+            _.assert(
+              'It finishes before `MAX_CYCLE_COUNT` is reached',
+              () => subject.cycleCount < Level.MAX_CYCLE_COUNT,
+            );
+          });
         });
       });
     });
