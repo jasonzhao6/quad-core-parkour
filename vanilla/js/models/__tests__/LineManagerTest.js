@@ -50,8 +50,8 @@ export default class LineManagerTest {
           _.assert(
             'It iterates and returns undefined',
             () => [
-              subject.nextLine().value === undefined,
-              subject.nextLine().value === undefined,
+              subject.nextLine() === undefined,
+              subject.nextLine() === undefined,
             ],
           );
         });
@@ -64,33 +64,33 @@ export default class LineManagerTest {
           _.assert(
             'It iterates',
             () => [
-              subject.nextLine().value === line1,
-              subject.nextLine().value === line2,
-              subject.nextLine().value === line3,
+              subject.nextLine() === line1,
+              subject.nextLine() === line2,
+              subject.nextLine() === line3,
             ],
           );
 
           _.assert(
             'It loops',
             () => [
-              subject.nextLine().value === line1,
-              subject.nextLine().value === line2,
-              subject.nextLine().value === line3,
-              subject.nextLine().value === line1,
-              subject.nextLine().value === line2,
-              subject.nextLine().value === line3,
+              subject.nextLine() === line1,
+              subject.nextLine() === line2,
+              subject.nextLine() === line3,
+              subject.nextLine() === line1,
+              subject.nextLine() === line2,
+              subject.nextLine() === line3,
             ],
           );
 
           _.assert(
             'It supports repeating the previous value',
             () => [
-              subject.nextLine().value === line1,
-              subject.nextLine(true).value === line1,
-              subject.nextLine().value === line2,
-              subject.nextLine(true).value === line2,
-              subject.nextLine().value === line3,
-              subject.nextLine(true).value === line3,
+              subject.nextLine() === line1,
+              subject.nextLine(true) === line1,
+              subject.nextLine() === line2,
+              subject.nextLine(true) === line2,
+              subject.nextLine() === line3,
+              subject.nextLine(true) === line3,
             ],
           );
         });

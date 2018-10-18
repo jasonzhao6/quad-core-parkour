@@ -21,13 +21,7 @@ export default class Core {
 
   // Manage work via `manager`
   loadLines(lines) { return this.manager.loadLines(lines); }
-  // nextLine(redoPrevious) { return this.manager.nextLine(redoPrevious).value; }
-  // TODO Implement parser
-  nextLine(redoPrevious) {
-    const temp = this.manager.nextLine(redoPrevious);
-    if (temp.value) return this.move('up', 'down');
-    return temp;
-  }
+  nextLine(redoPrevious) { return this.manager.nextLine(redoPrevious); }
 
   // Do work via `worker`
   move(source, destination) { return this.worker.move(source, destination); }

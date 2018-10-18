@@ -59,7 +59,7 @@ export default class MatrixTest {
 
           _.assert(
             'Every element is an instance of Core',
-            () => subject.getAll().every(el => el instanceof Class),
+            () => subject.getAll().every(element => element instanceof Class),
           );
 
           _.assert(
