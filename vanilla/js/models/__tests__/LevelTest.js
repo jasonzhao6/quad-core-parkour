@@ -128,8 +128,7 @@ export default class LevelTest {
 
         [...new Array(2).keys()].forEach((i) => {
           _.context(`When playing Level ${i}, and there is a solution`, () => {
-            const number = 0;
-            const subject = new Level({ number });
+            const subject = new Level({ number: i });
 
             subject.solve();
             subject.cycle();

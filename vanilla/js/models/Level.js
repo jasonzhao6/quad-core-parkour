@@ -20,8 +20,8 @@ export default class Level {
 
     // States
     this.cycleCount = 0;
-    this.inputX = this.data.input.x === undefined ? [] : [...this.data.input.x];
-    this.inputY = this.data.input.y === undefined ? [] : [...this.data.input.y];
+    this.inputX = [...this.data.input.x || []];
+    this.inputY = [...this.data.input.y || []];
     this.outputX = [];
     this.outputY = [];
     this.matrix = new Matrix({ ...Level.MATRIX_SIZE, Class: Core });
@@ -77,9 +77,9 @@ export default class Level {
     if (this.cycleCount >= Level.MAX_CYCLE_COUNT) return false;
 
     return [
-      this.outputX.length < this.data.output.x.length,
-      this.outputY.length < this.data.output.y.length,
-    ].some(condition => condition === true);
+      this.outputX.join() === (this.data.output.x || []).join(),
+      this.outputY.join() === (this.data.output.y || []).join(),
+    ].some(condition => condition === false);
   }
 
   solve() {
