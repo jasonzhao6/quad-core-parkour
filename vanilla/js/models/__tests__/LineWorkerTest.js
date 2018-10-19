@@ -20,6 +20,18 @@ export default class LineWorkerTest {
       _.method('#add', () => {
         const value = 10;
 
+        _.context('When adding string version of integer', () => {
+          const core = new Core();
+          const subject = new LineWorker({ core });
+
+          subject.add(value.toString());
+
+          _.assert(
+            'It adds value to the `accumulator`',
+            () => subject.core.accumulator === value,
+          );
+        });
+
         _.context('When `accumulator` is 0', () => {
           const core = new Core();
           const subject = new LineWorker({ core });
@@ -65,7 +77,7 @@ export default class LineWorkerTest {
         _.context('When moving message from one neighbor to another', () => {
           const twoByTwo = new Matrix(matrixArgs);
           const subject = twoByTwo.get(0, 0).worker;
-          const message = 'message';
+          const message = 10;
           twoByTwo.get(0, 1).send('left', message);
 
           _.assert(
@@ -84,7 +96,7 @@ export default class LineWorkerTest {
           _.assert(
             'It returns `false` and recipient cannot receive the message',
             () => [
-              subject.move('right', 'down') === false,
+              subject.move('right', 'down') === LineWorker.RETRY,
               twoByTwo.get(1, 0).receive('up') === null,
             ],
           );
@@ -93,16 +105,16 @@ export default class LineWorkerTest {
         _.context('When moving message to an already occupied neighbor', () => {
           const twoByTwo = new Matrix(matrixArgs);
           const subject = twoByTwo.get(0, 0).worker;
-          const existingMessage = 'existingMessage';
+          const existingMessage = 10;
           subject.core.send('down', existingMessage);
 
-          const newMessage = 'newMessage';
+          const newMessage = 20;
           twoByTwo.get(0, 1).send('left', newMessage);
 
           _.assert(
             'It returns `false` and recipient receives the existing message',
             () => [
-              subject.move('right', 'down') === false,
+              subject.move('right', 'down') === LineWorker.RETRY,
               twoByTwo.get(1, 0).receive('up') === existingMessage,
             ],
           );
@@ -111,7 +123,7 @@ export default class LineWorkerTest {
         _.context('When moving message from accumulator to neighbor', () => {
           const twoByTwo = new Matrix(matrixArgs);
           const subject = twoByTwo.get(0, 0).worker;
-          const message = 'message';
+          const message = 10;
           subject.core.accumulator = message;
 
           _.assert(
@@ -126,7 +138,7 @@ export default class LineWorkerTest {
         _.context('When moving message from neighbor to accumulator', () => {
           const twoByTwo = new Matrix(matrixArgs);
           const subject = twoByTwo.get(0, 0).worker;
-          const message = 'message';
+          const message = 10;
           twoByTwo.get(1, 0).send('up', message);
 
           _.assert(
@@ -141,7 +153,7 @@ export default class LineWorkerTest {
         _.context('When moving message directly to neighbor', () => {
           const twoByTwo = new Matrix(matrixArgs);
           const subject = twoByTwo.get(0, 0).worker;
-          const message = 'message';
+          const message = 10;
 
           _.assert(
             'It returns `true` and recipient can receive the message',
@@ -155,7 +167,7 @@ export default class LineWorkerTest {
         _.context('When moving message directly to accumulator', () => {
           const twoByTwo = new Matrix(matrixArgs);
           const subject = twoByTwo.get(0, 0).worker;
-          const message = 'message';
+          const message = 10;
 
           _.assert(
             'It returns `true` and recipient can receive the message',
@@ -169,7 +181,7 @@ export default class LineWorkerTest {
         _.context('When moving message to an invalid destination', () => {
           const twoByTwo = new Matrix(matrixArgs);
           const subject = twoByTwo.get(0, 0).worker;
-          const message = 'message';
+          const message = 10;
 
           _.assert(
             'It returns `false`',

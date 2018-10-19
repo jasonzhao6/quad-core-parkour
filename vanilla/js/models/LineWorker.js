@@ -36,6 +36,6 @@ export default class LineWorker {
   sourceValue(source) {
     if (Director.isDirection(source)) return this.core.receive(source);
     if (source === 'acc') return this.core.accumulator;
-    return source;
+    return parseInt(source, 10);
   }
 }
