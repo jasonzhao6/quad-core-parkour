@@ -118,11 +118,9 @@ export default class LevelTest {
           const number = 0;
           const subject = new Level({ number });
 
-          subject.cycle();
-
           _.assert(
             'It cycles until `MAX_CYCLE_COUNT` is reached',
-            () => subject.cycleCount === Level.MAX_CYCLE_COUNT,
+            () => subject.cycle() === Level.MAX_CYCLE_COUNT,
           );
         });
 
@@ -131,11 +129,10 @@ export default class LevelTest {
             const subject = new Level({ number: i });
 
             subject.solve();
-            subject.cycle();
 
             _.assert(
               'It finishes before `MAX_CYCLE_COUNT` is reached',
-              () => subject.cycleCount < Level.MAX_CYCLE_COUNT,
+              () => subject.cycle() < Level.MAX_CYCLE_COUNT,
             );
           });
         });

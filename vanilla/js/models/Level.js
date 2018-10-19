@@ -35,14 +35,19 @@ export default class Level {
 
   cycle() {
     this.cycleCount += 1;
+
     this.depositInputs();
+
     this.matrix.getAll().forEach((element, i) => {
       const redoPrevious = this.cycleReturnValues[i] === Core.REDO;
       this.cycleReturnValues[i] = element.nextLine(redoPrevious);
     });
+
     this.withdrawOutputs();
 
     if (this.shouldCycleAgain()) this.cycle();
+
+    return this.cycleCount;
   }
 
   //
