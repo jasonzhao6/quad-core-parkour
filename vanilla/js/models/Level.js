@@ -7,7 +7,10 @@ import data from './Level/data/all.js';
 import solutions from './Level/solutions/all.js';
 
 export default class Level {
-  static get MAX_CYCLE_COUNT() { return 100; }
+  // Max value before 'RangeError: Maximum call stack size exceeded' error.
+  // - Chrome: 11,369
+  // - Safari: 28,210
+  static get MAX_CYCLE_COUNT() { return 11369; }
 
   static get MATRIX_SIZE() { return { rowCount: 2, columnCount: 2 }; }
   static get INPUT() { return { X: 'input.x', Y: 'input.y' }; }
