@@ -20,6 +20,7 @@ export default class Level {
 
     // States
     this.cycleCount = 0;
+    this.cycleReturnValues = [];
     this.inputX = [...this.data.input.x || []];
     this.inputY = [...this.data.input.y || []];
     this.outputX = [];
@@ -33,11 +34,12 @@ export default class Level {
   }
 
   cycle() {
-    // TODO Call next with correct redo argument
-
     this.cycleCount += 1;
     this.depositInputs();
-    this.matrix.getAll().forEach(element => element.nextLine());
+    this.matrix.getAll().forEach((element, i) => {
+      const redoPrevious = this.cycleReturnValues[i] === Core.REDO;
+      this.cycleReturnValues[i] = element.nextLine(redoPrevious);
+    });
     this.withdrawOutputs();
 
     if (this.shouldCycleAgain()) this.cycle();

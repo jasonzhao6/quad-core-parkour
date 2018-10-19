@@ -1,20 +1,23 @@
 import Director from './Director.js';
 
 export default class LineWorker {
+  static get REDO() { return 'redo'; }
+
   constructor({ core }) {
     // Props
     this.core = core;
   }
 
   add(source) {
+    if (this.cannotReceive(source)) return LineWorker.REDO;
+
     this.core.accumulator += this.sourceValue(source);
+    return true;
   }
 
   move(source, destination) {
-    if ([
-      Director.isDirection(source) && !this.core.canReceive(source),
-      Director.isDirection(destination) && !this.core.canSend(destination),
-    ].some(shortCircuit => shortCircuit === true)) return false;
+    if (this.cannotReceive(source)) return LineWorker.REDO;
+    if (this.cannotSend(destination)) return LineWorker.REDO;
 
     const sourceValue = this.sourceValue(source);
 
@@ -32,6 +35,14 @@ export default class LineWorker {
   //
   // Private
   //
+
+  cannotReceive(source) {
+    return Director.isDirection(source) && !this.core.canReceive(source);
+  }
+
+  cannotSend(destination) {
+    return Director.isDirection(destination) && !this.core.canSend(destination);
+  }
 
   sourceValue(source) {
     if (Director.isDirection(source)) return this.core.receive(source);

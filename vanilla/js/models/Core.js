@@ -3,6 +3,7 @@ import LineManager from './LineManager.js';
 
 export default class Core {
   static get DEFAULT_VALUE() { return 0; }
+  static get REDO() { return LineWorker.REDO; }
 
   constructor({ lineManagerOverride, lineWorkerOverride, director } = {}) {
     // Props

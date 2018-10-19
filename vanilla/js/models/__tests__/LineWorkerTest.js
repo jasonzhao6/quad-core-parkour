@@ -18,11 +18,10 @@ export default class LineWorkerTest {
       });
 
       _.method('#add', () => {
-        const value = 10;
-
         _.context('When adding string version of integer', () => {
           const core = new Core();
           const subject = new LineWorker({ core });
+          const value = 10;
 
           subject.add(value.toString());
 
@@ -32,9 +31,10 @@ export default class LineWorkerTest {
           );
         });
 
-        _.context('When `accumulator` is 0', () => {
+        _.context('When adding integer to an `accumulator` of 0', () => {
           const core = new Core();
           const subject = new LineWorker({ core });
+          const value = 10;
 
           subject.add(value);
 
@@ -44,9 +44,10 @@ export default class LineWorkerTest {
           );
         });
 
-        _.context('When `accumulator` is 5', () => {
+        _.context('When adding integer to an `accumulator` of 5', () => {
           const core = new Core();
           const subject = new LineWorker({ core });
+          const value = 10;
           subject.core.accumulator = 5;
 
           subject.add(value);
@@ -57,7 +58,7 @@ export default class LineWorkerTest {
           );
         });
 
-        _.context('When `accumulator` is 5 and adding itself', () => {
+        _.context('When adding an `accumulator` of 5 to itself', () => {
           const core = new Core();
           const subject = new LineWorker({ core });
           subject.core.accumulator = 5;
@@ -67,6 +68,17 @@ export default class LineWorkerTest {
           _.assert(
             'It doubles the value of the `accumulator`',
             () => subject.core.accumulator === (5 * 2),
+          );
+        });
+
+        _.context('When adding value from an empty neighbor', () => {
+          const matrixArgs = { rowCount: 2, columnCount: 2, Class: Core };
+          const twoByTwo = new Matrix(matrixArgs);
+          const subject = twoByTwo.get(0, 0).worker;
+
+          _.assert(
+            'It returns `REDO`',
+            () => subject.add('up') === LineWorker.REDO,
           );
         });
       });
@@ -94,9 +106,9 @@ export default class LineWorkerTest {
           const subject = twoByTwo.get(0, 0).worker;
 
           _.assert(
-            'It returns `false` and recipient cannot receive the message',
+            'It returns `REDO` and recipient cannot receive the message',
             () => [
-              subject.move('right', 'down') === LineWorker.RETRY,
+              subject.move('right', 'down') === LineWorker.REDO,
               twoByTwo.get(1, 0).receive('up') === null,
             ],
           );
@@ -112,9 +124,9 @@ export default class LineWorkerTest {
           twoByTwo.get(0, 1).send('left', newMessage);
 
           _.assert(
-            'It returns `false` and recipient receives the existing message',
+            'It returns `REDO` and recipient receives the existing message',
             () => [
-              subject.move('right', 'down') === LineWorker.RETRY,
+              subject.move('right', 'down') === LineWorker.REDO,
               twoByTwo.get(1, 0).receive('up') === existingMessage,
             ],
           );
