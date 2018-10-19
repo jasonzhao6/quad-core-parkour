@@ -12,7 +12,7 @@ export default class LineWorker {
     if (this.cannotReceive(source)) return LineWorker.REDO;
 
     this.core.accumulator += this.sourceValue(source);
-    return true;
+    return this.core.accumulator;
   }
 
   move(source, destination) {

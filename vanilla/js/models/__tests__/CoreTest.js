@@ -93,8 +93,8 @@ export default class CoreTest {
     });
 
     _.Class('Core, delegated do-work methods', () => {
-      const workerOverride = _.echo();
-      const subject = new Core({ workerOverride });
+      const lineWorkerOverride = _.echo();
+      const subject = new Core({ lineWorkerOverride });
       const [source, destination] = ['source', 'destination'];
 
       _.method('#add', () => {

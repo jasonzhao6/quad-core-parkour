@@ -23,11 +23,9 @@ export default class LineWorkerTest {
           const subject = new LineWorker({ core });
           const value = 10;
 
-          subject.add(value.toString());
-
           _.assert(
             'It adds value to the `accumulator`',
-            () => subject.core.accumulator === value,
+            () => subject.add(value.toString()) === value,
           );
         });
 
@@ -36,11 +34,9 @@ export default class LineWorkerTest {
           const subject = new LineWorker({ core });
           const value = 10;
 
-          subject.add(value);
-
           _.assert(
             'It adds value to the `accumulator`',
-            () => subject.core.accumulator === value,
+            () => subject.add(value) === value,
           );
         });
 
@@ -50,11 +46,9 @@ export default class LineWorkerTest {
           const value = 10;
           subject.core.accumulator = 5;
 
-          subject.add(value);
-
           _.assert(
             'It adds value to the `accumulator`',
-            () => subject.core.accumulator === (5 + value),
+            () => subject.add(value) === (5 + value),
           );
         });
 
@@ -63,11 +57,9 @@ export default class LineWorkerTest {
           const subject = new LineWorker({ core });
           subject.core.accumulator = 5;
 
-          subject.add('acc');
-
           _.assert(
             'It doubles the value of the `accumulator`',
-            () => subject.core.accumulator === (5 * 2),
+            () => subject.add('acc') === (5 * 2),
           );
         });
 
