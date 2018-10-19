@@ -33,6 +33,7 @@ export default class LineManager {
     const [command, arg1, arg2] = line.split(' ');
 
     switch (command) {
+      case 'add': return this.core.add(arg1);
       case 'mov': return this.core.move(arg1, arg2);
 
       default: return undefined;

@@ -17,6 +17,48 @@ export default class LineWorkerTest {
         });
       });
 
+      _.method('#add', () => {
+        const value = 10;
+
+        _.context('When `accumulator` is 0', () => {
+          const core = new Core();
+          const subject = new LineWorker({ core });
+
+          subject.add(value);
+
+          _.assert(
+            'It adds value to the `accumulator`',
+            () => subject.core.accumulator === value,
+          );
+        });
+
+        _.context('When `accumulator` is 5', () => {
+          const core = new Core();
+          const subject = new LineWorker({ core });
+          subject.core.accumulator = 5;
+
+          subject.add(value);
+
+          _.assert(
+            'It adds value to the `accumulator`',
+            () => subject.core.accumulator === (5 + value),
+          );
+        });
+
+        _.context('When `accumulator` is 5 and adding itself', () => {
+          const core = new Core();
+          const subject = new LineWorker({ core });
+          subject.core.accumulator = 5;
+
+          subject.add('acc');
+
+          _.assert(
+            'It doubles the value of the `accumulator`',
+            () => subject.core.accumulator === (5 * 2),
+          );
+        });
+      });
+
       _.method('#move', () => {
         const matrixArgs = { rowCount: 2, columnCount: 2, Class: Core };
 

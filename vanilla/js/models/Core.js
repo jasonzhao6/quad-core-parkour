@@ -24,6 +24,7 @@ export default class Core {
   nextLine(redoPrevious) { return this.manager.nextLine(redoPrevious); }
 
   // Do work via `worker`
+  add(source) { return this.worker.add(source); }
   move(source, destination) { return this.worker.move(source, destination); }
 
   // Get name via `director`

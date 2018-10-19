@@ -6,6 +6,10 @@ export default class LineWorker {
     this.core = core;
   }
 
+  add(source) {
+    this.core.accumulator += this.sourceValue(source);
+  }
+
   move(source, destination) {
     if ([
       Director.isDirection(source) && !this.core.canReceive(source),

@@ -97,6 +97,13 @@ export default class CoreTest {
       const subject = new Core({ workerOverride });
       const [source, destination] = ['source', 'destination'];
 
+      _.method('#add', () => {
+        _.assert(
+          'It delegates to the `worker`',
+          () => subject.add(source) === subject.worker.add(source),
+        );
+      });
+
       _.method('#move', () => {
         _.assert(
           'It delegates to the `worker`',

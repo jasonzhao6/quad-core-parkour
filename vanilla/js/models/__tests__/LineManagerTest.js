@@ -113,6 +113,16 @@ export default class LineManagerTest {
       });
 
       _.method('nextLine, execution', () => {
+        _.context('When adding', () => {
+          const subject = new LineManager({ core: _.echo() });
+          subject.loadLines(['add 10']);
+
+          _.assert(
+            'It executes the line',
+            () => subject.nextLine() === 'add,10',
+          );
+        });
+
         _.context('When moving', () => {
           const subject = new LineManager({ core: _.echo() });
           subject.loadLines(['mov up down']);
