@@ -124,15 +124,15 @@ export default class LevelTest {
           );
         });
 
-        [...new Array(2).keys()].forEach((i) => {
+        [...new Array(2).keys()].splice(0).forEach((i) => {
           _.context(`When playing Level ${i}, and there is a solution`, () => {
             const subject = new Level({ number: i });
 
             subject.solve();
 
             _.assert(
-              'It finishes before `MAX_CYCLE_COUNT` is reached',
-              () => subject.cycle() < Level.MAX_CYCLE_COUNT,
+              'It finishes with the expected `cycleCount`',
+              () => subject.cycle() === subject.solution.cycleCount,
             );
           });
         });

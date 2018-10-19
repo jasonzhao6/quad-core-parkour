@@ -17,6 +17,7 @@ export default class Level {
     // Props
     this.number = number;
     this.data = dataOverride || data[number];
+    this.solution = solutions[number];
 
     // States
     this.cycleCount = 0;
@@ -90,12 +91,9 @@ export default class Level {
   }
 
   solve() {
-    const solution = solutions[this.number];
-
-    Object.keys(solution).forEach((key) => {
+    Object.keys(this.solution.lines).forEach((key) => {
       const [i, j] = key.split(':');
-      const lines = solution[key];
-
+      const lines = this.solution.lines[key];
       this.matrix.get(i, j).loadLines(lines);
     });
   }
