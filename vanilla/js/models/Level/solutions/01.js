@@ -2,7 +2,7 @@ export default {
   cycleCount: 30,
   lines: {
     '0:0': [
-      'mov up acc',
+      'double: mov up acc',
       'add acc',
       'mov acc down',
     ],

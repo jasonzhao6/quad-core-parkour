@@ -30,7 +30,8 @@ export default class LineManager {
   executeLine(line) {
     if (line === undefined) return undefined;
 
-    const [command, arg1, arg2] = line.split(' ');
+    const [head, tail] = line.split(': ');
+    const [command, arg1, arg2] = (tail || head).split(' ');
 
     switch (command) {
       case 'add': return this.core.add(arg1);
