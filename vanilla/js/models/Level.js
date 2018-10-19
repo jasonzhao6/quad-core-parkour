@@ -7,10 +7,7 @@ import data from './Level/data/all.js';
 import solutions from './Level/solutions/all.js';
 
 export default class Level {
-  // Max value before 'RangeError: Maximum call stack size exceeded' error.
-  // - Chrome: 11,369
-  // - Safari: 28,210
-  static get MAX_CYCLE_COUNT() { return 11369; }
+  static get MAX_CYCLE_COUNT() { return 100; }
 
   static get MATRIX_SIZE() { return { rowCount: 2, columnCount: 2 }; }
   static get INPUT() { return { X: 'input.x', Y: 'input.y' }; }
@@ -38,18 +35,18 @@ export default class Level {
   }
 
   cycle() {
-    this.cycleCount += 1;
+    do {
+      this.cycleCount += 1;
 
-    this.depositInputs();
+      this.depositInputs();
 
-    this.matrix.getAll().forEach((element, i) => {
-      const redoPrevious = this.cycleReturnValues[i] === Core.REDO;
-      this.cycleReturnValues[i] = element.nextLine(redoPrevious);
-    });
+      this.matrix.getAll().forEach((element, i) => {
+        const redoPrevious = this.cycleReturnValues[i] === Core.REDO;
+        this.cycleReturnValues[i] = element.nextLine(redoPrevious);
+      });
 
-    this.withdrawOutputs();
-
-    if (this.shouldCycleAgain()) this.cycle();
+      this.withdrawOutputs();
+    } while (this.shouldCycleAgain());
 
     return this.cycleCount;
   }
