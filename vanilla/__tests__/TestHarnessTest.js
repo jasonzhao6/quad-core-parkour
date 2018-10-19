@@ -35,6 +35,7 @@ export default class TestHarnessTest {
               subject.failures instanceof Array,
               subject.failures.length === 0,
               subject.pendingCount === 0,
+              subject.assertingOne === false,
             ],
           );
         });
@@ -93,23 +94,113 @@ export default class TestHarnessTest {
       });
 
       _.method('#assert', () => {
-        const subject = new TestHarness();
         const assertion = 'Assertion';
 
-        subject.assert('It ...', assertion);
+        _.context('When `assertingOne` is false', () => {
+          const subject = new TestHarness();
 
-        _.assert(
-          'It enqueues `assertion`',
-          () => [
-            subject.queue.length === 1,
-            subject.queue[0].assertion === assertion,
-          ],
-        );
+          subject.assert('It ...', assertion);
 
-        _.assert(
-          'It resets `currentAssertion` when done',
-          () => subject.currentAssertion === null,
-        );
+          _.assert(
+            'It enqueues `assertion`',
+            () => [
+              subject.queue.length === 1,
+              subject.queue[0].assertion === assertion,
+            ],
+          );
+
+          _.assert(
+            'It resets `currentAssertion` when done',
+            () => subject.currentAssertion === null,
+          );
+        });
+
+        _.context('When `assertingOne` is true', () => {
+          const subject = new TestHarness();
+          subject.assertingOne = true;
+
+          subject.assert('It ...', assertion);
+
+          _.assert(
+            'It does not enque `assertion`',
+            () => subject.queue.length === 0,
+          );
+
+          _.assert(
+            'It does not set `currentAssertion`',
+            () => subject.currentAssertion === null,
+          );
+        });
+      });
+
+      _.method('#assertOne', () => {
+        const assertion = 'Assertion';
+
+        _.context('When `assertingOne` is false', () => {
+          const subject = new TestHarness();
+
+          subject.assertOne('It ...', assertion);
+
+          _.assert(
+            'It enqueues only this one `assertion`',
+            () => [
+              subject.queue.length === 1,
+              subject.queue[0].assertion === assertion,
+            ],
+          );
+
+          _.assert(
+            'It resets `currentAssertion` when done',
+            () => subject.currentAssertion === null,
+          );
+
+          _.assert(
+            'It sets `assertingOne` to `true`',
+            () => subject.assertingOne === true,
+          );
+        });
+
+        _.context('When `assertingOne` is false, and queue is present', () => {
+          const subject = new TestHarness();
+          subject.assert('It ...', 'Other assertion');
+
+          subject.assertOne('It ...', assertion);
+
+          _.assert(
+            'It enqueues only this one `assertion`',
+            () => [
+              subject.queue.length === 1,
+              subject.queue[0].assertion === assertion,
+            ],
+          );
+
+          _.assert(
+            'It resets `currentAssertion` when done',
+            () => subject.currentAssertion === null,
+          );
+
+          _.assert(
+            'It sets `assertingOne` to `true`',
+            () => subject.assertingOne === true,
+          );
+        });
+
+        _.context('When `assertingOne` is true', () => {
+          const subject = new TestHarness();
+          subject.assertingOne = true;
+
+          subject.assertOne('It ...', assertion);
+
+          _.assert(
+            'It does not enque `assertion`',
+            () => subject.queue.length === 0,
+          );
+
+          _.assert(
+            'It does not set `currentAssertion`',
+            () => subject.currentAssertion === null,
+          );
+        });
       });
 
       _.method('#xassert', () => {

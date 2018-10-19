@@ -44,6 +44,10 @@
 //       _.assert('It can take them as an array', () => [true, true, ...]);
 //     });
 //
+//     _.context('When an assertion is being worked on', () => {
+//       _.assertOne('It can be singled out with assert[One]', () => true);
+//     });
+//
 //     _.context('When an assertion is temporarily pending', () => {
 //       _.xassert('It can be skipped with [x]assert', () => true);
 //     });
@@ -79,6 +83,7 @@ export default class TestHarness {
     this.queue = []; // [{ currentClass, etc }, ...] for easy access.
     this.failures = []; // [[currentClass, etc], ...] for easy sorting.
     this.pendingCount = 0;
+    this.assertingOne = false;
   }
 
   Class(Class, block) {
@@ -100,9 +105,19 @@ export default class TestHarness {
   }
 
   assert(string, assertion) {
+    if (this.assertingOne === true) return;
+
     this.currentAssertion = string;
     this.enqueue(assertion);
     this.currentAssertion = null;
+  }
+
+  assertOne(string, assertion) {
+    if (this.assertingOne === true) return;
+
+    this.queue.length = 0;
+    this.assert(string, assertion);
+    this.assertingOne = true;
   }
 
   xassert() {
