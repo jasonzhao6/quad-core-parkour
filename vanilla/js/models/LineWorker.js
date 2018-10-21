@@ -66,6 +66,19 @@ export default class LineWorker {
   }
 
   //
+  // Memory
+  //
+
+  save() {
+    this.core.backup = this.core.accumulator;
+  }
+
+  swap() {
+    const core = this.core;
+    [core.accumulator, core.backup] = [core.backup, core.accumulator];
+  }
+
+  //
   // Private
   //
 

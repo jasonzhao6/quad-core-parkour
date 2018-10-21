@@ -56,6 +56,8 @@ export default class LineManager {
       case 'jmp': return this.core.jump(arg1);
       case 'jez': return this.core.jumpIfZero(arg1);
       case 'jgz': return this.core.jumpIfPositive(arg1);
+      case 'sav': return this.core.save();
+      case 'swp': return this.core.swap();
 
       default: return undefined;
     }

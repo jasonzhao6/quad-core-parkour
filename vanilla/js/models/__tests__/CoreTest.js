@@ -149,6 +149,20 @@ export default class CoreTest {
           () => subject.jumpIfPositive(source) === subject.worker.jumpIfPositive(source),
         );
       });
+
+      _.method('#save', () => {
+        _.assert(
+          'It delegates to the `worker`',
+          () => subject.save() === subject.worker.save(),
+        );
+      });
+
+      _.method('#swap', () => {
+        _.assert(
+          'It delegates to the `worker`',
+          () => subject.swap() === subject.worker.swap(),
+        );
+      });
     });
 
     _.Class('Core, delegated name method', () => {

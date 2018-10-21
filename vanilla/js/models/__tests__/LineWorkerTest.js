@@ -364,6 +364,42 @@ export default class LineWorkerTest {
           );
         });
       });
+
+      _.method('#save', () => {
+        const core = new Core();
+        const subject = core.worker;
+        const value = 5;
+        subject.core.accumulator = value;
+
+        subject.save();
+
+        _.assert(
+          'It sets both `accumulator` and `backup` to `value`',
+          () => [
+            subject.core.accumulator === value,
+            subject.core.backup === value,
+          ],
+        );
+      });
+
+      _.method('#swap', () => {
+        const core = new Core();
+        const subject = core.worker;
+        const accumulator = 5;
+        const backup = 10;
+        subject.core.accumulator = accumulator;
+        subject.core.backup = backup;
+
+        subject.swap();
+
+        _.assert(
+          'It swaps `accumulator` and `backup` values',
+          () => [
+            subject.core.accumulator === backup,
+            subject.core.backup === accumulator,
+          ],
+        );
+      });
     });
   }
 }

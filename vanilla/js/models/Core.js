@@ -32,6 +32,8 @@ export default class Core {
   jump(label) { return this.worker.jump(label); }
   jumpIfZero(label) { return this.worker.jumpIfZero(label); }
   jumpIfPositive(label) { return this.worker.jumpIfPositive(label); }
+  save() { return this.worker.save(); }
+  swap() { return this.worker.swap(); }
 
   // Get name via `director`
   name() { return this.director.name(); }

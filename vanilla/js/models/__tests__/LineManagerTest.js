@@ -207,6 +207,26 @@ export default class LineManagerTest {
             () => subject.nextLine() === 'jumpIfPositive,label',
           );
         });
+
+        _.context('When jumping if accumulator is positive', () => {
+          const subject = new LineManager({ core: _.echo() });
+          subject.loadLines(['sav']);
+
+          _.assert(
+            'It executes the line',
+            () => subject.nextLine() === 'save',
+          );
+        });
+
+        _.context('When jumping if accumulator is positive', () => {
+          const subject = new LineManager({ core: _.echo() });
+          subject.loadLines(['swp']);
+
+          _.assert(
+            'It executes the line',
+            () => subject.nextLine() === 'swap',
+          );
+        });
       });
 
       _.method('#gotoLabel', () => {
