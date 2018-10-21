@@ -74,7 +74,7 @@ export default class LineWorker {
   }
 
   swap() {
-    const core = this.core;
+    const { core } = this;
     [core.accumulator, core.backup] = [core.backup, core.accumulator];
   }
 
