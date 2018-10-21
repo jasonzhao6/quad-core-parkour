@@ -41,8 +41,8 @@ export default class Level {
       this.depositInputs();
 
       this.matrix.getAll().forEach((element, i) => {
-        const redoPrevious = this.cycleReturnValues[i] === Core.REDO;
-        this.cycleReturnValues[i] = element.nextLine(redoPrevious);
+        const redo = this.cycleReturnValues[i] === Core.REDO;
+        this.cycleReturnValues[i] = element.nextLine(redo);
       });
 
       this.withdrawOutputs();

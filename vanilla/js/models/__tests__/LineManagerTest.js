@@ -54,7 +54,7 @@ export default class LineManagerTest {
         );
       });
 
-      _.method('nextLine', () => {
+      _.method('#nextLine', () => {
         _.context('When there is no `lines`', () => {
           const subject = new LineManager();
 
@@ -123,7 +123,21 @@ export default class LineManagerTest {
         });
       });
 
-      _.method('nextLine, execution', () => {
+      _.method('#nextLine, branching', () => {
+        const subject = new LineManager();
+        const label = 'label';
+        const [line1, line2, line3] = ['line 1', `${label}: line 2`, 'line 3'];
+        subject.loadLines([line1, line2, line3]);
+
+        subject.gotoLabel(label);
+
+        _.assert(
+          'It supports jumping to label',
+          () => subject.nextLine() === line2,
+        );
+      });
+
+      _.method('#nextLine, execution', () => {
         _.context('When there is a label', () => {
           const subject = new LineManager({ core: _.echo() });
           subject.loadLines(['label: add 10']);
@@ -168,7 +182,7 @@ export default class LineManagerTest {
       _.method('#gotoLabel', () => {
         const subject = new LineManager();
         const label = 'label';
-        const [line1, line2, line3] = ['l1', `${label}: l2`, 'l3'];
+        const [line1, line2, line3] = ['line 1', `${label}: line 2`, 'line 3'];
         subject.loadLines([line1, line2, line3]);
 
         subject.gotoLabel(label);

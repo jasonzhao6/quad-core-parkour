@@ -22,7 +22,7 @@ export default class Core {
 
   // Manage work via `manager`
   loadLines(lines) { return this.manager.loadLines(lines); }
-  nextLine(redoPrevious) { return this.manager.nextLine(redoPrevious); }
+  nextLine(redo) { return this.manager.nextLine(redo); }
   gotoLabel(label) { return this.manager.gotoLabel(label); }
 
   // Do work via `worker`
