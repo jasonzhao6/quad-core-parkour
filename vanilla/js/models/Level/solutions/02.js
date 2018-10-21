@@ -2,7 +2,7 @@ export default {
   cycleCount: 32,
   lines: {
     '0,0': [
-      'a-b: mov up acc',
+      'x-y: mov up acc',
       'sub right',
       'mov acc down',
     ],
