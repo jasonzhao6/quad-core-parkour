@@ -17,64 +17,6 @@ export default class LineWorkerTest {
         });
       });
 
-      _.method('#add', () => {
-        _.context('When adding string version of integer', () => {
-          const core = new Core();
-          const subject = new LineWorker({ core });
-          const value = 10;
-
-          _.assert(
-            'It adds value to the `accumulator`',
-            () => subject.add(value.toString()) === value,
-          );
-        });
-
-        _.context('When adding integer to an `accumulator` of 0', () => {
-          const core = new Core();
-          const subject = new LineWorker({ core });
-          const value = 10;
-
-          _.assert(
-            'It adds value to the `accumulator`',
-            () => subject.add(value) === value,
-          );
-        });
-
-        _.context('When adding integer to an `accumulator` of 5', () => {
-          const core = new Core();
-          const subject = new LineWorker({ core });
-          const value = 10;
-          subject.core.accumulator = 5;
-
-          _.assert(
-            'It adds value to the `accumulator`',
-            () => subject.add(value) === (5 + value),
-          );
-        });
-
-        _.context('When adding an `accumulator` of 5 to itself', () => {
-          const core = new Core();
-          const subject = new LineWorker({ core });
-          subject.core.accumulator = 5;
-
-          _.assert(
-            'It doubles the value of the `accumulator`',
-            () => subject.add('acc') === (5 * 2),
-          );
-        });
-
-        _.context('When adding value from an empty neighbor', () => {
-          const matrixArgs = { rowCount: 2, columnCount: 2, Class: Core };
-          const twoByTwo = new Matrix(matrixArgs);
-          const subject = twoByTwo.get(0, 0).worker;
-
-          _.assert(
-            'It returns `REDO`',
-            () => subject.add('up') === LineWorker.REDO,
-          );
-        });
-      });
-
       _.method('#move', () => {
         const matrixArgs = { rowCount: 2, columnCount: 2, Class: Core };
 
@@ -190,6 +132,122 @@ export default class LineWorkerTest {
           _.assert(
             'It returns `false`',
             () => subject.move(message, 'yo') === false,
+          );
+        });
+      });
+
+      _.method('#add', () => {
+        _.context('When adding string version of integer', () => {
+          const core = new Core();
+          const subject = new LineWorker({ core });
+          const value = 10;
+
+          _.assert(
+            'It adds value to the `accumulator`',
+            () => subject.add(value.toString()) === value,
+          );
+        });
+
+        _.context('When adding integer to an `accumulator` of 0', () => {
+          const core = new Core();
+          const subject = new LineWorker({ core });
+          const value = 10;
+
+          _.assert(
+            'It adds value to the `accumulator`',
+            () => subject.add(value) === value,
+          );
+        });
+
+        _.context('When adding integer to an `accumulator` of 5', () => {
+          const core = new Core();
+          const subject = new LineWorker({ core });
+          const value = 10;
+          subject.core.accumulator = 5;
+
+          _.assert(
+            'It adds value to the `accumulator`',
+            () => subject.add(value) === (5 + value),
+          );
+        });
+
+        _.context('When adding an `accumulator` of 5 to itself', () => {
+          const core = new Core();
+          const subject = new LineWorker({ core });
+          subject.core.accumulator = 5;
+
+          _.assert(
+            'It doubles the value of the `accumulator`',
+            () => subject.add('acc') === (5 * 2),
+          );
+        });
+
+        _.context('When adding value from an empty neighbor', () => {
+          const matrixArgs = { rowCount: 2, columnCount: 2, Class: Core };
+          const twoByTwo = new Matrix(matrixArgs);
+          const subject = twoByTwo.get(0, 0).worker;
+
+          _.assert(
+            'It returns `REDO`',
+            () => subject.add('up') === LineWorker.REDO,
+          );
+        });
+      });
+
+      _.method('#subtract', () => {
+        _.context('When subtracting string version of integer', () => {
+          const core = new Core();
+          const subject = new LineWorker({ core });
+          const value = 10;
+
+          _.assert(
+            'It subtracts value to the `accumulator`',
+            () => subject.subtract(value.toString()) === -value,
+          );
+        });
+
+        _.context('When subtracting integer to an `accumulator` of 0', () => {
+          const core = new Core();
+          const subject = new LineWorker({ core });
+          const value = 10;
+
+          _.assert(
+            'It subtracts value to the `accumulator`',
+            () => subject.subtract(value) === -value,
+          );
+        });
+
+        _.context('When subtracting integer to an `accumulator` of 5', () => {
+          const core = new Core();
+          const subject = new LineWorker({ core });
+          const value = 10;
+          subject.core.accumulator = 5;
+
+          _.assert(
+            'It subtracts value to the `accumulator`',
+            () => subject.subtract(value) === (5 - value),
+          );
+        });
+
+        _.context('When subtracting an `accumulator` of 5 to itself', () => {
+          const core = new Core();
+          const subject = new LineWorker({ core });
+          subject.core.accumulator = 5;
+
+          _.assert(
+            'It doubles the value of the `accumulator`',
+            () => subject.subtract('acc') === 0,
+          );
+        });
+
+        _.context('When subtracting value from an empty neighbor', () => {
+          const matrixArgs = { rowCount: 2, columnCount: 2, Class: Core };
+          const twoByTwo = new Matrix(matrixArgs);
+          const subject = twoByTwo.get(0, 0).worker;
+
+          _.assert(
+            'It returns `REDO`',
+            () => subject.subtract('up') === LineWorker.REDO,
           );
         });
       });

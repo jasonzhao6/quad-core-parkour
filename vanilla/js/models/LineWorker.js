@@ -8,13 +8,6 @@ export default class LineWorker {
     this.core = core;
   }
 
-  add(source) {
-    if (this.cannotReceive(source)) return LineWorker.REDO;
-
-    this.core.accumulator += this.sourceValue(source);
-    return this.core.accumulator;
-  }
-
   move(source, destination) {
     if (this.cannotReceive(source)) return LineWorker.REDO;
     if (this.cannotSend(destination)) return LineWorker.REDO;
@@ -30,6 +23,20 @@ export default class LineWorker {
 
     // In case destination is not valid
     return false;
+  }
+
+  add(source) {
+    if (this.cannotReceive(source)) return LineWorker.REDO;
+
+    this.core.accumulator += this.sourceValue(source);
+    return this.core.accumulator;
+  }
+
+  subtract(source) {
+    if (this.cannotReceive(source)) return LineWorker.REDO;
+
+    this.core.accumulator -= this.sourceValue(source);
+    return this.core.accumulator;
   }
 
   //

@@ -97,6 +97,14 @@ export default class CoreTest {
       const subject = new Core({ lineWorkerOverride });
       const [source, destination] = ['source', 'destination'];
 
+      _.method('#move', () => {
+        _.assert(
+          'It delegates to the `worker`',
+          () => subject.move(source, destination) ===
+            subject.worker.move(source, destination),
+        );
+      });
+
       _.method('#add', () => {
         _.assert(
           'It delegates to the `worker`',
@@ -104,11 +112,10 @@ export default class CoreTest {
         );
       });
 
-      _.method('#move', () => {
+      _.method('#subtract', () => {
         _.assert(
           'It delegates to the `worker`',
-          () => subject.move(source, destination) ===
-            subject.worker.move(source, destination),
+          () => subject.subtract(source) === subject.worker.subtract(source),
         );
       });
     });

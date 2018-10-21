@@ -123,6 +123,16 @@ export default class LineManagerTest {
           );
         });
 
+        _.context('When moving', () => {
+          const subject = new LineManager({ core: _.echo() });
+          subject.loadLines(['mov up down']);
+
+          _.assert(
+            'It executes the line',
+            () => subject.nextLine() === 'move,up,down',
+          );
+        });
+
         _.context('When adding', () => {
           const subject = new LineManager({ core: _.echo() });
           subject.loadLines(['add 10']);
@@ -133,13 +143,13 @@ export default class LineManagerTest {
           );
         });
 
-        _.context('When moving', () => {
+        _.context('When subtracting', () => {
           const subject = new LineManager({ core: _.echo() });
-          subject.loadLines(['mov up down']);
+          subject.loadLines(['subtract 10']);
 
           _.assert(
             'It executes the line',
-            () => subject.nextLine() === 'move,up,down',
+            () => subject.nextLine() === 'subtract,10',
           );
         });
       });
