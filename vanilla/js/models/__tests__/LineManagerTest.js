@@ -145,7 +145,7 @@ export default class LineManagerTest {
 
         _.context('When subtracting', () => {
           const subject = new LineManager({ core: _.echo() });
-          subject.loadLines(['subtract 10']);
+          subject.loadLines(['sub 10']);
 
           _.assert(
             'It executes the line',

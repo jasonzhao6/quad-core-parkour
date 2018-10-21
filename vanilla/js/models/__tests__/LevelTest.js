@@ -124,11 +124,19 @@ export default class LevelTest {
           );
         });
 
-        [...new Array(2).keys()].splice(0).forEach((i) => {
+        [...new Array(3).keys()].splice(0).forEach((i) => {
           _.context(`When playing Level ${i}, and there is a solution`, () => {
             const subject = new Level({ number: i });
 
             subject.solve();
+
+            // Uncomment for debugging
+            // console.log('cycleCount', subject.cycle());
+            // console.log('matrix', subject.matrix.getAll());
+            // console.log('escrow', subject.escrow);
+            // console.log('outputX', subject.outputX);
+            // console.log('outputY', subject.outputY);
+            // debugger;
 
             _.assert(
               'It finishes with the expected `cycleCount`',

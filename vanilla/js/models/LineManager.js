@@ -36,7 +36,7 @@ export default class LineManager {
     switch (command) {
       case 'mov': return this.core.move(arg1, arg2);
       case 'add': return this.core.add(arg1);
-      case 'subtract': return this.core.subtract(arg1);
+      case 'sub': return this.core.subtract(arg1);
 
       default: return undefined;
     }
