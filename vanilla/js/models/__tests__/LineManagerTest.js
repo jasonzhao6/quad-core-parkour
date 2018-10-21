@@ -28,18 +28,29 @@ export default class LineManagerTest {
               subject.priorities.next().done === false,
             ],
           );
+
+          _.assert(
+            'It initializes the `gotoLine` state to `null`',
+            () => subject.gotoLine === null,
+          );
         });
       });
 
       _.method('#loadLines', () => {
         const lines = 'lines';
         const subject = new LineManager();
+        subject.gotoLine = 10;
 
         subject.loadLines(lines);
 
         _.assert(
           'It sets the `lines` state',
           () => subject.lines === lines,
+        );
+
+        _.assert(
+          'It resets the `gotoLine` state',
+          () => subject.gotoLine === null,
         );
       });
 
@@ -113,9 +124,9 @@ export default class LineManagerTest {
       });
 
       _.method('nextLine, execution', () => {
-        _.context('When there is a comment', () => {
+        _.context('When there is a label', () => {
           const subject = new LineManager({ core: _.echo() });
-          subject.loadLines(['comment: add 10']);
+          subject.loadLines(['label: add 10']);
 
           _.assert(
             'It executes the line',
@@ -152,6 +163,20 @@ export default class LineManagerTest {
             () => subject.nextLine() === 'subtract,10',
           );
         });
+      });
+
+      _.method('#gotoLabel', () => {
+        const subject = new LineManager();
+        const label = 'label';
+        const [line1, line2, line3] = ['l1', `${label}: l2`, 'l3'];
+        subject.loadLines([line1, line2, line3]);
+
+        subject.gotoLabel(label);
+
+        _.assert(
+          'It sets `gotoLine` to line number of `label`',
+          () => subject.gotoLine === 1,
+        );
       });
     });
   }

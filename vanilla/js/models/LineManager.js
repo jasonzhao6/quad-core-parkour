@@ -5,15 +5,22 @@ export default class LineManager {
 
     // States
     this.lines = [];
+    this.gotoLine = null;
     this.priorities = this.prioritizer();
   }
 
-  loadLines(lines) { this.lines = lines; }
+  loadLines(lines) {
+    this.lines = lines;
+    this.gotoLine = null;
+  }
 
   nextLine(redoPrevious) {
     const line = this.priorities.next(redoPrevious).value;
-    if (this.core === undefined) return line;
-    return this.executeLine(line);
+    return this.core === undefined ? line : this.executeLine(line);
+  }
+
+  gotoLabel(label) {
+    this.gotoLine = this.lines.findIndex(line => line.startsWith(`${label}:`));
   }
 
   //

@@ -90,6 +90,16 @@ export default class CoreTest {
           ],
         );
       });
+
+      _.method('#gotoLabel', () => {
+        _.assert(
+          'It delegates to the `manager`',
+          () => [
+            subject.gotoLabel() === subject.manager.gotoLabel(),
+            subject.gotoLabel(argument) === subject.manager.gotoLabel(argument),
+          ],
+        );
+      });
     });
 
     _.Class('Core, delegated do-work methods', () => {
