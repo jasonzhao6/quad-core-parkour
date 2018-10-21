@@ -92,7 +92,7 @@ export default class Level {
 
   solve() {
     Object.keys(this.solution.lines).forEach((key) => {
-      const [i, j] = key.split(':');
+      const [i, j] = key.split(',');
       const lines = this.solution.lines[key];
       this.matrix.get(i, j).loadLines(lines);
     });
