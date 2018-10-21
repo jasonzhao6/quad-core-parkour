@@ -29,6 +29,9 @@ export default class Core {
   move(source, destination) { return this.worker.move(source, destination); }
   add(source) { return this.worker.add(source); }
   subtract(source) { return this.worker.subtract(source); }
+  jump(label) { return this.worker.jump(label); }
+  jumpIfZero(label) { return this.worker.jumpIfZero(label); }
+  jumpIfPositive(label) { return this.worker.jumpIfPositive(label); }
 
   // Get name via `director`
   name() { return this.director.name(); }

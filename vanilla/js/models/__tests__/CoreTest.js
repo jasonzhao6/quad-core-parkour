@@ -128,6 +128,27 @@ export default class CoreTest {
           () => subject.subtract(source) === subject.worker.subtract(source),
         );
       });
+
+      _.method('#jump', () => {
+        _.assert(
+          'It delegates to the `worker`',
+          () => subject.jump(source) === subject.worker.jump(source),
+        );
+      });
+
+      _.method('#jumpIfZero', () => {
+        _.assert(
+          'It delegates to the `worker`',
+          () => subject.jumpIfZero(source) === subject.worker.jumpIfZero(source),
+        );
+      });
+
+      _.method('#jumpIfPositive', () => {
+        _.assert(
+          'It delegates to the `worker`',
+          () => subject.jumpIfPositive(source) === subject.worker.jumpIfPositive(source),
+        );
+      });
     });
 
     _.Class('Core, delegated name method', () => {

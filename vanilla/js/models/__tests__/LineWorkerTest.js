@@ -139,7 +139,7 @@ export default class LineWorkerTest {
       _.method('#add', () => {
         _.context('When adding string version of integer', () => {
           const core = new Core();
-          const subject = new LineWorker({ core });
+          const subject = core.worker;
           const value = 10;
 
           _.assert(
@@ -150,7 +150,7 @@ export default class LineWorkerTest {
 
         _.context('When adding integer to an `accumulator` of 0', () => {
           const core = new Core();
-          const subject = new LineWorker({ core });
+          const subject = core.worker;
           const value = 10;
 
           _.assert(
@@ -161,7 +161,7 @@ export default class LineWorkerTest {
 
         _.context('When adding integer to an `accumulator` of 5', () => {
           const core = new Core();
-          const subject = new LineWorker({ core });
+          const subject = core.worker;
           const value = 10;
           subject.core.accumulator = 5;
 
@@ -173,7 +173,7 @@ export default class LineWorkerTest {
 
         _.context('When adding an `accumulator` of 5 to itself', () => {
           const core = new Core();
-          const subject = new LineWorker({ core });
+          const subject = core.worker;
           subject.core.accumulator = 5;
 
           _.assert(
@@ -197,7 +197,7 @@ export default class LineWorkerTest {
       _.method('#subtract', () => {
         _.context('When subtracting string version of integer', () => {
           const core = new Core();
-          const subject = new LineWorker({ core });
+          const subject = core.worker;
           const value = 10;
 
           _.assert(
@@ -208,7 +208,7 @@ export default class LineWorkerTest {
 
         _.context('When subtracting integer to an `accumulator` of 0', () => {
           const core = new Core();
-          const subject = new LineWorker({ core });
+          const subject = core.worker;
           const value = 10;
 
           _.assert(
@@ -219,7 +219,7 @@ export default class LineWorkerTest {
 
         _.context('When subtracting integer to an `accumulator` of 5', () => {
           const core = new Core();
-          const subject = new LineWorker({ core });
+          const subject = core.worker;
           const value = 10;
           subject.core.accumulator = 5;
 
@@ -231,7 +231,7 @@ export default class LineWorkerTest {
 
         _.context('When subtracting an `accumulator` of 5 to itself', () => {
           const core = new Core();
-          const subject = new LineWorker({ core });
+          const subject = core.worker;
           subject.core.accumulator = 5;
 
           _.assert(
@@ -248,6 +248,119 @@ export default class LineWorkerTest {
           _.assert(
             'It returns `REDO`',
             () => subject.subtract('up') === LineWorker.REDO,
+          );
+        });
+      });
+
+      _.method('#jump', () => {
+        const coreProxy = _.proxy(new Core());
+        const subject = new LineWorker({ core: coreProxy });
+        const label = 'label';
+
+        _.allow(coreProxy).toReceive('gotoLabel');
+        subject.jump(label);
+        _.expect(coreProxy).toHaveReceived('gotoLabel').withArgs(label);
+
+        _.assert(
+          'It subtracts value to the `accumulator`',
+          () => coreProxy.isAsExpected(),
+        );
+      });
+
+      _.method('#jumpIfZero', () => {
+        _.context('When accumulator is 0', () => {
+          const coreProxy = _.proxy(new Core());
+          const subject = new LineWorker({ core: coreProxy });
+          const label = 'label';
+
+          _.allow(coreProxy).toReceive('gotoLabel');
+          subject.jumpIfZero(label);
+          _.expect(coreProxy).toHaveReceived('gotoLabel').withArgs(label);
+
+          _.assert(
+            'It subtracts value to the `accumulator`',
+            () => coreProxy.isAsExpected(),
+          );
+        });
+
+        _.context('When accumulator is positive', () => {
+          const coreProxy = _.proxy(new Core());
+          const subject = new LineWorker({ core: coreProxy });
+          const label = 'label';
+
+          _.allow(coreProxy).toReceive('gotoLabel');
+          coreProxy.accumulator = 1;
+          subject.jumpIfZero(label);
+          _.expect(coreProxy).toHaveReceived('gotoLabel').nTimes(0);
+
+          _.assert(
+            'It subtracts value to the `accumulator`',
+            () => coreProxy.isAsExpected(),
+          );
+        });
+
+        _.context('When accumulator is negative', () => {
+          const coreProxy = _.proxy(new Core());
+          const subject = new LineWorker({ core: coreProxy });
+          const label = 'label';
+
+          _.allow(coreProxy).toReceive('gotoLabel');
+          coreProxy.accumulator = -1;
+          subject.jumpIfZero(label);
+          _.expect(coreProxy).toHaveReceived('gotoLabel').nTimes(0);
+
+          _.assert(
+            'It subtracts value to the `accumulator`',
+            () => coreProxy.isAsExpected(),
+          );
+        });
+      });
+
+      _.method('#jumpIfPositive', () => {
+        _.context('When accumulator is 0', () => {
+          const coreProxy = _.proxy(new Core());
+          const subject = new LineWorker({ core: coreProxy });
+          const label = 'label';
+
+          _.allow(coreProxy).toReceive('gotoLabel');
+          subject.jumpIfPositive(label);
+          _.expect(coreProxy).toHaveReceived('gotoLabel').nTimes(0);
+
+          _.assert(
+            'It subtracts value to the `accumulator`',
+            () => coreProxy.isAsExpected(),
+          );
+        });
+
+        _.context('When accumulator is positive', () => {
+          const coreProxy = _.proxy(new Core());
+          const subject = new LineWorker({ core: coreProxy });
+          const label = 'label';
+
+          _.allow(coreProxy).toReceive('gotoLabel');
+          coreProxy.accumulator = 1;
+          subject.jumpIfPositive(label);
+          _.expect(coreProxy).toHaveReceived('gotoLabel').withArgs(label);
+
+          _.assert(
+            'It subtracts value to the `accumulator`',
+            () => coreProxy.isAsExpected(),
+          );
+        });
+
+        _.context('When accumulator is negative', () => {
+          const coreProxy = _.proxy(new Core());
+          const subject = new LineWorker({ core: coreProxy });
+          const label = 'label';
+
+          _.allow(coreProxy).toReceive('gotoLabel');
+          coreProxy.accumulator = -1;
+          subject.jumpIfPositive(label);
+          _.expect(coreProxy).toHaveReceived('gotoLabel').nTimes(0);
+
+          _.assert(
+            'It subtracts value to the `accumulator`',
+            () => coreProxy.isAsExpected(),
           );
         });
       });

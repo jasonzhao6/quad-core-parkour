@@ -177,6 +177,36 @@ export default class LineManagerTest {
             () => subject.nextLine() === 'subtract,10',
           );
         });
+
+        _.context('When jumping', () => {
+          const subject = new LineManager({ core: _.echo() });
+          subject.loadLines(['jmp label']);
+
+          _.assert(
+            'It executes the line',
+            () => subject.nextLine() === 'jump,label',
+          );
+        });
+
+        _.context('When jumping if accumulator is zero', () => {
+          const subject = new LineManager({ core: _.echo() });
+          subject.loadLines(['jez label']);
+
+          _.assert(
+            'It executes the line',
+            () => subject.nextLine() === 'jumpIfZero,label',
+          );
+        });
+
+        _.context('When jumping if accumulator is positive', () => {
+          const subject = new LineManager({ core: _.echo() });
+          subject.loadLines(['jgz label']);
+
+          _.assert(
+            'It executes the line',
+            () => subject.nextLine() === 'jumpIfPositive,label',
+          );
+        });
       });
 
       _.method('#gotoLabel', () => {

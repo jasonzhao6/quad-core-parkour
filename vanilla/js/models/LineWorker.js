@@ -48,6 +48,24 @@ export default class LineWorker {
   }
 
   //
+  // Branching
+  //
+
+  jump(label) {
+    return this.core.gotoLabel(label);
+  }
+
+  jumpIfZero(label) {
+    if (this.core.accumulator === 0) return this.core.gotoLabel(label);
+    return false;
+  }
+
+  jumpIfPositive(label) {
+    if (this.core.accumulator > 0) return this.core.gotoLabel(label);
+    return false;
+  }
+
+  //
   // Private
   //
 
