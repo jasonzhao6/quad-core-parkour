@@ -124,7 +124,7 @@ export default class LevelTest {
           );
         });
 
-        [...new Array(7).keys()].splice(0).forEach((i) => {
+        [...new Array(8).keys()].splice(0).forEach((i) => {
           _.context(`When playing Level ${i}, and there is a solution`, () => {
             const subject = new Level({ number: i });
 
@@ -137,11 +137,17 @@ export default class LevelTest {
             // console.log('inputY', subject.data.input.y);
             // console.log('matrix', subject.matrix.getAll());
             // console.log('escrow', subject.escrow);
-            // console.log('outputX', subject.data.output.x);
+            // console.log('outputX', subject.data.output.x || []);
             // console.log('outputX', subject.outputX);
-            // console.log('outputY', subject.data.output.y);
+            // console.log('outputY', subject.data.output.y || []);
             // console.log('outputY', subject.outputY);
             // debugger;
+
+            _.assert(
+              'It has at most 15 lines per core',
+              () => Object.values(subject.solution.lines)
+                .map(lines => lines.length <= 15),
+            );
 
             _.assert(
               'It finishes with the expected `cycleCount`',
