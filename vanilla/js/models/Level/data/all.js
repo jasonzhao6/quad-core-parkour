@@ -8,9 +8,10 @@ import * as L6 from './06.js'; // Accumulator
 import * as L7 from './07.js'; // Desensitizer
 import * as L8 from './08.js'; // Activator
 import * as L9 from './09.js'; // Stabilizer
+import * as L10 from './10.js'; // Centrifugator
 
 const Levels = [
-  L0, L1, L2, L3, L4, L5, L6, L7, L8, L9,
+  L0, L1, L2, L3, L4, L5, L6, L7, L8, L9, L10,
 ];
 
 export default Levels;
