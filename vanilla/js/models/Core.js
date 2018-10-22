@@ -29,6 +29,7 @@ export default class Core {
   move(source, destination) { return this.worker.move(source, destination); }
   add(source) { return this.worker.add(source); }
   subtract(source) { return this.worker.subtract(source); }
+  negate() { return this.worker.negate(); }
   jump(label) { return this.worker.jump(label); }
   jumpIfZero(label) { return this.worker.jumpIfZero(label); }
   jumpIfPositive(label) { return this.worker.jumpIfPositive(label); }

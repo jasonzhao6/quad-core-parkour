@@ -53,6 +53,7 @@ export default class LineManager {
       case 'mov': return this.core.move(arg1, arg2);
       case 'add': return this.core.add(arg1);
       case 'sub': return this.core.subtract(arg1);
+      case 'neg': return this.core.negate();
       case 'jmp': return this.core.jump(arg1);
       case 'jez': return this.core.jumpIfZero(arg1);
       case 'jgz': return this.core.jumpIfPositive(arg1);

@@ -178,6 +178,16 @@ export default class LineManagerTest {
           );
         });
 
+        _.context('When negating', () => {
+          const subject = new LineManager({ core: _.echo() });
+          subject.loadLines(['neg']);
+
+          _.assert(
+            'It executes the line',
+            () => subject.nextLine() === 'negate',
+          );
+        });
+
         _.context('When jumping', () => {
           const subject = new LineManager({ core: _.echo() });
           subject.loadLines(['jmp label']);

@@ -47,6 +47,10 @@ export default class LineWorker {
     return this.core.accumulator;
   }
 
+  negate() {
+    this.core.accumulator = -this.core.accumulator;
+  }
+
   //
   // Branching
   //

@@ -252,6 +252,48 @@ export default class LineWorkerTest {
         });
       });
 
+      _.method('#negate', () => {
+        _.context('When negating zero', () => {
+          const core = new Core();
+          const subject = core.worker;
+
+          subject.negate();
+
+          _.assert(
+            'It negates the `accumulator`',
+            () => subject.core.accumulator === 0,
+          );
+        });
+
+        _.context('When negating a positive number', () => {
+          const core = new Core();
+          const subject = core.worker;
+          const value = 10;
+          subject.core.accumulator = value;
+
+          subject.negate();
+
+          _.assert(
+            'It negates the `accumulator`',
+            () => subject.core.accumulator === -value,
+          );
+        });
+
+        _.context('When negating a negative number', () => {
+          const core = new Core();
+          const subject = core.worker;
+          const value = -10;
+          subject.core.accumulator = value;
+
+          subject.negate();
+
+          _.assert(
+            'It negates the `accumulator`',
+            () => subject.core.accumulator === -value,
+          );
+        });
+      });
+
       _.method('#jump', () => {
         const coreProxy = _.proxy(new Core());
         const subject = new LineWorker({ core: coreProxy });

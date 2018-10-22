@@ -129,6 +129,13 @@ export default class CoreTest {
         );
       });
 
+      _.method('#negate', () => {
+        _.assert(
+          'It delegates to the `worker`',
+          () => subject.negate() === subject.worker.negate(),
+        );
+      });
+
       _.method('#jump', () => {
         _.assert(
           'It delegates to the `worker`',
