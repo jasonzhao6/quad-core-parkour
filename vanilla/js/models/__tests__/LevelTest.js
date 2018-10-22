@@ -124,7 +124,7 @@ export default class LevelTest {
           );
         });
 
-        [...new Array(1 + 8).keys()].splice(0).forEach((i) => {
+        [...new Array(1 + 9).keys()].splice(0).forEach((i) => {
           _.context(`When playing Level ${i}, and there is a solution`, () => {
             const subject = new Level({ number: i });
 
