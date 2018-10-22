@@ -9,9 +9,10 @@ import L7 from './07.js';
 import L8 from './08.js';
 import L9 from './09.js';
 import L10 from './10.js';
+import L11 from './11.js';
 
 const Levels = [
-  L0, L1, L2, L3, L4, L5, L6, L7, L8, L9, L10,
+  L0, L1, L2, L3, L4, L5, L6, L7, L8, L9, L10, L11,
 ];
 
 export default Levels;
