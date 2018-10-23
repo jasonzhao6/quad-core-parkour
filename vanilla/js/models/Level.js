@@ -3,7 +3,7 @@ import Core from './Core.js';
 import Matrix from './Matrix.js';
 
 // Level data
-import data from './Level/data/all.js';
+import data from './levelData/all.js';
 
 export default class Level {
   static get MAX_CYCLE_COUNT() { return 400; }
