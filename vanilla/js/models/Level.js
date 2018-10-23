@@ -7,7 +7,7 @@ import data from './Level/data/all.js';
 import solutions from './Level/solutions/all.js';
 
 export default class Level {
-  static get MAX_CYCLE_COUNT() { return 200; }
+  static get MAX_CYCLE_COUNT() { return 400; }
 
   static get MATRIX_SIZE() { return { rowCount: 2, columnCount: 2 }; }
   static get INPUT() { return { X: 'input.x', Y: 'input.y' }; }

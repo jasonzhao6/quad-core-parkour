@@ -10,7 +10,7 @@ import * as L8 from './08.js'; // Ignitor
 import * as L9 from './09.js'; // Stabilizer
 import * as L10 from './10.js'; // Centrifugator
 import * as L11 from './11.js'; // Slider
-// Multiplier
+import * as L12 from './12.js'; // Multiplier
 // Divider
 // Reverser
 // Sorter
@@ -25,7 +25,7 @@ const Levels = [
   L0, L1, L2, L3, L4, L5, L6,
 
   // Plain (hard)
-  L7, L8, L9, L10, L11,
+  L7, L8, L9, L10, L11, L12,
 
   // Stack
 
