@@ -4,7 +4,6 @@ import Matrix from './Matrix.js';
 
 // Level data
 import data from './Level/data/all.js';
-import solutions from './Level/solutions/all.js';
 
 export default class Level {
   static get MAX_CYCLE_COUNT() { return 400; }
@@ -17,21 +16,20 @@ export default class Level {
     // Props
     this.number = number;
     this.data = dataOverride || data[number];
-    this.solution = solutions[number];
 
     // States
     this.cycleCount = 0;
     this.cycleReturnValues = [];
-    this.inputX = [...this.data.input.x || []];
-    this.inputY = [...this.data.input.y || []];
-    this.outputX = [];
-    this.outputY = [];
     this.matrix = new Matrix({ ...Level.MATRIX_SIZE, Class: Core });
     this.matrix.alias(0, 0, Level.INPUT.X);
     this.matrix.alias(0, 1, Level.INPUT.Y);
     this.matrix.alias(1, 0, Level.OUTPUT.X);
     this.matrix.alias(1, 1, Level.OUTPUT.Y);
     this.escrow = this.matrix.escrow;
+    this.inputX = [...this.data.input.x || []];
+    this.inputY = [...this.data.input.y || []];
+    this.outputX = [];
+    this.outputY = [];
   }
 
   cycle() {
@@ -91,9 +89,9 @@ export default class Level {
   }
 
   solve() {
-    Object.keys(this.solution.lines).forEach((key) => {
+    Object.keys(this.data.solution.lines).forEach((key) => {
       const [i, j] = key.split(',');
-      const lines = this.solution.lines[key];
+      const lines = this.data.solution.lines[key];
       this.matrix.get(i, j).loadLines(lines);
     });
   }

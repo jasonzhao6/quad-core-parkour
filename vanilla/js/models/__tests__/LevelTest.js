@@ -20,6 +20,14 @@ export default class LevelTest {
           );
 
           _.assert(
+            'It initializes the `cycleReturnValues` state to []',
+            () => [
+              subject.cycleReturnValues instanceof Array,
+              subject.cycleReturnValues.length === 0,
+            ],
+          );
+
+          _.assert(
             'It initializes the `matrix` state to an instance of Matrix',
             () => subject.matrix instanceof Matrix,
           );
@@ -32,6 +40,11 @@ export default class LevelTest {
               typeof subject.matrix.get(Level.OUTPUT.X) === 'object',
               typeof subject.matrix.get(Level.OUTPUT.Y) === 'object',
             ],
+          );
+
+          _.assert(
+            'It aliases `this.escrow` to that of the `matrix`',
+            () => subject.escrow === subject.matrix.escrow,
           );
         });
 
@@ -145,13 +158,13 @@ export default class LevelTest {
 
             _.assert(
               'It has at most 15 lines per core',
-              () => Object.values(subject.solution.lines)
+              () => Object.values(subject.data.solution.lines)
                 .map(lines => lines.length <= 15),
             );
 
             _.assert(
               'It finishes with the expected `cycleCount`',
-              () => subject.cycle() === subject.solution.cycleCount,
+              () => subject.cycle() === subject.data.solution.cycleCount,
             );
           });
         });
