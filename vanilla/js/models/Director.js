@@ -3,15 +3,6 @@ export default class Director {
     return ['up', 'down', 'left', 'right'].includes(direction);
   }
 
-  static reverse(direction) {
-    if (direction === 'up') return 'down';
-    if (direction === 'down') return 'up';
-    if (direction === 'left') return 'right';
-
-    // ... if (direction === 'right')
-    return 'left';
-  }
-
   constructor({ i, j, matrix }) {
     // Props
     this.i = i;

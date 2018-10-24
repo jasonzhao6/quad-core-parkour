@@ -27,18 +27,6 @@ export default class DirectorTest {
         );
       });
 
-      _.method('.reverse', () => {
-        _.assert(
-          'It reverses any given direction',
-          () => [
-            Director.reverse('up') === 'down',
-            Director.reverse('down') === 'up',
-            Director.reverse('left') === 'right',
-            Director.reverse('right') === 'left',
-          ],
-        );
-      });
-
       _.method('#constructor', () => {
         const [i, j, matrix] = [0, 0, _.noop()];
         const subject = new Director({ i, j, matrix });
@@ -283,7 +271,7 @@ export default class DirectorTest {
         _.context('When receiving message from another element', () => {
           const direction = 'right';
           const sender = subject[direction].director;
-          sender.send(Director.reverse(direction), message);
+          sender.send('left', message);
 
           _.assert(
             'It receives the message',
