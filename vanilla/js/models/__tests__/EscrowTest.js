@@ -9,7 +9,7 @@ export default class EscrowTest {
         _.assert(
           'It initializes the `messages` state, a hash that defaults to `null`',
           () => [
-            typeof escrow.messages === 'object',
+            escrow.messages instanceof Object,
             escrow.messages.anything === null,
           ],
         );

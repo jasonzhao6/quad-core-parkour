@@ -1,4 +1,5 @@
 import Core from '../Core.js';
+import Escrow from '../Escrow.js';
 import Matrix from '../Matrix.js';
 
 export default class MatrixTest {
@@ -22,8 +23,8 @@ export default class MatrixTest {
           _.assert(
             'It initializes each state',
             () => [
-              typeof subject.aliases === 'object',
-              typeof subject.escrow === 'object',
+              subject.aliases instanceof Object,
+              subject.escrow instanceof Escrow,
               subject.arrOfArr instanceof Array,
               subject.stackAbove instanceof Array,
               subject.stackBelow instanceof Array,

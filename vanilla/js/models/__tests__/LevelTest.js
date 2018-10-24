@@ -5,13 +5,24 @@ export default class LevelTest {
   static enqueue(_) {
     _.Class('Level', () => {
       _.method('#constructor', () => {
-        _.context('When creating a level', () => {
+        _.context('When creating Level 0', () => {
           const number = 0;
           const subject = new Level({ number });
 
           _.assert(
             'It initializes the `number` property',
             () => subject.number === number,
+          );
+
+          _.assert(
+            'It initializes `givenInput`, `expectedOutput`, and `solution`',
+            () => [
+              subject.givenInputX instanceof Array,
+              subject.givenInputY instanceof Array,
+              subject.expectedOutputX instanceof Array,
+              subject.expectedOutputY instanceof Array,
+              subject.solution.lines instanceof Object,
+            ],
           );
 
           _.assert(
@@ -35,10 +46,10 @@ export default class LevelTest {
           _.assert(
             'It aliases the input/output x/y elements in the `matrix`',
             () => [
-              typeof subject.matrix.get(Level.INPUT.X) === 'object',
-              typeof subject.matrix.get(Level.INPUT.Y) === 'object',
-              typeof subject.matrix.get(Level.OUTPUT.X) === 'object',
-              typeof subject.matrix.get(Level.OUTPUT.Y) === 'object',
+              subject.matrix.get(Level.INPUT.X) instanceof Object,
+              subject.matrix.get(Level.INPUT.Y) instanceof Object,
+              subject.matrix.get(Level.OUTPUT.X) instanceof Object,
+              subject.matrix.get(Level.OUTPUT.Y) instanceof Object,
             ],
           );
 
@@ -46,31 +57,57 @@ export default class LevelTest {
             'It aliases `this.escrow` to that of the `matrix`',
             () => subject.escrow === subject.matrix.escrow,
           );
-        });
-
-        _.context('When creating a level without `dataOverride`', () => {
-          const number = 0;
-          const subject = new Level({ number });
 
           _.assert(
-            'It initializes the `data` property with imported data',
+            'It initializes the `inputX` state to a copy of input data',
             () => [
-              subject.data.input.x.length > 0,
-              subject.data.input.y.length > 0,
-              subject.data.output.x.length > 0,
-              subject.data.output.y.length > 0,
+              subject.inputX !== subject.givenInputX,
+              subject.inputX.join() === subject.givenInputX.join(),
+            ],
+          );
+
+          _.assert(
+            'It initializes the `inputY` state to a copy of input data',
+            () => [
+              subject.inputY !== subject.givenInputY,
+              subject.inputY.join() === subject.givenInputY.join(),
+            ],
+          );
+
+          _.assert(
+            'It initializes the `outputX` state to an empty array',
+            () => [
+              subject.outputX instanceof Array,
+              subject.outputX.length === 0,
+            ],
+          );
+
+          _.assert(
+            'It initializes the `outputY` state to an empty array',
+            () => [
+              subject.outputY instanceof Array,
+              subject.outputY.length === 0,
             ],
           );
         });
 
         _.context('When creating a level with `dataOverride`', () => {
           const number = 0;
-          const dataOverride = { input: {}, output: {} };
+          const input = { x: [], y: [] };
+          const output = { x: [], y: [] };
+          const solution = 'solution';
+          const dataOverride = { input, output, solution };
           const subject = new Level({ number, dataOverride });
 
           _.assert(
-            'It initializes the `data` property with `dataOverride`',
-            () => subject.data === dataOverride,
+            'It overrides `givenInput`, `expectedOutput`, and `solution`',
+            () => [
+              subject.givenInputX === dataOverride.input.x,
+              subject.givenInputY === dataOverride.input.y,
+              subject.expectedOutputX === dataOverride.output.x,
+              subject.expectedOutputY === dataOverride.output.y,
+              subject.solution === dataOverride.solution,
+            ],
           );
         });
 
@@ -80,7 +117,7 @@ export default class LevelTest {
           const subject = new Level({ number, dataOverride });
 
           _.assert(
-            'It initializes input and output states to empty array',
+            'It initializes input and output states to empty arrays',
             () => [
               subject.inputX.length === 0,
               subject.inputY.length === 0,
@@ -90,24 +127,22 @@ export default class LevelTest {
           );
         });
 
-        _.context('When creating a level with one input and one output', () => {
+        _.context('When creating a level with one input', () => {
           const number = 0;
           const inputX = [1];
-          const dataOverride = { input: { x: inputX }, output: { x: [2] } };
+          const dataOverride = { input: { x: inputX }, output: {} };
           const subject = new Level({ number, dataOverride });
 
           _.assert(
-            'It initializes only one input and output states each',
+            'It initializes only one input',
             () => [
               subject.inputX.toString() === inputX.toString(),
               subject.inputY.length === 0,
-              subject.outputX.length === 0,
-              subject.outputY.length === 0,
             ],
           );
         });
 
-        _.context('When creating a level with two inputs and outputs', () => {
+        _.context('When creating a level with two inputs', () => {
           const number = 0;
           const [inputX, inputY] = [[1], [2]];
           const output = { x: [3], y: [4] };
@@ -115,12 +150,10 @@ export default class LevelTest {
           const subject = new Level({ number, dataOverride });
 
           _.assert(
-            'It initializes only one input and output states each',
+            'It initializes both inputs',
             () => [
               subject.inputX.toString() === inputX.toString(),
               subject.inputY.toString() === inputY.toString(),
-              subject.outputX.length === 0,
-              subject.outputY.length === 0,
             ],
           );
         });
@@ -146,25 +179,25 @@ export default class LevelTest {
             // Uncomment for debugging
             // -----------------------
             // console.log('cycleCount', subject.cycle());
-            // console.log('inputX', subject.data.input.x);
-            // console.log('inputY', subject.data.input.y);
+            // console.log('inputX', subject.givenInputX);
+            // console.log('inputY', subject.givenInputY);
             // console.log('matrix', subject.matrix.getAll());
-            // console.log('escrow', subject.escrow);
-            // console.log('outputX', subject.data.output.x || []);
+            // console.log('escrow', subject.escrow.messages);
+            // console.log('outputX', subject.expectedOutputX || []);
             // console.log('outputX', subject.outputX);
-            // console.log('outputY', subject.data.output.y || []);
+            // console.log('outputY', subject.expectedOutputY || []);
             // console.log('outputY', subject.outputY);
             // debugger;
 
             _.assert(
               'It has at most 15 lines per core',
-              () => Object.values(subject.data.solution.lines)
+              () => Object.values(subject.solution.lines)
                 .map(lines => lines.length <= 15),
             );
 
             _.assert(
               'It finishes with the expected `cycleCount`',
-              () => subject.cycle() === subject.data.solution.cycleCount,
+              () => subject.cycle() === subject.solution.cycleCount,
             );
           });
         });

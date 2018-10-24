@@ -15,7 +15,14 @@ export default class Level {
   constructor({ number, dataOverride }) {
     // Props
     this.number = number;
-    this.data = dataOverride || data[number];
+
+    // Data
+    const { input, output, solution } = dataOverride || data[number];
+    this.givenInputX = input.x || [];
+    this.givenInputY = input.y || [];
+    this.expectedOutputX = output.x || [];
+    this.expectedOutputY = output.y || [];
+    this.solution = solution;
 
     // States
     this.cycleCount = 0;
@@ -26,8 +33,8 @@ export default class Level {
     this.matrix.alias(1, 0, Level.OUTPUT.X);
     this.matrix.alias(1, 1, Level.OUTPUT.Y);
     this.escrow = this.matrix.escrow;
-    this.inputX = [...this.data.input.x || []];
-    this.inputY = [...this.data.input.y || []];
+    this.inputX = [...this.givenInputX];
+    this.inputY = [...this.givenInputY];
     this.outputX = [];
     this.outputY = [];
   }
@@ -83,15 +90,15 @@ export default class Level {
     if (this.cycleCount >= Level.MAX_CYCLE_COUNT) return false;
 
     return [
-      this.outputX.join() === (this.data.output.x || []).join(),
-      this.outputY.join() === (this.data.output.y || []).join(),
+      this.outputX.join() === this.expectedOutputX.join(),
+      this.outputY.join() === this.expectedOutputY.join(),
     ].some(condition => condition === false);
   }
 
   solve() {
-    Object.keys(this.data.solution.lines).forEach((key) => {
+    Object.keys(this.solution.lines).forEach((key) => {
       const [i, j] = key.split(',');
-      const lines = this.data.solution.lines[key];
+      const lines = this.solution.lines[key];
       this.matrix.get(i, j).loadLines(lines);
     });
   }

@@ -254,7 +254,7 @@ export default class TestHarnessTest {
 
 
         const subject = new TestHarness('seed', Printer);
-        subject.queue = queue.slice();
+        subject.queue = [...queue];
         subject.executeAssertions();
 
         _.assert(
