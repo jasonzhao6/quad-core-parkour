@@ -12,6 +12,8 @@ export default class DirectorTest {
             Director.isDirection('down') === true,
             Director.isDirection('left') === true,
             Director.isDirection('right') === true,
+            Director.isDirection('above') === true,
+            Director.isDirection('below') === true,
           ],
         );
 
@@ -27,6 +29,27 @@ export default class DirectorTest {
         );
       });
 
+      _.method('.isStack', () => {
+        _.assert(
+          'It returns `true` for all directions',
+          () => [
+            Director.isStack('above') === true,
+            Director.isStack('below') === true,
+          ],
+        );
+
+        _.assert(
+          'It returns `false` for non directions',
+          () => [
+            Director.isStack('acc') === false,
+            Director.isStack('message') === false,
+            Director.isStack(0) === false,
+            Director.isStack(1) === false,
+            Director.isStack(-1) === false,
+          ],
+        );
+      });
+
       _.method('#constructor', () => {
         const [i, j, matrix] = [0, 0, _.noop()];
         const subject = new Director({ i, j, matrix });
@@ -37,11 +60,45 @@ export default class DirectorTest {
             subject.i === i,
             subject.j === j,
             subject.matrix === matrix,
+            subject.escrow.toString() === matrix.escrow.toString(),
+            subject.stackAbove.toString() === matrix.stackAbove.toString(),
+            subject.stackBelow.toString() === matrix.stackBelow.toString(),
           ],
         );
       });
 
+      _.method('#constructor, aliasing', () => {
+        const args = { rowCount: 0, columnCount: 0, Class: {}.constructor };
+        const matrixProxy = _.proxy(new Matrix(args));
+
+        _.allow(matrixProxy).toReceive('alias');
+
+        const [i, j, matrix] = [0, 0, matrixProxy];
+        const subject = new Director({ i, j, matrix });
+        const aliasArgs = [i, j, subject.name()];
+
+        _.expect(matrixProxy).toHaveReceived('alias').withArgs(aliasArgs);
+
+        _.assert(
+          'It calls `matrix.alias()` with element name',
+          () => matrixProxy.isAsExpected(),
+        );
+      });
+
       _.method('#name', () => {
+        _.context('When called with direction to get name of stack', () => {
+          const [i, j, matrix] = [0, 1, _.noop()];
+          const subject = new Director({ i, j, matrix });
+
+          _.assert(
+            'It returns name of stack',
+            () => [
+              subject.name('above') === `above`,
+              subject.name('below') === `below`,
+            ],
+          );
+        });
+
         _.context('When called without argument to get name of self', () => {
           const [i, j, matrix] = [0, 1, _.noop()];
           const subject = new Director({ i, j, matrix });
@@ -74,24 +131,6 @@ export default class DirectorTest {
             () => subject.name(direction) === direction,
           );
         });
-      });
-
-      _.method('#constructor, naming', () => {
-        const args = { rowCount: 0, columnCount: 0, Class: {}.constructor };
-        const matrixProxy = _.proxy(new Matrix(args));
-
-        _.allow(matrixProxy).toReceive('alias');
-
-        const [i, j, matrix] = [0, 0, matrixProxy];
-        const subject = new Director({ i, j, matrix });
-        const aliasArgs = [i, j, subject.name()];
-
-        _.expect(matrixProxy).toHaveReceived('alias').withArgs(aliasArgs);
-
-        _.assert(
-          'It calls `matrix.alias()` with element name',
-          () => matrixProxy.isAsExpected(),
-        );
       });
     });
 
@@ -178,25 +217,76 @@ export default class DirectorTest {
           );
         });
       });
+
+      _.method('#above', () => {
+        _.context('When element is at [0][0] inside a 2x2 matrix', () => {
+          const subject = new Director({ i: 0, j: 0, matrix: twoByTwo });
+
+          _.assert(
+            'It returns the stack above',
+            () => subject.above === twoByTwo.stackAbove,
+          );
+        });
+
+        _.context('When element is at [0][1] inside a 2x2 matrix', () => {
+          const subject = new Director({ i: 0, j: 1, matrix: twoByTwo });
+
+          _.assert(
+            'It returns the stack above',
+            () => subject.above === twoByTwo.stackAbove,
+          );
+        });
+      });
+
+      _.method('#below', () => {
+        _.context('When element is at [0][0] inside a 2x2 matrix', () => {
+          const subject = new Director({ i: 0, j: 0, matrix: twoByTwo });
+
+          _.assert(
+            'It returns the stack below',
+            () => subject.below === twoByTwo.stackBelow,
+          );
+        });
+
+        _.context('When element is at [0][1] inside a 2x2 matrix', () => {
+          const subject = new Director({ i: 0, j: 1, matrix: twoByTwo });
+
+          _.assert(
+            'It returns the stack below',
+            () => subject.below === twoByTwo.stackBelow,
+          );
+        });
+      });
     });
 
     _.Class('Director, messaging methods', () => {
       const message = 'message';
       const args = { rowCount: 2, columnCount: 2, Class: {}.constructor };
       const subject = new Director({ i: 0, j: 0, matrix: new Matrix(args) });
+      subject.below.push(1);
       // ^ Tests in this block share one subject but use different directions.
       // #canSend tests sending up and down.
       // #canReceive tests receiving up and down.
       // #send tests sending left and right.
       // #receive tests receiving left and right.
+      // Stack `above` stays empty throughout.
+      // Stack `below` stays non-empty trhoughout.
 
       _.method('#canSend', () => {
-        _.context('When there is no existing message to recipient', () => {
-          const direction = 'up';
-
+        _.context('When sending to a stack', () => {
           _.assert(
             'It returns `true`',
-            () => subject.canSend(direction) === true,
+            () => [
+              subject.canSend('above') === true,
+              subject.canSend('below') === true,
+            ],
+          );
+        });
+
+        _.context('When there is no existing message to recipient', () => {
+          _.assert(
+            'It returns `true`',
+            () => subject.canSend('up') === true,
           );
         });
 
@@ -212,6 +302,20 @@ export default class DirectorTest {
       });
 
       _.method('#canReceive', () => {
+        _.context('When receiving from an empty test stack', () => {
+          _.assert(
+            'It returns `false`',
+            () => subject.canReceive('above') === false,
+          );
+        });
+
+        _.context('When receiving from a non-empty test stack', () => {
+          _.assert(
+            'It returns `true`',
+            () => subject.canReceive('below') === true,
+          );
+        });
+
         _.context('When there is a message to receive', () => {
           const direction = 'up';
           subject.escrow.deposit(direction, subject.name(), message);
@@ -223,17 +327,25 @@ export default class DirectorTest {
         });
 
         _.context('When there is no message to receive', () => {
-          const direction = 'down';
-
           _.assert(
             'It returns `false`',
-            () => subject.canReceive(direction) === false,
+            () => subject.canReceive('down') === false,
           );
         });
       });
 
       _.method('#send', () => {
         const sender = subject.name();
+
+        _.context('When sending message to the non-empty test stack', () => {
+          const direction = 'below';
+          subject.send(direction, message);
+
+          _.assert(
+            'It populates stack with message',
+            () => subject.stackBelow.pop() === message,
+          );
+        });
 
         _.context('When sending message to out of bound', () => {
           const direction = 'left';
@@ -258,6 +370,16 @@ export default class DirectorTest {
       });
 
       _.method('#receive', () => {
+        _.context('When receiving from the non-empty test stack', () => {
+          const direction = 'below';
+          subject.send(direction, message);
+
+          _.assert(
+            'It populates stack with message',
+            () => subject.receive(direction) === message,
+          );
+        });
+
         _.context('When receiving message from out of bound', () => {
           const direction = 'left';
           subject.escrow.deposit(direction, subject.name(), message);

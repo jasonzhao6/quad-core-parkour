@@ -26,6 +26,10 @@ export default class Matrix {
         });
       }
     });
+
+    // Create two stacks accessible to all elements.
+    this.stackAbove = [];
+    this.stackBelow = [];
   }
 
   alias(i, j, alias) {

@@ -1,6 +1,11 @@
 export default class Director {
   static isDirection(direction) {
-    return ['up', 'down', 'left', 'right'].includes(direction);
+    const isNeighbor = ['up', 'down', 'left', 'right'].includes(direction);
+    return isNeighbor || Director.isStack(direction);
+  }
+
+  static isStack(direction) {
+    return ['above', 'below'].includes(direction);
   }
 
   constructor({ i, j, matrix }) {
@@ -9,6 +14,8 @@ export default class Director {
     this.j = j;
     this.matrix = matrix;
     this.escrow = this.matrix.escrow;
+    this.stackAbove = this.matrix.stackAbove;
+    this.stackBelow = this.matrix.stackBelow;
 
     // Name the current element
     this.matrix.alias(i, j, this.name());
@@ -16,6 +23,10 @@ export default class Director {
 
   // Arguments: [undefined] or [direction].
   name(direction) {
+    // Return name of stack.
+    if (direction === 'above') return 'above';
+    if (direction === 'below') return 'below';
+
     // Return name of self.
     if (direction === undefined) return [this.i, this.j].join(':');
 
@@ -50,29 +61,41 @@ export default class Director {
     return this.matrix.get(this.i, this.j + 1);
   }
 
+  get above() { return this.stackAbove; }
+
+  get below() { return this.stackBelow; }
+
   //
   // Messaging
   //
 
   canSend(direction) {
+    if (Director.isStack(direction)) { return true; }
+
     const sender = this.name();
     const recipient = this.name(direction);
     return !this.escrow.has(sender, recipient);
   }
 
   canReceive(direction) {
+    if (Director.isStack(direction)) { return this[direction].length > 0; }
+
     const sender = this.name(direction);
     const recipient = this.name();
     return this.escrow.has(sender, recipient);
   }
 
   send(direction, message) {
+    if (Director.isStack(direction)) { return this[direction].push(message); }
+
     const sender = this.name();
     const recipient = this.name(direction);
     return this.escrow.deposit(sender, recipient, message);
   }
 
   receive(direction) {
+    if (Director.isStack(direction)) { return this[direction].pop(); }
+
     const sender = this.name(direction);
     const recipient = this.name();
     return this.escrow.withdraw(sender, recipient);

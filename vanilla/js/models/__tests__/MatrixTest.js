@@ -20,9 +20,13 @@ export default class MatrixTest {
           );
 
           _.assert(
-            'It initializes the `aliases` state',
+            'It initializes each state',
             () => [
               typeof subject.aliases === 'object',
+              typeof subject.escrow === 'object',
+              subject.arrOfArr instanceof Array,
+              subject.stackAbove instanceof Array,
+              subject.stackBelow instanceof Array,
             ],
           );
         });
