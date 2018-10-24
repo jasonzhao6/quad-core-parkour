@@ -93,8 +93,8 @@ export default class DirectorTest {
           _.assert(
             'It returns name of stack',
             () => [
-              subject.name('above') === `above`,
-              subject.name('below') === `below`,
+              subject.name('above') === 'above',
+              subject.name('below') === 'below',
             ],
           );
         });

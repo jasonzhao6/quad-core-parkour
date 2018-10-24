@@ -63,7 +63,7 @@ export default class LevelTest {
           );
         });
 
-        _.context('When creating a level without `dataOverride`', () => {
+        _.context('When creating a level with `dataOverride`', () => {
           const number = 0;
           const dataOverride = { input: {}, output: {} };
           const subject = new Level({ number, dataOverride });
@@ -137,7 +137,7 @@ export default class LevelTest {
           );
         });
 
-        [...new Array(1 + 13).keys()].splice(0).forEach((i) => {
+        [...new Array(1 + 14).keys()].splice(0).forEach((i) => {
           _.context(`When playing Level ${i}, and there is a solution`, () => {
             const subject = new Level({ number: i });
 

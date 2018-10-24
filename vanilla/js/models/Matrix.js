@@ -12,7 +12,12 @@ export default class Matrix {
     this.aliases = {};
     this.escrow = new Escrow();
 
+    // Create two stacks accessible to all elements.
+    this.stackAbove = [];
+    this.stackBelow = [];
+
     // Create a `rowCount` by `columnCount` matrix.
+    // Note: Do this last in constructor as it passes `this` to each element.
     this.arrOfArr = new Array(this.rowCount);
     [...this.arrOfArr.keys()].forEach((i) => {
       this.arrOfArr[i] = new Array(this.columnCount);
@@ -26,10 +31,6 @@ export default class Matrix {
         });
       }
     });
-
-    // Create two stacks accessible to all elements.
-    this.stackAbove = [];
-    this.stackBelow = [];
   }
 
   alias(i, j, alias) {

@@ -12,6 +12,7 @@ import * as L10 from './10.js'; // Centrifugator
 import * as L11 from './11.js'; // Slider
 import * as L12 from './12.js'; // Multiplier
 import * as L13 from './13.js'; // Divider
+import * as L14 from './14.js'; // Divider
 // Reverser
 // Sorter
 // Filler
@@ -28,6 +29,7 @@ const Levels = [
   L7, L8, L9, L10, L11, L12, L13,
 
   // Stack
+  L14,
 
   // Image
 
