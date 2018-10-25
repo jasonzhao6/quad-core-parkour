@@ -7,7 +7,8 @@ export default class LevelTest {
       _.method('#constructor', () => {
         _.context('When creating Level 0', () => {
           const number = 0;
-          const subject = new Level({ number });
+          const maxCycleCountOverride = 10;
+          const subject = new Level({ number, maxCycleCountOverride });
 
           _.assert(
             'It initializes the `number` property',
@@ -15,7 +16,12 @@ export default class LevelTest {
           );
 
           _.assert(
-            'It initializes `givenInput`, `expectedOutput`, and `solution`',
+            'It initializes the `maxCycleCountOverride` property',
+            () => subject.maxCycleCountOverride === maxCycleCountOverride,
+          );
+
+          _.assert(
+            'It initializes `givenInput`, `expectedOutput` and `solution` data',
             () => [
               subject.givenInputX instanceof Array,
               subject.givenInputY instanceof Array,
@@ -162,11 +168,12 @@ export default class LevelTest {
       _.method('#cycle', () => {
         _.context('When playing Level 0, and there is no solution', () => {
           const number = 0;
-          const subject = new Level({ number });
+          const maxCycleCountOverride = 100;
+          const subject = new Level({ number, maxCycleCountOverride });
 
           _.assert(
-            'It cycles until `MAX_CYCLE_COUNT` is reached',
-            () => subject.cycle() === Level.MAX_CYCLE_COUNT,
+            'It cycles until `maxCycleCountOverride` is reached',
+            () => subject.cycle() === maxCycleCountOverride,
           );
         });
 

@@ -6,15 +6,16 @@ import Matrix from './Matrix.js';
 import data from './levelData/all.js';
 
 export default class Level {
-  static get MAX_CYCLE_COUNT() { return 400; }
+  static get MAX_CYCLE_COUNT() { return 40000; }
 
   static get MATRIX_SIZE() { return { rowCount: 2, columnCount: 2 }; }
   static get INPUT() { return { X: 'input.x', Y: 'input.y' }; }
   static get OUTPUT() { return { X: 'output.x', Y: 'output.y' }; }
 
-  constructor({ number, dataOverride }) {
+  constructor({ number, maxCycleCountOverride, dataOverride }) {
     // Props
     this.number = number;
+    this.maxCycleCountOverride = maxCycleCountOverride;
 
     // Data
     const { input, output, solution } = dataOverride || data[number];
@@ -87,7 +88,8 @@ export default class Level {
   }
 
   shouldCycleAgain() {
-    if (this.cycleCount >= Level.MAX_CYCLE_COUNT) return false;
+    const maxCycleCount = this.maxCycleCountOverride || Level.MAX_CYCLE_COUNT;
+    if (this.cycleCount >= maxCycleCount) return false;
 
     return [
       this.outputX.join() === this.expectedOutputX.join(),
