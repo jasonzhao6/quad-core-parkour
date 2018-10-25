@@ -11,26 +11,23 @@ export const output = {
 };
 
 export const solution = {
-  cycleCount: 92,
+  cycleCount: 81,
   lines: {
     '0,0': [
+      'init: mov 0 above',
       'start: mov up acc',
       'jez output',
       'stack: mov acc above',
-      'count: swp',
-      'add 1',
-      'sav',
       'jmp start',
-      'output: swp',
-      'mov acc down',
+      'output: mov 0 down',
       'wait: mov down acc',
     ],
     '1,0': [
       'mov up acc',
+      'output: mov above acc',
       'jez terminate',
-      'reverse: sub 1',
-      'mov above down',
-      'jgz reverse',
+      'mov acc down',
+      'jmp output',
       'terminate: mov 0 down',
       'mov 0 up',
     ],
