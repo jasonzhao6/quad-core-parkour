@@ -60,6 +60,10 @@ export default class LineManager {
       case 'sav': return this.core.save();
       case 'swp': return this.core.swap();
 
+      // TODO turn into a user command
+      // case 'dbg': debugger;
+
+      // Should be unreachable by user
       default: return undefined;
     }
   }
