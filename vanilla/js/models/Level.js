@@ -12,17 +12,19 @@ export default class Level {
   static get INPUT() { return { X: 'input.x', Y: 'input.y' }; }
   static get OUTPUT() { return { X: 'output.x', Y: 'output.y' }; }
 
-  constructor({ number, maxCycleCountOverride, dataOverride }) {
+  // eslint-disable-next-line object-curly-newline
+  constructor({ number, goBig, maxCycleCountOverride, dataOverride }) {
     // Props
     this.number = number;
+    this.goBig = goBig;
     this.maxCycleCountOverride = maxCycleCountOverride;
 
     // Data
     const { input, output, solution } = dataOverride || data[number];
-    this.givenInputX = input.x || [];
-    this.givenInputY = input.y || [];
-    this.expectedOutputX = output.x || [];
-    this.expectedOutputY = output.y || [];
+    this.givenInputX = (this.goBig ? input.xBig : input.x) || [];
+    this.givenInputY = (this.goBig ? input.yBig : input.y) || [];
+    this.expectedOutputX = (this.goBig ? output.xBig : output.x) || [];
+    this.expectedOutputY = (this.goBig ? output.yBig : output.y) || [];
     this.solution = solution;
 
     // States

@@ -7,17 +7,17 @@ export default class LevelTest {
       _.method('#constructor', () => {
         _.context('When creating Level 0', () => {
           const number = 0;
+          const goBig = true;
           const maxCycleCountOverride = 10;
-          const subject = new Level({ number, maxCycleCountOverride });
+          const subject = new Level({ number, goBig, maxCycleCountOverride });
 
           _.assert(
-            'It initializes the `number` property',
-            () => subject.number === number,
-          );
-
-          _.assert(
-            'It initializes the `maxCycleCountOverride` property',
-            () => subject.maxCycleCountOverride === maxCycleCountOverride,
+            'It initializes properties',
+            () => [
+              subject.number === number,
+              subject.goBig === goBig,
+              subject.maxCycleCountOverride === maxCycleCountOverride,
+            ],
           );
 
           _.assert(
@@ -179,7 +179,8 @@ export default class LevelTest {
 
         [...new Array(1 + 16).keys()].splice(0).forEach((i) => {
           _.context(`When playing Level ${i}, and there is a solution`, () => {
-            const subject = new Level({ number: i });
+            const [number, goBig] = [i, false];
+            const subject = new Level({ number, goBig });
 
             subject.solve();
 
@@ -206,7 +207,9 @@ export default class LevelTest {
 
             _.assert(
               'It finishes with the expected `cycleCount`',
-              () => subject.cycle() === subject.solution.cycleCount,
+              () => subject.cycle() === (goBig
+                ? subject.solution.cycleCountBig
+                : subject.solution.cycleCount),
             );
           });
         });
