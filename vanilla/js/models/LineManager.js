@@ -61,7 +61,7 @@ export default class LineManager {
       case 'swp': return this.core.swap();
 
       // TODO turn into a user command
-      // case 'dbg': debugger;
+      // case 'pry': debugger;
 
       // Should be unreachable by user
       default: return undefined;

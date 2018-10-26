@@ -6,7 +6,7 @@ import Matrix from './Matrix.js';
 import data from './levelData/all.js';
 
 export default class Level {
-  static get MAX_CYCLE_COUNT() { return 40000; }
+  static get MAX_CYCLE_COUNT() { return 1000; }
 
   static get MATRIX_SIZE() { return { rowCount: 2, columnCount: 2 }; }
   static get INPUT() { return { X: 'input.x', Y: 'input.y' }; }
