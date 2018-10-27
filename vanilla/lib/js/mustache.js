@@ -1,5 +1,8 @@
 // https://github.com/janl/mustache.js/releases/tag/v3.0.0
 
+// MONKEY PATCHES:
+// 1. Fix "Cannot set property 'Mustache' of undefined" error.
+
 /* eslint-disable */
 
 /*!
@@ -18,7 +21,7 @@
     global.Mustache = {};
     factory(global.Mustache); // script, wsh, asp
   }
-}(this, function mustacheFactory (mustache) {
+}(this || window, function mustacheFactory (mustache) {
 
   var objectToString = Object.prototype.toString;
   var isArray = Array.isArray || function isArrayPolyfill (object) {
