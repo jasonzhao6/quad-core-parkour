@@ -64,8 +64,8 @@
 import TestCasePrinter from './__TestCasePrinter__.js';
 import TestProxy from './__TestProxy__.js';
 
-// Libs
-import './lib/js/seedrandom.js';
+// Testing lib
+import './lib/js/__seedrandom__.js';
 
 export default class TestHarness {
   constructor(seed, PrinterOverride) {
