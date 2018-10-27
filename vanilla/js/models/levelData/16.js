@@ -1,17 +1,32 @@
+export const info = [
+  'Sequences are zero-terminated',
+  'Read a sequence from in.x',
+  'Sort it, then write it to out.x',
+];
+
+const sort = arr => arr.slice(0, -1)
+  .join().split(',0').map(sequence => sequence.split(',').filter(n => n !== ''))
+  .map(sequence => sequence.map(n => parseInt(n, 10)))
+  .map(sequence => [...sequence.sort((a, b) => a - b), 0])
+  .flat();
+
 export const input = {
   x: [1, 6, 7, 8, 7, 4, 8, 9, 0, 0],
+
+  /* eslint-disable max-len */
+  xBig: [58, 2, 29, 53, 76, 30, 16, 88, 80, 69, 0, 0, 0, 0, 95, 22, 37, 4, 71, 27, 24, 38, 85, 99, 71, 45, 94, 54, 89, 95, 2, 5, 65, 56, 1, 22, 7, 11, 81, 0],
+  /* eslint-enable max-len */
 };
 
 export const output = {
-  x: input.x.slice(0, -1)
-    .join('').split('0').map(sequence => sequence.split(''))
-    .map(sequence => [...sequence.sort(), 0])
-    .flat()
-    .map(n => parseInt(n, 10)),
+  x: sort(input.x),
+
+  xBig: sort(input.xBig),
 };
 
 export const solution = {
   cycleCount: 357,
+  cycleCountBig: 5697,
   lines: {
     '0,0': [
       'init: mov 0 above',
@@ -20,7 +35,7 @@ export const solution = {
       'mov acc above',
       'jmp start',
       'terminate: mov 0 right',
-      'mov 99 below',
+      'mov 100 below',
       'wait1: mov right acc',
       'mov 0 down',
       'wait2: mov down acc',
@@ -41,7 +56,7 @@ export const solution = {
       'wait: mov up acc',
       'output: mov below acc',
       'sav',
-      'sub 99',
+      'sub 100',
       'jez terminate',
       'swp',
       'mov acc down',

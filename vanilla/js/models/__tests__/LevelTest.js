@@ -177,10 +177,10 @@ export default class LevelTest {
           );
         });
 
-        [...new Array(1 + 16).keys()].splice(0).forEach((i) => {
+        [...new Array(1 + 16).keys()].slice(0).forEach((i) => {
           _.context(`When playing Level ${i}, and there is a solution`, () => {
-            const [number, goBig] = [i, false];
-            const subject = new Level({ number, goBig });
+            const goBig = false; // Big data set is about 5x slower than small.
+            const subject = new Level({ number: i, goBig });
 
             subject.solve();
 

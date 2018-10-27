@@ -1,18 +1,35 @@
+export const info = [
+  'Read values from in.x and in.y',
+  'Write 0 if in.x goes from 0 to 1',
+  'Write 1 if in.y goes from 0 to 1',
+  'Will not happen at the same time',
+];
+
+const zeroToOne = (arr1, arr2) => arr1.map((a, i) => {
+  if ([1, ...arr1][i] === 0 && a === 1) return 0;
+  else if ([1, ...arr2][i] === 0 && arr2[i] === 1) return 1;
+  return -1;
+});
+
 export const input = {
   x: [0, 1, 1, 1, 0, 0, 0, 1, 1, 0],
   y: [1, 0, 1, 0, 0, 1, 1, 0, 1, 0],
+
+  /* eslint-disable max-len */
+  xBig: [0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0],
+  yBig: [1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1],
+  /* eslint-enable max-len */
 };
 
 export const output = {
-  y: input.x.map((x, i) => {
-    if ([1, input.x].flat()[i] === 0 && x === 1) return 0;
-    else if ([1, input.y].flat()[i] === 0 && input.y[i] === 1) return 1;
-    return -1;
-  }),
+  y: zeroToOne(input.x, input.y),
+
+  yBig: zeroToOne(input.xBig, input.yBig),
 };
 
 export const solution = {
   cycleCount: 63,
+  cycleCountBig: 610,
   lines: {
     '0,0': [
       'duplicate: mov up acc',

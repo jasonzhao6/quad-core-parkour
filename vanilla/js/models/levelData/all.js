@@ -8,7 +8,7 @@ import * as L6 from './06.js'; // Accumulator
 import * as L7 from './07.js'; // Desensitizer
 import * as L8 from './08.js'; // Ignitor
 import * as L9 from './09.js'; // Stabilizer
-import * as L10 from './10.js'; // Centrifugator
+import * as L10 from './10.js'; // MinMaxer
 import * as L11 from './11.js'; // Slider
 import * as L12 from './12.js'; // Multiplier
 import * as L13 from './13.js'; // Divider
