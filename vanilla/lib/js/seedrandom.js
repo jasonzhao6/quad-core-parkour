@@ -1,3 +1,5 @@
+// https://github.com/davidbau/seedrandom/releases/tag/2.4.4
+
 /* eslint-disable */
 
 /*
