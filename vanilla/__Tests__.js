@@ -10,13 +10,13 @@ import TestHarnessTest from './__tests__/TestHarnessTest.js';
 import TestProxyTest from './__tests__/TestProxyTest.js';
 
 // Model tests
-import CoreTest from './js/models/__tests__/CoreTest.js';
-import DirectorTest from './js/models/__tests__/DirectorTest.js';
-import EscrowTest from './js/models/__tests__/EscrowTest.js';
-import LevelTest from './js/models/__tests__/LevelTest.js';
-import LineManagerTest from './js/models/__tests__/LineManagerTest.js';
-import LineWorkerTest from './js/models/__tests__/LineWorkerTest.js';
-import MatrixTest from './js/models/__tests__/MatrixTest.js';
+import CoreTest from './models/__tests__/CoreTest.js';
+import DirectorTest from './models/__tests__/DirectorTest.js';
+import EscrowTest from './models/__tests__/EscrowTest.js';
+import LevelTest from './models/__tests__/LevelTest.js';
+import LineManagerTest from './models/__tests__/LineManagerTest.js';
+import LineWorkerTest from './models/__tests__/LineWorkerTest.js';
+import MatrixTest from './models/__tests__/MatrixTest.js';
 
 export default class Tests {
   static enqueue(_) {

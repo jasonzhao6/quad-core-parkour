@@ -1,5 +1,5 @@
 /* 3rd party dependencies */
-@import './lib/css/reset.css';
+@import './3rdParty/css/reset.css';
 
 /* App dependencies */
-@import './js/views/LevelView.css';
+@import './views/LevelView.css';
