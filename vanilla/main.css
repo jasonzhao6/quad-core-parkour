@@ -5,8 +5,8 @@
 @import './views/LevelView.css';
 
 body {
-  background-color: #000;
-  color: #cecece;
+  background-color: #181818;
+  color: #f7f7f7;
   font-family: 'VT323', monospace;
   font-size: 20px;
   text-transform: uppercase;
