@@ -7,12 +7,11 @@ export default class InfoView {
       calc: () => 'View',
     };
 
-    return _.render(`
+    return _.renderBox(`
       <div class='InfoView'>
-        <div class='info box'>
-          <p>> Read a value from in.x and write the value to out.x</p>
-          <p>> Read a value from in.y and write the value to out.y</p>
-        </div>
+        {{title}} {{calc}}
+        <p>&gt; Read a value from in.x and write the value to out.x</p>
+        <p>&gt; Read a value from in.y and write the value to out.y</p>
       </div>
     `, view);
   }

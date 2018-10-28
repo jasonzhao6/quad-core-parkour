@@ -1,0 +1,8 @@
+.BoxView {
+  border: 1px solid white;
+}
+
+.BoxViewInner {
+  border: 1px solid white;
+  margin: 1px;
+}

@@ -2,6 +2,7 @@
 @import './3rdParty/css/reset.css';
 
 /* App dependencies */
+@import './views/BoxView.css';
 @import './views/LevelView.css';
 
 body {
