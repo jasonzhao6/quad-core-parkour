@@ -1,13 +1,13 @@
-import View from './View.js';
+import { ViewHelper as _ } from './ViewHelper.js';
 
-export default class MatrixView extends View {
+export default class MatrixView {
   render() {
     const view = {
       title: 'Matrix',
       calc: () => 'View',
     };
 
-    return super.render(`
+    return _.render(`
       <div class='MatrixView'>
         {{title}} {{calc}}
       </div>

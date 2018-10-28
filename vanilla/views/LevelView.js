@@ -1,9 +1,9 @@
-import View from './View.js';
+import { ViewHelper as _ } from './ViewHelper.js';
 
 import InfoView from './InfoView.js';
 import MatrixView from './MatrixView.js';
 
-export default class LevelView extends View {
+export default class LevelView {
   render() {
     const view = {
       title: 'Level',
@@ -13,9 +13,10 @@ export default class LevelView extends View {
     const infoView = new InfoView().render();
     const matrixView = new MatrixView().render();
 
-    return super.render(`
+    return _.render(`
       <div class='LevelView'>
         {{title}} {{calc}}
+        <div class='title'>&mdash; Tutorial &mdash;</div>
         {{>infoView}}
         {{>matrixView}}
       </div>

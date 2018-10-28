@@ -1,15 +1,14 @@
-import View from './View.js';
+import { ViewHelper as _ } from './ViewHelper.js';
 
-export default class InfoView extends View {
+export default class InfoView {
   render() {
     const view = {
       title: 'Info',
       calc: () => 'View',
     };
 
-    return super.render(`
+    return _.render(`
       <div class='InfoView'>
-        <div class='title'>&mdash; Tutorial &mdash;</div>
         <div class='info box'>
           <p>> Read a value from in.x and write the value to out.x</p>
           <p>> Read a value from in.y and write the value to out.y</p>
