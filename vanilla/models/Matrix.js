@@ -6,7 +6,6 @@ export default class Matrix {
     // Props
     this.rowCount = rowCount;
     this.columnCount = columnCount;
-    this.Class = Class;
 
     // States
     this.aliases = {};
@@ -18,16 +17,16 @@ export default class Matrix {
 
     // Create a `rowCount` by `columnCount` matrix.
     // Note: Do this last in constructor as it passes `this` to each element.
-    this.arrOfArr = new Array(this.rowCount);
+    this.arrOfArr = new Array(rowCount);
     [...this.arrOfArr.keys()].forEach((i) => {
-      this.arrOfArr[i] = new Array(this.columnCount);
+      this.arrOfArr[i] = new Array(columnCount);
 
       // If `Class` is passed in, populate each element with an instance of it.
-      if (this.Class) {
+      if (Class) {
         [...this.arrOfArr[i].keys()].forEach((j) => {
           // Inject into each instance a director to faciliate collaboration.
           const director = new Director({ i, j, matrix: this });
-          this.arrOfArr[i][j] = new this.Class({ director });
+          this.arrOfArr[i][j] = new Class({ director });
         });
       }
     });

@@ -16,7 +16,6 @@ export default class MatrixTest {
             () => [
               subject.rowCount === rowCount,
               subject.columnCount === columnCount,
-              subject.Class === Class,
             ],
           );
 
