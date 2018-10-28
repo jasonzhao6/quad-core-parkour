@@ -7,9 +7,14 @@
 @import './views/InfoView.css';
 @import './views/LevelView.css';
 
+:root {
+  --main-bg-color: #181818;
+  --main-color: #f7f7f7;
+}
+
 body {
-  background-color: #181818;
-  color: #f7f7f7;
+  background-color: var(--main-bg-color);
+  color: var(--main-color);
   font-family: 'VT323', monospace;
   font-size: 18px;
   letter-spacing: 1px;
