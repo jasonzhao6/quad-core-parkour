@@ -14,8 +14,10 @@ export default class LevelTest {
           );
 
           _.assert(
-            'It initializes `givenInput`, `expectedOutput` and `solution` data',
+            'It initializes data props',
             () => [
+              typeof subject.title === 'string',
+              subject.info instanceof Array,
               subject.givenInputX instanceof Array,
               subject.givenInputY instanceof Array,
               subject.expectedOutputX instanceof Array,
@@ -101,15 +103,21 @@ export default class LevelTest {
         });
 
         _.context('When creating a level with `dataOverride`', () => {
+          const title = 'title';
+          const info = ['info'];
           const input = { x: [], y: [] };
           const output = { x: [], y: [] };
           const solution = 'solution';
-          const dataOverride = { input, output, solution };
+
+          // eslint-disable-next-line object-curly-newline
+          const dataOverride = { title, info, input, output, solution };
           const subject = new Level({ number: 0, dataOverride });
 
           _.assert(
             'It overrides `givenInput`, `expectedOutput`, and `solution`',
             () => [
+              subject.title === dataOverride.title,
+              subject.info === dataOverride.info,
               subject.givenInputX === dataOverride.input.x,
               subject.givenInputY === dataOverride.input.y,
               subject.expectedOutputX === dataOverride.output.x,

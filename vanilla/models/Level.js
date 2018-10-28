@@ -3,7 +3,7 @@ import Core from './Core.js';
 import Matrix from './Matrix.js';
 
 // Level data
-import data from './levelData/all.js';
+import levelData from './levelData/all.js';
 
 export default class Level {
   static get MAX_CYCLE_COUNT() { return 10000; }
@@ -18,12 +18,14 @@ export default class Level {
     this.maxCycleCount = maxCycleCountOverride || Level.MAX_CYCLE_COUNT;
 
     // Data
-    const { input, output, solution } = dataOverride || data[number];
-    this.givenInputX = (goBig ? input.xBig : input.x) || [];
-    this.givenInputY = (goBig ? input.yBig : input.y) || [];
-    this.expectedOutputX = (goBig ? output.xBig : output.x) || [];
-    this.expectedOutputY = (goBig ? output.yBig : output.y) || [];
-    this.solution = solution;
+    const data = dataOverride || levelData[number];
+    this.title = data.title;
+    this.info = data.info;
+    this.givenInputX = (goBig ? data.input.xBig : data.input.x) || [];
+    this.givenInputY = (goBig ? data.input.yBig : data.input.y) || [];
+    this.expectedOutputX = (goBig ? data.output.xBig : data.output.x) || [];
+    this.expectedOutputY = (goBig ? data.output.yBig : data.output.y) || [];
+    this.solution = data.solution;
 
     // States
     this.cycleCount = 0;
