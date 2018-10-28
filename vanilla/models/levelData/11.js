@@ -33,7 +33,7 @@ export const solution = {
       'mov acc right',
     ],
     '0,1': [
-      'pass-through: mov left down',
+      'pass-thru: mov left down',
       'delay-2x: swp',
       'mov acc down',
       'mov left acc',
@@ -44,7 +44,7 @@ export const solution = {
       'sub right',
     ],
     '1,1': [
-      'pass-through: mov up left',
+      'pass-thru: mov up left',
       'delay-2x: swp',
       'mov acc left',
       'mov up acc',

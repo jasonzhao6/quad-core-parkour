@@ -1,5 +1,7 @@
 import { ViewHelper as _ } from './ViewHelper.js';
 
+import CoreView from './CoreView.js';
+
 export default class MatrixView {
   render() {
     const view = {
@@ -7,10 +9,13 @@ export default class MatrixView {
       calc: () => 'View',
     };
 
+    const coreView = new CoreView().render();
+
     return _.render(`
       <div class='MatrixView'>
         {{title}} {{calc}}
+        {{>coreView}}
       </div>
-    `, view);
+    `, view, { coreView });
   }
 }
