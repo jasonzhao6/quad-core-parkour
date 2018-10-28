@@ -1,3 +1,5 @@
+/* global document */
+
 // Dev / test environment
 import './__FileWatcherClient__.js';
 import './__Tests__.js';

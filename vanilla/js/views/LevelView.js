@@ -1,13 +1,16 @@
-export default class LevelView {
-  // constructor() {
-  // };
+import View from './View.js';
 
+export default class LevelView extends View {
   render() {
     const view = {
       title: 'Hello',
       calc: () => 'World',
     };
 
-    return Mustache.render('{{title}} {{calc}}', view);
+    return super.render(`
+      <div class='LevelView'>
+        {{title}} {{calc}}
+      </div>
+    `, view);
   }
 }
