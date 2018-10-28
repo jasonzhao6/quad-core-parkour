@@ -1,18 +1,22 @@
 import { ViewHelper as _ } from './ViewHelper.js';
 
 export default class BoxView {
-  constructor({ template, view }) {
-    this.template = template;
-    this.view = view;
+  constructor({ boxConfig, template, view }) {
+    // Props
+    const { width, height } = boxConfig;
+    this.view = Object.assign(view, {
+      style: _.renderStyle({ width, height }),
+    });
+    this.partials = { template };
   }
 
   render() {
     return _.render(`
-      <div class='BoxView'>
+      <div class='BoxView' style='{{style}}'>
         <div class='BoxViewInner'>
           {{> template}}
         </div>
       </div>
-    `, this.view, { template: this.template });
+    `, this.view, this.partials);
   }
 }

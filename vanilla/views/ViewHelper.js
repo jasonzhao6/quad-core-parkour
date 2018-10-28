@@ -8,7 +8,12 @@ export class ViewHelper {
     return Mustache.render(template, view, partials);
   }
 
-  static renderBox(template, view) {
-    return new BoxView({ template, view }).render();
+  static renderBox(boxConfig, template, view) {
+    return new BoxView({ boxConfig, template, view }).render();
+  }
+
+  static renderStyle(hash) {
+    return Object.entries(hash)
+      .map(([key, value]) => `${key}: ${value};`).join('\n');
   }
 }

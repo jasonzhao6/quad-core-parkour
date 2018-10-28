@@ -4,5 +4,6 @@
 
 .BoxViewInner {
   border: 1px solid white;
+  height: calc(100% - 2px);
   margin: 1px;
 }

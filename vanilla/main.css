@@ -1,4 +1,5 @@
 /* 3rd party dependencies */
+@import './3rdParty/css/boxSizing.css';
 @import './3rdParty/css/reset.css';
 
 /* App dependencies */
