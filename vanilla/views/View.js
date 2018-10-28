@@ -1,7 +1,7 @@
 /* global Mustache */
 
 export default class View {
-  render(template, view) {
-    return Mustache.render(template, view);
+  render(template, view, partials) {
+    return Mustache.render(template, view, partials);
   }
 }
