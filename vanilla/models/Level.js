@@ -15,16 +15,14 @@ export default class Level {
   // eslint-disable-next-line object-curly-newline
   constructor({ number, goBig, maxCycleCountOverride, dataOverride }) {
     // Props
-    this.number = number;
-    this.goBig = goBig;
-    this.maxCycleCountOverride = maxCycleCountOverride;
+    this.maxCycleCount = maxCycleCountOverride || Level.MAX_CYCLE_COUNT;
 
     // Data
     const { input, output, solution } = dataOverride || data[number];
-    this.givenInputX = (this.goBig ? input.xBig : input.x) || [];
-    this.givenInputY = (this.goBig ? input.yBig : input.y) || [];
-    this.expectedOutputX = (this.goBig ? output.xBig : output.x) || [];
-    this.expectedOutputY = (this.goBig ? output.yBig : output.y) || [];
+    this.givenInputX = (goBig ? input.xBig : input.x) || [];
+    this.givenInputY = (goBig ? input.yBig : input.y) || [];
+    this.expectedOutputX = (goBig ? output.xBig : output.x) || [];
+    this.expectedOutputY = (goBig ? output.yBig : output.y) || [];
     this.solution = solution;
 
     // States
@@ -90,8 +88,7 @@ export default class Level {
   }
 
   shouldCycleAgain() {
-    const maxCycleCount = this.maxCycleCountOverride || Level.MAX_CYCLE_COUNT;
-    if (this.cycleCount >= maxCycleCount) return false;
+    if (this.cycleCount >= this.maxCycleCount) return false;
 
     return [
       this.outputX.join() === this.expectedOutputX.join(),

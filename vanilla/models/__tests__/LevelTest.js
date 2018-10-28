@@ -6,18 +6,11 @@ export default class LevelTest {
     _.Class('Level', () => {
       _.method('#constructor', () => {
         _.context('When creating Level 0', () => {
-          const number = 0;
-          const goBig = true;
-          const maxCycleCountOverride = 10;
-          const subject = new Level({ number, goBig, maxCycleCountOverride });
+          const subject = new Level({ number: 0 });
 
           _.assert(
-            'It initializes properties',
-            () => [
-              subject.number === number,
-              subject.goBig === goBig,
-              subject.maxCycleCountOverride === maxCycleCountOverride,
-            ],
+            'It initializes the `maxCycleCount` prop',
+            () => subject.maxCycleCount === Level.MAX_CYCLE_COUNT,
           );
 
           _.assert(
@@ -97,13 +90,22 @@ export default class LevelTest {
           );
         });
 
+        _.context('When creating a level with `maxCycleCountOverride`', () => {
+          const maxCycleCountOverride = 10;
+          const subject = new Level({ number: 0, maxCycleCountOverride });
+
+          _.assert(
+            'It overrides `maxCycleCount`',
+            () => subject.maxCycleCount === maxCycleCountOverride,
+          );
+        });
+
         _.context('When creating a level with `dataOverride`', () => {
-          const number = 0;
           const input = { x: [], y: [] };
           const output = { x: [], y: [] };
           const solution = 'solution';
           const dataOverride = { input, output, solution };
-          const subject = new Level({ number, dataOverride });
+          const subject = new Level({ number: 0, dataOverride });
 
           _.assert(
             'It overrides `givenInput`, `expectedOutput`, and `solution`',
@@ -118,9 +120,8 @@ export default class LevelTest {
         });
 
         _.context('When creating a level without any input nor output', () => {
-          const number = 0;
           const dataOverride = { input: {}, output: {} };
-          const subject = new Level({ number, dataOverride });
+          const subject = new Level({ number: 0, dataOverride });
 
           _.assert(
             'It initializes input and output states to empty arrays',
@@ -134,10 +135,9 @@ export default class LevelTest {
         });
 
         _.context('When creating a level with one input', () => {
-          const number = 0;
           const inputX = [1];
           const dataOverride = { input: { x: inputX }, output: {} };
-          const subject = new Level({ number, dataOverride });
+          const subject = new Level({ number: 0, dataOverride });
 
           _.assert(
             'It initializes only one input',
@@ -149,11 +149,10 @@ export default class LevelTest {
         });
 
         _.context('When creating a level with two inputs', () => {
-          const number = 0;
           const [inputX, inputY] = [[1], [2]];
           const output = { x: [3], y: [4] };
           const dataOverride = { input: { x: inputX, y: inputY }, output };
-          const subject = new Level({ number, dataOverride });
+          const subject = new Level({ number: 0, dataOverride });
 
           _.assert(
             'It initializes both inputs',
@@ -167,9 +166,8 @@ export default class LevelTest {
 
       _.method('#cycle', () => {
         _.context('When playing Level 0, and there is no solution', () => {
-          const number = 0;
           const maxCycleCountOverride = 100;
-          const subject = new Level({ number, maxCycleCountOverride });
+          const subject = new Level({ number: 0, maxCycleCountOverride });
 
           _.assert(
             'It cycles until `maxCycleCountOverride` is reached',
