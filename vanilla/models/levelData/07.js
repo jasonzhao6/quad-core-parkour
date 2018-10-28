@@ -1,3 +1,5 @@
+export const title = 'Desensitizer';
+
 export const info = [
   'Read a value from in.x',
   'Compare to previous value',

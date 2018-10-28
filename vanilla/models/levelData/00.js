@@ -1,3 +1,5 @@
+export const title = 'Tutorial';
+
 export const info = [
   'Read a value from in.x and write the value to out.x',
   'Read a value from in.y and write the value to out.y',

@@ -1,3 +1,5 @@
+export const title = 'Dispatcher';
+
 export const info = [
   'Read a value from in.x',
   'Write 1 to out.x if in.x > 0',

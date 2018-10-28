@@ -1,3 +1,5 @@
+export const title = 'Divider';
+
 export const info = [
   'Read values from in.x and in.y',
   'Write in.x / in.y to out.x',

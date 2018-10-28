@@ -1,3 +1,5 @@
+export const title = 'Ignitor';
+
 export const info = [
   'Read values from in.x and in.y',
   'Write 0 if in.x goes from 0 to 1',

@@ -1,3 +1,5 @@
+export const title = 'Inverter';
+
 export const info = [
   'Read values from in.x and in.y',
   'Write in.x to out.y if in.y = 1',

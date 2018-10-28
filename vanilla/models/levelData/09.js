@@ -1,3 +1,5 @@
+export const title = 'Stabilizer';
+
 export const info = [
   'Read a value from in.x',
   'Compare to previous values',

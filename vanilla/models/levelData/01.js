@@ -1,3 +1,5 @@
+export const title = 'Adder';
+
 export const info = [
   'Read a value from in.x',
   'Double the value',

@@ -1,3 +1,5 @@
+export const title = 'Slider';
+
 export const info = [
   'Read a value from in.x',
   'Add up the last 5 values',

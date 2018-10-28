@@ -1,3 +1,5 @@
+export const title = 'MinMaxer';
+
 export const info = [
   'Sequences are zero-terminated',
   'Read a sequence from in.x',

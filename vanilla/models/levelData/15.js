@@ -1,3 +1,5 @@
+export const title = 'Indexer';
+
 export const info = [
   'Read the sequence from in.x',
   'Sequence is zero-terminated',

@@ -1,3 +1,5 @@
+export const title = 'Comparator';
+
 export const info = [
   'Read values from in.x and in.y',
   'Write the smaller value to out.y',
