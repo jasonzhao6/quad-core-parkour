@@ -12,6 +12,7 @@ export default class BoxView {
 
   render() {
     return _.render(`
+      {{title}} {{calc}}
       <div class='BoxView' style='{{style}}'>
         <div class='BoxViewInner'>
           {{> template}}

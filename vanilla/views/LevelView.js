@@ -14,11 +14,15 @@ export default class LevelView {
     const matrixView = new MatrixView().render();
 
     return _.render(`
+      {{title}} {{calc}}
       <div class='LevelView'>
-        {{title}} {{calc}}
-        <div class='title'>&mdash; Tutorial &mdash;</div>
-        {{>infoView}}
-        {{>matrixView}}
+        <div>
+          <div class='title'>&mdash; Tutorial &mdash;</div>
+          {{>infoView}}
+        </div>
+        <div>
+          {{>matrixView}}
+        </div>
       </div>
     `, view, { infoView, matrixView });
   }

@@ -6,6 +6,7 @@
 @import './views/BoxView.css';
 @import './views/InfoView.css';
 @import './views/LevelView.css';
+@import './views/MatrixView.css';
 
 :root {
   --main-bg-color: #181818;
