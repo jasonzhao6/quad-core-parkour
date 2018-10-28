@@ -4,12 +4,15 @@
 
 /* App dependencies */
 @import './views/BoxView.css';
+@import './views/InfoView.css';
 @import './views/LevelView.css';
 
 body {
   background-color: #181818;
   color: #f7f7f7;
   font-family: 'VT323', monospace;
-  font-size: 20px;
+  font-size: 18px;
+  letter-spacing: 1px;
+  line-height: 18px;
   text-transform: uppercase;
 }

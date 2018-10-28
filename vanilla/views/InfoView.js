@@ -8,14 +8,20 @@ export default class InfoView {
     };
 
     return _.renderBox({
-      width: '200px',
-      height: '200px',
+      width: '310px',
+      height: '90px',
     }, `
       <div class='InfoView'>
-        {{title}} {{calc}}
-        <p>&gt; Read a value from in.x and write the value to out.x</p>
-        <p>&gt; Read a value from in.y and write the value to out.y</p>
+        <ol>
+          {{!<li>Read values from in.x and in.y</li>}}
+          {{!<li>Write 0 if in.x goes from 0 to 1</li>}}
+          {{!<li>Write 1 if in.y goes from 0 to 1</li>}}
+          {{!<li>Will not happen at the same time</li>}}
+          <li>Read a value from in.x and write the value to out.x</li>
+          <li>Read a value from in.y and write the value to out.y</li>
+        </ol>
       </div>
     `, view);
   }
 }
+

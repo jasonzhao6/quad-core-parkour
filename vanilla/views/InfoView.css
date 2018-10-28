@@ -1,0 +1,10 @@
+.InfoView li {
+  padding-left: 15px;
+  position: relative;
+}
+
+.InfoView li:before {
+  content: '>';
+  position: absolute;
+  left: 0px;
+}
