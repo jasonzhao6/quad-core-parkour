@@ -3,10 +3,8 @@ import { ViewHelper as _ } from './ViewHelper.js';
 export default class BoxView {
   constructor({ boxConfig, template, view }) {
     // Props
-    const { width, height } = boxConfig;
-    this.view = Object.assign(view, {
-      style: _.renderStyle({ width, height }),
-    });
+    this.boxConfig = boxConfig;
+    this.view = view;
     this.partials = { template };
   }
 

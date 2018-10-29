@@ -8,10 +8,7 @@ export default class InfoView {
       wrap: false,
     };
 
-    return _.renderBox({
-      width: '300px',
-      height: '80px',
-    }, `
+    return _.renderBox({}, `
       <div class='InfoView'>
         <ol>
           {{^wrap}}

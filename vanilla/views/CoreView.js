@@ -7,10 +7,7 @@ export default class CoreView {
       calc: () => 'View',
     };
 
-    return _.renderBox({
-      width: '260px',
-      height: '240px',
-    }, `
+    return _.renderBox({}, `
       <div class='CoreView'>
         <ol>
           <li>start: mov left acc</li>
