@@ -5,6 +5,7 @@
 /* App dependencies */
 @import './views/BoxView.css';
 @import './views/InfoView.css';
+@import './views/CoreView.css';
 @import './views/LevelView.css';
 @import './views/MatrixView.css';
 

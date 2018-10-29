@@ -1,2 +1,12 @@
 .MatrixView {
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  justify-content: space-between;
+  width: 600px;
+}
+
+.MatrixView .row {
+  display: flex;
+  justify-content: space-between;
 }

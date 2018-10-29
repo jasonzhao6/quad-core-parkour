@@ -14,7 +14,6 @@ export default class LevelView {
     const matrixView = new MatrixView().render();
 
     return _.render(`
-      {{title}} {{calc}}
       <div class='LevelView'>
         <div>
           <div class='title'>&mdash; Tutorial &mdash;</div>

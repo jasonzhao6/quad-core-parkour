@@ -13,8 +13,14 @@ export default class MatrixView {
 
     return _.render(`
       <div class='MatrixView'>
-        {{title}} {{calc}}
-        {{>coreView}}
+        <div class='row'>
+          {{>coreView}}
+          {{>coreView}}
+        </div>
+        <div class='row'>
+          {{>coreView}}
+          {{>coreView}}
+        </div>
       </div>
     `, view, { coreView });
   }
