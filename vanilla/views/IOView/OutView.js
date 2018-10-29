@@ -1,14 +1,14 @@
-import { ViewHelper as _ } from './ViewHelper.js';
+import { ViewHelper as _ } from '../ViewHelper.js';
 
-export default class InView {
+export default class OutView {
   render() {
     const view = {
-      title: 'In',
+      title: 'Out',
       calc: () => 'View',
     };
 
-    return _.renderBox({ label: 'in.x' }, `
-      <div class='InView'>
+    return _.renderBox({ label: 'out.x' }, `
+      <div class='OutView'>
         <ol>
           <li>-99</li><li>-99</li><li>-99</li><li>-99</li><li>-99</li>
           <li>-99</li><li>-99</li><li>-99</li><li>-99</li><li>-99</li>

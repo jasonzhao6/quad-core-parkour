@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */ // To support import aliasing.
 /* global Mustache */
 
-import BoxView from './BoxView.js';
+import BoxView from './ViewHelper/BoxView.js';
 
 export class ViewHelper {
   static render(template, view, partials) {

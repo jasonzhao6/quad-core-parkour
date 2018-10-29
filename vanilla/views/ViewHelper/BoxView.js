@@ -1,4 +1,4 @@
-import { ViewHelper as _ } from './ViewHelper.js';
+import { ViewHelper as _ } from '../ViewHelper.js';
 
 export default class BoxView {
   constructor({ boxConfig, template, view }) {

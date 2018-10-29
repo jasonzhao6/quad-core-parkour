@@ -1,6 +1,7 @@
 import { ViewHelper as _ } from './ViewHelper.js';
 
-import InView from './InView.js';
+import InView from './IOView/InView.js';
+import OutView from './IOView/OutView.js';
 
 export default class IOView {
   render() {
@@ -11,16 +12,19 @@ export default class IOView {
     };
 
     const inView = new InView().render();
+    const outView = new OutView().render();
 
     return _.render(`
       <div class='IOView'>
         {{>inView}}
         {{>inView}}
+        {{>outView}}
+        {{>outView}}
         {{^wrap}}
         {{/wrap}}
         {{#wrap}}
         {{/wrap}}
       </div>
-    `, view, { inView });
+    `, view, { inView, outView });
   }
 }
