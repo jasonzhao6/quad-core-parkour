@@ -1,6 +1,19 @@
+.LevelViewOuter {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+}
+
 .LevelView {
   display: flex;
   justify-content: space-between;
-  margin: 10px;
-  width: 1000px;
+  width: 700px;
+}
+
+.LevelView .title {
+  margin-bottom: 5px;
+  text-align: center;
 }

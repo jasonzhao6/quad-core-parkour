@@ -18,8 +18,8 @@ body {
   background-color: var(--main-bg-color);
   color: var(--main-color);
   font-family: 'VT323', monospace;
-  font-size: 18px;
+  font-size: 15px;
   letter-spacing: 1px;
-  line-height: 15px;
+  line-height: 12px;
   text-transform: uppercase;
 }

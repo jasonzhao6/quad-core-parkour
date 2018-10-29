@@ -1,9 +1,9 @@
 .MatrixView {
   display: flex;
   flex-direction: column;
-  height: 520px;
+  height: 420px;
   justify-content: space-between;
-  width: 560px;
+  width: 400px;
 }
 
 .MatrixView .row {
