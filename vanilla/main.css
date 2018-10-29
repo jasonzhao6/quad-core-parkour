@@ -12,6 +12,13 @@
 @import './views/MatrixView.css';
 @import './views/ViewHelper/BoxView.css';
 
+/* In case Google Fonts is not responding, fallback to local copy. */
+@font-face {
+  font-family: 'VT323';
+  src: url('./3rdParty/fonts/VT323.woff2') format('woff2');
+}
+
+/* Global variables */
 :root {
   --main-bg-color: #181818;
   --main-color: #f7f7f7;
