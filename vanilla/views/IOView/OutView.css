@@ -1,2 +1,8 @@
-.InView {
+.OutView,
+.OutView-Output {
+  text-align: center;
+}
+
+.OutView-Output {
+  width: 20px;
 }

@@ -1,2 +1,4 @@
 .InView {
+  min-width: 12px;
+  text-align: center;
 }

@@ -5,11 +5,16 @@
 
 .BoxView {
   border: 1px solid var(--main-color);
+  display: flex;
+  padding: 1px;
 }
 
 .BoxViewInner {
   border: 1px solid var(--main-color);
   height: calc(100% - 2px);
-  margin: 1px;
-  padding: 5px 8px 5px 5px;
+  padding: 5px;
+}
+
+.BoxViewInner:nth-child(2) {
+  margin-left: 1px;
 }

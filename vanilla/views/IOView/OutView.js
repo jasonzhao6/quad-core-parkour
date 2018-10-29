@@ -7,13 +7,20 @@ export default class OutView {
       calc: () => 'View',
     };
 
-    return _.renderBox({ label: 'out.x' }, `
+    return _.renderBox({ label: 'out.x', layout: _.BOX_LAYOUTS.oneAndOne }, [`
       <div class='OutView'>
         <ol>
-          <li>-99</li><li>-99</li><li>-99</li><li>-99</li><li>-99</li>
-          <li>-99</li><li>-99</li><li>-99</li><li>-99</li><li>-99</li>
+          <li>2</li><li>2</li><li>2</li><li>2</li><li>2</li>
+          <li>2</li><li>2</li><li>2</li><li>2</li><li>2</li>
         </ol>
       </div>
-    `, view);
+    `, `
+      <div class='OutView-Output'>
+        <ol>
+          <li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li>
+          <li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li>
+        </ol>
+      </div>
+    `], view);
   }
 }

@@ -8,7 +8,7 @@ export default class InfoView {
       wrap: false,
     };
 
-    return _.renderBox({}, `
+    return _.renderBox({ label: '— Level 0: Tutorial —' }, `
       <div class='InfoView'>
         <ol>
           {{^wrap}}
