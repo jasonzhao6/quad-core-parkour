@@ -1,2 +1,8 @@
 .CoreView {
+  width: 170px; /* Good for 24 characters */
+}
+
+.CoreView-Accumulator,
+.CoreView-Backup {
+  text-align: center;
 }

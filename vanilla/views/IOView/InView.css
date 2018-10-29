@@ -1,4 +1,4 @@
 .InView {
-  min-width: 12px;
+  min-width: 12px;  /* Stretch to match 'in.x' label */
   text-align: center;
 }

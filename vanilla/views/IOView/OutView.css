@@ -4,5 +4,5 @@
 }
 
 .OutView-Output {
-  width: 20px;
+  width: 20px; /* Good for 3 characters */
 }

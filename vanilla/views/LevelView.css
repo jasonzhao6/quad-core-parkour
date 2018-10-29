@@ -10,7 +10,7 @@
 .LevelView {
   display: flex;
   justify-content: space-between;
-  width: 700px;
+  width: 760px; /* Adjust for spacing between columns */
 }
 
 .LevelView .column {

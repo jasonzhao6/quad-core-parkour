@@ -11,10 +11,13 @@
 
 .BoxViewInner {
   border: 1px solid var(--main-color);
-  height: calc(100% - 2px);
   padding: 5px;
 }
 
-.BoxViewInner:nth-child(2) {
+.BoxView .padLeft {
   margin-left: 1px;
+}
+
+.BoxView .padTop {
+  margin-top: 1px;
 }

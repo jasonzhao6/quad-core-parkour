@@ -7,7 +7,7 @@ export default class CoreView {
       calc: () => 'View',
     };
 
-    return _.renderBox({}, `
+    return _.renderBox({ layout: _.BOX_LAYOUTS.oneAndTwo }, [`
       <div class='CoreView'>
         <ol>
           <li>start: mov left acc</li>
@@ -27,6 +27,20 @@ export default class CoreView {
           <li>mov left acc</li>
         </ol>
       </div>
-    `, view);
+    `, `
+      <div class='CoreView-Accumulator'>
+        <ol>
+          <li>acc</li>
+          <li>0</li>
+        </ol>
+      </div>
+    `, `
+      <div class='CoreView-Backup'>
+        <ol>
+          <li>bak</li>
+          <li>0</li>
+        </ol>
+      </div>
+    `], view);
   }
 }

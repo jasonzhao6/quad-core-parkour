@@ -37,10 +37,20 @@ export default class BoxView {
             {{>template}}
           </div>
           {{#layout.oneAndOne}}
-            <div class='BoxViewInner'>
+            <div class='BoxViewInner padLeft'>
               {{>template2}}
             </div>
           {{/layout.oneAndOne}}
+          {{#layout.oneAndTwo}}
+            <div class='padLeft'>
+              <div class='BoxViewInner'>
+                {{>template2}}
+              </div>
+              <div class='BoxViewInner padTop'>
+                {{>template3}}
+              </div>
+            </div>
+          {{/layout.oneAndTwo}}
         </div>
       </div>
     `, view, this.partials);
