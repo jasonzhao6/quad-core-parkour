@@ -8,8 +8,8 @@ export default class CoreView {
     };
 
     return _.renderBox({
-      width: '290px',
-      height: '290px',
+      width: '260px',
+      height: '240px',
     }, `
       <div class='CoreView'>
         <ol>
