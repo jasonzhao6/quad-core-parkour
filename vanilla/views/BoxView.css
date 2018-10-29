@@ -1,3 +1,8 @@
+.BoxViewOuter .label {
+  margin-bottom: 5px;
+  text-align: center;
+}
+
 .BoxView {
   border: 1px solid var(--main-color);
 }

@@ -18,12 +18,11 @@ export default class InfoView {
             <li>Will not happen at the same time</li>
           {{/wrap}}
           {{#wrap}}
-          <li>Read a value from in.x and write the value to out.x</li>
-          <li>Read a value from in.y and write the value to out.y</li>
+            <li>Read a value from in.x and write the value to out.x</li>
+            <li>Read a value from in.y and write the value to out.y</li>
           {{/wrap}}
         </ol>
       </div>
     `, view);
   }
 }
-

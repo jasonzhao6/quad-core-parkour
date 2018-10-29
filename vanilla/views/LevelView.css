@@ -13,7 +13,12 @@
   width: 700px;
 }
 
+.LevelView .column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .LevelView .title {
-  margin-bottom: 5px;
   text-align: center;
 }

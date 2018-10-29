@@ -1,6 +1,7 @@
 import { ViewHelper as _ } from './ViewHelper.js';
 
 import InfoView from './InfoView.js';
+import IOView from './IOView.js';
 import MatrixView from './MatrixView.js';
 
 export default class LevelView {
@@ -11,20 +12,22 @@ export default class LevelView {
     };
 
     const infoView = new InfoView().render();
+    const ioView = new IOView().render();
     const matrixView = new MatrixView().render();
 
     return _.render(`
       <div class='LevelViewOuter'>
         <div class='LevelView'>
-          <div>
+          <div class='column'>
             <div class='title'>&mdash; Level 0: Tutorial &mdash;</div>
             {{>infoView}}
+            {{>ioView}}
           </div>
-          <div>
+          <div class='column'>
             {{>matrixView}}
           </div>
         </div>
       </div>
-    `, view, { infoView, matrixView });
+    `, view, { infoView, ioView, matrixView });
   }
 }
