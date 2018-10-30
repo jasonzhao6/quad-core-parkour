@@ -10,3 +10,32 @@
   display: flex;
   justify-content: space-between;
 }
+
+.MatrixView .horizontalBus:nth-child(1) {
+  margin-left: 5px;
+}
+
+.MatrixView .horizontalBus:nth-child(2) {
+  margin-right: 5px;
+}
+
+.MatrixView .horizontalBus ol,
+.MatrixView .horizontalBus li {
+  display: inline-block;
+  margin: 0 -2px 1px -3px;
+}
+
+.MatrixView .horizontalBus ol:nth-child(2) {
+  margin-left: 12px;
+}
+
+.MatrixView .horizontalBus li {
+  letter-spacing: 0;
+  text-align: right;
+  width: 21px;
+}
+
+.MatrixView .horizontalBus li.arrowIcon {
+  font-family: Impact, Charcoal, sans-serif;
+  width: 12px;
+}

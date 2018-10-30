@@ -18,6 +18,40 @@ export default class MatrixView {
           {{>coreView}}
         </div>
         <div class='row'>
+          <div class='horizontalBus'>
+            <ol>
+              <li class='arrowIcon'>&darr;</li>
+              <li>0</li>
+              <li class='commentColor'>0</li>
+              <li class='commentColor'>0</li>
+              <li class='commentColor'>0</li>
+            </ol>
+            <ol>
+              <li class='arrowIcon'>&uarr;</li>
+              <li>-99</li>
+              <li class='commentColor'>-99</li>
+              <li class='commentColor'>-99</li>
+              <li class='commentColor'>-99</li>
+            </ol>
+          </div>
+          <div class='horizontalBus'>
+            <ol>
+              <li class='arrowIcon'>&darr;</li>
+              <li>-99</li>
+              <li class='commentColor'>-99</li>
+              <li class='commentColor'>-99</li>
+              <li class='commentColor'>-99</li>
+            </ol>
+            <ol>
+              <li class='arrowIcon'>&uarr;</li>
+              <li>-99</li>
+              <li class='commentColor'>&nbsp;</li>
+              <li class='commentColor'>&nbsp;</li>
+              <li class='commentColor'>&nbsp;</li>
+            </ol>
+          </div>
+        </div>
+        <div class='row'>
           {{>coreView}}
           {{>coreView}}
         </div>

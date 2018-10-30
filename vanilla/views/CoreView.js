@@ -32,11 +32,11 @@ export default class CoreView {
         <ol>
           <li>acc</li>
           <li>0</li>
-          <li class='gradient1'>0</li>
-          <li class='gradient1'>0</li>
-          <li class='gradient1'>0</li>
-          <li class='gradient1'>0</li>
-          <li class='gradient1'>0</li>
+          <li class='commentColor'>-90</li>
+          <li class='commentColor'>-90</li>
+          <li class='commentColor'>0</li>
+          <li class='commentColor'>0</li>
+          <li class='commentColor'>0</li>
         </ol>
       </div>
     `, `
@@ -44,11 +44,11 @@ export default class CoreView {
         <ol>
           <li>bak</li>
           <li>0</li>
-          <li class='gradient1'>0</li>
-          <li class='gradient1'>0</li>
-          <li class='gradient1'>0</li>
-          <li class='gradient1'>0</li>
-          <li class='gradient1'>0</li>
+          <li class='commentColor'>&nbsp;</li>
+          <li class='commentColor'>&nbsp;</li>
+          <li class='commentColor'>&nbsp;</li>
+          <li class='commentColor'>&nbsp;</li>
+          <li class='commentColor'>&nbsp;</li>
         </ol>
       </div>
     `], view);

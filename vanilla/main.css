@@ -22,7 +22,7 @@
 :root {
   --background-color: #181818;
   --color: #F7F7F7;
-  --color-comment: #5F5A60;
+  --color-comment: #7A7A7A;
 }
 
 body {
@@ -33,4 +33,8 @@ body {
   letter-spacing: 1px;
   line-height: 12px;
   text-transform: uppercase;
+}
+
+.commentColor {
+  color: var(--color-comment);
 }

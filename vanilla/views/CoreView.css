@@ -6,8 +6,3 @@
 .CoreView-Backup {
   text-align: center;
 }
-
-.CoreView-Accumulator .gradient1,
-.CoreView-Backup .gradient1 {
-  color: var(--color-comment);
-}
