@@ -25,6 +25,7 @@
   --color-comment: #7A7A7A;
 }
 
+/* Global properties */
 body {
   background-color: var(--background-color);
   color: var(--color);
@@ -33,8 +34,4 @@ body {
   letter-spacing: 1px;
   line-height: 12px;
   text-transform: uppercase;
-}
-
-.commentColor {
-  color: var(--color-comment);
 }

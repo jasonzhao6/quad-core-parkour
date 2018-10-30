@@ -39,3 +39,7 @@
   font-family: Impact, Charcoal, sans-serif;
   width: 12px;
 }
+
+.MatrixView .horizontalBus li:nth-child(n+3) {
+  color: var(--color-comment);
+}

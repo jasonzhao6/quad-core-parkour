@@ -22,32 +22,32 @@ export default class MatrixView {
             <ol>
               <li class='arrowIcon'>&darr;</li>
               <li>0</li>
-              <li class='commentColor'>0</li>
-              <li class='commentColor'>0</li>
-              <li class='commentColor'>0</li>
+              <li>0</li>
+              <li>0</li>
+              <li>0</li>
             </ol>
             <ol>
               <li class='arrowIcon'>&uarr;</li>
               <li>-99</li>
-              <li class='commentColor'>-99</li>
-              <li class='commentColor'>-99</li>
-              <li class='commentColor'>-99</li>
+              <li>-99</li>
+              <li>-99</li>
+              <li>-99</li>
             </ol>
           </div>
           <div class='horizontalBus'>
             <ol>
               <li class='arrowIcon'>&darr;</li>
               <li>-99</li>
-              <li class='commentColor'>-99</li>
-              <li class='commentColor'>-99</li>
-              <li class='commentColor'>-99</li>
+              <li>-99</li>
+              <li>-99</li>
+              <li>-99</li>
             </ol>
             <ol>
               <li class='arrowIcon'>&uarr;</li>
+              <li>0</li>
               <li>-99</li>
-              <li class='commentColor'>&nbsp;</li>
-              <li class='commentColor'>&nbsp;</li>
-              <li class='commentColor'>&nbsp;</li>
+              <li>&nbsp;</li>
+              <li>&nbsp;</li>
             </ol>
           </div>
         </div>

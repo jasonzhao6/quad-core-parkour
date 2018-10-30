@@ -6,3 +6,8 @@
 .CoreView-Backup {
   text-align: center;
 }
+
+.CoreView-Accumulator li:nth-child(n+3),
+.CoreView-Backup li:nth-child(n+3) {
+  color: var(--color-comment);
+}
