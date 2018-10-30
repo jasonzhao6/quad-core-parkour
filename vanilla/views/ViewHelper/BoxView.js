@@ -33,20 +33,20 @@ export default class BoxView {
       <div class='BoxViewOuter'>
         <div class='label'>{{label}}</div>
         <div class='BoxView' style='{{style}}'>
-          <div class='BoxViewInner'>
+          <div class='BoxViewInner column'>
             {{>template}}
           </div>
           {{#layout.oneAndOne}}
-            <div class='BoxViewInner padLeft'>
+            <div class='BoxViewInner column'>
               {{>template2}}
             </div>
           {{/layout.oneAndOne}}
           {{#layout.oneAndTwo}}
-            <div class='padLeft'>
-              <div class='BoxViewInner'>
+            <div class='column'>
+              <div class='BoxViewInner row'>
                 {{>template2}}
               </div>
-              <div class='BoxViewInner padTop'>
+              <div class='BoxViewInner row'>
                 {{>template3}}
               </div>
             </div>

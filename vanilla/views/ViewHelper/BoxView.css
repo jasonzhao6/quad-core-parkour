@@ -14,10 +14,10 @@
   padding: 5px;
 }
 
-.BoxView .padLeft {
+.BoxView .column:nth-child(2) {
   margin-left: 1px;
 }
 
-.BoxView .padTop {
+.BoxView .row:nth-child(2) {
   margin-top: 1px;
 }
