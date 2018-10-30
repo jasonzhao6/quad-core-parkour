@@ -4,13 +4,13 @@
 }
 
 .BoxView {
-  border: 1px solid var(--main-color);
+  border: 1px solid var(--color);
   display: flex;
   padding: 1px;
 }
 
 .BoxViewInner {
-  border: 1px solid var(--main-color);
+  border: 1px solid var(--color);
   padding: 5px;
 }
 

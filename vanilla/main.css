@@ -20,13 +20,14 @@
 
 /* Global variables */
 :root {
-  --main-bg-color: #181818;
-  --main-color: #f7f7f7;
+  --background-color: #181818;
+  --color: #F7F7F7;
+  --color-comment: #5F5A60;
 }
 
 body {
-  background-color: var(--main-bg-color);
-  color: var(--main-color);
+  background-color: var(--background-color);
+  color: var(--color);
   font-family: 'VT323', monospace;
   font-size: 15px;
   letter-spacing: 1px;

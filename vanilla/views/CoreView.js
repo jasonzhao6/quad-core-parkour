@@ -32,6 +32,11 @@ export default class CoreView {
         <ol>
           <li>acc</li>
           <li>0</li>
+          <li class='gradient1'>0</li>
+          <li class='gradient1'>0</li>
+          <li class='gradient1'>0</li>
+          <li class='gradient1'>0</li>
+          <li class='gradient1'>0</li>
         </ol>
       </div>
     `, `
@@ -39,6 +44,11 @@ export default class CoreView {
         <ol>
           <li>bak</li>
           <li>0</li>
+          <li class='gradient1'>0</li>
+          <li class='gradient1'>0</li>
+          <li class='gradient1'>0</li>
+          <li class='gradient1'>0</li>
+          <li class='gradient1'>0</li>
         </ol>
       </div>
     `], view);
