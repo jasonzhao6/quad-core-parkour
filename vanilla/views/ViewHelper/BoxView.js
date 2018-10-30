@@ -31,7 +31,9 @@ export default class BoxView {
 
     return _.render(`
       <div class='BoxViewOuter'>
-        <div class='label'>{{label}}</div>
+        {{#label}}
+          <div class='label'>{{label}}</div>
+        {{/label}}
         <div class='BoxView' style='{{style}}'>
           <div class='BoxViewInner column'>
             {{>template}}
