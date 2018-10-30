@@ -4,6 +4,7 @@
 
 /* App dependencies */
 @import './views/CoreView.css';
+@import './views/EscrowView.css';
 @import './views/InfoView.css';
 @import './views/IOView.css';
 @import './views/IOView/InView.css';

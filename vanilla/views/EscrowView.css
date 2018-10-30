@@ -1,0 +1,56 @@
+/*
+  Left-Right or Up-Down
+*/
+
+.EscrowView {
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.EscrowView li.icon {
+  font-family: Impact, Charcoal, sans-serif;
+}
+
+.EscrowView li:nth-child(n+3) {
+  color: var(--color-comment);
+}
+
+/*
+  Left-Right Only
+*/
+
+.EscrowView.left-right ol:nth-child(2) {
+  margin-top: 10px;
+}
+
+.EscrowView.left-right li.icon {
+  height: 12px; /* Good for 1 horizontal arrow */
+  margin-bottom: 8px;
+}
+
+.EscrowView.left-right li.text {
+  margin-bottom: 3px;
+}
+
+/*
+  Up-Down Only
+*/
+
+.EscrowView.up-down ol,
+.EscrowView.up-down li {
+  display: inline-block;
+}
+
+.EscrowView.up-down ol:nth-child(2) {
+  margin-left: 10px;
+}
+
+.EscrowView.up-down li.icon {
+  margin-right: 2px;
+  width: 8px; /* Good for 1 vertical arrow */
+}
+
+.EscrowView.up-down li.text {
+  margin: 0 -2px 4px;
+  width: 21px; /* Good for 3 characters */
+}

@@ -1,6 +1,7 @@
 import { ViewHelper as _ } from './ViewHelper.js';
 
 import CoreView from './CoreView.js';
+import EscrowView from './EscrowView.js';
 
 export default class MatrixView {
   render() {
@@ -10,88 +11,26 @@ export default class MatrixView {
     };
 
     const coreView = new CoreView().render();
+    const escrowViewLR = new EscrowView(EscrowView.ORIENTATION.LR).render();
+    const escrowViewUD = new EscrowView(EscrowView.ORIENTATION.UD).render();
 
     return _.render(`
       <div class='MatrixView flexColumn'>
         <div class='flexRow'>
           {{>coreView}}
-          <div class='verticalBus'>
-            <ol>
-              <li class='arrowIcon'>&rarr;</li>
-              <li class='value'>0</li>
-              <li class='value'>0</li>
-              <li class='value'>0</li>
-              <li class='value'>0</li>
-              <li class='value'>0</li>
-            </ol>
-            <ol>
-              <li class='arrowIcon'>&larr;</li>
-              <li class='value'>-99</li>
-              <li class='value'>-99</li>
-              <li class='value'>-99</li>
-              <li class='value'>-99</li>
-              <li class='value'>-99</li>
-            </ol>
-          </div>
+          {{>escrowViewLR}}
           {{>coreView}}
         </div>
         <div class='flexRow'>
-          <div class='horizontalBus'>
-            <ol>
-              <li class='arrowIcon'>&uarr;</li>
-              <li class='value'>0</li>
-              <li class='value'>0</li>
-              <li class='value'>0</li>
-              <li class='value'>0</li>
-            </ol>
-            <ol>
-              <li class='arrowIcon'>&darr;</li>
-              <li class='value'>-99</li>
-              <li class='value'>-99</li>
-              <li class='value'>-99</li>
-              <li class='value'>-99</li>
-            </ol>
-          </div>
-          <div class='horizontalBus'>
-            <ol>
-              <li class='arrowIcon'>&uarr;</li>
-              <li class='value'>-99</li>
-              <li class='value'>-99</li>
-              <li class='value'>-99</li>
-              <li class='value'>-99</li>
-            </ol>
-            <ol>
-              <li class='arrowIcon'>&darr;</li>
-              <li class='value'>-99</li>
-              <li class='value'>-99</li>
-              <li class='value'>-99</li>
-              <li class='value'>-99</li>
-            </ol>
-          </div>
+          {{>escrowViewUD}}
+          {{>escrowViewUD}}
         </div>
         <div class='flexRow'>
           {{>coreView}}
-          <div class='verticalBus'>
-            <ol>
-              <li class='arrowIcon'>&rarr;</li>
-              <li class='value'>0</li>
-              <li class='value'>0</li>
-              <li class='value'>0</li>
-              <li class='value'>0</li>
-              <li class='value'>0</li>
-            </ol>
-            <ol>
-              <li class='arrowIcon'>&larr;</li>
-              <li class='value'>-99</li>
-              <li class='value'>-99</li>
-              <li class='value'>-99</li>
-              <li class='value'>-99</li>
-              <li class='value'>-99</li>
-            </ol>
-          </div>
+          {{>escrowViewLR}}
           {{>coreView}}
         </div>
       </div>
-    `, view, { coreView });
+    `, view, { coreView, escrowViewLR, escrowViewUD });
   }
 }
