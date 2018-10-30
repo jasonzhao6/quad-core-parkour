@@ -27,9 +27,6 @@ export default class EscrowView {
           <li class='text'>0</li>
           <li class='text'>0</li>
           <li class='text'>0</li>
-          {{#isLeftRight}}
-            <li class='text'>0</li>
-          {{/isLeftRight}}
         </ol>
         <ol>
           <li class='icon'>
@@ -40,9 +37,6 @@ export default class EscrowView {
           <li class='text'>-99</li>
           <li class='text'>-99</li>
           <li class='text'>-99</li>
-          {{#isLeftRight}}
-            <li class='text'>0</li>
-          {{/isLeftRight}}
         </ol>
       </div>
     `, this.view());

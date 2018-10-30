@@ -20,16 +20,16 @@
 */
 
 .EscrowView.left-right ol:nth-child(2) {
-  margin-top: 11px;
+  margin-top: 14px;
 }
 
 .EscrowView.left-right li.icon {
   height: 12px; /* Good for 1 horizontal arrow */
-  margin: -2px 0 7px;
+  margin-bottom: 12px;
 }
 
 .EscrowView.left-right li.text {
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
 /*
