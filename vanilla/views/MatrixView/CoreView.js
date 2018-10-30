@@ -1,4 +1,4 @@
-import { ViewHelper as _ } from './ViewHelper.js';
+import { ViewHelper as _ } from '../ViewHelper.js';
 
 export default class CoreView {
   render() {
@@ -16,15 +16,12 @@ export default class CoreView {
           <li>sav</li>
           <li>sub left</li>
           <li>jgz keep</li>
-          <li>pass-thru: mov left down</li>
-          <li>remainder: mov left down</li>
+          <li>pass-thru: mov up down</li>
+          <li>remainder: mov up down</li>
           <li>reverse: mov above acc</li>
           <li>keep: mov left acc</li>
           <li>jmp start</li>
           <li>terminate: swp</li>
-          <li>mov acc down</li>
-          <li>mov left acc</li>
-          <li>mov left acc</li>
         </ol>
       </div>
     `, `

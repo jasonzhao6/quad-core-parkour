@@ -5,6 +5,7 @@
 .CoreView-Accumulator,
 .CoreView-Backup {
   text-align: center;
+  width: 25px; /* Good for 3 characters */
 }
 
 .CoreView-Accumulator li:nth-child(n+2),

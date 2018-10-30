@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+.OutView {
+  min-width: 12px;  /* Stretch to match InView */
+}
+
 .OutView-Output {
   width: 20px; /* Good for 3 characters */
 }
