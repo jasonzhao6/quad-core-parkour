@@ -34,21 +34,21 @@ export default class BoxView {
         {{#label}}
           <div class='label'>{{label}}</div>
         {{/label}}
-        <div class='BoxView' style='{{style}}'>
-          <div class='BoxViewInner column'>
+        <div class='BoxView flexRow' style='{{style}}'>
+          <div class='BoxViewInner left'>
             {{>template}}
           </div>
           {{#layout.oneAndOne}}
-            <div class='BoxViewInner column'>
+            <div class='BoxViewInner right'>
               {{>template2}}
             </div>
           {{/layout.oneAndOne}}
           {{#layout.oneAndTwo}}
-            <div class='column'>
-              <div class='BoxViewInner row'>
+            <div class='right'>
+              <div class='BoxViewInner top'>
                 {{>template2}}
               </div>
-              <div class='BoxViewInner row'>
+              <div class='BoxViewInner bottom'>
                 {{>template3}}
               </div>
             </div>

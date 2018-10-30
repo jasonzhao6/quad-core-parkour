@@ -35,3 +35,14 @@ body {
   line-height: 12px;
   text-transform: uppercase;
 }
+
+/* Global layouts */
+.flexRow {
+  display: flex;
+  justify-content: space-between;
+}
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

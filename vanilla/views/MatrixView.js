@@ -12,12 +12,12 @@ export default class MatrixView {
     const coreView = new CoreView().render();
 
     return _.render(`
-      <div class='MatrixView'>
-        <div class='row'>
+      <div class='MatrixView flexColumn'>
+        <div class='flexRow'>
           {{>coreView}}
           {{>coreView}}
         </div>
-        <div class='row'>
+        <div class='flexRow'>
           <div class='horizontalBus'>
             <ol>
               <li class='arrowIcon'>&darr;</li>
@@ -51,7 +51,7 @@ export default class MatrixView {
             </ol>
           </div>
         </div>
-        <div class='row'>
+        <div class='flexRow'>
           {{>coreView}}
           {{>coreView}}
         </div>

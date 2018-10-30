@@ -1,14 +1,6 @@
 .MatrixView {
-  display: flex;
-  flex-direction: column;
   height: 430px; /* Adjust for spacing between rows */
-  justify-content: space-between;
   width: 470px; /* Adjust for spacing between columns */
-}
-
-.MatrixView .row {
-  display: flex;
-  justify-content: space-between;
 }
 
 .MatrixView .horizontalBus:nth-child(1) {
@@ -32,12 +24,12 @@
 .MatrixView .horizontalBus li {
   letter-spacing: 0;
   text-align: right;
-  width: 21px;
+  width: 21px; /* Good for 3 characters */
 }
 
 .MatrixView .horizontalBus li.arrowIcon {
   font-family: Impact, Charcoal, sans-serif;
-  width: 12px;
+  width: 12px; /* Good for 1 vertical arrow */
 }
 
 .MatrixView .horizontalBus li:nth-child(n+3) {

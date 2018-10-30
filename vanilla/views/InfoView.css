@@ -1,5 +1,5 @@
 .InfoView {
-  width: 235px;
+  width: 235px; /* Good for 32 characters */
 }
 
 .InfoView li {

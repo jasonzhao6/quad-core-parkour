@@ -15,7 +15,7 @@ export default class IOView {
     const outView = new OutView().render();
 
     return _.render(`
-      <div class='IOView'>
+      <div class='IOView flexRow'>
         {{>inView}}
         {{>inView}}
         {{>outView}}

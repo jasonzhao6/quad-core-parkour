@@ -17,13 +17,13 @@ export default class LevelView {
 
     return _.render(`
       <div class='LevelViewOuter'>
-        <div class='LevelView'>
-          <div class='column'>
+        <div class='LevelView flexRow'>
+          <div class='flexColumn'>
             <div class='title'>&mdash; Level 0: Tutorial &mdash;</div>
             {{>infoView}}
             {{>ioView}}
           </div>
-          <div class='column'>
+          <div class='flexColumn'>
             {{>matrixView}}
           </div>
         </div>

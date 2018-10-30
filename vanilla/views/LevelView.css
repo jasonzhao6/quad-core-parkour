@@ -8,15 +8,7 @@
 }
 
 .LevelView {
-  display: flex;
-  justify-content: space-between;
   width: 760px; /* Adjust for spacing between columns */
-}
-
-.LevelView .column {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .LevelView .title {
