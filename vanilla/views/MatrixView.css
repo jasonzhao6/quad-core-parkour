@@ -1,37 +1,55 @@
 .MatrixView {
-  height: 430px; /* Adjust for spacing between rows */
-  width: 470px; /* Adjust for spacing between columns */
+  height: 440px; /* Adjust for spacing between rows */
+  width: 490px; /* Adjust for spacing between columns */
 }
 
-.MatrixView .horizontalBus:nth-child(1) {
-  margin-left: 5px;
-}
-
-.MatrixView .horizontalBus:nth-child(2) {
-  margin-right: 5px;
+.MatrixView .horizontalBus {
+  letter-spacing: 0;
+  text-align: center;
 }
 
 .MatrixView .horizontalBus ol,
 .MatrixView .horizontalBus li {
   display: inline-block;
-  margin: 0 -2px 1px -3px;
 }
 
 .MatrixView .horizontalBus ol:nth-child(2) {
-  margin-left: 12px;
-}
-
-.MatrixView .horizontalBus li {
-  letter-spacing: 0;
-  text-align: right;
-  width: 21px; /* Good for 3 characters */
+  margin-left: 10px;
 }
 
 .MatrixView .horizontalBus li.arrowIcon {
   font-family: Impact, Charcoal, sans-serif;
-  width: 12px; /* Good for 1 vertical arrow */
+  margin-right: 2px;
+  width: 8px; /* Good for 1 vertical arrow */
+}
+
+.MatrixView .horizontalBus li.value {
+  margin: 0 -2px 4px;
+  width: 21px; /* Good for 3 characters */
 }
 
 .MatrixView .horizontalBus li:nth-child(n+3) {
+  color: var(--color-comment);
+}
+
+.MatrixView .verticalBus {
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.MatrixView .verticalBus ol:nth-child(2) {
+  margin-top: 10px;
+}
+
+.MatrixView .verticalBus li.arrowIcon {
+  font-family: Impact, Charcoal, sans-serif;
+  height: 20px; /* Good for 1 horizontal arrow */
+}
+
+.MatrixView .verticalBus li.value {
+  margin-bottom: 3px;
+}
+
+.MatrixView .verticalBus li:nth-child(n+3) {
   color: var(--color-comment);
 }
