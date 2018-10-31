@@ -22,6 +22,7 @@
 /* Global variables */
 :root {
   --background-color: #181818;
+  --background-color-highlight: #37393B;
   --color: #F7F7F7;
   --color-comment: #5F5A60;
 }
@@ -37,7 +38,7 @@ body {
   text-transform: uppercase;
 }
 
-/* Global layouts */
+/* Global helpers */
 .flexRow {
   display: flex;
   justify-content: space-between;
@@ -46,4 +47,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.highlight {
+  background-color: var(--background-color-highlight);
+  box-shadow: -5px 0 0 var(--background-color-highlight),
+              5px 0 0 var(--background-color-highlight);
 }

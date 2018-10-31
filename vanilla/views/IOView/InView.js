@@ -10,7 +10,7 @@ export default class InView {
     return _.renderBox({ label: 'in.x' }, `
       <div class='InView'>
         <ol>
-          <li>0</li><li>0</li><li>0</li><li>0</li><li>0</li>
+          <li>0</li><li class='highlight'>0</li><li>0</li><li>0</li><li>0</li>
           <li>1</li><li>1</li><li>1</li><li>1</li><li>1</li>
         </ol>
       </div>
