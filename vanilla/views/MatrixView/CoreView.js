@@ -29,8 +29,8 @@ export default class CoreView {
         <ol>
           <li>acc</li>
           <li>0</li>
-          <li>-90</li>
-          <li>-90</li>
+          <li>-99</li>
+          <li>-99</li>
           <li>0</li>
           <li>0</li>
           <li>0</li>
@@ -41,8 +41,8 @@ export default class CoreView {
         <ol>
           <li>bak</li>
           <li>0</li>
-          <li>10</li>
-          <li>-90</li>
+          <li>-99</li>
+          <li>&nbsp;</li>
           <li>&nbsp;</li>
           <li>&nbsp;</li>
           <li>&nbsp;</li>

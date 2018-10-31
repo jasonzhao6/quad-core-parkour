@@ -8,7 +8,6 @@ export default class IOView {
     const view = {
       title: 'IO',
       calc: () => 'View',
-      wrap: false,
     };
 
     const inView = new InView().render();
@@ -20,10 +19,6 @@ export default class IOView {
         {{>inView}}
         {{>outView}}
         {{>outView}}
-        {{^wrap}}
-        {{/wrap}}
-        {{#wrap}}
-        {{/wrap}}
       </div>
     `, view, { inView, outView });
   }

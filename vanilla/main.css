@@ -2,8 +2,13 @@
 @import './3rdParty/css/boxSizing.css';
 @import './3rdParty/css/reset.css';
 
-/* App dependencies */
+/* App entry points */
 @import './views/EntryPoints/LevelView.css';
+
+/* App helpers */
+@import './views/ViewHelper/BoxView.css';
+
+/* App views */
 @import './views/IOView/InView.css';
 @import './views/IOView/OutView.css';
 @import './views/LevelView/InfoView.css';
@@ -11,7 +16,7 @@
 @import './views/LevelView/MatrixView.css';
 @import './views/MatrixView/CoreView.css';
 @import './views/MatrixView/EscrowView.css';
-@import './views/ViewHelper/BoxView.css';
+@import './views/MatrixView/StackView.css';
 
 /* In case Google Fonts is not responding, fallback to local copy. */
 @font-face {
@@ -38,16 +43,31 @@ body {
   text-transform: uppercase;
 }
 
-/* Global helpers */
+/*
+  Global helpers
+*/
+
 .flexRow {
   display: flex;
   justify-content: space-between;
 }
+
 .flexColumn {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
+.icon {
+  font-family: Impact, Charcoal, sans-serif;
+}
+
+.ellipsis {
+  letter-spacing: -2px;
+  line-height: 10px;
+  vertical-align: top;
+}
+
 .highlight {
   background-color: var(--background-color-highlight);
   box-shadow: -5px 0 0 var(--background-color-highlight),

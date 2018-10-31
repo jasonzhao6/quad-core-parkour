@@ -1,0 +1,11 @@
+.StackView {
+  letter-spacing: 0;
+}
+
+.StackView li {
+  display: inline-block;
+}
+
+.StackView li.text {
+  letter-spacing: 1px;
+}

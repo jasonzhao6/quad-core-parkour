@@ -11,7 +11,7 @@ export default class OutView {
       <div class='OutView'>
         <ol>
           <li class='highlight'>2</li><li>2</li><li>2</li><li>2</li><li>2</li>
-          <li>2</li><li>2</li><li>2</li><li>2</li><li>2</li>
+          <li>-99</li><li>-99</li><li>-99</li><li>-99</li><li>-99</li>
         </ol>
       </div>
     `, `

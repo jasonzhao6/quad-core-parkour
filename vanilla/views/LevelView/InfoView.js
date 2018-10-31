@@ -1,10 +1,10 @@
 import { ViewHelper as _ } from '../ViewHelper.js';
 
 export default class InfoView {
-  view() {
+  view() { // eslint-disable-line class-methods-use-this, TODO
     return {
       wrap: true,
-    }
+    };
   }
   render() {
     return _.renderBox({ label: '— Level 0: Tutorial —' }, `

@@ -1,19 +1,6 @@
-/*
-  Left-Right or Up-Down
-*/
-
 .EscrowView {
   letter-spacing: 0;
   text-align: center;
-}
-
-.EscrowView li.icon {
-  font-family: Impact, Charcoal, sans-serif;
-}
-
-.EscrowView li.ellipsis {
-  letter-spacing: -2px;
-  vertical-align: top;
 }
 
 .EscrowView li:nth-child(n+3):nth-last-child(n+3) {
@@ -33,7 +20,7 @@
 }
 
 .EscrowView.horizontal li.ellipsis {
-  margin: -3px 0 8px;
+  margin: -3px 0 9px;
 }
 
 .EscrowView.horizontal li.text {
@@ -47,6 +34,9 @@
 .EscrowView.vertical ol,
 .EscrowView.vertical li {
   display: inline-block;
+}
+
+.EscrowView.vertical ol {
   margin-bottom: 2px;
 }
 
@@ -59,7 +49,7 @@
 }
 
 .EscrowView.vertical li.icon:last-child {
-  margin-left: 3px;
+  margin-left: 4px;
 }
 
 .EscrowView.vertical li.ellipsis {

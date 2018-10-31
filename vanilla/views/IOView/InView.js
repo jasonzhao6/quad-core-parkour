@@ -11,7 +11,7 @@ export default class InView {
       <div class='InView'>
         <ol>
           <li>0</li><li class='highlight'>0</li><li>0</li><li>0</li><li>0</li>
-          <li>1</li><li>1</li><li>1</li><li>1</li><li>1</li>
+          <li>-99</li><li>-99</li><li>-99</li><li>-99</li><li>-99</li>
         </ol>
       </div>
     `, view);

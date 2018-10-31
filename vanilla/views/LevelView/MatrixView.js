@@ -2,6 +2,7 @@ import { ViewHelper as _ } from '../ViewHelper.js';
 
 import CoreView from '../MatrixView/CoreView.js';
 import EscrowView from '../MatrixView/EscrowView.js';
+import StackView from '../MatrixView/StackView.js';
 
 export default class MatrixView {
   partials() { // eslint-disable-line class-methods-use-this, TODO
@@ -15,6 +16,7 @@ export default class MatrixView {
       escrowViewInY: new EscrowView(EscrowView.ORIENTATION.InY).render(),
       escrowViewOutX: new EscrowView(EscrowView.ORIENTATION.OutX).render(),
       escrowViewOutY: new EscrowView(EscrowView.ORIENTATION.OutY).render(),
+      stackView: new StackView().render(),
     };
   }
   render() {
@@ -40,6 +42,7 @@ export default class MatrixView {
         </div>
         <div class='flexRow'>
           {{>escrowViewOutX}}
+          {{>stackView}}
           {{>escrowViewOutY}}
         </div>
       </div>
