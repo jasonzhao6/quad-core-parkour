@@ -13,9 +13,4 @@ export class ViewHelper {
   static renderBox(boxConfig, templates, view) {
     return new BoxView(boxConfig, templates, view).render();
   }
-
-  static renderStyle(hash) {
-    return Object.entries(hash)
-      .map(([key, value]) => `${key}: ${value};`).join('\n');
-  }
 }
