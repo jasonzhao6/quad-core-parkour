@@ -1,7 +1,14 @@
 import { ViewHelper as _ } from '../ViewHelper.js';
 
 export default class EscrowView {
-  static get ORIENTATION() { return { LR: 'left-right', UD: 'up-down' }; }
+  static get ORIENTATION() {
+    return {
+      LR: 'left-right',
+      RL: 'right-left',
+      UD: 'up-down',
+      DU: 'down-up',
+    };
+  }
 
   constructor(orientation) {
     this.orientation = orientation;
@@ -9,34 +16,39 @@ export default class EscrowView {
 
   view() {
     return {
-      orientation: this.orientation,
-      isLeftRight: this.orientation === EscrowView.ORIENTATION.LR,
-      isUpDown: this.orientation === EscrowView.ORIENTATION.UD,
+      class: /left|right/.test(this.orientation) ? 'horizontal' : 'vertical',
+      isLR: this.orientation === EscrowView.ORIENTATION.LR,
+      isRL: this.orientation === EscrowView.ORIENTATION.RL,
+      isUD: this.orientation === EscrowView.ORIENTATION.UD,
+      isDU: this.orientation === EscrowView.ORIENTATION.DU,
     };
   }
 
   render() {
     return _.render(`
-      <div class='EscrowView {{orientation}}'>
+      <div class='EscrowView {{class}}'>
         <ol>
           <li class='icon'>
-            {{#isLeftRight}}&rarr;{{/isLeftRight}}
-            {{#isUpDown}}&uarr;{{/isUpDown}}
-          </li>
-          <li class='text'>0</li>
-          <li class='text'>0</li>
-          <li class='text'>0</li>
-          <li class='text'>0</li>
-        </ol>
-        <ol>
-          <li class='icon'>
-            {{#isLeftRight}}&larr;{{/isLeftRight}}
-            {{#isUpDown}}&darr;{{/isUpDown}}
+            {{#isLR}}&larr;{{/isLR}}
+            {{#isRL}}&rarr;{{/isRL}}
+            {{#isUD}}&uarr;{{/isUD}}
+            {{#isDU}}&darr;{{/isDU}}
           </li>
           <li class='text'>-99</li>
           <li class='text'>-99</li>
           <li class='text'>-99</li>
           <li class='text'>-99</li>
+          <li class='ellipsis'>...</li>
+          <li class='text'>-99</li>
+          <li class='text'>-99</li>
+          <li class='text'>-99</li>
+          <li class='text'>-99</li>
+          <li class='icon'>
+            {{#isLR}}&rarr;{{/isLR}}
+            {{#isRL}}&larr;{{/isRL}}
+            {{#isUD}}&darr;{{/isUD}}
+            {{#isDU}}&uarr;{{/isDU}}
+          </li>
         </ol>
       </div>
     `, this.view());

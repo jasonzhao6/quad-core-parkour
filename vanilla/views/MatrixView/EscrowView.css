@@ -11,46 +11,62 @@
   font-family: Impact, Charcoal, sans-serif;
 }
 
-.EscrowView li:nth-child(n+3) {
+.EscrowView li.ellipsis {
+  letter-spacing: -2px;
+  vertical-align: top;
+}
+
+.EscrowView li:nth-child(n+3):nth-last-child(n+3) {
   color: var(--color-comment);
 }
 
 /*
-  Left-Right Only
+  Horizontal Only
 */
 
-.EscrowView.left-right ol:nth-child(2) {
-  margin-top: 14px;
-}
-
-.EscrowView.left-right li.icon {
+.EscrowView.horizontal li.icon {
   height: 12px; /* Good for 1 horizontal arrow */
-  margin-bottom: 12px;
 }
 
-.EscrowView.left-right li.text {
-  margin-top: 6px;
+.EscrowView.horizontal li.icon:first-child {
+  margin-bottom: 10px;
+}
+
+.EscrowView.horizontal li.ellipsis {
+  margin: -3px 0 8px;
+}
+
+.EscrowView.horizontal li.text {
+  margin: 6px 0;
 }
 
 /*
-  Up-Down Only
+  Vertical Only
 */
 
-.EscrowView.up-down ol,
-.EscrowView.up-down li {
+.EscrowView.vertical ol,
+.EscrowView.vertical li {
   display: inline-block;
+  margin-bottom: 1px;
 }
 
-.EscrowView.up-down ol:nth-child(2) {
-  margin-left: 10px;
-}
-
-.EscrowView.up-down li.icon {
-  margin-right: 4px;
+.EscrowView.vertical li.icon {
   width: 8px; /* Good for 1 vertical arrow */
 }
 
-.EscrowView.up-down li.text {
-  margin: 0 -2px 2px;
-  width: 21px; /* Good for 3 characters */
+.EscrowView.vertical li.icon:first-child {
+  margin-right: 3px;
+}
+
+.EscrowView.vertical li.icon:last-child {
+  margin-left: 3px;
+}
+
+.EscrowView.vertical li.ellipsis {
+  margin: 0 2px;
+}
+
+.EscrowView.vertical li.text {
+  margin: 0 -1px;
+  width: 18px; /* Good for 3 characters */
 }

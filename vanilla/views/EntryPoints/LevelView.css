@@ -8,7 +8,7 @@
 }
 
 .LevelView {
-  width: 790px; /* Adjust for spacing between columns */
+  min-width: 790px; /* Adjust for spacing between columns */
 }
 
 .LevelView .title {
