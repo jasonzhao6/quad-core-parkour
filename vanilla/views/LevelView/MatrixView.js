@@ -1,7 +1,7 @@
-import { ViewHelper as _ } from './ViewHelper.js';
+import { ViewHelper as _ } from '../ViewHelper.js';
 
-import CoreView from './MatrixView/CoreView.js';
-import EscrowView from './MatrixView/EscrowView.js';
+import CoreView from '../MatrixView/CoreView.js';
+import EscrowView from '../MatrixView/EscrowView.js';
 
 export default class MatrixView {
   render() {

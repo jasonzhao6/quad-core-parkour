@@ -3,12 +3,12 @@
 @import './3rdParty/css/reset.css';
 
 /* App dependencies */
-@import './views/InfoView.css';
-@import './views/IOView.css';
+@import './views/EntryPoints/LevelView.css';
 @import './views/IOView/InView.css';
 @import './views/IOView/OutView.css';
-@import './views/LevelView.css';
-@import './views/MatrixView.css';
+@import './views/LevelView/InfoView.css';
+@import './views/LevelView/IOView.css';
+@import './views/LevelView/MatrixView.css';
 @import './views/MatrixView/CoreView.css';
 @import './views/MatrixView/EscrowView.css';
 @import './views/ViewHelper/BoxView.css';

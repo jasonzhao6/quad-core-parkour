@@ -1,8 +1,8 @@
-import { ViewHelper as _ } from './ViewHelper.js';
+import { ViewHelper as _ } from '../ViewHelper.js';
 
-import InfoView from './InfoView.js';
-import IOView from './IOView.js';
-import MatrixView from './MatrixView.js';
+import InfoView from '../LevelView/InfoView.js';
+import IOView from '../LevelView/IOView.js';
+import MatrixView from '../LevelView/MatrixView.js';
 
 export default class LevelView {
   render() {

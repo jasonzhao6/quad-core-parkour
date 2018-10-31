@@ -1,7 +1,7 @@
-import { ViewHelper as _ } from './ViewHelper.js';
+import { ViewHelper as _ } from '../ViewHelper.js';
 
-import InView from './IOView/InView.js';
-import OutView from './IOView/OutView.js';
+import InView from '../IOView/InView.js';
+import OutView from '../IOView/OutView.js';
 
 export default class IOView {
   render() {
