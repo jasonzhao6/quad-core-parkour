@@ -7,7 +7,7 @@ export default class Matrix {
     this.rowCount = rowCount;
     this.columnCount = columnCount;
 
-    // States
+    // State
     this.aliases = {};
     this.escrow = new Escrow();
 

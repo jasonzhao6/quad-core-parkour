@@ -4,7 +4,7 @@ export default class TestCasePrinter {
     this.failures = failures; // [[class, method, context, assertion], ...].
     this.console = consoleOverride || console;
 
-    // States
+    // State
     this.lastClass = null;
     this.lastMethod = null;
     this.lastContext = null;

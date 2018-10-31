@@ -3,7 +3,7 @@ export default class LineManager {
     // Props
     this.core = core;
 
-    // States
+    // State
     this.lines = [];
     this.gotoLine = null;
     this.priorities = this.prioritizer();

@@ -53,7 +53,7 @@ export default class TestCasePrinterTest {
         subject.print();
 
         _.assert(
-          'It resets all the `last*` states when done',
+          'It resets all the `last*` state vars when done',
           () => [
             subject.lastClass === null,
             subject.lastMethod === null,

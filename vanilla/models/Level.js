@@ -27,7 +27,7 @@ export default class Level {
     this.expectedOutputY = (goBig ? data.output.yBig : data.output.y) || [];
     this.solution = data.solution;
 
-    // States
+    // State
     this.cycleCount = 0;
     this.cycleReturnValues = [];
     this.matrix = new Matrix({ ...Level.MATRIX_SIZE, Class: Core });

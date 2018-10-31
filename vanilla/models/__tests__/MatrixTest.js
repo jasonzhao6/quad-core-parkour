@@ -167,7 +167,7 @@ export default class MatrixTest {
           subject.alias(i, j, alias2);
 
           _.assert(
-            'It sets the `aliases` states',
+            'It sets the `aliases` state',
             () => [
               subject.aliases[alias1].i === i,
               subject.aliases[alias1].j === j,

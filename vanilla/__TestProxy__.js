@@ -17,7 +17,7 @@ class TestHandler {
     this.currentMode = null; // Either MODES.ALLOW or MODES.EXPECT.
     this.currentMethod = null;
 
-    // States
+    // State
     this.expectations = {}; // { [method]: { callsActual: 0, etc }, ... }.
   }
 

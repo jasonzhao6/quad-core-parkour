@@ -11,7 +11,7 @@ export default class Core {
     this.worker = lineWorkerOverride || new LineWorker({ core: this });
     this.director = director;
 
-    // States
+    // State
     this.accumulator = Core.DEFAULT_VALUE;
     this.backup = Core.DEFAULT_VALUE;
   }

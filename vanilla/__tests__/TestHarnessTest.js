@@ -28,7 +28,7 @@ export default class TestHarnessTest {
           );
 
           _.assert(
-            'It initializes all the states',
+            'It initializes all the state vars',
             () => [
               subject.queue instanceof Array,
               subject.queue.length === 0,

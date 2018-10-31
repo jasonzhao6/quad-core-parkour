@@ -79,7 +79,7 @@ export default class TestHarness {
     this.currentContext = null; // 'When ...'. Note: Nesting is not supported.
     this.currentAssertion = null; // 'It ...'.
 
-    // States
+    // State
     this.queue = []; // [{ currentClass, etc }, ...] for easy access.
     this.failures = []; // [[currentClass, etc], ...] for easy sorting.
     this.pendingCount = 0;

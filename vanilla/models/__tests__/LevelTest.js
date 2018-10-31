@@ -132,7 +132,7 @@ export default class LevelTest {
           const subject = new Level({ number: 0, dataOverride });
 
           _.assert(
-            'It initializes input and output states to empty arrays',
+            'It initializes input and output state vars to empty arrays',
             () => [
               subject.inputX.length === 0,
               subject.inputY.length === 0,
