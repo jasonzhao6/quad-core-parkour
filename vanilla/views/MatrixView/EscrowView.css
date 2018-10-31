@@ -47,7 +47,7 @@
 .EscrowView.vertical ol,
 .EscrowView.vertical li {
   display: inline-block;
-  margin-bottom: 1px;
+  margin-bottom: 2px;
 }
 
 .EscrowView.vertical li.icon {

@@ -5,21 +5,25 @@ import EscrowView from '../MatrixView/EscrowView.js';
 
 export default class MatrixView {
   partials() { // eslint-disable-line class-methods-use-this, TODO
-    const coreView = new CoreView().render();
-    const escrowViewLR = new EscrowView(EscrowView.ORIENTATION.LR).render();
-    const escrowViewRL = new EscrowView(EscrowView.ORIENTATION.RL).render();
-    const escrowViewUD = new EscrowView(EscrowView.ORIENTATION.UD).render();
-    const escrowViewDU = new EscrowView(EscrowView.ORIENTATION.DU).render();
-
     return {
-      coreView,
-      escrowViewLR, escrowViewRL,
-      escrowViewUD, escrowViewDU,
+      coreView: new CoreView().render(),
+      escrowViewLR: new EscrowView(EscrowView.ORIENTATION.LR).render(),
+      escrowViewRL: new EscrowView(EscrowView.ORIENTATION.RL).render(),
+      escrowViewUD: new EscrowView(EscrowView.ORIENTATION.UD).render(),
+      escrowViewDU: new EscrowView(EscrowView.ORIENTATION.DU).render(),
+      escrowViewInX: new EscrowView(EscrowView.ORIENTATION.InX).render(),
+      escrowViewInY: new EscrowView(EscrowView.ORIENTATION.InY).render(),
+      escrowViewOutX: new EscrowView(EscrowView.ORIENTATION.OutX).render(),
+      escrowViewOutY: new EscrowView(EscrowView.ORIENTATION.OutY).render(),
     };
   }
   render() {
     return _.render(`
       <div class='MatrixView flexColumn'>
+        <div class='flexRow'>
+          {{>escrowViewInX}}
+          {{>escrowViewInY}}
+        </div>
         <div class='flexRow'>
           {{>coreView}}
           {{>escrowViewRL}}
@@ -33,6 +37,10 @@ export default class MatrixView {
           {{>coreView}}
           {{>escrowViewLR}}
           {{>coreView}}
+        </div>
+        <div class='flexRow'>
+          {{>escrowViewOutX}}
+          {{>escrowViewOutY}}
         </div>
       </div>
     `, {}, this.partials());
