@@ -13,22 +13,26 @@ export default class BoxView {
     const { label, layout } = boxConfig;
     this.label = label;
     this.layout = layout || BoxView.LAYOUTS.one;
-
-    const [template, template2, template3] = Array.of(templates).flat();
-    this.partials = { template, template2, template3 };
-
-    this.view = view;
+    this.templates = templates;
+    this.originalView = view;
   }
 
-  render() {
-    const view = {
+  view() {
+    return Object.assign({
       label: this.label,
       layout: {
         oneAndOne: this.layout === BoxView.LAYOUTS.oneAndOne,
         oneAndTwo: this.layout === BoxView.LAYOUTS.oneAndTwo,
       },
-    };
+    }, this.originalView);
+  }
 
+  partials() {
+    const [template1, template2, template3] = Array.of(this.templates).flat();
+    return { template1, template2, template3 };
+  }
+
+  render() {
     return _.render(`
       <div class='BoxViewOuter'>
         {{#label}}
@@ -36,7 +40,7 @@ export default class BoxView {
         {{/label}}
         <div class='BoxView flexRow' style='{{style}}'>
           <div class='BoxViewInner'>
-            {{>template}}
+            {{>template1}}
           </div>
           {{#layout.oneAndOne}}
             <div class='right'>
@@ -59,6 +63,6 @@ export default class BoxView {
           {{/layout.oneAndTwo}}
         </div>
       </div>
-    `, view, this.partials);
+    `, this.view(), this.partials());
   }
 }
