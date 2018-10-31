@@ -19,8 +19,11 @@ export default class EscrowView {
   }
 
   view() {
+    const isHorizontal = /left|right/.test(this.orientation);
+
     return {
-      class: /left|right/.test(this.orientation) ? 'horizontal' : 'vertical',
+      debugClass: isHorizontal ? 'debugHideBlock' : 'debugHideInlineBlock',
+      viewClass: isHorizontal ? 'horizontal' : 'vertical',
       isLR: this.orientation === EscrowView.ORIENTATION.LR,
       isRL: this.orientation === EscrowView.ORIENTATION.RL,
       isUD: this.orientation === EscrowView.ORIENTATION.UD,
@@ -35,7 +38,7 @@ export default class EscrowView {
 
   render() {
     return _.render(`
-      <div class='EscrowView {{class}}'>
+      <div class='EscrowView {{viewClass}} {{^isInOrOut}}stretch{{/isInOrOut}}'>
         <ol>
           <li class='icon'>
             {{#isLR}}&larr;{{/isLR}}
@@ -48,15 +51,15 @@ export default class EscrowView {
           {{#isInX}}<li>in.x</li>{{/isInX}}
           {{#isOutX}}<li>out.x</li>{{/isOutX}}
           {{^isInOrOut}}
-            <li class='text'>-99</li>
-            <li class='text'>-99</li>
-            <li class='text'>-99</li>
-            <li class='text'>-99</li>
-            <li class='ellipsis'>...</li>
-            <li class='text'>-99</li>
-            <li class='text'>-99</li>
-            <li class='text'>-99</li>
-            <li class='text'>-99</li>
+            <li class='number'>0</li>
+            <li class='number {{debugClass}}'>0</li>
+            <li class='number {{debugClass}}'>0</li>
+            <li class='number {{debugClass}}'>0</li>
+            <li class='ellipsis debugHidden'>...</li>
+            <li class='number {{debugClass}}'>-99</li>
+            <li class='number {{debugClass}}'>-99</li>
+            <li class='number {{debugClass}}'>-99</li>
+            <li class='number'>-99</li>
           {{/isInOrOut}}
           {{#isInY}}<li>in.y</li>{{/isInY}}
           {{#isOutY}}<li>out.y</li>{{/isOutY}}

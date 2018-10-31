@@ -11,6 +11,12 @@
   Horizontal Only
 */
 
+.EscrowView.horizontal.stretch {
+  align-items: center;
+  display: flex;
+  height: 194px; /* Stretch for proper centering in non-debug mode */
+}
+
 .EscrowView.horizontal li.icon {
   height: 12px; /* Good for 1 horizontal arrow */
 }
@@ -23,13 +29,17 @@
   margin: -3px 0 9px;
 }
 
-.EscrowView.horizontal li.text {
+.EscrowView.horizontal li.number {
   margin: 6px 0;
 }
 
 /*
   Vertical Only
 */
+
+.EscrowView.vertical.stretch {
+  width: 227px; /* Stretch for proper centering in non-debug mode */
+}
 
 .EscrowView.vertical ol,
 .EscrowView.vertical li {
@@ -56,7 +66,7 @@
   margin: 0 2px;
 }
 
-.EscrowView.vertical li.text {
+.EscrowView.vertical li.number {
   margin: 0 -1px;
-  width: 18px; /* Good for 3 characters */
+  width: 18px; /* Good for 3 digits */
 }

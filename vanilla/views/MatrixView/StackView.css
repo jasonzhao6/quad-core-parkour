@@ -6,6 +6,6 @@
   display: inline-block;
 }
 
-.StackView li.text {
+.StackView li.label {
   letter-spacing: 1px;
 }

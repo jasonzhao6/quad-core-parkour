@@ -18,7 +18,7 @@
 @import './views/MatrixView/EscrowView.css';
 @import './views/MatrixView/StackView.css';
 
-/* In case Google Fonts is not responding, fallback to local copy. */
+/* In case Google Fonts is not responding, fallback to local copy */
 @font-face {
   font-family: 'VT323';
   src: url('./3rdParty/fonts/VT323.woff2') format('woff2');
@@ -72,4 +72,32 @@ body {
   background-color: var(--background-color-highlight);
   box-shadow: -5px 0 0 var(--background-color-highlight),
               5px 0 0 var(--background-color-highlight);
+}
+
+/*
+  Debug helpers
+*/
+
+.debugHideBlock {
+  display: none !important;
+}
+
+.debugHideInlineBlock {
+  display: none !important;
+}
+
+.debugHidden {
+  visibility: hidden !important;
+}
+
+.debugMode .debugHideBlock {
+  display: block !important;
+}
+
+.debugMode .debugHideInlineBlock {
+  display: inline-block !important;
+}
+
+.debugMode .debugHidden {
+  visibility: visible !important;
 }

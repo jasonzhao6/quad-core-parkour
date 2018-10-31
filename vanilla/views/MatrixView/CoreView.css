@@ -1,11 +1,12 @@
 .CoreView {
+  height: 181px; /* Good for 15 lines */
   width: 170px; /* Good for 24 characters */
 }
 
 .CoreView-Accumulator,
 .CoreView-Backup {
   text-align: center;
-  width: 25px; /* Good for 3 characters */
+  width: 25px; /* Good for 3 digits */
 }
 
 .CoreView-Accumulator li:nth-child(n+2),
@@ -16,4 +17,10 @@
 .CoreView-Accumulator li:nth-child(n+3),
 .CoreView-Backup li:nth-child(n+3) {
   color: var(--color-comment);
+}
+
+.CoreView-Accumulator li.ellipsis,
+.CoreView-Backup li.ellipsis {
+  line-height: 8px;
+  height: 12px;
 }

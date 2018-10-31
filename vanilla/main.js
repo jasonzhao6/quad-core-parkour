@@ -7,8 +7,9 @@ import './__Tests__.js';
 // 3rd party dependencies
 import './3rdParty/js/mustache.js';
 
-// App dependencies
+/* App entry points */
 import LevelView from './views/EntryPoints/LevelView.js';
 
 const levelView = new LevelView();
 document.body.innerHTML = levelView.render();
+document.body.classList.add('debugMode');

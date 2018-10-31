@@ -28,12 +28,14 @@ export default class CoreView {
       <div class='CoreView-Accumulator'>
         <ol>
           <li>acc</li>
-          <li>0</li>
           <li>-99</li>
-          <li>-99</li>
-          <li>0</li>
-          <li>0</li>
-          <li>0</li>
+          <div class='debugHideBlock'>
+            <li>-99</li>
+            <li>-99</li>
+            <li>-99</li>
+            <li>-99</li>
+            <li class='ellipsis'>...</li>
+          </div>
         </ol>
       </div>
     `, `
@@ -41,11 +43,13 @@ export default class CoreView {
         <ol>
           <li>bak</li>
           <li>0</li>
-          <li>-99</li>
-          <li>&nbsp;</li>
-          <li>&nbsp;</li>
-          <li>&nbsp;</li>
-          <li>&nbsp;</li>
+          <div class='debugHideBlock'>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li>0</li>
+            <li class='ellipsis'>...</li>
+          </div>
         </ol>
       </div>
     `], view);
