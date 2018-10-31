@@ -1,5 +1,6 @@
 .InfoView {
-  width: 235px; /* Good for 32 characters */
+  margin-right: 2px;
+  width: 235px; /* Good for 32 characters; stretch left sidebar */
 }
 
 .InfoView li {
