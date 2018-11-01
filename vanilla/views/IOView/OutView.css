@@ -1,10 +1,11 @@
 .OutView,
 .OutView-Output {
+  height: 187px; /* Stretch for space besides 'in.x' to form a square image */
   text-align: center;
 }
 
 .OutView {
-  min-width: 12px;  /* Stretch to match InView */
+  min-width: 12px; /* Stretch to match InView */
 }
 
 .OutView-Output {
