@@ -29,13 +29,11 @@ export default class CoreView {
         <ol>
           <li>acc</li>
           <li>-99</li>
-          <div class='debugHideBlock'>
-            <li>-99</li>
-            <li>-99</li>
-            <li>-99</li>
-            <li>-99</li>
-            <li class='ellipsis'>...</li>
-          </div>
+          <li class='debugHideBlock'>-99</li>
+          <li class='debugHideBlock'>-99</li>
+          <li class='debugHideBlock'>-99</li>
+          <li class='debugHideBlock'>-99</li>
+          <li class='debugHideBlock ellipsis'>...</li>
         </ol>
       </div>
     `, `
@@ -43,13 +41,11 @@ export default class CoreView {
         <ol>
           <li>bak</li>
           <li>0</li>
-          <div class='debugHideBlock'>
-            <li>0</li>
-            <li>0</li>
-            <li>0</li>
-            <li>0</li>
-            <li class='ellipsis'>...</li>
-          </div>
+          <li class='debugHideBlock'>0</li>
+          <li class='debugHideBlock'>0</li>
+          <li class='debugHideBlock'>0</li>
+          <li class='debugHideBlock'>0</li>
+          <li class='debugHideBlock ellipsis'>...</li>
         </ol>
       </div>
     `], view);
