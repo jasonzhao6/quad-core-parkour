@@ -1,33 +1,35 @@
 import { ViewHelper as _ } from '../ViewHelper.js';
 
+import ActionsView from '../LevelView/ActionsView.js';
 import InfoView from '../LevelView/InfoView.js';
 import IOView from '../LevelView/IOView.js';
 import MatrixView from '../LevelView/MatrixView.js';
 
 export default class LevelView {
-  render() {
-    const view = {
-      title: 'Level',
-      calc: () => 'View',
+  partials() { // eslint-disable-line class-methods-use-this, TODO
+    return {
+      actionsView: new ActionsView().render(),
+      infoView: new InfoView().render(),
+      ioView: new IOView().render(),
+      matrixView: new MatrixView().render(),
     };
+  }
 
-    const infoView = new InfoView().render();
-    const ioView = new IOView().render();
-    const matrixView = new MatrixView().render();
-
+  render() {
     return _.render(`
-      <div class='LevelViewOuter'>
+      <div class='LevelViewOuter flexCenter'>
         <div class='LevelView flexRow'>
           <div class='flexColumn'>
             <div class='title'>&mdash; Level 0: Tutorial &mdash;</div>
             {{>infoView}}
             {{>ioView}}
+            {{>actionsView}}
           </div>
           <div class='flexColumn'>
             {{>matrixView}}
           </div>
         </div>
       </div>
-    `, view, { infoView, ioView, matrixView });
+    `, {}, this.partials());
   }
 }

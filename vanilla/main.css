@@ -11,6 +11,7 @@
 /* App views */
 @import './views/IOView/InView.css';
 @import './views/IOView/OutView.css';
+@import './views/LevelView/ActionsView.css';
 @import './views/LevelView/InfoView.css';
 @import './views/LevelView/IOView.css';
 @import './views/LevelView/MatrixView.css';
@@ -46,6 +47,12 @@ body {
 /*
   Global helpers
 */
+
+.flexCenter {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
 
 .flexRow {
   display: flex;

@@ -1,0 +1,12 @@
+.ActionsView ol {
+  align-items: flex-end;
+}
+
+.ActionsView-Speed,
+.ActionsView-Start,
+.ActionsView-Step,
+.ActionsView-Stop {
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+}

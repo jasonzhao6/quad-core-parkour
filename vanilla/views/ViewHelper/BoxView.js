@@ -10,8 +10,9 @@ export default class BoxView {
   }
 
   constructor(boxConfig, templates, view) {
-    const { label, layout } = boxConfig;
+    const { label, labelStyle, layout } = boxConfig;
     this.label = label;
+    this.labelStyle = labelStyle;
     this.layout = layout || BoxView.LAYOUTS.one;
     this.templates = templates;
     this.originalView = view;
@@ -20,6 +21,7 @@ export default class BoxView {
   view() {
     return Object.assign({
       label: this.label,
+      labelStyle: this.labelStyle,
       layout: {
         oneAndOne: this.layout === BoxView.LAYOUTS.oneAndOne,
         oneAndTwo: this.layout === BoxView.LAYOUTS.oneAndTwo,
@@ -36,7 +38,7 @@ export default class BoxView {
     return _.render(`
       <div class='BoxViewOuter'>
         {{#label}}
-          <div class='label'>{{label}}</div>
+          <div class='label' style={{labelStyle}}>{{label}}</div>
         {{/label}}
         <div class='BoxView flexRow' style='{{style}}'>
           <div class='BoxViewInner'>
