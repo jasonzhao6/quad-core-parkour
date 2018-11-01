@@ -3,3 +3,9 @@
   min-width: 12px; /* Stretch to match 'in.x' label */
   text-align: center;
 }
+
+.InView li.ellipsis {
+  height: 7px;
+  line-height: 0;
+  margin-right: 2px;
+}
