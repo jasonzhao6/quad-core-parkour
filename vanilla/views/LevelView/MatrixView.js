@@ -16,7 +16,8 @@ export default class MatrixView {
       escrowViewInY: new EscrowView(EscrowView.ORIENTATION.InY).render(),
       escrowViewOutX: new EscrowView(EscrowView.ORIENTATION.OutX).render(),
       escrowViewOutY: new EscrowView(EscrowView.ORIENTATION.OutY).render(),
-      stackView: new StackView().render(),
+      stackAboveView: new StackView().render(),
+      stackBelowView: new StackView().render(),
     };
   }
   render() {
@@ -24,6 +25,7 @@ export default class MatrixView {
       <div class='MatrixView flexColumn'>
         <div class='flexRow'>
           {{>escrowViewInX}}
+          {{>stackAboveView}}
           {{>escrowViewInY}}
         </div>
         <div class='flexRow'>
@@ -42,7 +44,7 @@ export default class MatrixView {
         </div>
         <div class='flexRow'>
           {{>escrowViewOutX}}
-          {{>stackView}}
+          {{>stackBelowView}}
           {{>escrowViewOutY}}
         </div>
       </div>
