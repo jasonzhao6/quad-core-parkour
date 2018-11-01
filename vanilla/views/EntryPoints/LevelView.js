@@ -4,6 +4,7 @@ import ActionsView from '../LevelView/ActionsView.js';
 import InfoView from '../LevelView/InfoView.js';
 import IOView from '../LevelView/IOView.js';
 import MatrixView from '../LevelView/MatrixView.js';
+import ModesView from '../LevelView/ModesView.js';
 
 export default class LevelView {
   partials() { // eslint-disable-line class-methods-use-this, TODO
@@ -12,6 +13,7 @@ export default class LevelView {
       infoView: new InfoView().render(),
       ioView: new IOView().render(),
       matrixView: new MatrixView().render(),
+      modesView: new ModesView().render(),
     };
   }
 
@@ -23,6 +25,7 @@ export default class LevelView {
             <div class='title'>&mdash; Level 0: Tutorial &mdash;</div>
             {{>infoView}}
             {{>ioView}}
+            {{>modesView}}
             {{>actionsView}}
           </div>
           <div class='flexColumn'>

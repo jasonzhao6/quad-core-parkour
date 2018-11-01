@@ -16,6 +16,7 @@
 @import './views/LevelView/InfoView.css';
 @import './views/LevelView/IOView.css';
 @import './views/LevelView/MatrixView.css';
+@import './views/LevelView/ModesView.css';
 @import './views/MatrixView/CoreView.css';
 @import './views/MatrixView/debugMode.css';
 @import './views/MatrixView/EscrowView.css';

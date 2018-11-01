@@ -1,0 +1,12 @@
+.ModesView ol {
+  align-items: flex-end;
+}
+
+.ModesView-Demo,
+.ModesView-Easy,
+.ModesView-Image,
+.ModesView-Stack {
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+}
