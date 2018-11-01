@@ -22,7 +22,6 @@ export default class LevelView {
       <div class='LevelViewOuter flexCenter'>
         <div class='LevelView flexRow'>
           <div class='flexColumn'>
-            <div class='title'>&mdash; Level 0: Tutorial &mdash;</div>
             {{>infoView}}
             {{>ioView}}
             {{>modesView}}

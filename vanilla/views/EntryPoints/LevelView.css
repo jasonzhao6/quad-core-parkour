@@ -7,7 +7,3 @@
 .LevelView {
   min-width: 800px; /* Adjust for spacing between columns */
 }
-
-.LevelView .title {
-  text-align: center;
-}
