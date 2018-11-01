@@ -1,0 +1,5 @@
+/* In case Google Fonts is not responding, fallback to local copy */
+@font-face {
+  font-family: 'VT323';
+  src: url('../fonts/VT323.woff2') format('woff2');
+}

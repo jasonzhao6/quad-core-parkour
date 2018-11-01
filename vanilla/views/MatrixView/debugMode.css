@@ -1,0 +1,30 @@
+/*
+  Off
+*/
+.debugHideBlock {
+  display: none !important;
+}
+
+.debugHideInlineBlock {
+  display: none !important;
+}
+
+.debugHidden {
+  visibility: hidden !important;
+}
+
+/*
+  On
+*/
+
+.debugMode .debugHideBlock {
+  display: block !important;
+}
+
+.debugMode .debugHideInlineBlock {
+  display: inline-block !important;
+}
+
+.debugMode .debugHidden {
+  visibility: visible !important;
+}
