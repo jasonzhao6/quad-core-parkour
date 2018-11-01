@@ -10,7 +10,7 @@ export default class StackView {
       <div class='StackView'>
         <ol>
           <li class='icon'>&#9782;</li>
-          <li class='label'>below: [</li>
+          <li class='label'>Stack: [</li>
           <li class='ellipsis'>...</li>
           <li>-99</li>
           <li>-99</li>

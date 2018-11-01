@@ -19,7 +19,7 @@ export default class ModesView {
         <div class='ModesView-Image flexCenter'>Image</div>
       `, this.view()),
       stackMode: _.renderBox({}, `
-        <div class='ModesView-Stack flexCenter'>Stacks</div>
+        <div class='ModesView-Stack flexCenter'>Mem</div>
       `, this.view()),
     };
   }
