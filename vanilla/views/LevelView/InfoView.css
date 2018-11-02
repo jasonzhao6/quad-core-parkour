@@ -3,12 +3,12 @@
   width: 235px; /* Good for 32 characters; stretch left sidebar */
 }
 
-.InfoView li {
+.InfoView .bullet {
   padding-left: 10px;
   position: relative;
 }
 
-.InfoView li:before {
+.InfoView .bullet:before {
   content: '>';
   position: absolute;
   left: 0px;

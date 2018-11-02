@@ -1,4 +1,4 @@
-.BoxViewOuter .label {
+.BoxViewOuter .boxViewLabel {
   margin-bottom: 5px;
   text-align: center;
 }
@@ -13,10 +13,10 @@
   padding: 5px;
 }
 
-.BoxView .right {
+.BoxView .boxViewRight {
   margin-left: 1px;
 }
 
-.BoxView .bottom {
+.BoxView .boxViewBottom {
   margin-top: 1px;
 }

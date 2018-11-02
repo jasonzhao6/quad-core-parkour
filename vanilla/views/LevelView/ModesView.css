@@ -1,16 +1,8 @@
-.ModesView ol {
+.ModesView {
   align-items: flex-end;
 }
 
-.ModesView-Demo,
-.ModesView-Easy,
-.ModesView-Image,
-.ModesView-Stack {
-  cursor: pointer;
+.ModesView .--button {
   height: 40px;
   width: 40px;
-}
-
-.ModesView-Image {
-  cursor: not-allowed;
 }

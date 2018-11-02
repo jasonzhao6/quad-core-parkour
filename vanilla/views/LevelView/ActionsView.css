@@ -1,12 +1,8 @@
-.ActionsView ol {
+.ActionsView {
   align-items: flex-end;
 }
 
-.ActionsView-Speed,
-.ActionsView-Start,
-.ActionsView-Step,
-.ActionsView-Stop {
-  cursor: pointer;
+.ActionsView .--button {
   height: 40px;
   width: 40px;
 }

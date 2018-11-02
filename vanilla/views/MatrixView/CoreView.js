@@ -12,44 +12,41 @@ export default class CoreView {
 
     return this._.renderBox({ layout: this._.BOX_LAYOUTS.oneAndTwo }, [`
       <div class='CoreView'>
-        <ol>
-          <li>start: mov left acc</li>
-          <li>jez terminate</li>
-          <li>swp</li>
-          <li>sav</li>
-          <li>sub left</li>
-          <li>jgz keep</li>
-          <li class='--highlight'>pass-thru: mov up down</li>
-          <li>remainder: mov up down</li>
-          <li>reverse: mov above acc</li>
-          <li>keep: mov left acc</li>
-          <li>jmp start</li>
-          <li>terminate: swp</li>
-        </ol>
+        <div>start: mov left acc</div>
+        <div>jez terminate</div>
+        <div>swp</div>
+        <div>sav</div>
+        <div>sub left</div>
+        <div>jgz keep</div>
+        <div class='--highlight'>pass-thru: mov up down</div>
+        <div>remainder: mov up down</div>
+        <div>reverse: mov above acc</div>
+        <div>keep: mov left acc</div>
+        <div>jmp start</div>
+        <div>terminate: swp</div>
+        <div>terminate: swp</div>
+        <div>terminate: swp</div>
+        <div>terminate: swp</div>
       </div>
     `, `
-      <div class='CoreView-Accumulator'>
-        <ol>
-          <li>acc</li>
-          <li>-99</li>
-          <li class='debugBlock'>-99</li>
-          <li class='debugBlock'>-99</li>
-          <li class='debugBlock'>-99</li>
-          <li class='debugBlock'>-99</li>
-          <li class='debugBlock --ellipsis'>...</li>
-        </ol>
+      <div class='CoreView-state'>
+        <div class='label'>acc</div>
+        <div>-99</div>
+        <div class='debugBlock'>-99</div>
+        <div class='debugBlock'>-99</div>
+        <div class='debugBlock'>-99</div>
+        <div class='debugBlock'>-99</div>
+        <div class='debugBlock --ellipsis'>...</div>
       </div>
     `, `
-      <div class='CoreView-Backup'>
-        <ol>
-          <li>bak</li>
-          <li>0</li>
-          <li class='debugBlock'>0</li>
-          <li class='debugBlock'>0</li>
-          <li class='debugBlock'>0</li>
-          <li class='debugBlock'>0</li>
-          <li class='debugBlock --ellipsis'>...</li>
-        </ol>
+      <div class='CoreView-state'>
+        <div class='label'>bak</div>
+        <div>0</div>
+        <div class='debugBlock'>0</div>
+        <div class='debugBlock'>0</div>
+        <div class='debugBlock'>0</div>
+        <div class='debugBlock'>0</div>
+        <div class='debugBlock --ellipsis'>...</div>
       </div>
     `], view);
   }

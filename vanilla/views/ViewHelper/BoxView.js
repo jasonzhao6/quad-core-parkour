@@ -44,25 +44,25 @@ export default class BoxView {
     return this._.render(`
       <div class='BoxViewOuter'>
         {{#label}}
-          <div class='label' style='{{labelStyle}}'>{{label}}</div>
+          <div class='boxViewLabel' style='{{labelStyle}}'>{{label}}</div>
         {{/label}}
         <div class='BoxView --horizontalJustify' style='{{style}}'>
           <div class='BoxViewInner'>
             {{>template1}}
           </div>
           {{#layout.oneAndOne}}
-            <div class='right'>
+            <div class='boxViewRight'>
               <div class='BoxViewInner'>
                 {{>template2}}
               </div>
             </div>
           {{/layout.oneAndOne}}
           {{#layout.oneAndTwo}}
-            <div class='right'>
+            <div class='boxViewRight'>
               <div class='BoxViewInner'>
                 {{>template2}}
               </div>
-              <div class='bottom'>
+              <div class='boxViewBottom'>
                 <div class='BoxViewInner'>
                   {{>template3}}
                 </div>

@@ -1,11 +1,25 @@
 .StackView {
+  display: flex;
   letter-spacing: 0;
 }
 
-.StackView li {
-  display: inline-block;
+.StackView .label {
+  letter-spacing: 1px;
+  margin: 0 2px 0 8px;
 }
 
-.StackView li.label {
-  letter-spacing: 1px;
+.StackView .number {
+  margin: 0 3px;
+}
+
+.StackView .bracket {
+  margin: 0 2px;
+}
+
+.StackView .--ellipsis {
+  margin: 0 2px 0 1px;
+}
+
+.StackView .--icon {
+  line-height: 9px;
 }

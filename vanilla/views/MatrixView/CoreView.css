@@ -3,24 +3,21 @@
   width: 170px; /* Good for 24 characters */
 }
 
-.CoreView-Accumulator,
-.CoreView-Backup {
+.CoreView-state {
+  letter-spacing: 0;
   text-align: center;
   width: 25px; /* Good for 3 digits */
 }
 
-.CoreView-Accumulator li:nth-child(n+2),
-.CoreView-Backup li:nth-child(n+2) {
-  letter-spacing: 0;
+.CoreView-state .label {
+  letter-spacing: 1px;
 }
 
-.CoreView-Accumulator li:nth-child(n+3),
-.CoreView-Backup li:nth-child(n+3) {
+.CoreView-state :nth-child(n+3) {
   color: var(--color-comment);
 }
 
-.CoreView-Accumulator li.--ellipsis,
-.CoreView-Backup li.--ellipsis {
-  line-height: 8px;
+.CoreView-state .--ellipsis {
   height: 12px;
+  margin-right: 2px;
 }

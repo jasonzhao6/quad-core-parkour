@@ -13,29 +13,27 @@ export default class ActionsView {
     const boxConfig = { label: 'Actions:', labelStyle: 'text-align: left;' };
     return {
       speedButton: this._.renderBox({}, `
-        <div class='ActionsView-Speed --center'>100x</div>
+        <div class='--button --center'>100x</div>
       `, this.view()),
       startButton: this._.renderBox({}, `
-        <div class='ActionsView-Start --center'>Start</div>
+        <div class='--button --center'>Start</div>
       `, this.view()),
       stepButton: this._.renderBox({}, `
-        <div class='ActionsView-Step --center'>Step</div>
+        <div class='--button --center'>Step</div>
       `, this.view()),
       stopButton: this._.renderBox(boxConfig, `
-        <div class='ActionsView-Stop --center'>Stop</div>
+        <div class='--button --center'>Stop</div>
       `, this.view()),
     };
   }
 
   render() {
     return this._.render(`
-      <div class='ActionsView'>
-        <ol class='--horizontalJustify'>
-          <li>{{>stopButton}}</li>
-          <li>{{>startButton}}</li>
-          <li>{{>stepButton}}</li>
-          <li>{{>speedButton}}</li>
-        </ol>
+      <div class='ActionsView --horizontalJustify'>
+        {{>stopButton}}
+        {{>startButton}}
+        {{>stepButton}}
+        {{>speedButton}}
       </div>
     `, this.view(), this.partials());
   }

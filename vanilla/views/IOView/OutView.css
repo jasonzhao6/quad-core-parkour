@@ -1,13 +1,9 @@
-.OutView,
-.OutView-Output {
+.OutView {
   height: 187px; /* Stretch for space besides 'in.x' to form a square image */
+  min-width: 12px; /* Stretch to match InView */
   text-align: center;
 }
 
-.OutView {
-  min-width: 12px; /* Stretch to match InView */
-}
-
-.OutView-Output {
+.OutView.userOutput {
   width: 20px; /* Good for 3 digits */
 }

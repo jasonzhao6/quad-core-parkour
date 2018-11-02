@@ -38,39 +38,37 @@ export default class EscrowView {
   render() {
     return this._.render(`
       <div class='EscrowView {{viewClass}} {{^isInOrOut}}stretch{{/isInOrOut}}'>
-        <ol>
-          <li class='--icon'>
-            {{#isLR}}&larr;{{/isLR}}
-            {{#isRL}}&rarr;{{/isRL}}
-            {{#isUD}}&uarr;{{/isUD}}
-            {{#isDU}}&darr;{{/isDU}}
-            {{#isInX}}&darr;{{/isInX}}
-            {{#isOutX}}&darr;{{/isOutX}}
-          </li>
-          {{#isInX}}<li>in.x</li>{{/isInX}}
-          {{#isOutX}}<li>out.x</li>{{/isOutX}}
-          {{^isInOrOut}}
-            <li class='number'>0</li>
-            <li class='number {{debugClass}}'>0</li>
-            <li class='number {{debugClass}}'>0</li>
-            <li class='number {{debugClass}}'>0</li>
-            <li class='--ellipsis debugVisible'>...</li>
-            <li class='number {{debugClass}}'>-99</li>
-            <li class='number {{debugClass}}'>-99</li>
-            <li class='number {{debugClass}}'>-99</li>
-            <li class='number'>-99</li>
-          {{/isInOrOut}}
-          {{#isInY}}<li>in.y</li>{{/isInY}}
-          {{#isOutY}}<li>out.y</li>{{/isOutY}}
-          <li class='--icon'>
-            {{#isLR}}&rarr;{{/isLR}}
-            {{#isRL}}&larr;{{/isRL}}
-            {{#isUD}}&darr;{{/isUD}}
-            {{#isDU}}&uarr;{{/isDU}}
-            {{#isInY}}&darr;{{/isInY}}
-            {{#isOutY}}&darr;{{/isOutY}}
-          </li>
-        </ol>
+        <div class='--icon'>
+          {{#isLR}}&larr;{{/isLR}}
+          {{#isRL}}&rarr;{{/isRL}}
+          {{#isUD}}&uarr;{{/isUD}}
+          {{#isDU}}&darr;{{/isDU}}
+          {{#isInX}}&darr;{{/isInX}}
+          {{#isOutX}}&darr;{{/isOutX}}
+        </div>
+        {{#isInX}}<div>in.x</div>{{/isInX}}
+        {{#isOutX}}<div>out.x</div>{{/isOutX}}
+        {{^isInOrOut}}
+          <div class='number'>000</div>
+          <div class='number {{debugClass}}'>000</div>
+          <div class='number {{debugClass}}'>000</div>
+          <div class='number {{debugClass}}'>000</div>
+          <div class='--ellipsis debugVisible'>...</div>
+          <div class='number {{debugClass}}'>000</div>
+          <div class='number {{debugClass}}'>000</div>
+          <div class='number {{debugClass}}'>000</div>
+          <div class='number'>000</div>
+        {{/isInOrOut}}
+        {{#isInY}}<div>in.y</div>{{/isInY}}
+        {{#isOutY}}<div>out.y</div>{{/isOutY}}
+        <div class='--icon'>
+          {{#isLR}}&rarr;{{/isLR}}
+          {{#isRL}}&larr;{{/isRL}}
+          {{#isUD}}&darr;{{/isUD}}
+          {{#isDU}}&uarr;{{/isDU}}
+          {{#isInY}}&darr;{{/isInY}}
+          {{#isOutY}}&darr;{{/isOutY}}
+        </div>
       </div>
     `, this.view());
   }

@@ -12,12 +12,11 @@ export default class InView {
 
     return this._.renderBox({ label: 'in.x' }, `
       <div class='InView'>
-        <ol>
-          <li class='--ellipsis'>...</li>
-          <li>0</li><li class='--highlight'>0</li><li>0</li><li>0</li><li>0</li>
-          <li>-99</li><li>-99</li><li>-99</li><li>-99</li><li>-99</li>
-          <li>-99</li><li>-99</li><li>-99</li><li>-99</li><li class='--highlight'>-99</li>
-        </ol>
+        <div class='--ellipsis'>...</div>
+        <div>0</div><div class='--highlight'>0</div><div>0</div><div>0</div>
+        <div>0</div><div>-99</div><div>-99</div><div>-99</div><div>-99</div>
+        <div>-99</div><div>-99</div><div>-99</div><div>-99</div><div>-99</div>
+        <div class='--highlight'>-99</div>
       </div>
     `, view);
   }

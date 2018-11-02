@@ -11,18 +11,17 @@ export default class StackView {
   render() {
     return this._.render(`
       <div class='StackView'>
-        <ol>
-          <li class='--icon'>&#9782;</li>
-          <li class='label'>Stack: [</li>
-          <li class='--ellipsis'>...</li>
-          <li>-99</li>
-          <li>-99</li>
-          <li>-99</li>
-          <li>-99</li>
-          <li>-99</li>
-          <li>-99</li>
-          <li>]</li>
-        </ol>
+        <div class='--icon'>&#9782;</div>
+        <div class='label'>Stack:</div>
+        <div class='bracket'>[</div>
+        <div class='--ellipsis'>...</div>
+        <div class='number'>-99</div>
+        <div class='number'>-99</div>
+        <div class='number'>-99</div>
+        <div class='number'>-99</div>
+        <div class='number'>-99</div>
+        <div class='number'>-99</div>
+        <div class='bracket'>]</div>
       </div>
     `, this.view());
   }

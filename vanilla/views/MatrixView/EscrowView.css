@@ -1,9 +1,10 @@
 .EscrowView {
+  display: flex;
+  justify-content: center;
   letter-spacing: 0;
-  text-align: center;
 }
 
-.EscrowView li:nth-child(n+3):nth-last-child(n+3) {
+.EscrowView :nth-child(n+3):nth-last-child(n+3) {
   color: var(--color-comment);
 }
 
@@ -12,25 +13,29 @@
 */
 
 .EscrowView.horizontal.stretch {
-  align-items: center;
-  display: flex;
+  flex-direction: column;
   height: 194px; /* Stretch for proper centering in non-debug mode */
 }
 
-.EscrowView.horizontal li.--icon {
+.EscrowView.horizontal .number {
+  margin: 3px 0;
+}
+
+.EscrowView.horizontal .--ellipsis {
+  margin: 0 0 6px 2px;
+}
+
+.EscrowView.horizontal .--icon {
+  margin-left: 1px;
   height: 12px; /* Good for 1 horizontal arrow */
 }
 
-.EscrowView.horizontal li.--icon:first-child {
-  margin-bottom: 10px;
+.EscrowView.horizontal .--icon:first-child {
+  margin-bottom: 6px;
 }
 
-.EscrowView.horizontal li.--ellipsis {
-  margin: -3px 0 9px;
-}
-
-.EscrowView.horizontal li.number {
-  margin: 6px 0;
+.EscrowView.horizontal .--icon:last-child {
+  margin-top: 1px;
 }
 
 /*
@@ -41,32 +46,32 @@
   width: 227px; /* Stretch for proper centering in non-debug mode */
 }
 
-.EscrowView.vertical ol,
-.EscrowView.vertical li {
-  display: inline-block;
+.EscrowView.vertical.stretch:first-child {
+  margin-left: -1px;
 }
 
-.EscrowView.vertical ol {
-  margin-bottom: 2px;
+.EscrowView.vertical.stretch:last-child {
+  margin-right: -1px;
 }
 
-.EscrowView.vertical li.--icon {
+.EscrowView.vertical .number {
+  margin: 0 2.5px;
+  width: 18px; /* Good for 3 digits */
+}
+
+.EscrowView.vertical .--ellipsis {
+  margin: 0 3px 0 2px;
+}
+
+.EscrowView.vertical .--icon {
+  line-height: 6px;
   width: 8px; /* Good for 1 vertical arrow */
 }
 
-.EscrowView.vertical li.--icon:first-child {
-  margin-right: 3px;
+.EscrowView.vertical .--icon:first-child {
+  margin-right: 4px;
 }
 
-.EscrowView.vertical li.--icon:last-child {
+.EscrowView.vertical .--icon:last-child {
   margin-left: 4px;
-}
-
-.EscrowView.vertical li.--ellipsis {
-  margin: 0 2px;
-}
-
-.EscrowView.vertical li.number {
-  margin: 0 -1px;
-  width: 18px; /* Good for 3 digits */
 }

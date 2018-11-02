@@ -90,14 +90,14 @@ body {
   Content mixins
 */
 
-.--icon {
-  font-family: Impact, Charcoal, sans-serif;
-}
-
 .--ellipsis {
   letter-spacing: -2px;
-  line-height: 10px;
+  line-height: 6px;
   vertical-align: top;
+}
+
+.--icon {
+  font-family: Impact, Charcoal, sans-serif;
 }
 
 /*
@@ -108,4 +108,16 @@ body {
   background-color: var(--background-color-highlight);
   box-shadow: -5px 0 0 var(--background-color-highlight),
               5px 0 0 var(--background-color-highlight);
+}
+
+/*
+  Button mixins
+*/
+
+.--button {
+  cursor: pointer;
+}
+
+.--disabled {
+  cursor: not-allowed;
 }
