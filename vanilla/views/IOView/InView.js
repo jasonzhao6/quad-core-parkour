@@ -1,13 +1,16 @@
-import { ViewHelper as _ } from '../ViewHelper.js';
-
 export default class InView {
+  constructor(_) {
+    // Props
+    this._ = _;
+  }
+
   render() {
     const view = {
       title: 'In',
       calc: () => 'View',
     };
 
-    return _.renderBox({ label: 'in.x' }, `
+    return this._.renderBox({ label: 'in.x' }, `
       <div class='InView'>
         <ol>
           <li class='ellipsis'>...</li>

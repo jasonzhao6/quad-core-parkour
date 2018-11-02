@@ -1,6 +1,9 @@
-import { ViewHelper as _ } from '../ViewHelper.js';
-
 export default class ActionsView {
+  constructor(_) {
+    // Props
+    this._ = _;
+  }
+
   view() { // eslint-disable-line class-methods-use-this, TODO
     return {
     };
@@ -9,23 +12,23 @@ export default class ActionsView {
   partials() { // eslint-disable-line class-methods-use-this, TODO
     const boxConfig = { label: 'Actions:', labelStyle: 'text-align:left;' };
     return {
-      speedButton: _.renderBox({}, `
+      speedButton: this._.renderBox({}, `
         <div class='ActionsView-Speed flexCenter'>100x</div>
       `, this.view()),
-      startButton: _.renderBox({}, `
+      startButton: this._.renderBox({}, `
         <div class='ActionsView-Start flexCenter'>Start</div>
       `, this.view()),
-      stepButton: _.renderBox({}, `
+      stepButton: this._.renderBox({}, `
         <div class='ActionsView-Step flexCenter'>Step</div>
       `, this.view()),
-      stopButton: _.renderBox(boxConfig, `
+      stopButton: this._.renderBox(boxConfig, `
         <div class='ActionsView-Stop flexCenter'>Stop</div>
       `, this.view()),
     };
   }
 
   render() {
-    return _.render(`
+    return this._.render(`
       <div class='ActionsView'>
         <ol class='flexRow'>
           <li>{{>stopButton}}</li>

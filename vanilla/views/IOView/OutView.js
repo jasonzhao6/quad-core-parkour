@@ -1,13 +1,12 @@
-import { ViewHelper as _ } from '../ViewHelper.js';
-
 export default class OutView {
-  render() {
-    const view = {
-      title: 'Out',
-      calc: () => 'View',
-    };
+  constructor(_) {
+    // Props
+    this._ = _;
+  }
 
-    return _.renderBox({ label: 'out.x', layout: _.BOX_LAYOUTS.oneAndOne }, [`
+  render() {
+    const boxConfig = { label: 'out.x', layout: this._.BOX_LAYOUTS.oneAndOne };
+    return this._.renderBox(boxConfig, [`
       <div class='OutView'>
         <ol>
           <li class='highlight'>0</li><li>0</li><li>0</li><li>0</li><li>0</li>
@@ -21,6 +20,6 @@ export default class OutView {
           <li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li><li>&nbsp;</li>
         </ol>
       </div>
-    `], view);
+    `], {});
   }
 }

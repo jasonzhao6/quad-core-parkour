@@ -1,5 +1,3 @@
-import { ViewHelper as _ } from '../ViewHelper.js';
-
 export default class EscrowView {
   static get ORIENTATION() {
     return {
@@ -14,7 +12,8 @@ export default class EscrowView {
     };
   }
 
-  constructor(orientation) {
+  constructor(_, orientation) {
+    this._ = _;
     this.orientation = orientation;
   }
 
@@ -22,7 +21,7 @@ export default class EscrowView {
     const isHorizontal = /left|right/.test(this.orientation);
 
     return {
-      debugClass: isHorizontal ? 'debugHideBlock' : 'debugHideInlineBlock',
+      debugClass: isHorizontal ? 'debugBlock' : 'debugInlineBlock',
       viewClass: isHorizontal ? 'horizontal' : 'vertical',
       isLR: this.orientation === EscrowView.ORIENTATION.LR,
       isRL: this.orientation === EscrowView.ORIENTATION.RL,
@@ -37,7 +36,7 @@ export default class EscrowView {
   }
 
   render() {
-    return _.render(`
+    return this._.render(`
       <div class='EscrowView {{viewClass}} {{^isInOrOut}}stretch{{/isInOrOut}}'>
         <ol>
           <li class='icon'>
@@ -55,7 +54,7 @@ export default class EscrowView {
             <li class='number {{debugClass}}'>0</li>
             <li class='number {{debugClass}}'>0</li>
             <li class='number {{debugClass}}'>0</li>
-            <li class='ellipsis debugHidden'>...</li>
+            <li class='ellipsis debugVisible'>...</li>
             <li class='number {{debugClass}}'>-99</li>
             <li class='number {{debugClass}}'>-99</li>
             <li class='number {{debugClass}}'>-99</li>

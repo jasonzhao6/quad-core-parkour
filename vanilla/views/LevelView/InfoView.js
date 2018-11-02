@@ -1,13 +1,17 @@
-import { ViewHelper as _ } from '../ViewHelper.js';
-
 export default class InfoView {
+  constructor(_) {
+    // Props
+    this._ = _;
+  }
+
   view() { // eslint-disable-line class-methods-use-this, TODO
     return {
       wrap: true,
     };
   }
+
   render() {
-    return _.renderBox({ label: '— Level 0: Tutorial —' }, `
+    return this._.renderBox({ label: '— Level 0: Tutorial —' }, `
       <div class='InfoView'>
         <ol>
           {{#wrap}}

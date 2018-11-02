@@ -1,5 +1,3 @@
-import { ViewHelper as _ } from '../ViewHelper.js';
-
 export default class BoxView {
   static get LAYOUTS() {
     return {
@@ -9,13 +7,21 @@ export default class BoxView {
     };
   }
 
-  constructor(boxConfig, templates, view) {
-    const { label, labelStyle, layout } = boxConfig;
-    this.label = label;
-    this.labelStyle = labelStyle;
-    this.layout = layout || BoxView.LAYOUTS.one;
+  constructor(_, templates, view, boxConfig) {
+    // Props
+    this._ = _;
     this.templates = templates;
     this.originalView = view;
+
+    // Destructure `boxConfig` props
+    [
+      'label',
+      'labelStyle',
+      'layout',
+    ].forEach((key) => { this[key] = boxConfig[key]; });
+
+    // Set default for `layout` prop
+    this.layout = this.layout || BoxView.LAYOUTS.one;
   }
 
   view() {
@@ -35,7 +41,7 @@ export default class BoxView {
   }
 
   render() {
-    return _.render(`
+    return this._.render(`
       <div class='BoxViewOuter'>
         {{#label}}
           <div class='label' style={{labelStyle}}>{{label}}</div>

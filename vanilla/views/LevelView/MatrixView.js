@@ -1,27 +1,32 @@
-import { ViewHelper as _ } from '../ViewHelper.js';
-
 import CoreView from '../MatrixView/CoreView.js';
 import EscrowView from '../MatrixView/EscrowView.js';
 import StackView from '../MatrixView/StackView.js';
 
 export default class MatrixView {
+  constructor(_) {
+    // Props
+    this._ = _;
+  }
+
   partials() { // eslint-disable-line class-methods-use-this, TODO
+    const orientation = EscrowView.ORIENTATION;
     return {
-      coreView: new CoreView().render(),
-      escrowViewLR: new EscrowView(EscrowView.ORIENTATION.LR).render(),
-      escrowViewRL: new EscrowView(EscrowView.ORIENTATION.RL).render(),
-      escrowViewUD: new EscrowView(EscrowView.ORIENTATION.UD).render(),
-      escrowViewDU: new EscrowView(EscrowView.ORIENTATION.DU).render(),
-      escrowViewInX: new EscrowView(EscrowView.ORIENTATION.InX).render(),
-      escrowViewInY: new EscrowView(EscrowView.ORIENTATION.InY).render(),
-      escrowViewOutX: new EscrowView(EscrowView.ORIENTATION.OutX).render(),
-      escrowViewOutY: new EscrowView(EscrowView.ORIENTATION.OutY).render(),
-      stackAboveView: new StackView().render(),
-      stackBelowView: new StackView().render(),
+      coreView: new CoreView(this._).render(),
+      escrowViewLR: new EscrowView(this._, orientation.LR).render(),
+      escrowViewRL: new EscrowView(this._, orientation.RL).render(),
+      escrowViewUD: new EscrowView(this._, orientation.UD).render(),
+      escrowViewDU: new EscrowView(this._, orientation.DU).render(),
+      escrowViewInX: new EscrowView(this._, orientation.InX).render(),
+      escrowViewInY: new EscrowView(this._, orientation.InY).render(),
+      escrowViewOutX: new EscrowView(this._, orientation.OutX).render(),
+      escrowViewOutY: new EscrowView(this._, orientation.OutY).render(),
+      stackAboveView: new StackView(this._).render(),
+      stackBelowView: new StackView(this._).render(),
     };
   }
+
   render() {
-    return _.render(`
+    return this._.render(`
       <div class='MatrixView flexColumn'>
         <div class='flexRow'>
           {{>escrowViewInX}}

@@ -1,13 +1,16 @@
-import { ViewHelper as _ } from '../ViewHelper.js';
-
 export default class CoreView {
+  constructor(_) {
+    // Props
+    this._ = _;
+  }
+
   render() {
     const view = {
       title: 'Core',
       calc: () => 'View',
     };
 
-    return _.renderBox({ layout: _.BOX_LAYOUTS.oneAndTwo }, [`
+    return this._.renderBox({ layout: this._.BOX_LAYOUTS.oneAndTwo }, [`
       <div class='CoreView'>
         <ol>
           <li>start: mov left acc</li>
@@ -29,11 +32,11 @@ export default class CoreView {
         <ol>
           <li>acc</li>
           <li>-99</li>
-          <li class='debugHideBlock'>-99</li>
-          <li class='debugHideBlock'>-99</li>
-          <li class='debugHideBlock'>-99</li>
-          <li class='debugHideBlock'>-99</li>
-          <li class='debugHideBlock ellipsis'>...</li>
+          <li class='debugBlock'>-99</li>
+          <li class='debugBlock'>-99</li>
+          <li class='debugBlock'>-99</li>
+          <li class='debugBlock'>-99</li>
+          <li class='debugBlock ellipsis'>...</li>
         </ol>
       </div>
     `, `
@@ -41,11 +44,11 @@ export default class CoreView {
         <ol>
           <li>bak</li>
           <li>0</li>
-          <li class='debugHideBlock'>0</li>
-          <li class='debugHideBlock'>0</li>
-          <li class='debugHideBlock'>0</li>
-          <li class='debugHideBlock'>0</li>
-          <li class='debugHideBlock ellipsis'>...</li>
+          <li class='debugBlock'>0</li>
+          <li class='debugBlock'>0</li>
+          <li class='debugBlock'>0</li>
+          <li class='debugBlock'>0</li>
+          <li class='debugBlock ellipsis'>...</li>
         </ol>
       </div>
     `], view);

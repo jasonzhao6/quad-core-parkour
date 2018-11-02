@@ -1,15 +1,15 @@
 /*
   Off
 */
-.debugHideBlock {
+.debugBlock {
   display: none !important;
 }
 
-.debugHideInlineBlock {
+.debugInlineBlock {
   display: none !important;
 }
 
-.debugHidden {
+.debugVisible {
   visibility: hidden !important;
 }
 
@@ -17,14 +17,14 @@
   On
 */
 
-.debugMode .debugHideBlock {
+.debugMode .debugBlock {
   display: block !important;
 }
 
-.debugMode .debugHideInlineBlock {
+.debugMode .debugInlineBlock {
   display: inline-block !important;
 }
 
-.debugMode .debugHidden {
+.debugMode .debugVisible {
   visibility: visible !important;
 }
