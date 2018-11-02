@@ -39,7 +39,7 @@ export default class EscrowView {
     return this._.render(`
       <div class='EscrowView {{viewClass}} {{^isInOrOut}}stretch{{/isInOrOut}}'>
         <ol>
-          <li class='icon'>
+          <li class='--icon'>
             {{#isLR}}&larr;{{/isLR}}
             {{#isRL}}&rarr;{{/isRL}}
             {{#isUD}}&uarr;{{/isUD}}
@@ -54,7 +54,7 @@ export default class EscrowView {
             <li class='number {{debugClass}}'>0</li>
             <li class='number {{debugClass}}'>0</li>
             <li class='number {{debugClass}}'>0</li>
-            <li class='ellipsis debugVisible'>...</li>
+            <li class='--ellipsis debugVisible'>...</li>
             <li class='number {{debugClass}}'>-99</li>
             <li class='number {{debugClass}}'>-99</li>
             <li class='number {{debugClass}}'>-99</li>
@@ -62,7 +62,7 @@ export default class EscrowView {
           {{/isInOrOut}}
           {{#isInY}}<li>in.y</li>{{/isInY}}
           {{#isOutY}}<li>out.y</li>{{/isOutY}}
-          <li class='icon'>
+          <li class='--icon'>
             {{#isLR}}&rarr;{{/isLR}}
             {{#isRL}}&larr;{{/isRL}}
             {{#isUD}}&darr;{{/isUD}}

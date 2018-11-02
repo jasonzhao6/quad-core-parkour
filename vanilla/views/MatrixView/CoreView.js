@@ -19,7 +19,7 @@ export default class CoreView {
           <li>sav</li>
           <li>sub left</li>
           <li>jgz keep</li>
-          <li class='highlight'>pass-thru: mov up down</li>
+          <li class='--highlight'>pass-thru: mov up down</li>
           <li>remainder: mov up down</li>
           <li>reverse: mov above acc</li>
           <li>keep: mov left acc</li>
@@ -36,7 +36,7 @@ export default class CoreView {
           <li class='debugBlock'>-99</li>
           <li class='debugBlock'>-99</li>
           <li class='debugBlock'>-99</li>
-          <li class='debugBlock ellipsis'>...</li>
+          <li class='debugBlock --ellipsis'>...</li>
         </ol>
       </div>
     `, `
@@ -48,7 +48,7 @@ export default class CoreView {
           <li class='debugBlock'>0</li>
           <li class='debugBlock'>0</li>
           <li class='debugBlock'>0</li>
-          <li class='debugBlock ellipsis'>...</li>
+          <li class='debugBlock --ellipsis'>...</li>
         </ol>
       </div>
     `], view);

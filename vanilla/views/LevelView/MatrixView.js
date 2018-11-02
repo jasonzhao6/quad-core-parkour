@@ -27,27 +27,27 @@ export default class MatrixView {
 
   render() {
     return this._.render(`
-      <div class='MatrixView flexColumn'>
-        <div class='flexRow'>
+      <div class='MatrixView --verticalJustify'>
+        <div class='--horizontalJustify'>
           {{>escrowViewInX}}
           {{>stackAboveView}}
           {{>escrowViewInY}}
         </div>
-        <div class='flexRow'>
+        <div class='--horizontalJustify'>
           {{>coreView}}
           {{>escrowViewRL}}
           {{>coreView}}
         </div>
-        <div class='flexRow'>
+        <div class='--horizontalJustify'>
           {{>escrowViewDU}}
           {{>escrowViewUD}}
         </div>
-        <div class='flexRow'>
+        <div class='--horizontalJustify'>
           {{>coreView}}
           {{>escrowViewLR}}
           {{>coreView}}
         </div>
-        <div class='flexRow'>
+        <div class='--horizontalJustify'>
           {{>escrowViewOutX}}
           {{>stackBelowView}}
           {{>escrowViewOutY}}

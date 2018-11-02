@@ -42,37 +42,69 @@ body {
 }
 
 /*
-  Global helpers
+  Layout mixins
 */
 
-.flexCenter {
+.--center {
   align-items: center;
   display: flex;
   justify-content: center;
 }
 
-.flexRow {
+.--horizontalJustify {
   display: flex;
   justify-content: space-between;
 }
 
-.flexColumn {
+.--verticalJustify {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.icon {
+/*
+  Visibility mixins
+*/
+
+.--hide {
+  display: none;
+}
+
+.--block {
+  display: block;
+}
+
+.--inlineBlock {
+  display: inline-block;
+}
+
+.--hidden {
+  visibility: hidden;
+}
+
+.--visible {
+  visibility: visible;
+}
+
+/*
+  Content mixins
+*/
+
+.--icon {
   font-family: Impact, Charcoal, sans-serif;
 }
 
-.ellipsis {
+.--ellipsis {
   letter-spacing: -2px;
   line-height: 10px;
   vertical-align: top;
 }
 
-.highlight {
+/*
+  Effects mixins
+*/
+
+.--highlight {
   background-color: var(--background-color-highlight);
   box-shadow: -5px 0 0 var(--background-color-highlight),
               5px 0 0 var(--background-color-highlight);

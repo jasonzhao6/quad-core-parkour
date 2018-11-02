@@ -17,7 +17,7 @@ export default class IOView {
     const outView = new OutView(this._).render();
 
     return this._.render(`
-      <div class='IOView flexRow'>
+      <div class='IOView --horizontalJustify'>
         {{>inView}}
         {{>inView}}
         {{>outView}}

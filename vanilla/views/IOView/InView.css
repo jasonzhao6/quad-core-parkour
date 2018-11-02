@@ -4,7 +4,7 @@
   text-align: center;
 }
 
-.InView li.ellipsis {
+.InView li.--ellipsis {
   height: 7px;
   line-height: 0;
   margin-right: 2px;

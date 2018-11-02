@@ -13,16 +13,16 @@ export default class ModesView {
     const boxConfig = { label: 'Modes:', labelStyle: 'text-align: left;' };
     return {
       demoMode: this._.renderBox(boxConfig, `
-        <div class='ModesView-Demo flexCenter'>Demo</div>
+        <div class='ModesView-Demo --center'>Demo</div>
       `, this.view()),
       easyMode: this._.renderBox({}, `
-        <div class='ModesView-Easy flexCenter'>Easy</div>
+        <div class='ModesView-Easy --center'>Easy</div>
       `, this.view()),
       imageMode: this._.renderBox({}, `
-        <div class='ModesView-Image flexCenter'>Image</div>
+        <div class='ModesView-Image --center'>Image</div>
       `, this.view()),
       stackMode: this._.renderBox({}, `
-        <div class='ModesView-Stack flexCenter'>Mem</div>
+        <div class='ModesView-Stack --center'>Mem</div>
       `, this.view()),
     };
   }
@@ -30,7 +30,7 @@ export default class ModesView {
   render() {
     return this._.render(`
       <div class='ModesView'>
-        <ol class='flexRow'>
+        <ol class='--horizontalJustify'>
           <li>{{>demoMode}}</li>
           <li>{{>easyMode}}</li>
           <li>{{>stackMode}}</li>

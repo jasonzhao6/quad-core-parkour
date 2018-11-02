@@ -17,15 +17,15 @@
   height: 194px; /* Stretch for proper centering in non-debug mode */
 }
 
-.EscrowView.horizontal li.icon {
+.EscrowView.horizontal li.--icon {
   height: 12px; /* Good for 1 horizontal arrow */
 }
 
-.EscrowView.horizontal li.icon:first-child {
+.EscrowView.horizontal li.--icon:first-child {
   margin-bottom: 10px;
 }
 
-.EscrowView.horizontal li.ellipsis {
+.EscrowView.horizontal li.--ellipsis {
   margin: -3px 0 9px;
 }
 
@@ -50,19 +50,19 @@
   margin-bottom: 2px;
 }
 
-.EscrowView.vertical li.icon {
+.EscrowView.vertical li.--icon {
   width: 8px; /* Good for 1 vertical arrow */
 }
 
-.EscrowView.vertical li.icon:first-child {
+.EscrowView.vertical li.--icon:first-child {
   margin-right: 3px;
 }
 
-.EscrowView.vertical li.icon:last-child {
+.EscrowView.vertical li.--icon:last-child {
   margin-left: 4px;
 }
 
-.EscrowView.vertical li.ellipsis {
+.EscrowView.vertical li.--ellipsis {
   margin: 0 2px;
 }
 

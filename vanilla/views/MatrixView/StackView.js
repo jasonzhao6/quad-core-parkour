@@ -12,9 +12,9 @@ export default class StackView {
     return this._.render(`
       <div class='StackView'>
         <ol>
-          <li class='icon'>&#9782;</li>
+          <li class='--icon'>&#9782;</li>
           <li class='label'>Stack: [</li>
-          <li class='ellipsis'>...</li>
+          <li class='--ellipsis'>...</li>
           <li>-99</li>
           <li>-99</li>
           <li>-99</li>

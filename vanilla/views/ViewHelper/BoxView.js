@@ -46,7 +46,7 @@ export default class BoxView {
         {{#label}}
           <div class='label' style='{{labelStyle}}'>{{label}}</div>
         {{/label}}
-        <div class='BoxView flexRow' style='{{style}}'>
+        <div class='BoxView --horizontalJustify' style='{{style}}'>
           <div class='BoxViewInner'>
             {{>template1}}
           </div>

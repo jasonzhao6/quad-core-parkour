@@ -22,15 +22,15 @@ export default class LevelView {
 
   render() {
     return this._.render(`
-      <div class='LevelViewOuter flexCenter'>
-        <div class='LevelView flexRow'>
-          <div class='flexColumn'>
+      <div class='LevelViewOuter --center'>
+        <div class='LevelView --horizontalJustify'>
+          <div class='--verticalJustify'>
             {{>infoView}}
             {{>ioView}}
             {{>modesView}}
             {{>actionsView}}
           </div>
-          <div class='flexColumn'>
+          <div class='--verticalJustify'>
             {{>matrixView}}
           </div>
         </div>
