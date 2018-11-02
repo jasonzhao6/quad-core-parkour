@@ -1,6 +1,6 @@
 .InView {
-  height: 187px; /* Stretch for space besides 'in.x' to form a square image */
-  min-width: 12px; /* Stretch to match 'in.x' label */
+  height: 187px; /* Good to make a square image over 'in.y, out.x, out.y` */
+  min-width: 12px; /* Good to match 'in.x' label */
   text-align: center;
 }
 

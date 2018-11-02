@@ -12,7 +12,7 @@
   Left-Right orientation
 */
 
-.EscrowView.leftRight.stretch {
+.EscrowView.leftRight.messageBus {
   flex-direction: column;
   height: 194px; /* Stretch for proper centering in non-debug mode */
 }
@@ -42,15 +42,15 @@
   Up-Down orienation
 */
 
-.EscrowView.upDown.stretch {
+.EscrowView.upDown.messageBus {
   width: 227px; /* Stretch for proper centering in non-debug mode */
 }
 
-.EscrowView.upDown.stretch:first-child {
+.EscrowView.upDown.messageBus:first-child {
   margin-left: -1px;
 }
 
-.EscrowView.upDown.stretch:last-child {
+.EscrowView.upDown.messageBus:last-child {
   margin-right: -1px;
 }
 

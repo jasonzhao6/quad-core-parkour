@@ -6,7 +6,7 @@ export default class InfoView {
 
   view() { // eslint-disable-line class-methods-use-this, TODO
     return {
-      wrap: true,
+      wrap: false,
     };
   }
 

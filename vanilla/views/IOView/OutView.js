@@ -12,7 +12,8 @@ export default class OutView {
         <div>0</div><div>0</div><div>0</div><div>0</div><div>0</div><div>0</div>
       </div>
     `, `
-      <div class='OutView userOutput'></div>
+      <div class='OutView userOutput'>
+      </div>
     `], {});
   }
 }

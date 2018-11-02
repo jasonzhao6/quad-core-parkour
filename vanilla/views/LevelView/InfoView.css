@@ -1,6 +1,7 @@
 .InfoView {
   margin-right: 2px;
-  width: 235px; /* Good for 32 characters; stretch left sidebar */
+  min-width: 235px; /* Good for 32 characters */
+  width: 235px; /* Adjust for width of left pane */
 }
 
 .InfoView .bullet {
