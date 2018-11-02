@@ -18,11 +18,11 @@ export default class EscrowView {
   }
 
   view() {
-    const isHorizontal = /left|right/.test(this.orientation);
+    const isLeftRight = /left|right/.test(this.orientation);
 
     return {
-      debugClass: isHorizontal ? 'debugBlock' : 'debugInlineBlock',
-      viewClass: isHorizontal ? 'horizontal' : 'vertical',
+      debugClass: isLeftRight ? 'debugBlock' : 'debugInlineBlock',
+      orientationClass: isLeftRight ? 'leftRight' : 'upDown',
       isLR: this.orientation === EscrowView.ORIENTATION.LR,
       isRL: this.orientation === EscrowView.ORIENTATION.RL,
       isUD: this.orientation === EscrowView.ORIENTATION.UD,
@@ -37,7 +37,7 @@ export default class EscrowView {
 
   render() {
     return this._.render(`
-      <div class='EscrowView {{viewClass}} {{^isInOrOut}}stretch{{/isInOrOut}}'>
+      <div class='EscrowView {{orientationClass}} {{^isInOrOut}}stretch{{/isInOrOut}}'>
         <div class='--icon'>
           {{#isLR}}&larr;{{/isLR}}
           {{#isRL}}&rarr;{{/isRL}}
