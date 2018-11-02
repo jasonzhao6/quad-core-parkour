@@ -4,15 +4,16 @@ export default class CoreView {
     this._ = _;
   }
 
-  render() {
-    const view = {
-      debugMode: this._.store.modes.debugMode ? '--block' : '--hide',
-
-      title: 'Core',
-      calc: () => 'View',
+  view() {
+    const { store } = this._;
+    return {
+      debugMode: store.modes.debugMode ? '--block' : '--hide',
     };
+  }
 
-    return this._.renderBox({ layout: this._.BOX_LAYOUTS.oneAndTwo }, [`
+  render() {
+    const { _ } = this;
+    return _.renderBox({ layout: _.BOX_LAYOUTS.oneAndTwo }, [`
       <div class='CoreView'>
         <div>start: mov left acc</div>
         <div>jez terminate</div>
@@ -50,6 +51,6 @@ export default class CoreView {
         <div class='{{debugMode}}'>0</div>
         <div class='{{debugMode}} --ellipsis'>...</div>
       </div>
-    `], view);
+    `], this.view());
   }
 }

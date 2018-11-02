@@ -18,9 +18,10 @@ export default class EscrowView {
   }
 
   view() {
+    const { store } = this._;
     const isLR = /left|right/.test(this.orientation);
     const isMessageBus = /left|right|up|down/.test(this.orientation);
-    const isDebugMode = this._.store.modes.debugMode;
+    const isDebugMode = store.modes.debugMode;
     const numberDebugMode = isLR ? '--block' : '--inlineBlock';
 
     return {

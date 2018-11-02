@@ -5,8 +5,9 @@ export default class OutView {
   }
 
   render() {
-    const boxConfig = { label: 'out.x', layout: this._.BOX_LAYOUTS.oneAndOne };
-    return this._.renderBox(boxConfig, [`
+    const { _ } = this;
+    const boxConfig = { label: 'out.x', layout: _.BOX_LAYOUTS.oneAndOne };
+    return _.renderBox(boxConfig, [`
       <div class='OutView'>
         <div class='--highlight'>0</div><div>0</div><div>0</div><div>0</div>
         <div>0</div><div>0</div><div>0</div><div>0</div><div>0</div><div>0</div>
