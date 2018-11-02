@@ -44,7 +44,7 @@ export default class BoxView {
     return this._.render(`
       <div class='BoxViewOuter'>
         {{#label}}
-          <div class='label' style={{labelStyle}}>{{label}}</div>
+          <div class='label' style='{{labelStyle}}'>{{label}}</div>
         {{/label}}
         <div class='BoxView flexRow' style='{{style}}'>
           <div class='BoxViewInner'>

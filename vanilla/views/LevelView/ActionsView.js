@@ -10,7 +10,7 @@ export default class ActionsView {
   }
 
   partials() { // eslint-disable-line class-methods-use-this, TODO
-    const boxConfig = { label: 'Actions:', labelStyle: 'text-align:left;' };
+    const boxConfig = { label: 'Actions:', labelStyle: 'text-align: left;' };
     return {
       speedButton: this._.renderBox({}, `
         <div class='ActionsView-Speed flexCenter'>100x</div>

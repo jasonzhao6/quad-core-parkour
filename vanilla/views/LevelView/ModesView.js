@@ -10,7 +10,7 @@ export default class ModesView {
   }
 
   partials() { // eslint-disable-line class-methods-use-this, TODO
-    const boxConfig = { label: 'Modes:', labelStyle: 'text-align:left;' };
+    const boxConfig = { label: 'Modes:', labelStyle: 'text-align: left;' };
     return {
       demoMode: this._.renderBox(boxConfig, `
         <div class='ModesView-Demo flexCenter'>Demo</div>
