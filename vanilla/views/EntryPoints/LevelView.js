@@ -10,7 +10,7 @@ export default class LevelView {
     this._ = _;
   }
 
-  partials() { // eslint-disable-line class-methods-use-this, TODO
+  partials() {
     return {
       actionsView: new ActionsView(this._).render(),
       infoView: new InfoView(this._).render(),

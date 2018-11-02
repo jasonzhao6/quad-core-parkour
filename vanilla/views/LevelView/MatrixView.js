@@ -8,7 +8,7 @@ export default class MatrixView {
     this._ = _;
   }
 
-  partials() { // eslint-disable-line class-methods-use-this, TODO
+  partials() {
     const orientation = EscrowView.ORIENTATION;
     return {
       coreView: new CoreView(this._).render(),

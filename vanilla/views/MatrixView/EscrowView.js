@@ -18,14 +18,17 @@ export default class EscrowView {
   }
 
   view() {
-    const isLeftRight = /left|right/.test(this.orientation);
+    const isLR = /left|right/.test(this.orientation);
     const isMessageBus = /left|right|up|down/.test(this.orientation);
+    const isDebugMode = this._.store.modes.debugMode;
+    const numberDebugMode = isLR ? '--block' : '--inlineBlock';
 
     return {
       // Classes
-      debugging: isLeftRight ? 'debugBlock' : 'debugInlineBlock',
-      orientation: isLeftRight ? 'leftRight' : 'upDown',
+      orientation: isLR ? 'leftRight' : 'upDown',
       messageBus: isMessageBus ? 'messageBus' : false,
+      numberDebugMode: isDebugMode ? numberDebugMode : '--hide',
+      ellipsisDebugMode: isDebugMode ? '--visible' : '--hidden',
 
       // Message buses
       isLR: this.orientation === EscrowView.ORIENTATION.LR,
@@ -56,13 +59,13 @@ export default class EscrowView {
 
         {{#messageBus}}
           <div class='number'>000</div>
-          <div class='number {{debugging}}'>000</div>
-          <div class='number {{debugging}}'>000</div>
-          <div class='number {{debugging}}'>000</div>
-          <div class='--ellipsis debugVisible'>...</div>
-          <div class='number {{debugging}}'>000</div>
-          <div class='number {{debugging}}'>000</div>
-          <div class='number {{debugging}}'>000</div>
+          <div class='number {{numberDebugMode}}'>000</div>
+          <div class='number {{numberDebugMode}}'>000</div>
+          <div class='number {{numberDebugMode}}'>000</div>
+          <div class='--ellipsis {{ellipsisDebugMode}}'>...</div>
+          <div class='number {{numberDebugMode}}'>000</div>
+          <div class='number {{numberDebugMode}}'>000</div>
+          <div class='number {{numberDebugMode}}'>000</div>
           <div class='number'>000</div>
         {{/messageBus}}
 

@@ -14,6 +14,7 @@ import LevelView from './views/EntryPoints/LevelView.js';
 import ViewHelper from './views/ViewHelper.js';
 
 const _ = new ViewHelper();
+_.update('modes', { debugMode: true });
+
 const levelView = new LevelView(_);
 document.body.innerHTML = levelView.render();
-document.body.classList.add('debugMode');

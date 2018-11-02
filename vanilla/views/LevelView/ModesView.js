@@ -9,7 +9,7 @@ export default class ModesView {
     };
   }
 
-  partials() { // eslint-disable-line class-methods-use-this, TODO
+  partials() {
     const boxConfig = { label: 'Modes:', labelStyle: 'text-align: left;' };
     return {
       demoMode: this._.renderBox(boxConfig, `

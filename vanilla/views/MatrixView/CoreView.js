@@ -6,6 +6,8 @@ export default class CoreView {
 
   render() {
     const view = {
+      debugMode: this._.store.modes.debugMode ? '--block' : '--hide',
+
       title: 'Core',
       calc: () => 'View',
     };
@@ -32,21 +34,21 @@ export default class CoreView {
       <div class='CoreView-state'>
         <div class='label'>acc</div>
         <div>-99</div>
-        <div class='debugBlock'>-99</div>
-        <div class='debugBlock'>-99</div>
-        <div class='debugBlock'>-99</div>
-        <div class='debugBlock'>-99</div>
-        <div class='debugBlock --ellipsis'>...</div>
+        <div class='{{debugMode}}'>-99</div>
+        <div class='{{debugMode}}'>-99</div>
+        <div class='{{debugMode}}'>-99</div>
+        <div class='{{debugMode}}'>-99</div>
+        <div class='{{debugMode}} --ellipsis'>...</div>
       </div>
     `, `
       <div class='CoreView-state'>
         <div class='label'>bak</div>
         <div>0</div>
-        <div class='debugBlock'>0</div>
-        <div class='debugBlock'>0</div>
-        <div class='debugBlock'>0</div>
-        <div class='debugBlock'>0</div>
-        <div class='debugBlock --ellipsis'>...</div>
+        <div class='{{debugMode}}'>0</div>
+        <div class='{{debugMode}}'>0</div>
+        <div class='{{debugMode}}'>0</div>
+        <div class='{{debugMode}}'>0</div>
+        <div class='{{debugMode}} --ellipsis'>...</div>
       </div>
     `], view);
   }
