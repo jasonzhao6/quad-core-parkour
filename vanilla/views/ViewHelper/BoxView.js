@@ -9,10 +9,10 @@ export default class BoxView {
     };
   }
 
-  constructor(boxConfig, templates, view) {
+  constructor(templates, context, boxConfig) {
     // Props
     this.templates = templates;
-    this.originalView = view;
+    this.originalContext = context;
 
     // Destructure `boxConfig` props.
     [
@@ -35,7 +35,7 @@ export default class BoxView {
         oneAndTwo: this.layout === BoxView.LAYOUTS.oneAndTwo,
       },
       viewClass: this.viewClass,
-    }, this.originalView);
+    }, this.originalContext);
   }
 
   partials() {

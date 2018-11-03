@@ -1,14 +1,11 @@
+/* eslint class-methods-use-this: ['error', { exceptMethods:
+     ['TEMPLATE', 'TEMPLATES', 'context', 'partials'] }] */
+
 import { singleton as _ } from '../ViewHelper.js';
 
 export default class InfoView {
-  view() { // eslint-disable-line class-methods-use-this, TODO
-    return {
-      wrap: false,
-    };
-  }
-
-  render() {
-    return _.renderBox({ label: '— Level 0: Tutorial —' }, `
+  get TEMPLATE() {
+    return `
       <div class='InfoView'>
         {{#wrap}}
           <div class='bullet'>Read a value from in.x and write the value to out.x</div>
@@ -21,6 +18,14 @@ export default class InfoView {
           <div class='bullet'>Will not happen at the same time</div>
         {{/wrap}}
       </div>
-    `, this.view());
+    `;
+  }
+
+  context() {
+    return { wrap: false };
+  }
+
+  render() {
+    return _.renderBox(this, { label: '— Level 0: Tutorial —' });
   }
 }

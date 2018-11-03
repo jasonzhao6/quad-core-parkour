@@ -28,7 +28,7 @@ class ViewHelper {
     };
 
     // To be rendered to DOM.
-    this.appEntryPoint = null;
+    this.entryPoint = null;
 
     // To be bound after DOM has rendered.
     this.eventsToBind = [];
@@ -72,8 +72,8 @@ class ViewHelper {
   // View instance method expectations*:
   //
   //   - view.EVENTS: An array of [className, event, callback] to be bound.
-  //   - view.template(): A string template.
-  //     - Or view.templates(): An array of string templates.
+  //   - view.TEMPLATE: A string template.
+  //     - Or view.TEMPLATES: An array of string templates for some BoxViews.
   //   - view.context(): A hash containing all values needed by template.
   //   - view.partials(): A hash containing all partials needed by template.
   //
@@ -82,20 +82,35 @@ class ViewHelper {
     return Mustache.render(template, context, partials);
   }
 
-  renderBox(boxConfig, templates, context) {
-    return new BoxView(boxConfig, templates, context).render();
+  renderBox(view, boxConfig) {
+    const { template, context } = ViewHelper.extract(view);
+    return new BoxView(template, context, boxConfig).render();
   }
 
   // This is the only method that renders to DOM; all others render to string.
   renderToDom(view) {
-    if (view !== undefined) this.appEntryPoint = view;
+    if (view !== undefined) this.entryPoint = view;
 
-    const template = this.appEntryPoint.template();
-    const context = (this.appEntryPoint.context || (() => {}))();
-    const partials = this.appEntryPoint.partials();
-
+    const { template, context, partials } = ViewHelper.extract(this.entryPoint);
     document.body.innerHTML = this.render(template, context, partials);
     this.bindEvents();
+  }
+
+  //
+  // Private
+  //
+
+  static extract(view) {
+    return {
+      template: view.TEMPLATE || view.TEMPLATES,
+      context: (view.context || ViewHelper.noop())(),
+      partials: (view.partials || ViewHelper.noop())(),
+    };
+  }
+
+  static noop() {
+    if (this.noopSingleton === undefined) this.noopSingleton = () => {};
+    return this.noopSingleton;
   }
 }
 

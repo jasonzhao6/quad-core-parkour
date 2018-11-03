@@ -1,3 +1,6 @@
+/* eslint class-methods-use-this: ['error', { exceptMethods:
+     ['TEMPLATE', 'TEMPLATES', 'context', 'partials'] }] */
+
 import { singleton as _ } from '../ViewHelper.js';
 
 // Views
@@ -8,7 +11,7 @@ import MatrixView from '../LevelView/MatrixView.js';
 import ModesView from '../LevelView/ModesView.js';
 
 export default class LevelView {
-  template() {
+  get TEMPLATE() {
     return `
       <div class='LevelViewOuter --center'>
         <div class='LevelView --horizontalJustify'>
@@ -26,13 +29,14 @@ export default class LevelView {
     `;
   }
 
-  partials() { // eslint-disable-line class-methods-use-this, TODO
+  partials() {
     return {
-      actionsView: new ActionsView().render(),
+      // TODO maybe initialize these views in constructor once
+      // actionsView: new ActionsView().render(),
       infoView: new InfoView().render(),
-      ioView: new IOView().render(),
-      matrixView: new MatrixView().render(),
-      modesView: new ModesView().render(),
+      // ioView: new IOView().render(),
+      // matrixView: new MatrixView().render(),
+      // modesView: new ModesView().render(),
     };
   }
 
