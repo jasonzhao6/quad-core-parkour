@@ -1,3 +1,5 @@
+import { singleton as _ } from '../ViewHelper.js';
+
 export default class EscrowView {
   static get ORIENTATION() {
     return {
@@ -12,16 +14,15 @@ export default class EscrowView {
     };
   }
 
-  constructor(_, orientation) {
-    this._ = _;
+  constructor(orientation) {
     this.orientation = orientation;
   }
 
   view() {
-    const { store } = this._;
+    const { debugMode } = _.store.modes;
     const isLR = /left|right/.test(this.orientation);
     const isMessageBus = /left|right|up|down/.test(this.orientation);
-    const isDebugMode = store.modes.debugMode;
+    const isDebugMode = debugMode;
     const numberDebugMode = isLR ? '--block' : '--inlineBlock';
 
     return {
@@ -46,7 +47,7 @@ export default class EscrowView {
   }
 
   render() {
-    return this._.render(`
+    return _.render(`
       <div class='EscrowView {{orientation}} {{messageBus}}'>
         <div class='--icon'>
           {{#isLR}}&larr;{{/isLR}}

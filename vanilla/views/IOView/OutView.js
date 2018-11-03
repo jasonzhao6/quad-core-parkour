@@ -1,8 +1,7 @@
-export default class OutView {
-  constructor(_) { this._ = _; }
+import { singleton as _ } from '../ViewHelper.js';
 
+export default class OutView {
   render() {
-    const { _ } = this;
     const boxConfig = { label: 'out.x', layout: _.BOX_LAYOUTS.oneAndOne };
     return _.renderBox(boxConfig, [`
       <div class='OutView'>

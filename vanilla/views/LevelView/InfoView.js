@@ -1,6 +1,6 @@
-export default class InfoView {
-  constructor(_) { this._ = _; }
+import { singleton as _ } from '../ViewHelper.js';
 
+export default class InfoView {
   view() { // eslint-disable-line class-methods-use-this, TODO
     return {
       wrap: false,
@@ -8,7 +8,7 @@ export default class InfoView {
   }
 
   render() {
-    return this._.renderBox({ label: '— Level 0: Tutorial —' }, `
+    return _.renderBox({ label: '— Level 0: Tutorial —' }, `
       <div class='InfoView'>
         {{#wrap}}
           <div class='bullet'>Read a value from in.x and write the value to out.x</div>

@@ -1,12 +1,12 @@
-export default class StackView {
-  constructor(_) { this._ = _; }
+import { singleton as _ } from '../ViewHelper.js';
 
+export default class StackView {
   view() { // eslint-disable-line class-methods-use-this, TODO
     return {};
   }
 
   render() {
-    return this._.render(`
+    return _.render(`
       <div class='StackView'>
         <div class='--icon'>&#9782;</div>
         <div class='label'>Stack:</div>

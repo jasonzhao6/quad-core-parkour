@@ -1,3 +1,5 @@
+import { singleton as _ } from '../ViewHelper.js';
+
 export default class BoxView {
   static get LAYOUTS() {
     return {
@@ -7,9 +9,8 @@ export default class BoxView {
     };
   }
 
-  constructor(_, templates, view, boxConfig) {
+  constructor(boxConfig, templates, view) {
     // Props
-    this._ = _;
     this.templates = templates;
     this.originalView = view;
 
@@ -43,15 +44,16 @@ export default class BoxView {
   }
 
   render() {
-    return this._.render(`
+    return _.render(`
       <div class='BoxViewOuter'>
         {{#label}}
           <div class='boxViewLabel' style='{{labelStyle}}'>{{label}}</div>
         {{/label}}
-        <div class='BoxView --horizontalJustify {{viewClass}}' style='{{style}}'>
+        <div class='BoxView --horizontalJustify {{viewClass}}'>
           <div class='BoxViewInner'>
             {{>template1}}
           </div>
+
           {{#layout.oneAndOne}}
             <div class='boxViewRight'>
               <div class='BoxViewInner'>
@@ -59,11 +61,13 @@ export default class BoxView {
               </div>
             </div>
           {{/layout.oneAndOne}}
+
           {{#layout.oneAndTwo}}
             <div class='boxViewRight'>
               <div class='BoxViewInner'>
                 {{>template2}}
               </div>
+
               <div class='boxViewBottom'>
                 <div class='BoxViewInner'>
                   {{>template3}}

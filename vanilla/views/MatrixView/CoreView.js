@@ -1,15 +1,14 @@
-export default class CoreView {
-  constructor(_) { this._ = _; }
+import { singleton as _ } from '../ViewHelper.js';
 
-  view() {
-    const { store } = this._;
+export default class CoreView {
+  view() { // eslint-disable-line class-methods-use-this, TODO
+    const { debugMode } = _.store.modes;
     return {
-      debugMode: store.modes.debugMode ? '--block' : '--hide',
+      debugMode: debugMode ? '--block' : '--hide',
     };
   }
 
   render() {
-    const { _ } = this;
     return _.renderBox({ layout: _.BOX_LAYOUTS.oneAndTwo }, [`
       <div class='CoreView'>
         <div>start: mov left acc</div>

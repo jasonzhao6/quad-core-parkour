@@ -1,3 +1,6 @@
+import { singleton as _ } from '../ViewHelper.js';
+
+// Views
 import ActionsView from '../LevelView/ActionsView.js';
 import InfoView from '../LevelView/InfoView.js';
 import IOView from '../LevelView/IOView.js';
@@ -5,20 +8,18 @@ import MatrixView from '../LevelView/MatrixView.js';
 import ModesView from '../LevelView/ModesView.js';
 
 export default class LevelView {
-  constructor(_) { this._ = _; }
-
-  partials() {
+  partials() { // eslint-disable-line class-methods-use-this, TODO
     return {
-      actionsView: new ActionsView(this._).render(),
-      infoView: new InfoView(this._).render(),
-      ioView: new IOView(this._).render(),
-      matrixView: new MatrixView(this._).render(),
-      modesView: new ModesView(this._).render(),
+      actionsView: new ActionsView().render(),
+      infoView: new InfoView().render(),
+      ioView: new IOView().render(),
+      matrixView: new MatrixView().render(),
+      modesView: new ModesView().render(),
     };
   }
 
   render() {
-    return this._.render(`
+    return _.render(`
       <div class='LevelViewOuter --center'>
         <div class='LevelView --horizontalJustify'>
           <div class='--verticalJustify'>

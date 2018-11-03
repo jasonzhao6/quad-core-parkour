@@ -1,29 +1,30 @@
+import { singleton as _ } from '../ViewHelper.js';
+
+// Views
 import CoreView from '../MatrixView/CoreView.js';
 import EscrowView from '../MatrixView/EscrowView.js';
 import StackView from '../MatrixView/StackView.js';
 
 export default class MatrixView {
-  constructor(_) { this._ = _; }
-
-  partials() {
+  partials() { // eslint-disable-line class-methods-use-this, TODO
     const orientation = EscrowView.ORIENTATION;
     return {
-      coreView: new CoreView(this._).render(),
-      escrowViewLR: new EscrowView(this._, orientation.LR).render(),
-      escrowViewRL: new EscrowView(this._, orientation.RL).render(),
-      escrowViewUD: new EscrowView(this._, orientation.UD).render(),
-      escrowViewDU: new EscrowView(this._, orientation.DU).render(),
-      escrowViewInX: new EscrowView(this._, orientation.InX).render(),
-      escrowViewInY: new EscrowView(this._, orientation.InY).render(),
-      escrowViewOutX: new EscrowView(this._, orientation.OutX).render(),
-      escrowViewOutY: new EscrowView(this._, orientation.OutY).render(),
-      stackAboveView: new StackView(this._).render(),
-      stackBelowView: new StackView(this._).render(),
+      coreView: new CoreView().render(),
+      escrowViewLR: new EscrowView(orientation.LR).render(),
+      escrowViewRL: new EscrowView(orientation.RL).render(),
+      escrowViewUD: new EscrowView(orientation.UD).render(),
+      escrowViewDU: new EscrowView(orientation.DU).render(),
+      escrowViewInX: new EscrowView(orientation.InX).render(),
+      escrowViewInY: new EscrowView(orientation.InY).render(),
+      escrowViewOutX: new EscrowView(orientation.OutX).render(),
+      escrowViewOutY: new EscrowView(orientation.OutY).render(),
+      stackAboveView: new StackView().render(),
+      stackBelowView: new StackView().render(),
     };
   }
 
   render() {
-    return this._.render(`
+    return _.render(`
       <div class='MatrixView --verticalJustify'>
         <div class='--horizontalJustify'>
           {{>escrowViewInX}}

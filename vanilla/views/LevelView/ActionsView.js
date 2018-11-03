@@ -1,6 +1,6 @@
-export default class ActionsView {
-  constructor(_) { this._ = _; }
+import { singleton as _ } from '../ViewHelper.js';
 
+export default class ActionsView {
   view() { // eslint-disable-line class-methods-use-this, TODO
     return {
     };
@@ -9,23 +9,23 @@ export default class ActionsView {
   partials() {
     const boxConfig = { label: 'Actions:', labelStyle: 'text-align: left;' };
     return {
-      speedButton: this._.renderBox({}, `
+      speedButton: _.renderBox({}, `
         <div class='--button --center'>100x</div>
       `, this.view()),
-      startButton: this._.renderBox({}, `
+      startButton: _.renderBox({}, `
         <div class='--button --center'>Start</div>
       `, this.view()),
-      stepButton: this._.renderBox({}, `
+      stepButton: _.renderBox({}, `
         <div class='--button --center'>Step</div>
       `, this.view()),
-      stopButton: this._.renderBox(boxConfig, `
+      stopButton: _.renderBox(boxConfig, `
         <div class='--button --center'>Stop</div>
       `, this.view()),
     };
   }
 
   render() {
-    return this._.render(`
+    return _.render(`
       <div class='ActionsView --horizontalJustify'>
         {{>stopButton}}
         {{>startButton}}

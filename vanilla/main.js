@@ -11,10 +11,9 @@ import './3rdParty/js/mustache.js';
 import LevelView from './views/EntryPoints/LevelView.js';
 
 // App helpers
-import ViewHelper from './views/ViewHelper.js';
+import { singleton as _ } from './views/ViewHelper.js';
 
-const _ = new ViewHelper();
-_.update('modes', { debugMode: true });
-
-const levelView = new LevelView(_);
+const levelView = new LevelView();
 document.body.innerHTML = levelView.render();
+_.appEntryPoint = levelView;
+_.bindEvents();

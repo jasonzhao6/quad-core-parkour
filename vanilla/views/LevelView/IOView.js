@@ -1,19 +1,20 @@
+import { singleton as _ } from '../ViewHelper.js';
+
+// Views
 import InView from '../IOView/InView.js';
 import OutView from '../IOView/OutView.js';
 
 export default class IOView {
-  constructor(_) { this._ = _; }
-
   render() {
     const view = {
       title: 'IO',
       calc: () => 'View',
     };
 
-    const inView = new InView(this._).render();
-    const outView = new OutView(this._).render();
+    const inView = new InView().render();
+    const outView = new OutView().render();
 
-    return this._.render(`
+    return _.render(`
       <div class='IOView --horizontalJustify'>
         {{>inView}}
         {{>inView}}
