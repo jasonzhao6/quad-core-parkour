@@ -1,3 +1,5 @@
+/* eslint class-methods-use-this: ['error', { exceptMethods: ['print'] }] */
+
 import TestHarness from '../__TestHarness__.js';
 
 export default class TestHarnessTest {
@@ -229,7 +231,7 @@ export default class TestHarnessTest {
             failures = arg;
           }
 
-          print() { // eslint-disable-line class-methods-use-this
+          print() {
             printed = true;
           }
         }

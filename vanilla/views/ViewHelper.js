@@ -1,8 +1,9 @@
 /* eslint class-methods-use-this: ['error', { exceptMethods:
-     ['BOX_LAYOUTS', 'render'] }] */
-/* eslint-disable import/prefer-default-export */ // To support import aliasing.
-/* global Mustache */
-
+     ['BOX_LAYOUTS', 'render', 'renderBox'] }] */
+/* eslint no-param-reassign: ['error', { 'props': true,
+     'ignorePropertyModificationsFor': ['element'] }] */
+/* eslint-disable import/prefer-default-export */ // To support aliasing to _.
+/* global document, Mustache */
 import BoxView from './ViewHelper/BoxView.js';
 
 export default class ViewHelper {
