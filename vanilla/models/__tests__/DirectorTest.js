@@ -270,7 +270,7 @@ export default class DirectorTest {
       // #send tests sending left and right.
       // #receive tests receiving left and right.
       // Stack `above` stays empty throughout.
-      // Stack `below` stays non-empty trhoughout.
+      // Stack `below` stays non-empty throughout.
 
       _.method('#canSend', () => {
         _.context('When sending to a stack', () => {

@@ -1,9 +1,9 @@
 export default class BoxView {
   static get LAYOUTS() {
     return {
-      one: 'one', // [template 1]
-      oneAndOne: 'oneAndOne', // [template 1, template 2]
-      oneAndTwo: 'oneAndTwo', // [template 1, [template 2, template 3]]
+      one: 'one', // [template 1].
+      oneAndOne: 'oneAndOne', // [template 1, template 2].
+      oneAndTwo: 'oneAndTwo', // [template 1, [template 2, template 3]].
     };
   }
 
@@ -13,7 +13,7 @@ export default class BoxView {
     this.templates = templates;
     this.originalView = view;
 
-    // Destructure `boxConfig` props
+    // Destructure `boxConfig` props.
     [
       'label',
       'labelStyle',
@@ -21,7 +21,7 @@ export default class BoxView {
       'viewClass',
     ].forEach((key) => { this[key] = boxConfig[key]; });
 
-    // Set default for `layout` prop
+    // Set default for `layout` prop.
     this.layout = this.layout || BoxView.LAYOUTS.one;
   }
 

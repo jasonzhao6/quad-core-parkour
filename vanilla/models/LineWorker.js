@@ -25,7 +25,7 @@ export default class LineWorker {
       return true;
     }
 
-    // In case destination is not valid
+    // In case destination is not valid.
     return false;
   }
 

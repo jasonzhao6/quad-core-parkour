@@ -17,7 +17,7 @@ export default class Director {
     this.stackAbove = this.matrix.stackAbove;
     this.stackBelow = this.matrix.stackBelow;
 
-    // Name the current element
+    // Name the current element.
     this.matrix.alias(i, j, this.name());
   }
 

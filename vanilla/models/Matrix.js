@@ -40,7 +40,7 @@ export default class Matrix {
   get(...args) {
     if (args.length === 2) return this.arrOfArr[args[0]][args[1]];
 
-    // ... if (args.length === 1)
+    // `if (args.length === 1)`
     const { i, j } = this.aliases[args[0]];
     return this.arrOfArr[i][j];
   }

@@ -29,7 +29,7 @@ export default class LineManager {
 
   * prioritizer() {
     for (let i = 0; i < Infinity; i += 1) {
-      // Handle goto
+      // Handle goto.
       if (this.gotoLine !== null) {
         i = this.gotoLine;
         this.gotoLine = null;
@@ -37,7 +37,7 @@ export default class LineManager {
 
       const line = this.lines[i % this.lines.length];
 
-      // Handle redo
+      // Handle redo.
       const redo = yield line;
       if (redo === true) i -= 1;
     }
@@ -60,10 +60,10 @@ export default class LineManager {
       case 'sav': return this.core.save();
       case 'swp': return this.core.swap();
 
-      // TODO turn into a user command
+      // TODO turn into a user command.
       // case 'pry': debugger;
 
-      // Should be unreachable by user
+      // Should be unreachable by user.
       default: return undefined;
     }
   }
