@@ -2,10 +2,10 @@
 // This view helper should be instantiated as a singleton and imported into all
 // views to provide them with the following functionalities:
 //
-// - A store of global states, organized by slices.
+// - A store of global state organized into slices.
 // - A store update method that triggers re-render.
 // - A queue that delays event binding to after DOM rendering.
-// - Various render methods that take view instances with expectations*.
+// - Various render methods that take view instances with method expectations*.
 //
 
 /* eslint class-methods-use-this: ['error', { exceptMethods:
@@ -21,13 +21,13 @@ class ViewHelper {
   get BOX_LAYOUTS() { return BoxView.LAYOUTS; }
 
   constructor() {
-    // Global states
+    // Global state.
     this.store = {
-      // REGISTER SLICES HERE.
+      // SLICES REGISTRY:
       modes: {},
     };
 
-    // To be rendered to <body> tag.
+    // To be rendered to DOM.
     this.appEntryPoint = null;
 
     // To be bound after DOM has rendered.
@@ -47,8 +47,7 @@ class ViewHelper {
       this.store[slice][key] = sliceProps[key];
     });
 
-    document.body.innerHTML = this.appEntryPoint.render();
-    this.bindEvents();
+    this.renderToDom();
   }
 
   //
@@ -70,7 +69,7 @@ class ViewHelper {
   //
   // Render methods
   //
-  // View instance expectations*:
+  // View instance method expectations*:
   //
   //   - view.EVENTS: An array of [className, event, callback] to be bound.
   //   - view.template(): A string template.
@@ -85,6 +84,18 @@ class ViewHelper {
 
   renderBox(boxConfig, templates, context) {
     return new BoxView(boxConfig, templates, context).render();
+  }
+
+  // This is the only method that renders to DOM; all others render to string.
+  renderToDom(view) {
+    if (view !== undefined) this.appEntryPoint = view;
+
+    const template = this.appEntryPoint.template();
+    const context = (this.appEntryPoint.context || (() => {}))();
+    const partials = this.appEntryPoint.partials();
+
+    document.body.innerHTML = this.render(template, context, partials);
+    this.bindEvents();
   }
 }
 

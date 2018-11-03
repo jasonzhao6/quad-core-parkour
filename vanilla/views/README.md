@@ -1,3 +1,3 @@
-- This folder houses ViewHelper.js and many subfolders.
-- EntryPoints subfolder houses views that are top level pages.
-- All other subfolders house partials of their respective parent views.
+- This folder houses ViewHelper.js and subfolders.
+- EntryPoints subfolder houses views that render to DOM.
+- Other subfolders house partials of their respective parent views.
