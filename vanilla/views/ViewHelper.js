@@ -6,19 +6,30 @@
 // - A store update method that triggers re-render.
 // - A queue that delays event binding to after DOM rendering.
 // - Various render methods that take view instances with method expectations*.
+// - A factory method that wraps a template into a view instance.
 //
 
 /* eslint class-methods-use-this: ['error', { exceptMethods:
-     ['BOX_LAYOUTS', 'render', 'renderBox'] }] */
+     ['BOX_LAYOUTS', 'render', 'renderBox', 'wrap'] }] */
 /* eslint no-param-reassign: ['error', { 'props': true,
      'ignorePropertyModificationsFor': ['element'] }] */
 /* eslint-disable import/prefer-default-export */ // To support aliasing to _.
 /* global document, Mustache */
 
 import BoxView from './ViewHelper/BoxView.js';
+import FactoryView from './ViewHelper/FactoryView.js';
 
 class ViewHelper {
+  //
+  // Constants
+  //
+
+  // Delegated
   get BOX_LAYOUTS() { return BoxView.LAYOUTS; }
+
+  //
+  // Constructor
+  //
 
   constructor() {
     // Global state.
@@ -93,6 +104,14 @@ class ViewHelper {
     if (view !== undefined) this.entryPoint = view;
     document.body.innerHTML = this.render(this.entryPoint);
     this.bindEvents();
+  }
+
+  //
+  // Factory method
+  //
+
+  wrap(template) {
+    return new FactoryView(template);
   }
 
   //
