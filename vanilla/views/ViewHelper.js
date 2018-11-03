@@ -2,10 +2,10 @@
 // This view helper should be instantiated as a singleton and imported into all
 // views to provide them with the following functionalities:
 //
-// - A global store of all states.
-// - A store update handler that triggers re-render.
-// - Various render methods that take view instances with some expectations*.
-// - Event binding.
+// - A store of global states, organized by slices.
+// - A store update method that triggers re-render.
+// - A queue that delays event binding to after DOM rendering.
+// - Various render methods that take view instances with expectations*.
 //
 
 /* eslint class-methods-use-this: ['error', { exceptMethods:
@@ -14,27 +14,28 @@
      'ignorePropertyModificationsFor': ['element'] }] */
 /* eslint-disable import/prefer-default-export */ // To support aliasing to _.
 /* global document, Mustache */
+
 import BoxView from './ViewHelper/BoxView.js';
 
 class ViewHelper {
   get BOX_LAYOUTS() { return BoxView.LAYOUTS; }
 
   constructor() {
-    // TODO
-    this.appEntryPoint = null;
-
-    // Global store
+    // Global states
     this.store = {
-      // REGISTER STORE SLICES HERE.
+      // REGISTER SLICES HERE.
       modes: {},
     };
 
-    // Wait until after DOM has rendered to bind events.
+    // To be rendered to <body> tag.
+    this.appEntryPoint = null;
+
+    // To be bound after DOM has rendered.
     this.eventsToBind = [];
   }
 
   //
-  // Store update handler
+  // Update method
   //
 
   update(slice, sliceProps) {
@@ -51,25 +52,6 @@ class ViewHelper {
   }
 
   //
-  // Render methods
-  //
-  // Expectations*:
-  // - view.template(): A string template. Or if needed-
-  //   view.templates(): An array of string templates.
-  // - view.props(): A hash containing all props needed by template.
-  // - view.partials(): A hash containing all partials needed by template.
-  // - View.EVENTS: An array of [className, event, callback] to bind.
-  //
-
-  render(template, view, partials) {
-    return Mustache.render(template, view, partials);
-  }
-
-  renderBox(boxConfig, templates, view) {
-    return new BoxView(boxConfig, templates, view).render();
-  }
-
-  //
   // Event binding
   //
 
@@ -83,6 +65,26 @@ class ViewHelper {
         element[event] = view.constructor[callback];
       });
     });
+  }
+
+  //
+  // Render methods
+  //
+  // View instance expectations*:
+  //
+  //   - view.EVENTS: An array of [className, event, callback] to be bound.
+  //   - view.template(): A string template.
+  //     - Or view.templates(): An array of string templates.
+  //   - view.context(): A hash containing all values needed by template.
+  //   - view.partials(): A hash containing all partials needed by template.
+  //
+
+  render(template, context, partials) {
+    return Mustache.render(template, context, partials);
+  }
+
+  renderBox(boxConfig, templates, context) {
+    return new BoxView(boxConfig, templates, context).render();
   }
 }
 
