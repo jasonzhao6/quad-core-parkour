@@ -18,6 +18,7 @@ export default class BoxView {
       'label',
       'labelStyle',
       'layout',
+      'viewClass',
     ].forEach((key) => { this[key] = boxConfig[key]; });
 
     // Set default for `layout` prop
@@ -32,6 +33,7 @@ export default class BoxView {
         oneAndOne: this.layout === BoxView.LAYOUTS.oneAndOne,
         oneAndTwo: this.layout === BoxView.LAYOUTS.oneAndTwo,
       },
+      viewClass: this.viewClass,
     }, this.originalView);
   }
 
@@ -46,7 +48,7 @@ export default class BoxView {
         {{#label}}
           <div class='boxViewLabel' style='{{labelStyle}}'>{{label}}</div>
         {{/label}}
-        <div class='BoxView --horizontalJustify' style='{{style}}'>
+        <div class='BoxView --horizontalJustify {{viewClass}}' style='{{style}}'>
           <div class='BoxViewInner'>
             {{>template1}}
           </div>

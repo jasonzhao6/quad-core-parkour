@@ -10,20 +10,25 @@ export default class ModesView {
   }
 
   partials() {
-    const boxConfig = { label: 'Modes:', labelStyle: 'text-align: left;' };
+    const demoConfig = { viewClass: 'demoMode --button' };
+    const debugConfig = { viewClass: 'debugMode --button active' };
+    const imageConfig = { viewClass: 'imageMode --button disabled' };
+    const stackConfig = { viewClass: 'stackMode --button' };
+
+    // Label row via the first box
+    demoConfig.label = 'Modes:';
+    demoConfig.labelStyle = 'text-align: left;';
+
+    const demoTemplate = `<div class='label --center'>Demo</div>`;
+    const debugTemplate = `<div class='label --center'>Easy</div>`;
+    const imageTemplate = `<div class='label --center'>Image</div>`;
+    const stackTemplate = `<div class='label --center'>Mem</div>`;
+
     return {
-      demoMode: this._.renderBox(boxConfig, `
-        <div class='--button --center'>Demo</div>
-      `, this.view()),
-      easyMode: this._.renderBox({}, `
-        <div class='--button --center'>Easy</div>
-      `, this.view()),
-      imageMode: this._.renderBox({}, `
-        <div class='--button --center --disabled'>Image</div>
-      `, this.view()),
-      stackMode: this._.renderBox({}, `
-        <div class='--button --center'>Mem</div>
-      `, this.view()),
+      demoMode: this._.renderBox(demoConfig, demoTemplate, this.view()),
+      debugMode: this._.renderBox(debugConfig, debugTemplate, this.view()),
+      imageMode: this._.renderBox(imageConfig, imageTemplate, this.view()),
+      stackMode: this._.renderBox(stackConfig, stackTemplate, this.view()),
     };
   }
 
@@ -31,7 +36,7 @@ export default class ModesView {
     return this._.render(`
       <div class='ModesView --horizontalJustify'>
         {{>demoMode}}
-        {{>easyMode}}
+        {{>debugMode}}
         {{>stackMode}}
         {{>imageMode}}
       </div>
