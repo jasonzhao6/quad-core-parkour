@@ -103,14 +103,9 @@ class ViewHelper {
   static extract(view) {
     return {
       template: view.TEMPLATE || view.TEMPLATES,
-      context: (view.context || ViewHelper.noop())(),
-      partials: (view.partials || ViewHelper.noop())(),
+      context: view.context ? view.context() : {},
+      partials: view.partials ? view.partials() : {},
     };
-  }
-
-  static noop() {
-    if (this.noopSingleton === undefined) this.noopSingleton = () => {};
-    return this.noopSingleton;
   }
 }
 
