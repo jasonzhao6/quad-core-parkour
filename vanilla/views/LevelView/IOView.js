@@ -2,10 +2,7 @@ import InView from '../IOView/InView.js';
 import OutView from '../IOView/OutView.js';
 
 export default class IOView {
-  constructor(_) {
-    // Props
-    this._ = _;
-  }
+  constructor(_) { this._ = _; }
 
   render() {
     const view = {

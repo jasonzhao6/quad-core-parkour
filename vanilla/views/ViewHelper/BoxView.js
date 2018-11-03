@@ -1,7 +1,7 @@
 export default class BoxView {
   static get LAYOUTS() {
     return {
-      one: 'one', // [template]
+      one: 'one', // [template 1]
       oneAndOne: 'oneAndOne', // [template 1, template 2]
       oneAndTwo: 'oneAndTwo', // [template 1, [template 2, template 3]]
     };

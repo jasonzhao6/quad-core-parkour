@@ -5,10 +5,7 @@ import MatrixView from '../LevelView/MatrixView.js';
 import ModesView from '../LevelView/ModesView.js';
 
 export default class LevelView {
-  constructor(_) {
-    // Props
-    this._ = _;
-  }
+  constructor(_) { this._ = _; }
 
   partials() {
     return {

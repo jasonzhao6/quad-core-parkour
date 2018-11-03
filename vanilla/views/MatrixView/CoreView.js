@@ -1,8 +1,5 @@
 export default class CoreView {
-  constructor(_) {
-    // Props
-    this._ = _;
-  }
+  constructor(_) { this._ = _; }
 
   view() {
     const { store } = this._;

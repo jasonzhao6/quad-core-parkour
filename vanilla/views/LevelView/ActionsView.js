@@ -1,8 +1,5 @@
 export default class ActionsView {
-  constructor(_) {
-    // Props
-    this._ = _;
-  }
+  constructor(_) { this._ = _; }
 
   view() { // eslint-disable-line class-methods-use-this, TODO
     return {

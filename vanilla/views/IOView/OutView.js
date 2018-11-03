@@ -1,8 +1,5 @@
 export default class OutView {
-  constructor(_) {
-    // Props
-    this._ = _;
-  }
+  constructor(_) { this._ = _; }
 
   render() {
     const { _ } = this;

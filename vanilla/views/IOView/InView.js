@@ -1,8 +1,5 @@
 export default class InView {
-  constructor(_) {
-    // Props
-    this._ = _;
-  }
+  constructor(_) { this._ = _; }
 
   render() {
     const view = {

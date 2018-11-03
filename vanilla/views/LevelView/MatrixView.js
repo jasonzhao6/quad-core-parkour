@@ -3,10 +3,7 @@ import EscrowView from '../MatrixView/EscrowView.js';
 import StackView from '../MatrixView/StackView.js';
 
 export default class MatrixView {
-  constructor(_) {
-    // Props
-    this._ = _;
-  }
+  constructor(_) { this._ = _; }
 
   partials() {
     const orientation = EscrowView.ORIENTATION;
