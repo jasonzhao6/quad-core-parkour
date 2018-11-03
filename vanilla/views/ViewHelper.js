@@ -78,7 +78,8 @@ class ViewHelper {
   //   - view.partials(): A hash containing all partials needed by template.
   //
 
-  render(template, context, partials) {
+  render(view) {
+    const { template, context, partials } = ViewHelper.extract(view);
     return Mustache.render(template, context, partials);
   }
 
@@ -90,9 +91,7 @@ class ViewHelper {
   // This is the only method that renders to DOM; all others render to string.
   renderToDom(view) {
     if (view !== undefined) this.entryPoint = view;
-
-    const { template, context, partials } = ViewHelper.extract(this.entryPoint);
-    document.body.innerHTML = this.render(template, context, partials);
+    document.body.innerHTML = this.render(this.entryPoint);
     this.bindEvents();
   }
 

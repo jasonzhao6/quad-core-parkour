@@ -1,26 +1,33 @@
+/* eslint class-methods-use-this: ['error', { exceptMethods:
+     ['TEMPLATE', 'TEMPLATES', 'context', 'partials'] }] */
+
+// Helper
 import { singleton as _ } from '../ViewHelper.js';
 
-// Views
+// Partials
 import InView from '../IOView/InView.js';
 import OutView from '../IOView/OutView.js';
 
 export default class IOView {
-  render() {
-    const view = {
-      title: 'IO',
-      calc: () => 'View',
-    };
-
-    const inView = new InView().render();
-    const outView = new OutView().render();
-
-    return _.render(`
+  get TEMPLATE() {
+    return `
       <div class='IOView --horizontalJustify'>
         {{>inView}}
         {{>inView}}
         {{>outView}}
         {{>outView}}
       </div>
-    `, view, { inView, outView });
+    `;
+  }
+
+  partials() {
+    return {
+      inView: new InView().render(),
+      outView: new OutView().render(),
+    };
+  }
+
+  render() {
+    return _.render(this);
   }
 }

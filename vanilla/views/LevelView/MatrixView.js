@@ -1,6 +1,7 @@
+// Helper
 import { singleton as _ } from '../ViewHelper.js';
 
-// Views
+// Partials
 import CoreView from '../MatrixView/CoreView.js';
 import EscrowView from '../MatrixView/EscrowView.js';
 import StackView from '../MatrixView/StackView.js';

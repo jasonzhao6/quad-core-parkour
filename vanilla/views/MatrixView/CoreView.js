@@ -9,7 +9,7 @@ export default class CoreView {
   }
 
   render() {
-    return _.renderBox({ layout: _.BOX_LAYOUTS.oneAndTwo }, [`
+    return _.renderBox({ layout: _.BOX_LAYOUTS.oneTwo }, [`
       <div class='CoreView'>
         <div>start: mov left acc</div>
         <div>jez terminate</div>

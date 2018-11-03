@@ -1,9 +1,10 @@
 /* eslint class-methods-use-this: ['error', { exceptMethods:
      ['TEMPLATE', 'TEMPLATES', 'context', 'partials'] }] */
 
+// Helper
 import { singleton as _ } from '../ViewHelper.js';
 
-// Views
+// Partials
 import ActionsView from '../LevelView/ActionsView.js';
 import InfoView from '../LevelView/InfoView.js';
 import IOView from '../LevelView/IOView.js';
@@ -34,7 +35,7 @@ export default class LevelView {
       // TODO maybe initialize these views in constructor once
       // actionsView: new ActionsView().render(),
       infoView: new InfoView().render(),
-      // ioView: new IOView().render(),
+      ioView: new IOView().render(),
       // matrixView: new MatrixView().render(),
       // modesView: new ModesView().render(),
     };

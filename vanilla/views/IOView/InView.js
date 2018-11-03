@@ -1,13 +1,11 @@
+/* eslint class-methods-use-this: ['error', { exceptMethods:
+     ['TEMPLATE', 'TEMPLATES', 'context', 'partials'] }] */
+
 import { singleton as _ } from '../ViewHelper.js';
 
 export default class InView {
-  render() {
-    const view = {
-      title: 'In',
-      calc: () => 'View',
-    };
-
-    return _.renderBox({ label: 'in.x' }, `
+  get TEMPLATE() {
+    return `
       <div class='InView'>
         <div class='--ellipsis'>...</div>
         <div>000</div><div class='--highlight'>000</div><div>000</div><div>000</div>
@@ -15,6 +13,10 @@ export default class InView {
         <div>000</div><div>000</div><div>000</div><div>000</div><div>000</div>
         <div class='--highlight'>000</div>
       </div>
-    `, view);
+    `;
+  }
+
+  render() {
+    return _.renderBox(this, { label: 'in.x' });
   }
 }

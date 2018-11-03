@@ -1,13 +1,24 @@
+/* eslint class-methods-use-this: ['error', { exceptMethods:
+     ['TEMPLATE', 'TEMPLATES', 'context', 'partials'] }] */
+
 import { singleton as _ } from '../ViewHelper.js';
 
 export default class BoxView {
+  //
+  // Constants
+  //
+
   static get LAYOUTS() {
     return {
       one: 'one', // [template 1].
-      oneAndOne: 'oneAndOne', // [template 1, template 2].
-      oneAndTwo: 'oneAndTwo', // [template 1, [template 2, template 3]].
+      oneOne: 'oneOne', // [template 1, template 2].
+      oneTwo: 'oneTwo', // [template 1, [template 2, template 3]].
     };
   }
+
+  //
+  // Constructor
+  //
 
   constructor(templates, context, boxConfig) {
     // Props
@@ -19,50 +30,37 @@ export default class BoxView {
       'label',
       'labelStyle',
       'layout',
-      'viewClass',
+      'classes',
     ].forEach((key) => { this[key] = boxConfig[key]; });
 
     // Set default for `layout` prop.
     this.layout = this.layout || BoxView.LAYOUTS.one;
   }
 
-  view() {
-    return Object.assign({
-      label: this.label,
-      labelStyle: this.labelStyle,
-      layout: {
-        oneAndOne: this.layout === BoxView.LAYOUTS.oneAndOne,
-        oneAndTwo: this.layout === BoxView.LAYOUTS.oneAndTwo,
-      },
-      viewClass: this.viewClass,
-    }, this.originalContext);
-  }
+  //
+  // Render
+  //
 
-  partials() {
-    const [template1, template2, template3] = Array.of(this.templates).flat();
-    return { template1, template2, template3 };
-  }
-
-  render() {
-    return _.render(`
+  get TEMPLATE() {
+    return `
       <div class='BoxViewOuter'>
         {{#label}}
           <div class='boxViewLabel' style='{{labelStyle}}'>{{label}}</div>
         {{/label}}
-        <div class='BoxView --horizontalJustify {{viewClass}}'>
+        <div class='BoxView --horizontalJustify {{classes}}'>
           <div class='BoxViewInner'>
             {{>template1}}
           </div>
 
-          {{#layout.oneAndOne}}
+          {{#layout.oneOne}}
             <div class='boxViewRight'>
               <div class='BoxViewInner'>
                 {{>template2}}
               </div>
             </div>
-          {{/layout.oneAndOne}}
+          {{/layout.oneOne}}
 
-          {{#layout.oneAndTwo}}
+          {{#layout.oneTwo}}
             <div class='boxViewRight'>
               <div class='BoxViewInner'>
                 {{>template2}}
@@ -74,9 +72,30 @@ export default class BoxView {
                 </div>
               </div>
             </div>
-          {{/layout.oneAndTwo}}
+          {{/layout.oneTwo}}
         </div>
       </div>
-    `, this.view(), this.partials());
+    `;
+  }
+
+  context() {
+    return Object.assign({
+      label: this.label,
+      labelStyle: this.labelStyle,
+      layout: {
+        oneOne: this.layout === BoxView.LAYOUTS.oneOne,
+        oneTwo: this.layout === BoxView.LAYOUTS.oneTwo,
+      },
+      classes: this.classes,
+    }, this.originalContext);
+  }
+
+  partials() {
+    const [template1, template2, template3] = Array.of(this.templates).flat();
+    return { template1, template2, template3 };
+  }
+
+  render() {
+    return _.render(this);
   }
 }

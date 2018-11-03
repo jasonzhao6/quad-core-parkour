@@ -1,6 +1,10 @@
 import { singleton as _ } from '../ViewHelper.js';
 
 export default class ModesView {
+  //
+  // Events
+  //
+
   static get EVENTS() {
     return [
       ['-debugMode', 'onclick', 'toggleDebugMode'],
@@ -11,6 +15,10 @@ export default class ModesView {
     const { debugMode } = _.store.modes;
     _.update('modes', { debugMode: !debugMode });
   }
+
+  //
+  // Render
+  //
 
   view() { // eslint-disable-line class-methods-use-this, TODO
     const { debugMode, imageMode } = _.store.modes;
@@ -24,10 +32,10 @@ export default class ModesView {
   partials() { // eslint-disable-line class-methods-use-this, TODO
     const { inDebugMode, inImageMode } = this.view();
 
-    const demo = { viewClass: 'demoMode --button' };
-    const debug = { viewClass: `-debugMode --button ${inDebugMode}` };
-    const image = { viewClass: `imageMode --button ${inImageMode}` };
-    const stack = { viewClass: 'stackMode --button' };
+    const demo = { classes: 'demoMode --button' };
+    const debug = { classes: `-debugMode --button ${inDebugMode}` };
+    const image = { classes: `imageMode --button ${inImageMode}` };
+    const stack = { classes: 'stackMode --button' };
 
     // Label row of boxes via the first box.
     demo.label = 'Modes:';
