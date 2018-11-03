@@ -1,3 +1,6 @@
+/* eslint class-methods-use-this: ['error', { exceptMethods:
+     ['TEMPLATE', 'TEMPLATES', 'context', 'partials'] }] */
+
 import { singleton as _ } from '../ViewHelper.js';
 
 export default class ModesView {
@@ -20,6 +23,17 @@ export default class ModesView {
   // Render
   //
 
+  get TEMPLATE() {
+    return `
+      <div class='ModesView --horizontalJustify'>
+        {{>demoMode}}
+        {{>debugMode}}
+        {{>stackMode}}
+        {{>imageMode}}
+      </div>
+    `;
+  }
+
   view() { // eslint-disable-line class-methods-use-this, TODO
     const { debugMode, imageMode } = _.store.modes;
 
@@ -32,33 +46,33 @@ export default class ModesView {
   partials() { // eslint-disable-line class-methods-use-this, TODO
     const { inDebugMode, inImageMode } = this.view();
 
-    const demo = { classes: 'demoMode --button' };
-    const debug = { classes: `-debugMode --button ${inDebugMode}` };
-    const image = { classes: `imageMode --button ${inImageMode}` };
-    const stack = { classes: 'stackMode --button' };
+    const demoBoxConfig = { classes: 'demoMode --button' };
+    const debugBoxConfig = { classes: `-debugMode --button ${inDebugMode}` };
+    const imageBoxConfig = { classes: `imageMode --button ${inImageMode}` };
+    const stackBoxConfig = { classes: 'stackMode --button' };
 
     // Label row of boxes via the first box.
-    demo.label = 'Modes:';
-    demo.labelStyle = 'text-align: left;';
+    demoBoxConfig.label = 'Modes:';
+    demoBoxConfig.labelStyle = 'text-align: left;';
 
     return {
-      demoMode: _.renderBox(demo, "<div class='label --center'>Demo</div>"),
-      debugMode: _.renderBox(debug, "<div class='label --center'>Easy</div>"),
-      imageMode: _.renderBox(image, "<div class='label --center'>Image</div>"),
-      stackMode: _.renderBox(stack, "<div class='label --center'>Mem</div>"),
+      demoMode: _.renderBox(ModesView.labelView('Demo'), demoBoxConfig),
+      debugMode: _.renderBox(ModesView.labelView('Easy'), debugBoxConfig),
+      imageMode: _.renderBox(ModesView.labelView('Image'), imageBoxConfig),
+      stackMode: _.renderBox(ModesView.labelView('Mem'), stackBoxConfig),
     };
   }
 
   render() {
     _.enqueue(this, ModesView.EVENTS);
+    return _.render(this);
+  }
 
-    return _.render(`
-      <div class='ModesView --horizontalJustify'>
-        {{>demoMode}}
-        {{>debugMode}}
-        {{>stackMode}}
-        {{>imageMode}}
-      </div>
-    `, this.view(), this.partials());
+  //
+  // Private
+  //
+
+  static labelView(label) {
+    return _.wrap(`<div class='label --center'>${label}</div>`);
   }
 }
