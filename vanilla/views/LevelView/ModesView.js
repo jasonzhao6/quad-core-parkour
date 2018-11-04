@@ -1,5 +1,6 @@
 /* eslint class-methods-use-this: ['error', { exceptMethods:
-     ['TEMPLATE', 'TEMPLATES', 'context', 'partials'] }] */
+     ['TEMPLATE', 'TEMPLATES', 'context', 'partials',
+      'EVENTS', 'toggleDebugMode'] }] */
 
 import { singleton as _ } from '../ViewHelper.js';
 
@@ -8,13 +9,13 @@ export default class ModesView {
   // Events
   //
 
-  static get EVENTS() {
+  get EVENTS() {
     return [
       ['-debugMode', 'onclick', 'toggleDebugMode'],
     ];
   }
 
-  static toggleDebugMode() {
+  toggleDebugMode() {
     const { debugMode } = _.store.modes;
     _.update('modes', { debugMode: !debugMode });
   }
@@ -64,7 +65,7 @@ export default class ModesView {
   }
 
   render() {
-    _.enqueue(this, ModesView.EVENTS);
+    _.enqueue(this);
     return _.render(this);
   }
 

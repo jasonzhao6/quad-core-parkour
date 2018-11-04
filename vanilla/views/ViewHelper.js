@@ -65,14 +65,14 @@ class ViewHelper {
   // Event binding
   //
 
-  enqueue(view, events) {
-    this.eventsToBind.splice(-1, 0, ...events.map(event => [view, ...event]));
+  enqueue(view) {
+    this.eventsToBind.splice(-1, 0, ...view.EVENTS.map(event => [view, ...event]));
   }
 
   bindEvents() {
     this.eventsToBind.forEach(([view, className, event, callback]) => {
       [...document.getElementsByClassName(className)].forEach((element) => {
-        element[event] = view.constructor[callback];
+        element[event] = view[callback];
       });
     });
   }
