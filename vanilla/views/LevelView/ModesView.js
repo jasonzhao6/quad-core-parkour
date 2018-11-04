@@ -73,6 +73,6 @@ export default class ModesView {
   //
 
   static labelView(label) {
-    return _.wrap(`<div class='label --center'>${label}</div>`);
+    return _.wrap(`<div class='label --center --noSelect'>${label}</div>`);
   }
 }
