@@ -35,7 +35,7 @@ export default class ModesView {
     `;
   }
 
-  view() { // eslint-disable-line class-methods-use-this, TODO
+  context() {
     const { debugMode, imageMode } = _.store.modes;
 
     return {
@@ -44,8 +44,8 @@ export default class ModesView {
     };
   }
 
-  partials() { // eslint-disable-line class-methods-use-this, TODO
-    const { inDebugMode, inImageMode } = this.view();
+  partials() {
+    const { inDebugMode, inImageMode } = this.context();
 
     const demoBoxConfig = { classes: 'demoMode --button' };
     const debugBoxConfig = { classes: `-debugMode --button ${inDebugMode}` };

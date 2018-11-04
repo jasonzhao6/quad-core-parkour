@@ -36,7 +36,7 @@ export default class LevelView {
       actionsView: new ActionsView().render(),
       infoView: new InfoView().render(),
       ioView: new IOView().render(),
-      // matrixView: new MatrixView().render(),
+      matrixView: new MatrixView().render(),
       modesView: new ModesView().render(),
     };
   }

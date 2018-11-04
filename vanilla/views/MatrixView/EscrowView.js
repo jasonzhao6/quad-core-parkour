@@ -1,6 +1,10 @@
 import { singleton as _ } from '../ViewHelper.js';
 
 export default class EscrowView {
+  //
+  // Constants
+  //
+
   static get ORIENTATION() {
     return {
       LR: 'left-right',
@@ -14,40 +18,20 @@ export default class EscrowView {
     };
   }
 
+  //
+  // Constructor
+  //
+
   constructor(orientation) {
     this.orientation = orientation;
   }
 
-  view() {
-    const { debugMode } = _.store.modes;
-    const isLR = /left|right/.test(this.orientation);
-    const isMessageBus = /left|right|up|down/.test(this.orientation);
-    const isDebugMode = debugMode;
-    const numberDebugMode = isLR ? '--block' : '--inlineBlock';
+  //
+  // Render
+  //
 
-    return {
-      // Classes
-      orientation: isLR ? 'leftRight' : 'upDown',
-      messageBus: isMessageBus ? 'messageBus' : false,
-      numberDebugMode: isDebugMode ? numberDebugMode : '--hide',
-      ellipsisDebugMode: isDebugMode ? '--visible' : '--hidden',
-
-      // Message buses
-      isLR: this.orientation === EscrowView.ORIENTATION.LR,
-      isRL: this.orientation === EscrowView.ORIENTATION.RL,
-      isUD: this.orientation === EscrowView.ORIENTATION.UD,
-      isDU: this.orientation === EscrowView.ORIENTATION.DU,
-
-      // Inputs/outputs
-      isInX: this.orientation === EscrowView.ORIENTATION.InX,
-      isInY: this.orientation === EscrowView.ORIENTATION.InY,
-      isOutX: this.orientation === EscrowView.ORIENTATION.OutX,
-      isOutY: this.orientation === EscrowView.ORIENTATION.OutY,
-    };
-  }
-
-  render() {
-    return _.render(`
+  get TEMPLATE() {
+    return `
       <div class='EscrowView {{orientation}} {{messageBus}}'>
         <div class='--icon'>
           {{#isLR}}&larr;{{/isLR}}
@@ -86,6 +70,38 @@ export default class EscrowView {
           {{#isOutY}}&darr;{{/isOutY}}
         </div>
       </div>
-    `, this.view());
+    `;
+  }
+
+  context() {
+    const { debugMode } = _.store.modes;
+    const isLR = /left|right/.test(this.orientation);
+    const isMessageBus = /left|right|up|down/.test(this.orientation);
+    const isDebugMode = debugMode;
+    const numberDebugMode = isLR ? '--block' : '--inlineBlock';
+
+    return {
+      // Classes
+      orientation: isLR ? 'leftRight' : 'upDown',
+      messageBus: isMessageBus ? 'messageBus' : false,
+      numberDebugMode: isDebugMode ? numberDebugMode : '--hide',
+      ellipsisDebugMode: isDebugMode ? '--visible' : '--hidden',
+
+      // Message buses
+      isLR: this.orientation === EscrowView.ORIENTATION.LR,
+      isRL: this.orientation === EscrowView.ORIENTATION.RL,
+      isUD: this.orientation === EscrowView.ORIENTATION.UD,
+      isDU: this.orientation === EscrowView.ORIENTATION.DU,
+
+      // Inputs/outputs
+      isInX: this.orientation === EscrowView.ORIENTATION.InX,
+      isInY: this.orientation === EscrowView.ORIENTATION.InY,
+      isOutX: this.orientation === EscrowView.ORIENTATION.OutX,
+      isOutY: this.orientation === EscrowView.ORIENTATION.OutY,
+    };
+  }
+
+  render() {
+    return _.render(this);
   }
 }

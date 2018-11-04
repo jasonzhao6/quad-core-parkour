@@ -7,25 +7,8 @@ import EscrowView from '../MatrixView/EscrowView.js';
 import StackView from '../MatrixView/StackView.js';
 
 export default class MatrixView {
-  partials() { // eslint-disable-line class-methods-use-this, TODO
-    const orientation = EscrowView.ORIENTATION;
-    return {
-      coreView: new CoreView().render(),
-      escrowViewLR: new EscrowView(orientation.LR).render(),
-      escrowViewRL: new EscrowView(orientation.RL).render(),
-      escrowViewUD: new EscrowView(orientation.UD).render(),
-      escrowViewDU: new EscrowView(orientation.DU).render(),
-      escrowViewInX: new EscrowView(orientation.InX).render(),
-      escrowViewInY: new EscrowView(orientation.InY).render(),
-      escrowViewOutX: new EscrowView(orientation.OutX).render(),
-      escrowViewOutY: new EscrowView(orientation.OutY).render(),
-      stackAboveView: new StackView().render(),
-      stackBelowView: new StackView().render(),
-    };
-  }
-
-  render() {
-    return _.render(`
+  get TEMPLATE() {
+    return `
       <div class='MatrixView --verticalJustify'>
         <div class='--horizontalJustify'>
           {{>escrowViewInX}}
@@ -52,6 +35,27 @@ export default class MatrixView {
           {{>escrowViewOutY}}
         </div>
       </div>
-    `, {}, this.partials());
+    `;
+  }
+
+  partials() {
+    const { ORIENTATION } = EscrowView;
+    return {
+      coreView: new CoreView().render(),
+      escrowViewLR: new EscrowView(ORIENTATION.LR).render(),
+      escrowViewRL: new EscrowView(ORIENTATION.RL).render(),
+      escrowViewUD: new EscrowView(ORIENTATION.UD).render(),
+      escrowViewDU: new EscrowView(ORIENTATION.DU).render(),
+      escrowViewInX: new EscrowView(ORIENTATION.InX).render(),
+      escrowViewInY: new EscrowView(ORIENTATION.InY).render(),
+      escrowViewOutX: new EscrowView(ORIENTATION.OutX).render(),
+      escrowViewOutY: new EscrowView(ORIENTATION.OutY).render(),
+      stackAboveView: new StackView().render(),
+      stackBelowView: new StackView().render(),
+    };
+  }
+
+  render() {
+    return _.render(this);
   }
 }

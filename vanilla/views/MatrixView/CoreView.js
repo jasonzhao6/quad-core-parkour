@@ -1,15 +1,8 @@
 import { singleton as _ } from '../ViewHelper.js';
 
 export default class CoreView {
-  view() { // eslint-disable-line class-methods-use-this, TODO
-    const { debugMode } = _.store.modes;
-    return {
-      debugMode: debugMode ? '--block' : '--hide',
-    };
-  }
-
-  render() {
-    return _.renderBox({ layout: _.BOX_LAYOUTS.oneTwo }, [`
+  get TEMPLATE() {
+    return [`
       <div class='CoreView'>
         <div>start: mov left acc</div>
         <div>jez terminate</div>
@@ -47,6 +40,17 @@ export default class CoreView {
         <div class='{{debugMode}}'>0</div>
         <div class='{{debugMode}} --ellipsis'>...</div>
       </div>
-    `], this.view());
+    `];
+  }
+
+  context() {
+    const { debugMode } = _.store.modes;
+    return {
+      debugMode: debugMode ? '--block' : '--hide',
+    };
+  }
+
+  render() {
+    return _.renderBox(this, { layout: _.BOX_LAYOUTS.oneTwo });
   }
 }
