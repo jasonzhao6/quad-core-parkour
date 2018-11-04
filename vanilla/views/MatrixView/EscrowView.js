@@ -5,7 +5,7 @@ export default class EscrowView {
   // Constants
   //
 
-  static get ORIENTATION() {
+  static get DIRECTION() {
     return {
       LR: 'left-right',
       RL: 'right-left',
@@ -22,8 +22,8 @@ export default class EscrowView {
   // Constructor
   //
 
-  constructor(orientation) {
-    this.orientation = orientation;
+  constructor(direction) {
+    this.direction = direction;
   }
 
   //
@@ -32,7 +32,7 @@ export default class EscrowView {
 
   get TEMPLATE() {
     return `
-      <div class='EscrowView {{orientation}} {{messageBus}}'>
+      <div class='EscrowView {{orientation}} {{isMessageBus}}'>
         <div class='--icon'>
           {{#isLR}}&larr;{{/isLR}}
           {{#isRL}}&rarr;{{/isRL}}
@@ -43,22 +43,22 @@ export default class EscrowView {
           {{#isOutX}}&darr;{{/isOutX}}
         </div>
 
-        {{#messageBus}}
-          <div class='number'>000</div>
-          <div class='number {{numberDebugMode}}'>000</div>
-          <div class='number {{numberDebugMode}}'>000</div>
-          <div class='number {{numberDebugMode}}'>000</div>
-          <div class='--ellipsis {{ellipsisDebugMode}}'>...</div>
-          <div class='number {{numberDebugMode}}'>000</div>
-          <div class='number {{numberDebugMode}}'>000</div>
-          <div class='number {{numberDebugMode}}'>000</div>
-          <div class='number'>000</div>
-        {{/messageBus}}
-
         {{#isInX}}<div>in.x</div>{{/isInX}}
-        {{#isOutX}}<div>out.x</div>{{/isOutX}}
         {{#isInY}}<div>in.y</div>{{/isInY}}
+        {{#isOutX}}<div>out.x</div>{{/isOutX}}
         {{#isOutY}}<div>out.y</div>{{/isOutY}}
+
+        {{#isMessageBus}}
+          <div class='number'>000</div>
+          <div class='number {{isNumberVisible}}'>000</div>
+          <div class='number {{isNumberVisible}}'>000</div>
+          <div class='number {{isNumberVisible}}'>000</div>
+          <div class='--ellipsis {{isEllipsisVisible}}'>...</div>
+          <div class='number {{isNumberVisible}}'>000</div>
+          <div class='number {{isNumberVisible}}'>000</div>
+          <div class='number {{isNumberVisible}}'>000</div>
+          <div class='number'>000</div>
+        {{/isMessageBus}}
 
         <div class='--icon'>
           {{#isLR}}&rarr;{{/isLR}}
@@ -74,29 +74,29 @@ export default class EscrowView {
   }
 
   context() {
-    const isLR = /left|right/.test(this.orientation);
-    const isDebugMode = debugMode;
-    const numberDebugMode = isLR ? '--block' : '--inlineBlock';
     const { inDebugMode } = _.store.modes;
+    const isHorizontal = /left|right/.test(this.direction);
+    const isMessageBus = /left|right|up|down/.test(this.direction);
+    const isNumberVisible = isHorizontal ? '--block' : '--inlineBlock';
 
     return {
       // Classes
-      orientation: isLR ? 'leftRight' : 'upDown',
-      messageBus: isMessageBus ? 'messageBus' : false,
-      numberDebugMode: isDebugMode ? numberDebugMode : '--hide',
-      ellipsisDebugMode: isDebugMode ? '--visible' : '--hidden',
+      orientation: isHorizontal ? 'horizontal' : 'vertical',
+      isMessageBus: isMessageBus ? 'messageBus' : false,
+      isNumberVisible: inDebugMode ? isNumberVisible : '--hide',
+      isEllipsisVisible: inDebugMode ? '--visible' : '--hidden',
 
       // Message buses
-      isLR: this.orientation === EscrowView.ORIENTATION.LR,
-      isRL: this.orientation === EscrowView.ORIENTATION.RL,
-      isUD: this.orientation === EscrowView.ORIENTATION.UD,
-      isDU: this.orientation === EscrowView.ORIENTATION.DU,
+      isLR: this.direction === EscrowView.DIRECTION.LR,
+      isRL: this.direction === EscrowView.DIRECTION.RL,
+      isUD: this.direction === EscrowView.DIRECTION.UD,
+      isDU: this.direction === EscrowView.DIRECTION.DU,
 
       // Inputs/outputs
-      isInX: this.orientation === EscrowView.ORIENTATION.InX,
-      isInY: this.orientation === EscrowView.ORIENTATION.InY,
-      isOutX: this.orientation === EscrowView.ORIENTATION.OutX,
-      isOutY: this.orientation === EscrowView.ORIENTATION.OutY,
+      isInX: this.direction === EscrowView.DIRECTION.InX,
+      isInY: this.direction === EscrowView.DIRECTION.InY,
+      isOutX: this.direction === EscrowView.DIRECTION.OutX,
+      isOutY: this.direction === EscrowView.DIRECTION.OutY,
     };
   }
 

@@ -50,17 +50,17 @@ export default class MatrixView {
   }
 
   partials() {
-    const { ORIENTATION } = EscrowView;
+    const { DIRECTION } = EscrowView;
     return {
       coreView: new CoreView().render(),
-      escrowViewLR: new EscrowView(ORIENTATION.LR).render(),
-      escrowViewRL: new EscrowView(ORIENTATION.RL).render(),
-      escrowViewUD: new EscrowView(ORIENTATION.UD).render(),
-      escrowViewDU: new EscrowView(ORIENTATION.DU).render(),
-      escrowViewInX: new EscrowView(ORIENTATION.InX).render(),
-      escrowViewInY: new EscrowView(ORIENTATION.InY).render(),
-      escrowViewOutX: new EscrowView(ORIENTATION.OutX).render(),
-      escrowViewOutY: new EscrowView(ORIENTATION.OutY).render(),
+      escrowViewLR: new EscrowView(DIRECTION.LR).render(),
+      escrowViewRL: new EscrowView(DIRECTION.RL).render(),
+      escrowViewUD: new EscrowView(DIRECTION.UD).render(),
+      escrowViewDU: new EscrowView(DIRECTION.DU).render(),
+      escrowViewInX: new EscrowView(DIRECTION.InX).render(),
+      escrowViewInY: new EscrowView(DIRECTION.InY).render(),
+      escrowViewOutX: new EscrowView(DIRECTION.OutX).render(),
+      escrowViewOutY: new EscrowView(DIRECTION.OutY).render(),
       stackAboveView: new StackView().render(),
       stackBelowView: new StackView().render(),
     };

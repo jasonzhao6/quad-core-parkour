@@ -9,69 +9,69 @@
 }
 
 /*
-  Left-Right orientation
+  Horizontal direction
 */
 
-.EscrowView.leftRight.messageBus {
+.EscrowView.horizontal.messageBus {
   flex-direction: column;
   height: 194px; /* Stretch for proper centering in non-debug mode */
 }
 
-.EscrowView.leftRight .number {
+.EscrowView.horizontal .number {
   margin: 3px 0;
 }
 
-.EscrowView.leftRight .--ellipsis {
+.EscrowView.horizontal .--ellipsis {
   margin: 0 0 6px 2px;
 }
 
-.EscrowView.leftRight .--icon {
+.EscrowView.horizontal .--icon {
   margin-left: 1px;
   height: 12px; /* Good for 1 horizontal arrow */
 }
 
-.EscrowView.leftRight .--icon:first-child {
+.EscrowView.horizontal .--icon:first-child {
   margin-bottom: 6px;
 }
 
-.EscrowView.leftRight .--icon:last-child {
+.EscrowView.horizontal .--icon:last-child {
   margin-top: 1px;
 }
 
 /*
-  Up-Down orienation
+  Vertical direction
 */
 
-.EscrowView.upDown.messageBus {
+.EscrowView.vertical.messageBus {
   width: 227px; /* Stretch for proper centering in non-debug mode */
 }
 
-.EscrowView.upDown.messageBus:first-child {
+.EscrowView.vertical.messageBus:first-child {
   margin-left: -1px;
 }
 
-.EscrowView.upDown.messageBus:last-child {
+.EscrowView.vertical.messageBus:last-child {
   margin-right: -1px;
 }
 
-.EscrowView.upDown .number {
+.EscrowView.vertical .number {
   margin: 0 2.5px;
   width: 18px; /* Good for 3 digits */
 }
 
-.EscrowView.upDown .--ellipsis {
+.EscrowView.vertical .--ellipsis {
   margin: 0 3px 0 2px;
 }
 
-.EscrowView.upDown .--icon {
+.EscrowView.vertical .--icon {
   line-height: 6px;
   width: 8px; /* Good for 1 vertical arrow */
 }
 
-.EscrowView.upDown .--icon:first-child {
+.EscrowView.vertical .--icon:first-child {
   margin-right: 4px;
 }
 
-.EscrowView.upDown .--icon:last-child {
+.EscrowView.vertical .--icon:last-child {
   margin-left: 4px;
 }
