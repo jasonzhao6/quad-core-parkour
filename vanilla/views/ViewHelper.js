@@ -58,7 +58,7 @@ class ViewHelper {
       this.store[slice][key] = sliceProps[key];
     });
 
-    this.renderToDom();
+    this.renderDom();
   }
 
   //
@@ -100,7 +100,7 @@ class ViewHelper {
   }
 
   // This is the only method that renders to DOM; all others render to string.
-  renderToDom(view) {
+  renderDom(view) {
     if (view !== undefined) this.entryPoint = view;
     document.body.innerHTML = this.render(this.entryPoint);
     this.bindEvents();

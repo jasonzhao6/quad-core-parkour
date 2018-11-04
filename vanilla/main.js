@@ -8,4 +8,4 @@ import './3rdParty/js/mustache.js';
 // App entry points
 import LevelView from './views/EntryPoints/LevelView.js';
 
-new LevelView().renderToDom();
+new LevelView().renderDom();

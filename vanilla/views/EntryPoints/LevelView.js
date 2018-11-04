@@ -41,7 +41,7 @@ export default class LevelView {
     };
   }
 
-  renderToDom() {
-    return _.renderToDom(this);
+  renderDom() {
+    return _.renderDom(this);
   }
 }
