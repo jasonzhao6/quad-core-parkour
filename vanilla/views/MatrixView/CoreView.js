@@ -24,29 +24,29 @@ export default class CoreView {
       <div class='CoreView-state'>
         <div class='label'>acc</div>
         <div>-99</div>
-        <div class='{{debugMode}}'>-99</div>
-        <div class='{{debugMode}}'>-99</div>
-        <div class='{{debugMode}}'>-99</div>
-        <div class='{{debugMode}}'>-99</div>
-        <div class='{{debugMode}} --ellipsis'>...</div>
+        <div class='{{inDebugMode}}'>-99</div>
+        <div class='{{inDebugMode}}'>-99</div>
+        <div class='{{inDebugMode}}'>-99</div>
+        <div class='{{inDebugMode}}'>-99</div>
+        <div class='{{inDebugMode}} --ellipsis'>...</div>
       </div>
     `, `
       <div class='CoreView-state'>
         <div class='label'>bak</div>
         <div>0</div>
-        <div class='{{debugMode}}'>0</div>
-        <div class='{{debugMode}}'>0</div>
-        <div class='{{debugMode}}'>0</div>
-        <div class='{{debugMode}}'>0</div>
-        <div class='{{debugMode}} --ellipsis'>...</div>
+        <div class='{{inDebugMode}}'>0</div>
+        <div class='{{inDebugMode}}'>0</div>
+        <div class='{{inDebugMode}}'>0</div>
+        <div class='{{inDebugMode}}'>0</div>
+        <div class='{{inDebugMode}} --ellipsis'>...</div>
       </div>
     `];
   }
 
   context() {
-    const { debugMode } = _.store.modes;
+    const { inDebugMode } = _.store.modes;
     return {
-      debugMode: debugMode ? '--block' : '--hide',
+      inDebugMode: inDebugMode ? '--block' : '--hide',
     };
   }
 

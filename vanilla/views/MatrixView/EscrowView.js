@@ -74,11 +74,10 @@ export default class EscrowView {
   }
 
   context() {
-    const { debugMode } = _.store.modes;
     const isLR = /left|right/.test(this.orientation);
-    const isMessageBus = /left|right|up|down/.test(this.orientation);
     const isDebugMode = debugMode;
     const numberDebugMode = isLR ? '--block' : '--inlineBlock';
+    const { inDebugMode } = _.store.modes;
 
     return {
       // Classes
