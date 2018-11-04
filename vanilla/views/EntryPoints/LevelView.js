@@ -33,7 +33,7 @@ export default class LevelView {
   partials() {
     return {
       // TODO maybe initialize these views in constructor once
-      // actionsView: new ActionsView().render(),
+      actionsView: new ActionsView().render(),
       infoView: new InfoView().render(),
       ioView: new IOView().render(),
       // matrixView: new MatrixView().render(),

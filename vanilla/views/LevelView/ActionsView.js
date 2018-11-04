@@ -1,37 +1,47 @@
+/* eslint class-methods-use-this: ['error', { exceptMethods:
+     ['TEMPLATE', 'TEMPLATES', 'context', 'partials'] }] */
+
 import { singleton as _ } from '../ViewHelper.js';
 
 export default class ActionsView {
-  view() { // eslint-disable-line class-methods-use-this, TODO
-    return {
-    };
-  }
-
-  partials() {
-    const boxConfig = { label: 'Actions:', labelStyle: 'text-align: left;' };
-    return {
-      speedButton: _.renderBox({}, `
-        <div class='--button --center'>100x</div>
-      `, this.view()),
-      startButton: _.renderBox({}, `
-        <div class='--button --center'>Start</div>
-      `, this.view()),
-      stepButton: _.renderBox({}, `
-        <div class='--button --center'>Step</div>
-      `, this.view()),
-      stopButton: _.renderBox(boxConfig, `
-        <div class='--button --center'>Stop</div>
-      `, this.view()),
-    };
-  }
-
-  render() {
-    return _.render(`
+  get TEMPLATE() {
+    return `
       <div class='ActionsView --horizontalJustify'>
         {{>stopButton}}
         {{>startButton}}
         {{>stepButton}}
         {{>speedButton}}
       </div>
-    `, this.view(), this.partials());
+    `;
+  }
+
+  partials() {
+    const speedBoxConfig = { classes: 'speedAction --button' };
+    const startBoxConfig = { classes: 'startAction --button' };
+    const stepBoxConfig = { classes: 'stepAction --button' };
+    const stopBoxConfig = { classes: 'stopAction --button' };
+
+    // Label row of boxes via the first box.
+    stopBoxConfig.label = 'Actions:';
+    stopBoxConfig.labelStyle = 'text-align: left;';
+
+    return {
+      speedButton: _.renderBox(ActionsView.labelView('100x'), speedBoxConfig),
+      startButton: _.renderBox(ActionsView.labelView('Start'), startBoxConfig),
+      stepButton: _.renderBox(ActionsView.labelView('Step'), stepBoxConfig),
+      stopButton: _.renderBox(ActionsView.labelView('Stop'), stopBoxConfig),
+    };
+  }
+
+  render() {
+    return _.render(this);
+  }
+
+  //
+  // Private
+  //
+
+  static labelView(label) {
+    return _.wrap(`<div class='label --center --noSelect'>${label}</div>`);
   }
 }
