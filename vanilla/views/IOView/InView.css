@@ -1,11 +1,11 @@
 .InView {
-  height: 187px; /* Good to make a square image over 'in.y, out.x, out.y` */
-  min-width: 12px; /* Good to match 'in.x' label */
+  height: var(--size-image); /* Stretch to match image size. */
+  min-width: 12px; /* Good to match 'in.x' label. */
   text-align: center;
 }
 
 .InView .--ellipsis {
-  height: 7px;
-  line-height: 0;
-  margin-right: 2px;
+  height: 10px; /* Treat as `height` + `padding-bottom`. */
+  line-height: 1px; /* Treat as `padding-top`. */
+  padding-right: 2px;
 }

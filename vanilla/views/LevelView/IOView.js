@@ -5,6 +5,7 @@
 import { singleton as _ } from '../ViewHelper.js';
 
 // Partials
+import ImageView from '../IOView/ImageView.js';
 import InView from '../IOView/InView.js';
 import OutView from '../IOView/OutView.js';
 
@@ -12,18 +13,22 @@ export default class IOView {
   get TEMPLATE() {
     return `
       <div class='IOView --horizontalJustify'>
-        {{>inView}}
-        {{>inView}}
-        {{>outView}}
-        {{>outView}}
+        {{>inViewX}}
+        {{>inViewY}}
+        {{>outViewX}}
+        {{>outViewY}}
+        {{>imageView}}
       </div>
     `;
   }
 
   partials() {
     return {
-      inView: new InView().render(),
-      outView: new OutView().render(),
+      inViewX: new InView().render(),
+      // inViewY: new InView().render(),
+      // outViewX: new OutView().render(),
+      // outViewY: new OutView().render(),
+      imageView: new ImageView().render(),
     };
   }
 

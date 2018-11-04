@@ -10,6 +10,7 @@
 @import './views/ViewHelper/BoxView.css';
 
 /* App views */
+@import './views/IOView/ImageView.css';
 @import './views/IOView/InView.css';
 @import './views/IOView/OutView.css';
 @import './views/LevelView/ActionsView.css';
@@ -27,6 +28,7 @@
   --background-color-highlight: #37393B;
   --color: #F7F7F7;
   --color-comment: #5F5A60;
+  --size-image: 190px;
 }
 
 /* Global properties */

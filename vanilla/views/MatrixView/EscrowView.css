@@ -14,7 +14,7 @@
 
 .EscrowView.left-right.message-bus {
   flex-direction: column;
-  height: 194px; /* Stretch for proper centering in non-debug mode */
+  height: 194px; /* Stretch for proper centering in non-debug mode. */
 }
 
 .EscrowView.left-right .number {
@@ -27,7 +27,7 @@
 
 .EscrowView.left-right .--icon {
   margin-left: 1px;
-  height: 12px; /* Good for 1 left-right arrow */
+  height: 12px; /* Good for 1 left-right arrow .*/
 }
 
 .EscrowView.left-right .--icon:first-child {
@@ -43,7 +43,7 @@
 */
 
 .EscrowView.up-down.message-bus {
-  width: 227px; /* Stretch for proper centering in non-debug mode */
+  width: 227px; /* Stretch for proper centering in non-debug mode. */
 }
 
 .EscrowView.up-down.message-bus:first-child {
@@ -56,7 +56,7 @@
 
 .EscrowView.up-down .number {
   margin: 0 2.5px;
-  width: 18px; /* Good for 3 digits */
+  width: 18px; /* Good for 3 digits. */
 }
 
 .EscrowView.up-down .--ellipsis {
@@ -65,7 +65,7 @@
 
 .EscrowView.up-down .--icon {
   line-height: 6px;
-  width: 8px; /* Good for 1 up-down arrow */
+  width: 8px; /* Good for 1 up-down arrow. */
 }
 
 .EscrowView.up-down .--icon:first-child {

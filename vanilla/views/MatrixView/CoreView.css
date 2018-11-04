@@ -1,12 +1,12 @@
 .CoreView {
-  height: 181px; /* Good for 15 lines */
-  width: 170px; /* Good for 24 characters */
+  height: 181px; /* Good for 15 lines. */
+  width: 170px; /* Good for 24 characters. */
 }
 
 .CoreView-state {
   letter-spacing: 0;
   text-align: center;
-  width: 25px; /* Good for 3 digits */
+  width: 25px; /* Good for 3 digits. */
 }
 
 .CoreView-state .label {
