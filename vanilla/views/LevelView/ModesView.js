@@ -12,12 +12,18 @@ export default class ModesView {
   get EVENTS() {
     return [
       ['-debugMode', 'onclick', 'toggleDebugMode'],
+      ['-stackMode', 'onclick', 'toggleStackMode'],
     ];
   }
 
   toggleDebugMode() {
-    const { debugMode } = _.store.modes;
-    _.update('modes', { debugMode: !debugMode });
+    const { inDebugMode } = _.store.modes;
+    _.update('modes', { inDebugMode: !inDebugMode });
+  }
+
+  toggleStackMode() {
+    const { inStackMode } = _.store.modes;
+    _.update('modes', { inStackMode: !inStackMode });
   }
 
   //
@@ -36,21 +42,22 @@ export default class ModesView {
   }
 
   context() {
-    const { debugMode, imageMode } = _.store.modes;
+    const { inDebugMode, inImageMode, inStackMode } = _.store.modes;
 
     return {
-      inDebugMode: debugMode ? 'active' : '',
-      inImageMode: imageMode ? 'active' : 'disabled',
+      inDebugMode: inDebugMode ? 'active' : '',
+      inImageMode: inImageMode ? 'active' : 'disabled',
+      inStackMode: inStackMode ? 'active' : '',
     };
   }
 
   partials() {
-    const { inDebugMode, inImageMode } = this.context();
+    const { inDebugMode, inImageMode, inStackMode } = this.context();
 
     const demoBoxConfig = { classes: 'demoMode --button' };
     const debugBoxConfig = { classes: `-debugMode --button ${inDebugMode}` };
     const imageBoxConfig = { classes: `imageMode --button ${inImageMode}` };
-    const stackBoxConfig = { classes: 'stackMode --button' };
+    const stackBoxConfig = { classes: `-stackMode --button ${inStackMode}` };
 
     // Label row of boxes via the first box.
     demoBoxConfig.label = 'Modes:';

@@ -34,7 +34,7 @@ class ViewHelper {
   constructor() {
     // Global state.
     this.store = {
-      // SLICES REGISTRY:
+      // SLICE REGISTRY:
       modes: {},
     };
 

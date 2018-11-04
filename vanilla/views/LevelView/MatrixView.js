@@ -12,7 +12,9 @@ export default class MatrixView {
       <div class='MatrixView --verticalJustify'>
         <div class='--horizontalJustify'>
           {{>escrowViewInX}}
-          {{>stackAboveView}}
+          {{#inStackMode}}
+            {{>stackAboveView}}
+          {{/inStackMode}}
           {{>escrowViewInY}}
         </div>
         <div class='--horizontalJustify'>
@@ -31,11 +33,20 @@ export default class MatrixView {
         </div>
         <div class='--horizontalJustify'>
           {{>escrowViewOutX}}
-          {{>stackBelowView}}
+          {{#inStackMode}}
+            {{>stackBelowView}}
+          {{/inStackMode}}
           {{>escrowViewOutY}}
         </div>
       </div>
     `;
+  }
+
+  context() {
+    const { inStackMode } = _.store.modes;
+    return {
+      inStackMode,
+    };
   }
 
   partials() {
