@@ -1,6 +1,6 @@
 /* eslint class-methods-use-this: ['error', { exceptMethods:
      ['TEMPLATE', 'TEMPLATES', 'context', 'partials',
-      'EVENTS', 'toggleDebugMode'] }] */
+      'EVENTS', 'toggleDebugMode', 'toggleStackMode'] }] */
 
 import { singleton as _ } from '../ViewHelper.js';
 

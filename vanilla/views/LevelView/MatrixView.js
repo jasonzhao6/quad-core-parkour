@@ -1,3 +1,6 @@
+/* eslint class-methods-use-this: ['error', { exceptMethods:
+     ['TEMPLATE', 'TEMPLATES', 'context', 'partials'] }] */
+
 // Helper
 import { singleton as _ } from '../ViewHelper.js';
 
@@ -13,28 +16,28 @@ export default class MatrixView {
         <div class='--horizontalJustify'>
           {{>escrowViewInX}}
           {{#inStackMode}}
-            {{>stackAboveView}}
+            {{>stackViewAbove}}
           {{/inStackMode}}
           {{>escrowViewInY}}
         </div>
         <div class='--horizontalJustify'>
           {{>coreView}}
-          {{>escrowViewRL}}
+          {{>escrowView0001}}
           {{>coreView}}
         </div>
         <div class='--horizontalJustify'>
-          {{>escrowViewDU}}
-          {{>escrowViewUD}}
+          {{>escrowView0010}}
+          {{>escrowView0111}}
         </div>
         <div class='--horizontalJustify'>
           {{>coreView}}
-          {{>escrowViewLR}}
+          {{>escrowView1011}}
           {{>coreView}}
         </div>
         <div class='--horizontalJustify'>
           {{>escrowViewOutX}}
           {{#inStackMode}}
-            {{>stackBelowView}}
+            {{>stackViewBelow}}
           {{/inStackMode}}
           {{>escrowViewOutY}}
         </div>
@@ -50,19 +53,19 @@ export default class MatrixView {
   }
 
   partials() {
-    const { DIRECTION } = EscrowView;
+    const { TYPES } = EscrowView;
     return {
       coreView: new CoreView().render(),
-      escrowViewLR: new EscrowView(DIRECTION.LR).render(),
-      escrowViewRL: new EscrowView(DIRECTION.RL).render(),
-      escrowViewUD: new EscrowView(DIRECTION.UD).render(),
-      escrowViewDU: new EscrowView(DIRECTION.DU).render(),
-      escrowViewInX: new EscrowView(DIRECTION.InX).render(),
-      escrowViewInY: new EscrowView(DIRECTION.InY).render(),
-      escrowViewOutX: new EscrowView(DIRECTION.OutX).render(),
-      escrowViewOutY: new EscrowView(DIRECTION.OutY).render(),
-      stackAboveView: new StackView().render(),
-      stackBelowView: new StackView().render(),
+      escrowView0001: new EscrowView(TYPES.BusLR).render(),
+      escrowView0010: new EscrowView(TYPES.BusUD).render(),
+      escrowView0111: new EscrowView(TYPES.BusUD).render(),
+      escrowView1011: new EscrowView(TYPES.BusLR).render(),
+      escrowViewInX: new EscrowView(TYPES.InX).render(),
+      escrowViewInY: new EscrowView(TYPES.InY).render(),
+      escrowViewOutX: new EscrowView(TYPES.OutX).render(),
+      escrowViewOutY: new EscrowView(TYPES.OutY).render(),
+      stackViewAbove: new StackView().render(),
+      stackViewBelow: new StackView().render(),
     };
   }
 

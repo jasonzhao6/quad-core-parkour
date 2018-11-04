@@ -1,3 +1,6 @@
+/* eslint class-methods-use-this: ['error', { exceptMethods:
+     ['TEMPLATE', 'TEMPLATES', 'context', 'partials'] }] */
+
 import { singleton as _ } from '../ViewHelper.js';
 
 export default class EscrowView {
@@ -5,16 +8,14 @@ export default class EscrowView {
   // Constants
   //
 
-  static get DIRECTION() {
+  static get TYPES() {
     return {
-      LR: 'left-right',
-      RL: 'right-left',
-      UD: 'up-down',
-      DU: 'down-up',
-      InX: 'in.x',
-      InY: 'in.y',
-      OutX: 'out.x',
-      OutY: 'out.y',
+      BusLR: 'message-bus left-right',
+      BusUD: 'message-bus up-down',
+      InX: 'in.x up-down',
+      InY: 'in.y up-down',
+      OutX: 'out.x up-down',
+      OutY: 'out.y up-down',
     };
   }
 
@@ -22,8 +23,8 @@ export default class EscrowView {
   // Constructor
   //
 
-  constructor(direction) {
-    this.direction = direction;
+  constructor(type) {
+    this.type = type;
   }
 
   //
@@ -32,13 +33,10 @@ export default class EscrowView {
 
   get TEMPLATE() {
     return `
-      <div class='EscrowView {{orientation}} {{isMessageBus}}'>
+      <div class='EscrowView {{type}}'>
         <div class='--icon'>
-          {{#isLR}}&larr;{{/isLR}}
-          {{#isRL}}&rarr;{{/isRL}}
-          {{#isUD}}&uarr;{{/isUD}}
-          {{#isDU}}&darr;{{/isDU}}
-
+          {{#isBusLR}}&rarr;{{/isBusLR}}
+          {{#isBusUD}}&uarr;{{/isBusUD}}
           {{#isInX}}&darr;{{/isInX}}
           {{#isOutX}}&darr;{{/isOutX}}
         </div>
@@ -48,24 +46,21 @@ export default class EscrowView {
         {{#isOutX}}<div>out.x</div>{{/isOutX}}
         {{#isOutY}}<div>out.y</div>{{/isOutY}}
 
-        {{#isMessageBus}}
+        {{#isBus}}
           <div class='number'>000</div>
-          <div class='number {{isNumberVisible}}'>000</div>
-          <div class='number {{isNumberVisible}}'>000</div>
-          <div class='number {{isNumberVisible}}'>000</div>
+          <div class='number {{isNumberShown}}'>000</div>
+          <div class='number {{isNumberShown}}'>000</div>
+          <div class='number {{isNumberShown}}'>000</div>
           <div class='--ellipsis {{isEllipsisVisible}}'>...</div>
-          <div class='number {{isNumberVisible}}'>000</div>
-          <div class='number {{isNumberVisible}}'>000</div>
-          <div class='number {{isNumberVisible}}'>000</div>
+          <div class='number {{isNumberShown}}'>000</div>
+          <div class='number {{isNumberShown}}'>000</div>
+          <div class='number {{isNumberShown}}'>000</div>
           <div class='number'>000</div>
-        {{/isMessageBus}}
+        {{/isBus}}
 
         <div class='--icon'>
-          {{#isLR}}&rarr;{{/isLR}}
-          {{#isRL}}&larr;{{/isRL}}
-          {{#isUD}}&darr;{{/isUD}}
-          {{#isDU}}&uarr;{{/isDU}}
-
+          {{#isBusLR}}&larr;{{/isBusLR}}
+          {{#isBusUD}}&darr;{{/isBusUD}}
           {{#isInY}}&darr;{{/isInY}}
           {{#isOutY}}&darr;{{/isOutY}}
         </div>
@@ -75,28 +70,22 @@ export default class EscrowView {
 
   context() {
     const { inDebugMode } = _.store.modes;
-    const isHorizontal = /left|right/.test(this.direction);
-    const isMessageBus = /left|right|up|down/.test(this.direction);
-    const isNumberVisible = isHorizontal ? '--block' : '--inlineBlock';
+    const showNumber = /left/.test(this.type) ? '--block' : '--inlineBlock';
 
     return {
       // Classes
-      orientation: isHorizontal ? 'horizontal' : 'vertical',
-      isMessageBus: isMessageBus ? 'messageBus' : false,
-      isNumberVisible: inDebugMode ? isNumberVisible : '--hide',
+      type: this.type,
+      isNumberShown: inDebugMode ? showNumber : '--hide',
       isEllipsisVisible: inDebugMode ? '--visible' : '--hidden',
 
-      // Message buses
-      isLR: this.direction === EscrowView.DIRECTION.LR,
-      isRL: this.direction === EscrowView.DIRECTION.RL,
-      isUD: this.direction === EscrowView.DIRECTION.UD,
-      isDU: this.direction === EscrowView.DIRECTION.DU,
-
-      // Inputs/outputs
-      isInX: this.direction === EscrowView.DIRECTION.InX,
-      isInY: this.direction === EscrowView.DIRECTION.InY,
-      isOutX: this.direction === EscrowView.DIRECTION.OutX,
-      isOutY: this.direction === EscrowView.DIRECTION.OutY,
+      // Booleans
+      isBus: /message-bus/.test(this.type),
+      isBusLR: this.type === EscrowView.TYPES.BusLR,
+      isBusUD: this.type === EscrowView.TYPES.BusUD,
+      isInX: this.type === EscrowView.TYPES.InX,
+      isInY: this.type === EscrowView.TYPES.InY,
+      isOutX: this.type === EscrowView.TYPES.OutX,
+      isOutY: this.type === EscrowView.TYPES.OutY,
     };
   }
 
