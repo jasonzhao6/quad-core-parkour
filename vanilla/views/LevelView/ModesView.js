@@ -39,7 +39,7 @@ export default class ModesView {
 
     return {
       inDebugMode: debugMode ? 'active' : '',
-      inImageMode: imageMode ? 'active' : 'disable',
+      inImageMode: imageMode ? 'active' : 'disabled',
     };
   }
 

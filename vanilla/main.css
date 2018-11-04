@@ -118,24 +118,17 @@ body {
   cursor: pointer;
 }
 
-.--button.active,
-.--button:not(.active):not(.disabled):hover {
+.--button.active {
   background-color: var(--background-color-highlight);
+}
+
+.--button:hover,
+.--button.active {
   border-width: 2px;
   padding: 0;
 }
 
-.--button.active:hover {
-  background-color: var(--background-color);
-  border-width: 1px;
-  padding: 1px;
-}
-
 .--button.disabled {
   cursor: not-allowed;
-  text-decoration: line-through;
-}
-
-.--button.disabled:hover {
   text-decoration: line-through;
 }
