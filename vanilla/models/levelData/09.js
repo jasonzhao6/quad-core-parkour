@@ -1,4 +1,4 @@
-export const title = 'Stabilizer';
+export const title = 'Detector';
 
 export const info = [
   'Read a value from in.x',
