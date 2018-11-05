@@ -10,7 +10,7 @@
 //
 
 /* eslint class-methods-use-this: ['error', { exceptMethods:
-     ['BOX_LAYOUTS', 'paint', 'render', 'renderBox', 'wrap'] }] */
+     ['BOX_LAYOUTS', 'paint', 'paintDemo', 'render', 'renderBox', 'wrap'] }] */
 /* eslint no-param-reassign: ['error', { 'props': true,
      'ignorePropertyModificationsFor': ['element'] }] */
 /* eslint-disable import/prefer-default-export */ // To support aliasing to _.
@@ -115,7 +115,8 @@ class ViewHelper {
     this.bindEvents();
 
     // TODO temp
-    this.paintDemo(2);
+    // Delay to avoid rare race condition painting immediately after rendering.
+    setTimeout(() => this.paintDemo(4), 0);
   }
 
   //

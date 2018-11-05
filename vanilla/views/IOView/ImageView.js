@@ -82,17 +82,22 @@ export default class ImageView {
   static paintChecker() {
     let toggle = false;
     [...new Array(ImageView.SIZE).keys()].forEach((i) => {
-      toggle = !toggle; // Alternate every row.
+      // Alternate every row.
+      toggle = !toggle;
       [...new Array(ImageView.SIZE).keys()].forEach((j) => {
-        toggle = !toggle; // Alternate every column.
+        // Alternate every column.
+        toggle = !toggle;
         if (toggle) ImageView.paint(i, j, 1, 1);
       });
     });
   }
 
   static paintSmiley() {
+    // Left eye
     ImageView.paint(5, 4, 3, 3);
+    // Right eye
     ImageView.paint(12, 4, 3, 3);
+    // Mouth from here down
     ImageView.paint(2, 10, 3, 2);
     ImageView.paint(3, 12, 3, 2);
     ImageView.paint(5, 14, 10, 2);
@@ -113,6 +118,32 @@ export default class ImageView {
     ImageView.paint(2, 13, 17, 1);
     ImageView.paint(1, 14, 19, 2);
     ImageView.paint(1, 16, 19, 2);
+    ImageView.paint(0, 18, 20, 2);
+  }
+
+  static paintFireFlower() {
+    // Background
+    ImageView.paint(0, 0, 20, 2);
+    ImageView.paint(0, 2, 5, 1);
+    ImageView.paint(15, 2, 5, 1);
+    ImageView.paint(0, 3, 3, 1);
+    ImageView.paint(17, 3, 3, 1);
+    ImageView.paint(0, 4, 2, 5);
+    ImageView.paint(18, 4, 2, 5);
+    ImageView.paint(0, 9, 3, 1);
+    ImageView.paint(17, 9, 3, 1);
+    ImageView.paint(0, 10, 5, 1);
+    ImageView.paint(15, 10, 5, 1);
+    ImageView.paint(0, 11, 3, 1);
+    ImageView.paint(17, 11, 3, 1);
+    ImageView.paint(0, 12, 2, 3);
+    ImageView.paint(18, 12, 2, 3);
+    ImageView.paint(0, 15, 3, 1);
+    ImageView.paint(17, 15, 3, 1);
+    ImageView.paint(0, 16, 4, 1);
+    ImageView.paint(16, 16, 4, 1);
+    ImageView.paint(0, 17, 6, 1);
+    ImageView.paint(14, 17, 6, 1);
     ImageView.paint(0, 18, 20, 2);
   }
 }
