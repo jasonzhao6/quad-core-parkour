@@ -5,7 +5,14 @@
 }
 
 .InView .--ellipsis {
-  height: 10px; /* Treat as `height` + `padding-bottom`. */
-  line-height: 1px; /* Treat as `padding-top`. */
+  height: var(--line-height);
   padding-right: 2px;
+}
+
+.InView .inViewFirst.--ellipsis {
+  line-height: 4px; /* Treat as `padding-top`, so to keep height fixed. */
+}
+
+.InView .inViewLast.--ellipsis {
+  line-height: 8px; /* Treat as `padding-top`, so to keep height fixed. */
 }

@@ -31,6 +31,7 @@
   --background-color: #181818;
   --background-color-highlight: #37393B;
   --color-comment: #5F5A60;
+  --line-height: 12px;
   --size-image: 190px;
 }
 
@@ -41,7 +42,7 @@ body {
   font-family: 'VT323', monospace;
   font-size: 15px;
   letter-spacing: 1px;
-  line-height: 12px;
+  line-height: var(--line-height);
   text-transform: uppercase;
 }
 

@@ -27,7 +27,7 @@
 
 .EscrowView.left-right .--icon {
   margin-left: 1px;
-  height: 12px; /* Good for 1 left-right arrow .*/
+  height: var(--line-height); /* Good for 1 left-right arrow .*/
 }
 
 .EscrowView.left-right .--icon:first-child {

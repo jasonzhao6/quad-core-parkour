@@ -7,7 +7,8 @@ export default class OutView {
   get TEMPLATES() {
     return [`
       <div class='OutView'>
-        <div class='--highlight'>0</div><div>0</div><div>0</div><div>0</div>
+        <div>0</div><div>0</div><div class='--highlight'>0</div><div>0</div>
+        <div>0</div><div>0</div><div>0</div><div>0</div><div>0</div><div>0</div>
         <div>0</div><div>0</div><div>0</div><div>0</div><div>0</div><div>0</div>
       </div>
     `, `

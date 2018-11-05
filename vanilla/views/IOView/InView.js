@@ -7,11 +7,11 @@ export default class InView {
   get TEMPLATE() {
     return `
       <div class='InView'>
-        <div class='--ellipsis'>...</div>
+        <div class='inViewFirst --ellipsis'>...</div>
         <div>000</div><div class='--highlight'>000</div><div>000</div><div>000</div>
         <div>000</div><div>000</div><div>000</div><div>000</div><div>000</div>
         <div>000</div><div>000</div><div>000</div><div>000</div><div>000</div>
-        <div class='--highlight'>000</div>
+        <div class='inViewLast --ellipsis'>...</div>
       </div>
     `;
   }
