@@ -78,5 +78,18 @@ export default class ImageView {
   }
 
   static paintHalfDome() {
+    ImageView.paint(5, 3, 1, 1);
+    ImageView.paint(8, 3, 5, 1);
+    ImageView.paint(5, 4, 9, 1);
+    ImageView.paint(5, 5, 10, 1);
+    ImageView.paint(5, 6, 11, 2);
+    ImageView.paint(5, 8, 12, 1);
+    ImageView.paint(4, 9, 13, 1);
+    ImageView.paint(3, 10, 15, 2);
+    ImageView.paint(3, 12, 16, 1);
+    ImageView.paint(2, 13, 17, 1);
+    ImageView.paint(1, 14, 19, 2);
+    ImageView.paint(1, 16, 19, 2);
+    ImageView.paint(0, 18, 20, 2);
   }
 }

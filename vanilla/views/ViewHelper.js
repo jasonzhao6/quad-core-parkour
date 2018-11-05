@@ -115,7 +115,7 @@ class ViewHelper {
     this.bindEvents();
 
     // TODO temp
-    this.paintDemo();
+    this.paintDemo(1);
   }
 
   //
