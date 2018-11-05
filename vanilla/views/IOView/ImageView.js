@@ -10,9 +10,17 @@ export default class ImageView {
   // Paint
   //
 
-  static get COLORS() { return [colors.color]; }
-  static get DEMOS() { return ['Smiley', 'HalfDome']; }
   static get SIZE() { return 20; }
+  static get COLORS() { return [colors.color]; }
+  static get DEMOS() {
+    return [
+      'Whiteout',
+      'Checker',
+      'Smiley',
+      'HalfDome',
+      'FireFlower',
+    ];
+  }
 
   static paint(x, y, width, height, colorIndex = 0) {
     const canvas = ImageView.initCanvasOnce();
@@ -65,6 +73,21 @@ export default class ImageView {
     this.canvas.width = clientWidth;
 
     return this.canvas;
+  }
+
+  static paintWhiteout() {
+    ImageView.paint(0, 0, 20, 20);
+  }
+
+  static paintChecker() {
+    let toggle = false;
+    [...new Array(ImageView.SIZE).keys()].forEach((i) => {
+      toggle = !toggle; // Alternate every row.
+      [...new Array(ImageView.SIZE).keys()].forEach((j) => {
+        toggle = !toggle; // Alternate every column.
+        if (toggle) ImageView.paint(i, j, 1, 1);
+      });
+    });
   }
 
   static paintSmiley() {
