@@ -24,9 +24,12 @@
 
 /* Global variables */
 :root {
+  /* Mirrored to colors.js */
+  --color: #F7F7F7;
+
+  /* Not mirrored */
   --background-color: #181818;
   --background-color-highlight: #37393B;
-  --color: #F7F7F7;
   --color-comment: #5F5A60;
   --size-image: 190px;
 }

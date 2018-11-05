@@ -6,7 +6,6 @@
 
 /* Tried `canvas.ImageView`, but it stretched height by 2 mysterious pixels. */
 .ImageView canvas {
-  background-color: pink;
   height: 100%;
   width: 100%;
 }

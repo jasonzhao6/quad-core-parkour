@@ -10,7 +10,7 @@
 //
 
 /* eslint class-methods-use-this: ['error', { exceptMethods:
-     ['BOX_LAYOUTS', 'render', 'renderBox', 'wrap'] }] */
+     ['BOX_LAYOUTS', 'paint', 'render', 'renderBox', 'wrap'] }] */
 /* eslint no-param-reassign: ['error', { 'props': true,
      'ignorePropertyModificationsFor': ['element'] }] */
 /* eslint-disable import/prefer-default-export */ // To support aliasing to _.
@@ -18,14 +18,22 @@
 
 import BoxView from './ViewHelper/BoxView.js';
 import FactoryView from './ViewHelper/FactoryView.js';
+import ImageView from './IOView/ImageView.js';
 
 class ViewHelper {
   //
-  // Constants
+  // Delegated
   //
 
-  // Delegated
   get BOX_LAYOUTS() { return BoxView.LAYOUTS; }
+
+  paint(x, y, width, height, colorIndex) {
+    return ImageView.paint(x, y, width, height, colorIndex);
+  }
+
+  paintDemo(demoIndex) {
+    return ImageView.demo(demoIndex);
+  }
 
   //
   // Constructor
@@ -66,7 +74,8 @@ class ViewHelper {
   //
 
   enqueue(view) {
-    this.eventsToBind.splice(-1, 0, ...view.EVENTS.map(event => [view, ...event]));
+    const eventsWithView = view.EVENTS.map(event => [view, ...event]);
+    this.eventsToBind.splice(-1, 0, ...eventsWithView);
   }
 
   bindEvents() {
@@ -104,6 +113,9 @@ class ViewHelper {
     if (view !== undefined) this.entryPoint = view;
     document.body.innerHTML = this.render(this.entryPoint);
     this.bindEvents();
+
+    // TODO temp
+    this.paintDemo();
   }
 
   //
