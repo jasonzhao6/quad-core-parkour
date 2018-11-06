@@ -23,30 +23,30 @@ export default class ImageView {
   }
   static get DEMOS() {
     return [
-      'Whiteout',
-      'Checker',
-      'Smiley',
-      'HalfDome',
-      'FireFlower',
+      'Whiteout', // md5: c7ce5636b3a52d0e217938a617b4be0e
+      'Checker', // md5: 6a78d4635cdad9808ec5a6650c52a13c
+      'Smiley', // md5: d48bd7484c44020831f8a34e13fcfc18
+      'HalfDome', // md5: 3493057349d7531fd31fbf22dcf3d888
+      'FireFlower', // md5: e0dcb2d318d94fe5b2789461e8927751
     ];
   }
 
   static paint(x, y, width, height, colorIndex = 0) {
     const canvas = ImageView.initCanvasOnce();
     const shadowCanvas = ImageView.initShadowCanvasOnce();
-    const color = ImageView.COLORS[colorIndex]
+    const color = ImageView.COLORS[colorIndex];
 
     // Paint the shadow canvas for testing.
-    shadowCanvas.forEach((row, i) => {
+    [...shadowCanvas.keys()].forEach((i) => {
       if (i >= y && i < (y + height)) {
         [...new Array(width).keys()].forEach((j) => {
-          row[j + x] = color;
+          shadowCanvas[i][j + x] = color;
         });
       }
     });
 
     // If a real canvas cannot be found, short circuit.
-    if (canvas === undefined) return shadowCanvas;
+    if (canvas === undefined || canvas === null) return shadowCanvas;
 
     // Otherwise, paint the real canvas.
     const scale = canvas.width / ImageView.SIZE;
@@ -87,7 +87,7 @@ export default class ImageView {
 
     // Memoize <canvas> element and short circuit if not found.
     [this.canvas] = document.getElementsByTagName('canvas');
-    if (this.canvas === undefined) return;
+    if (this.canvas === undefined) return null;
 
     // Raise error if canvas is not a square.
     const { clientHeight, clientWidth } = this.canvas;

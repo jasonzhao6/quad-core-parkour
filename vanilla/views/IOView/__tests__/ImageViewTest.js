@@ -1,9 +1,11 @@
 import * as colors from '../../ViewHelper/colors.js';
 import ImageView from '../ImageView.js';
+import md5 from '../../../3rdParty/js/md5.js';
 
 export default class ImageViewTest {
   static enqueue(_) {
     _.Class('ImageView', () => {
+      // eslint-disable-next-line object-curly-newline
       const { black, white, green, orange, yellow } = colors;
 
       _.method('.paint', () => {
@@ -29,6 +31,11 @@ export default class ImageViewTest {
             'It paints all pixels white',
             () => ImageView.demo().flat().every(pixel => pixel === white),
           );
+
+          _.assert(
+            'It hashes to expected md5',
+            () => md5(ImageView.demo()) === 'c7ce5636b3a52d0e217938a617b4be0e',
+          );
         });
 
         _.context('When demoing Checker', () => {
@@ -46,8 +53,33 @@ export default class ImageViewTest {
             'It paints top-right pixel white',
             () => ImageView.demo(1)[0][19] === white,
           );
+
+          _.assert(
+            'It hashes to expected md5',
+            () => md5(ImageView.demo(1)) === '6a78d4635cdad9808ec5a6650c52a13c',
+          );
         });
 
+        _.context('When demoing Smiley', () => {
+          _.assert(
+            'It hashes to expected md5',
+            () => md5(ImageView.demo(2)) === 'd48bd7484c44020831f8a34e13fcfc18',
+          );
+        });
+
+        _.context('When demoing HalfDome', () => {
+          _.assert(
+            'It hashes to expected md5',
+            () => md5(ImageView.demo(3)) === '3493057349d7531fd31fbf22dcf3d888',
+          );
+        });
+
+        _.context('When demoing FireFlower', () => {
+          _.assert(
+            'It hashes to expected md5',
+            () => md5(ImageView.demo(4)) === 'e0dcb2d318d94fe5b2789461e8927751',
+          );
+        });
       });
     });
   }
