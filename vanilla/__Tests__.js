@@ -18,10 +18,14 @@ import LineManagerTest from './models/__tests__/LineManagerTest.js';
 import LineWorkerTest from './models/__tests__/LineWorkerTest.js';
 import MatrixTest from './models/__tests__/MatrixTest.js';
 
+// View tests
+import ImageViewTest from './views/IOView/__tests__/ImageViewTest.js';
+
 export default class Tests {
   static enqueue(_) {
     this.enqueueTestingFrameworkTests(_);
     this.enqueueModelTests(_);
+    this.enqueueViewTests(_);
   }
 
   //
@@ -43,6 +47,10 @@ export default class Tests {
     LineManagerTest.enqueue(_);
     LineWorkerTest.enqueue(_);
     MatrixTest.enqueue(_);
+  }
+
+  static enqueueViewTests(_) {
+    ImageViewTest.enqueue(_);
   }
 }
 
