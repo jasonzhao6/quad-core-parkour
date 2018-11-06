@@ -62,12 +62,42 @@ export default class ImageViewTest {
 
         _.context('When demoing Smiley', () => {
           _.assert(
+            'It paints a sample background pixel black',
+            () => ImageView.demo(2)[0][10] === black,
+          );
+
+          _.assert(
+            'It paints a sample left-eye pixel white',
+            () => ImageView.demo(2)[6][6] === white,
+          );
+
+          _.assert(
+            'It paints a sample right-eye pixel white',
+            () => ImageView.demo(2)[10][15] === white,
+          );
+
+          _.assert(
+            'It paints a sample mouth pixel white',
+            () => ImageView.demo(2)[6][14] === white,
+          );
+
+          _.assert(
             'It hashes to expected md5',
             () => md5(ImageView.demo(2)) === 'd48bd7484c44020831f8a34e13fcfc18',
           );
         });
 
         _.context('When demoing HalfDome', () => {
+          _.assert(
+            'It paints a sample background pixel black',
+            () => ImageView.demo(2)[0][10] === black,
+          );
+
+          _.assert(
+            'It paints a sample HalfDome pixel white',
+            () => ImageView.demo(2)[6][6] === white,
+          );
+
           _.assert(
             'It hashes to expected md5',
             () => md5(ImageView.demo(3)) === '3493057349d7531fd31fbf22dcf3d888',
