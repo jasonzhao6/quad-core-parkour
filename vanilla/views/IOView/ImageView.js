@@ -11,7 +11,16 @@ export default class ImageView {
   //
 
   static get SIZE() { return 20; }
-  static get COLORS() { return [colors.color]; }
+  static get DEFAULT_COLOR() { return colors.color; }
+  static get COLORS() {
+    return [
+      colors.white,
+      colors.black,
+      colors.green,
+      colors.orange,
+      colors.yellow,
+    ];
+  }
   static get DEMOS() {
     return [
       'Whiteout',

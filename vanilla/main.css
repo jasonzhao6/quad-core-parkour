@@ -25,10 +25,10 @@
 /* Global variables */
 :root {
   /* Mirrored to colors.js */
+  --background-color: #181818;
   --color: #F7F7F7;
 
   /* Not mirrored */
-  --background-color: #181818;
   --background-color-highlight: #37393B;
   --color-comment: #5F5A60;
   --line-height: 12px;

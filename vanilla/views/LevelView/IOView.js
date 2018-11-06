@@ -25,10 +25,10 @@ export default class IOView {
   partials() {
     return {
       inViewX: new InView().render(),
-      inViewY: new InView().render(),
-      outViewX: new OutView().render(),
-      outViewY: new OutView().render(),
-      // imageView: new ImageView().render(),
+      // inViewY: new InView().render(),
+      // outViewX: new OutView().render(),
+      // outViewY: new OutView().render(),
+      imageView: new ImageView().render(),
     };
   }
 
