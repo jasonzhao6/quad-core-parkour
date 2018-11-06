@@ -175,28 +175,55 @@ export default class ImageView {
   static paintFireFlower() {
     ImageView.resetShadowCanvas();
 
-    // Background
-    ImageView.paint(0, 0, 20, 2);
-    ImageView.paint(0, 2, 5, 1);
-    ImageView.paint(15, 2, 5, 1);
-    ImageView.paint(0, 3, 3, 1);
-    ImageView.paint(17, 3, 3, 1);
-    ImageView.paint(0, 4, 2, 5);
-    ImageView.paint(18, 4, 2, 5);
-    ImageView.paint(0, 9, 3, 1);
-    ImageView.paint(17, 9, 3, 1);
-    ImageView.paint(0, 10, 5, 1);
-    ImageView.paint(15, 10, 5, 1);
-    ImageView.paint(0, 11, 3, 1);
-    ImageView.paint(17, 11, 3, 1);
-    ImageView.paint(0, 12, 2, 3);
-    ImageView.paint(18, 12, 2, 3);
-    ImageView.paint(0, 15, 3, 1);
-    ImageView.paint(17, 15, 3, 1);
-    ImageView.paint(0, 16, 4, 1);
-    ImageView.paint(16, 16, 4, 1);
-    ImageView.paint(0, 17, 6, 1);
-    ImageView.paint(14, 17, 6, 1);
-    return ImageView.paint(0, 18, 20, 2);
+    // White background
+    ImageView.paint(0, 0, 20, 20);
+
+    // Black flower outline
+    ImageView.paint(5, 2, 10, 9, 1);
+    ImageView.paint(3, 3, 14, 7, 1);
+    ImageView.paint(2, 4, 16, 5, 1);
+
+    // Black stem outline
+    ImageView.paint(8, 11, 4, 7, 1);
+    ImageView.paint(6, 13, 8, 5, 1);
+    ImageView.paint(4, 13, 12, 4, 1);
+
+    // Black left-leaf outline
+    ImageView.paint(3, 11, 2, 5, 1);
+    ImageView.paint(2, 12, 5, 3, 1);
+
+    // Black right-leaf outline
+    ImageView.paint(15, 11, 2, 5, 1);
+    ImageView.paint(13, 12, 5, 3, 1);
+
+    // Orange
+    ImageView.paint(6, 3, 8, 7, 3);
+    ImageView.paint(4, 4, 12, 5, 3);
+    ImageView.paint(3, 5, 14, 3, 3);
+
+    // Yellow
+    ImageView.paint(7, 4, 6, 5, 4);
+    ImageView.paint(5, 5, 10, 3, 4);
+
+    // Eyes
+    ImageView.paint(7, 6, 6, 1);
+    ImageView.paint(8, 5, 1, 3, 1);
+    ImageView.paint(11, 5, 1, 3, 1);
+
+    // Green stem
+    ImageView.paint(9, 11, 2, 6, 2);
+    ImageView.paint(6, 16, 8, 1, 2);
+
+    // Green left-leaf
+    ImageView.paint(3, 12, 2, 3, 2);
+    ImageView.paint(3, 13, 4, 2, 2);
+    ImageView.paint(4, 14, 4, 2, 2);
+
+    // Green right-leaf
+    ImageView.paint(15, 12, 2, 3, 2);
+    ImageView.paint(13, 13, 4, 2, 2);
+    ImageView.paint(12, 14, 4, 2, 2);
+
+    return ImageView.shadowCanvas; // TODO
   }
 }

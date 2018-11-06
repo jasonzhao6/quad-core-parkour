@@ -106,8 +106,58 @@ export default class ImageViewTest {
 
         _.context('When demoing FireFlower', () => {
           _.assert(
+            'It paints a sample background pixel white',
+            () => ImageView.demo(4)[0][10] === white,
+          );
+
+          _.assert(
+            'It paints a sample outline pixel black',
+            () => ImageView.demo(4)[2][10] === black,
+          );
+
+          _.assert(
+            'It paints a sample flower pixel orange',
+            () => ImageView.demo(4)[3][10] === orange,
+          );
+
+          _.assert(
+            'It paints a sample flower pixel yellow',
+            () => ImageView.demo(4)[4][10] === yellow,
+          );
+
+          _.assert(
+            'It paints a sample eye pixel white',
+            () => ImageView.demo(4)[6][10] === white,
+          );
+
+          _.assert(
+            'It paints a sample left-eye pixel black',
+            () => ImageView.demo(4)[6][8] === black,
+          );
+
+          _.assert(
+            'It paints a sample right-eye pixel black',
+            () => ImageView.demo(4)[6][11] === black,
+          );
+
+          _.assert(
+            'It paints a sample stem pixel green',
+            () => ImageView.demo(4)[15][10] === green,
+          );
+
+          _.assert(
+            'It paints a sample left-leaf pixel green',
+            () => ImageView.demo(4)[15][5] === green,
+          );
+
+          _.assert(
+            'It paints a sample right-leaf pixel green',
+            () => ImageView.demo(4)[15][15] === green,
+          );
+
+          _.assert(
             'It hashes to expected md5',
-            () => md5(ImageView.demo(4)) === 'e0dcb2d318d94fe5b2789461e8927751',
+            () => md5(ImageView.demo(4)) === '0c012fc4d2c9af949fb0bc91297f2a74',
           );
         });
       });
