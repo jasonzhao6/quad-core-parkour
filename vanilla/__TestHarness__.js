@@ -68,6 +68,10 @@ import TestProxy from './__TestProxy__.js';
 import './3rdParty/js/__seedrandom__.js';
 
 export default class TestHarness {
+  //
+  // Constructor
+  //
+
   constructor(seed, PrinterOverride) {
     // Props
     this.seed = seed; // E.g '3:00:19 PM'.
@@ -82,9 +86,40 @@ export default class TestHarness {
     // State
     this.queue = []; // [{ currentClass, etc }, ...] for easy access.
     this.failures = []; // [[currentClass, etc], ...] for easy sorting.
+    this.cleanUps = []; // [() => {}, etc].
     this.pendingCount = 0;
     this.assertingOne = false;
   }
+
+  //
+  // Delegated proxy methods
+  //
+
+  proxy(instance) {
+    return new TestProxy(instance);
+  }
+
+  allow(instanceProxy) {
+    TestProxy.verify(instanceProxy);
+    return instanceProxy.allowIt();
+  }
+
+  expect(instanceProxy) {
+    TestProxy.verify(instanceProxy);
+    return instanceProxy.expectIt();
+  }
+
+  echo() {
+    return TestProxy.echo();
+  }
+
+  noop() {
+    return TestProxy.noop();
+  }
+
+  //
+  // Test methods
+  //
 
   Class(Class, block) {
     this.currentClass = Class;
@@ -131,29 +166,15 @@ export default class TestHarness {
   }
 
   //
-  // Delegated
+  // Test clean up methods
   //
 
-  proxy(instance) {
-    return new TestProxy(instance);
+  afterAll(cleanUp) {
+    this.cleanUps.push(cleanUp);
   }
 
-  allow(instanceProxy) {
-    TestProxy.verify(instanceProxy);
-    return instanceProxy.allowIt();
-  }
-
-  expect(instanceProxy) {
-    TestProxy.verify(instanceProxy);
-    return instanceProxy.expectIt();
-  }
-
-  echo() {
-    return TestProxy.echo();
-  }
-
-  noop() {
-    return TestProxy.noop();
+  cleanUpAll() {
+    this.cleanUps.forEach(fn => fn());
   }
 
   //

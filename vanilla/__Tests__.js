@@ -68,6 +68,7 @@ console.info('--------------------');
 
 Tests.enqueue(_);
 _.executeAssertions();
+_.cleanUpAll();
 
 if (_.pendingCount > 0) console.info(`(${_.pendingCount} pending to do)`);
 console.info(`${_.failures.length} failed out of ${_.queue.length}`);

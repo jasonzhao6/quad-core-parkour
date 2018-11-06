@@ -62,6 +62,10 @@ export default class ImageView {
     return ImageView[`paint${ImageView.DEMOS[demoIndex]}`]();
   }
 
+  static resetCanvas() {
+    this.canvas = undefined;
+  }
+
   //
   // Render
   //

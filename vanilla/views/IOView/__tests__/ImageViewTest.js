@@ -4,6 +4,8 @@ import md5 from '../../../3rdParty/js/md5.js';
 
 export default class ImageViewTest {
   static enqueue(_) {
+    _.afterAll(() => { ImageView.resetCanvas(); });
+
     _.Class('ImageView', () => {
       // eslint-disable-next-line object-curly-newline
       const { black, white, green, orange, yellow } = colors;
