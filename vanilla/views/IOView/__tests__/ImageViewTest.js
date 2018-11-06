@@ -9,6 +9,21 @@ export default class ImageViewTest {
       const { black, white, green, orange, yellow } = colors;
 
       _.method('.paint', () => {
+        _.context('When called multiple times', () => {
+          ImageView.paint(0, 0, 0, 0);
+          ImageView.paint(0, 0, 0, 0);
+
+          _.assert(
+            'It initializes `canvas` only once',
+            () => ImageView.initCanvasTimes === 1,
+          );
+
+          _.assert(
+            'It initializes `shadowCanvas` only once',
+            () => ImageView.initShadowCanvasTimes === 1,
+          );
+        });
+
         _.context('When painting top-left pixel with default color', () => {
           _.assert(
             'It paints it white',

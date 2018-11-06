@@ -84,10 +84,12 @@ export default class ImageView {
 
   static initCanvasOnce() {
     if (this.canvas !== undefined) return this.canvas;
+    this.initCanvasTimes = this.initCanvasTimes || 0;
+    this.initCanvasTimes += 1;
 
-    // Memoize <canvas> element and short circuit if not found.
-    [this.canvas] = document.getElementsByTagName('canvas');
-    if (this.canvas === undefined) return null;
+    // Memoize <canvas> element if found, or else short circuit.
+    [this.canvas] = [...document.getElementsByTagName('canvas'), null];
+    if (this.canvas === null) return null;
 
     // Raise error if canvas is not a square.
     const { clientHeight, clientWidth } = this.canvas;
@@ -103,6 +105,8 @@ export default class ImageView {
 
   static initShadowCanvasOnce() {
     if (this.shadowCanvas !== undefined) return this.shadowCanvas;
+    this.initShadowCanvasTimes = this.initShadowCanvasTimes || 0;
+    this.initShadowCanvasTimes += 1;
 
     // Create a `SIZE` squared matrix populated with `BACKGROUND_COLOR`.
     this.shadowCanvas = new Array(ImageView.SIZE);
