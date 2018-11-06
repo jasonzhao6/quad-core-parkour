@@ -1,4 +1,4 @@
-export const title = 'Detector';
+export const title = 'Matcher';
 
 export const info = [
   'Read a value from in.x',

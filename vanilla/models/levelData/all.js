@@ -6,20 +6,20 @@ import * as L4 from './04.js'; // Inverter
 import * as L5 from './05.js'; // Comparator
 import * as L6 from './06.js'; // Accumulator
 import * as L7 from './07.js'; // Stabilizer
-import * as L8 from './08.js'; // Ignitor
-import * as L9 from './09.js'; // Detector
+import * as L8 from './08.js'; // Starter
+import * as L9 from './09.js'; // Matcher
 import * as L10 from './10.js'; // MinMaxer
-import * as L11 from './11.js'; // Slider
+import * as L11 from './11.js'; // Fiver
 import * as L12 from './12.js'; // Multiplier
 import * as L13 from './13.js'; // Divider
 import * as L14 from './14.js'; // Reverser
 import * as L15 from './15.js'; // Indexer
 import * as L16 from './16.js'; // Sorter
-// Blaster
+// Splasher
 // Alternator
 // BoxPlotter
 // Histogrammer
-// LinePrinter
+// ColorPrinter
 
 const Levels = [
   // Plain (simple)

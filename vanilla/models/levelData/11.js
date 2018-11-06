@@ -1,4 +1,4 @@
-export const title = 'Slider';
+export const title = 'Fiver';
 
 export const info = [
   'Read a value from in.x',

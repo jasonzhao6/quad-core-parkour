@@ -1,4 +1,4 @@
-export const title = 'Ignitor';
+export const title = 'Starter';
 
 export const info = [
   'Read values from in.x and in.y',
