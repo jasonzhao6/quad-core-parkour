@@ -26,7 +26,7 @@ export default class ActionsView {
     stopBoxConfig.labelStyle = 'text-align: left;';
 
     return {
-      speedButton: _.renderBox(ActionsView.labelView('100x'), speedBoxConfig),
+      speedButton: _.renderBox(ActionsView.labelView('1x'), speedBoxConfig),
       startButton: _.renderBox(ActionsView.labelView('Start'), startBoxConfig),
       stepButton: _.renderBox(ActionsView.labelView('Step'), stepBoxConfig),
       stopButton: _.renderBox(ActionsView.labelView('Stop'), stopBoxConfig),

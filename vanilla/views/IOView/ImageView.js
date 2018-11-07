@@ -230,8 +230,6 @@ export default class ImageView {
     // Green right-leaf
     ImageView.paint(15, 12, 2, 3, 2);
     ImageView.paint(13, 13, 4, 2, 2);
-    ImageView.paint(12, 14, 4, 2, 2);
-
-    return ImageView.shadowCanvas; // TODO
+    return ImageView.paint(12, 14, 4, 2, 2);
   }
 }

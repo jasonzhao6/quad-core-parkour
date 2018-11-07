@@ -32,7 +32,7 @@
 //       _.expect(friendProxy).toHaveReceived('hello').withArgs('hi'); // Once
 //       _.expect(friendProxy).toHaveReceived('goodbye').nTimes(0);
 //
-//       _.assert('It says only hello', () => friendProxy.isAsExpected());
+//       _.assert('Says hello, no goodbye', () => friendProxy.isAsExpected());
 //     });
 //   });
 //

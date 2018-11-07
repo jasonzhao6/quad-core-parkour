@@ -30,6 +30,7 @@
 
   /* Not mirrored */
   --background-color-highlight: #37393B;
+  --background-color-lowlight: #262728;
   --color-comment: #5F5A60;
   --line-height: 12px;
   --size-image: 190px;

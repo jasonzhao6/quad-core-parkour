@@ -44,6 +44,7 @@ class ViewHelper {
     this.store = {
       // SLICE REGISTRY:
       modes: {},
+      views: {}, // TODO put image view here to have access to its paint methods
     };
 
     // To be rendered to DOM.
