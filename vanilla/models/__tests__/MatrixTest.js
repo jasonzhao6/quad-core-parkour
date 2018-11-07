@@ -34,18 +34,18 @@ export default class MatrixTest {
         _.context('When creating a 10x20 matrix', () => {
           const [rowCount, columnCount] = [10, 20];
           const args = { rowCount, columnCount };
-          const subject = new Matrix(args).arrOfArr;
+          const subject = new Matrix(args);
 
           _.assert(
             `It has ${rowCount} rows`,
-            () => subject.length === rowCount,
+            () => subject.arrOfArr.length === rowCount,
           );
 
           _.assert(
             `Every row has ${columnCount} columns`,
             () => [
-              !subject.includes(undefined),
-              subject.every(row => row.length === columnCount),
+              !subject.arrOfArr.includes(undefined),
+              subject.arrOfArr.every(row => row.length === columnCount),
             ],
           );
         });

@@ -117,7 +117,7 @@ class ViewHelper {
 
     // TODO temp
     // Delay to avoid rare race condition painting immediately after rendering.
-    setTimeout(() => this.paintDemo(3), 0);
+    // setTimeout(() => this.paintDemo(3), 0);
   }
 
   //

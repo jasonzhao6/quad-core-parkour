@@ -4,32 +4,56 @@ import md5 from '../../../3rdParty/js/md5.js';
 
 export default class ImageViewTest {
   static enqueue(_) {
-    _.afterAll(() => { ImageView.resetCanvas(); });
-
     _.Class('ImageView', () => {
       // eslint-disable-next-line object-curly-newline
       const { black, white, green, orange, yellow } = colors;
 
-      _.method('.paint', () => {
-        _.context('When called multiple times', () => {
-          ImageView.paint(0, 0, 0, 0);
-          ImageView.paint(0, 0, 0, 0);
+      _.method('#constructor', () => {
+        _.context('When called without argument', () => {
+          const subject = new ImageView();
 
           _.assert(
-            'It initializes `canvas` only once',
-            () => ImageView.initCanvasTimes === 1,
+            'It initializes `shadowOnly` prop to `undefined`',
+            () => subject.shadowOnly === undefined,
           );
 
           _.assert(
-            'It initializes `shadowCanvas` only once',
-            () => ImageView.initShadowCanvasTimes === 1,
+            'It initializes `canvas` state to `null`',
+            () => subject.canvas === null,
+          );
+
+          _.assert(
+            `It initializes a ${ImageView.SIZE}x${ImageView.SIZE} shadow canvas`,
+            () => [
+              subject.shadowCanvas.length === ImageView.SIZE,
+              subject.shadowCanvas.every(row => row.length === ImageView.SIZE),
+            ],
+          );
+
+          _.assert(
+            'It fills shadow canvas with `BACKGROUND_COLOR`',
+            () => subject.shadowCanvas.flat()
+              .map(color => color === ImageView.BACKGROUND_COLOR),
           );
         });
+
+        _.context('When called with `shadowOnly` set to `true`', () => {
+          const subject = new ImageView({ shadowOnly: true });
+
+          _.assert(
+            'It initializes `shadowOnly` prop to `true`',
+            () => subject.shadowOnly === true,
+          );
+        });
+      });
+
+      _.method('.paint', () => {
+        const subject = new ImageView({ shadowOnly: true });
 
         _.context('When painting top-left pixel with default color', () => {
           _.assert(
             'It paints it white',
-            () => ImageView.paint(0, 0, 1, 1)[0][0] === white,
+            () => subject.paint(0, 0, 1, 1)[0][0] === white,
           );
         });
 
@@ -37,144 +61,146 @@ export default class ImageViewTest {
           const orangeIndex = ImageView.COLORS.indexOf(orange);
           _.assert(
             'It initializes each property',
-            () => ImageView.paint(10, 19, 1, 1, orangeIndex)[19][10] === orange,
+            () => subject.paint(10, 19, 1, 1, orangeIndex)[19][10] === orange,
           );
         });
       });
 
       _.method('.demo', () => {
+        const subject = new ImageView({ shadowOnly: true });
+
         _.context('When demoing Whiteout', () => {
           _.assert(
             'It paints all pixels white',
-            () => ImageView.demo().flat().every(pixel => pixel === white),
+            () => subject.demo().flat().every(pixel => pixel === white),
           );
 
           _.assert(
             'It hashes to expected md5',
-            () => md5(ImageView.demo()) === 'c7ce5636b3a52d0e217938a617b4be0e',
+            () => md5(subject.demo()) === 'c7ce5636b3a52d0e217938a617b4be0e',
           );
         });
 
         _.context('When demoing Checker', () => {
           _.assert(
             'It paints first top-left pixel black',
-            () => ImageView.demo(1)[0][0] === black,
+            () => subject.demo(1)[0][0] === black,
           );
 
           _.assert(
             'It paints second top-left pixel white',
-            () => ImageView.demo(1)[0][1] === white,
+            () => subject.demo(1)[0][1] === white,
           );
 
           _.assert(
             'It paints top-right pixel white',
-            () => ImageView.demo(1)[0][19] === white,
+            () => subject.demo(1)[0][19] === white,
           );
 
           _.assert(
             'It hashes to expected md5',
-            () => md5(ImageView.demo(1)) === '6a78d4635cdad9808ec5a6650c52a13c',
+            () => md5(subject.demo(1)) === '6a78d4635cdad9808ec5a6650c52a13c',
           );
         });
 
         _.context('When demoing Smiley', () => {
           _.assert(
             'It paints a sample background pixel black',
-            () => ImageView.demo(2)[0][10] === black,
+            () => subject.demo(2)[0][10] === black,
           );
 
           _.assert(
             'It paints a sample left-eye pixel white',
-            () => ImageView.demo(2)[6][6] === white,
+            () => subject.demo(2)[6][6] === white,
           );
 
           _.assert(
             'It paints a sample right-eye pixel white',
-            () => ImageView.demo(2)[10][15] === white,
+            () => subject.demo(2)[10][15] === white,
           );
 
           _.assert(
             'It paints a sample mouth pixel white',
-            () => ImageView.demo(2)[6][14] === white,
+            () => subject.demo(2)[6][14] === white,
           );
 
           _.assert(
             'It hashes to expected md5',
-            () => md5(ImageView.demo(2)) === 'd48bd7484c44020831f8a34e13fcfc18',
+            () => md5(subject.demo(2)) === 'd48bd7484c44020831f8a34e13fcfc18',
           );
         });
 
         _.context('When demoing HalfDome', () => {
           _.assert(
             'It paints a sample background pixel black',
-            () => ImageView.demo(2)[0][10] === black,
+            () => subject.demo(2)[0][10] === black,
           );
 
           _.assert(
             'It paints a sample HalfDome pixel white',
-            () => ImageView.demo(2)[6][6] === white,
+            () => subject.demo(2)[6][6] === white,
           );
 
           _.assert(
             'It hashes to expected md5',
-            () => md5(ImageView.demo(3)) === '3493057349d7531fd31fbf22dcf3d888',
+            () => md5(subject.demo(3)) === '3493057349d7531fd31fbf22dcf3d888',
           );
         });
 
         _.context('When demoing FireFlower', () => {
           _.assert(
             'It paints a sample background pixel white',
-            () => ImageView.demo(4)[0][10] === white,
+            () => subject.demo(4)[0][10] === white,
           );
 
           _.assert(
             'It paints a sample outline pixel black',
-            () => ImageView.demo(4)[2][10] === black,
+            () => subject.demo(4)[2][10] === black,
           );
 
           _.assert(
             'It paints a sample flower pixel orange',
-            () => ImageView.demo(4)[3][10] === orange,
+            () => subject.demo(4)[3][10] === orange,
           );
 
           _.assert(
             'It paints a sample flower pixel yellow',
-            () => ImageView.demo(4)[4][10] === yellow,
+            () => subject.demo(4)[4][10] === yellow,
           );
 
           _.assert(
             'It paints a sample eye pixel white',
-            () => ImageView.demo(4)[6][10] === white,
+            () => subject.demo(4)[6][10] === white,
           );
 
           _.assert(
             'It paints a sample left-eye pixel black',
-            () => ImageView.demo(4)[6][8] === black,
+            () => subject.demo(4)[6][8] === black,
           );
 
           _.assert(
             'It paints a sample right-eye pixel black',
-            () => ImageView.demo(4)[6][11] === black,
+            () => subject.demo(4)[6][11] === black,
           );
 
           _.assert(
             'It paints a sample stem pixel green',
-            () => ImageView.demo(4)[15][10] === green,
+            () => subject.demo(4)[15][10] === green,
           );
 
           _.assert(
             'It paints a sample left-leaf pixel green',
-            () => ImageView.demo(4)[15][5] === green,
+            () => subject.demo(4)[15][5] === green,
           );
 
           _.assert(
             'It paints a sample right-leaf pixel green',
-            () => ImageView.demo(4)[15][15] === green,
+            () => subject.demo(4)[15][15] === green,
           );
 
           _.assert(
             'It hashes to expected md5',
-            () => md5(ImageView.demo(4)) === '0c012fc4d2c9af949fb0bc91297f2a74',
+            () => md5(subject.demo(4)) === '0c012fc4d2c9af949fb0bc91297f2a74',
           );
         });
       });

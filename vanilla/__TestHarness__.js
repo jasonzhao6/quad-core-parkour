@@ -86,7 +86,6 @@ export default class TestHarness {
     // State
     this.queue = []; // [{ currentClass, etc }, ...] for easy access.
     this.failures = []; // [[currentClass, etc], ...] for easy sorting.
-    this.cleanUps = []; // [() => {}, etc].
     this.pendingCount = 0;
     this.assertingOne = false;
   }
@@ -163,18 +162,6 @@ export default class TestHarness {
     this.shuffle();
     this.perform();
     this.print();
-  }
-
-  //
-  // Test clean up methods
-  //
-
-  afterAll(cleanUp) {
-    this.cleanUps.push(cleanUp);
-  }
-
-  cleanUpAll() {
-    this.cleanUps.forEach(fn => fn());
   }
 
   //
