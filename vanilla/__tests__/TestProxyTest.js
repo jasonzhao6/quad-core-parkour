@@ -247,6 +247,21 @@ export default class TestProxyTest {
           );
         });
 
+        _.context('When args were almost the same but not quite', () => {
+          const args = { a: 1 };
+          const expectedArgs = { a: '1' };
+          const subject = new TestProxy({}, _.noop());
+          subject.allowIt().toReceive('toString');
+
+          subject.toString(args);
+          subject.expectIt().toHaveReceived('toString').withArgs(expectedArgs);
+
+          _.assert(
+            'It was called once',
+            () => subject.isAsExpected().map(expectation => !expectation),
+          );
+        });
+
         _.context('When used to test a method that does not exist', () => {
           const subject = new TestProxy({}, _.noop());
           const errors = [];

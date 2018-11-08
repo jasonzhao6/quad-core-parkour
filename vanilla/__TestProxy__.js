@@ -1,4 +1,5 @@
-/* eslint class-methods-use-this: ['error', { exceptMethods: ['has'] }] */
+/* eslint class-methods-use-this: ['error', { exceptMethods:
+     ['has', 'compare'] }] */
 
 import TestException from './__TestException__.js';
 
@@ -119,7 +120,7 @@ class TestHandler {
 
       return [
         callsExpected === undefined || callsExpected === callsActual,
-        argsExpected === undefined || argsExpected.join() === argsActual.join(),
+        argsExpected === undefined || this.compare(argsExpected, argsActual),
       ].every(expectation => expectation === true);
     });
   }
@@ -145,6 +146,10 @@ class TestHandler {
       message: `${method}()`,
       inspect: this.instance,
     }, this.console);
+  }
+
+  compare(object1, object2) {
+    return JSON.stringify(object1) === JSON.stringify(object2);
   }
 }
 
