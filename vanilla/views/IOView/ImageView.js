@@ -104,7 +104,7 @@ export default class ImageView {
   //
 
   initCanvasOnce() {
-    if (this.canvas !== undefined) return;
+    if (this.canvas !== null) return;
 
     // Memoize <canvas> element.
     [this.canvas] = document.getElementsByTagName('canvas');
