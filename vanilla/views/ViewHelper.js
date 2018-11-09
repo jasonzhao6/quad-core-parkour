@@ -7,6 +7,7 @@
 // - A queue that delays event binding to after DOM rendering.
 // - Various render methods that take view instances with method expectations*.
 // - A factory method that wraps a template into a view instance.
+// - Various delegated methods.
 //
 
 /* eslint class-methods-use-this: ['error', { exceptMethods:
@@ -21,20 +22,6 @@ import FactoryView from './ViewHelper/FactoryView.js';
 import ImageView from './IOView/ImageView.js';
 
 class ViewHelper {
-  //
-  // Delegated
-  //
-
-  get BOX_LAYOUTS() { return BoxView.LAYOUTS; }
-
-  paint(x, y, width, height, colorIndex) {
-    return ImageView.paint(x, y, width, height, colorIndex);
-  }
-
-  paintDemo(demoIndex) {
-    return ImageView.demo(demoIndex);
-  }
-
   //
   // Constructor
   //
@@ -56,6 +43,8 @@ class ViewHelper {
 
     // To be bound after DOM has rendered.
     this.eventsToBind = [];
+
+    return this;
   }
 
   //
@@ -71,7 +60,9 @@ class ViewHelper {
       this.store[slice][key] = sliceProps[key];
     });
 
-    this.renderDom();
+    if (this.entryPoint !== null) this.renderDom();
+
+    return this.store;
   }
 
   //
@@ -81,11 +72,13 @@ class ViewHelper {
   enqueue(view) {
     const eventsWithView = view.EVENTS.map(event => [view, ...event]);
     this.eventsToBind.splice(-1, 0, ...eventsWithView);
+    return this.eventsToBind;
   }
 
-  bindEvents() {
+  bindEvents(documentOverride) {
+    const thisDocument = documentOverride || document;
     this.eventsToBind.forEach(([view, className, event, callback]) => {
-      [...document.getElementsByClassName(className)].forEach((element) => {
+      [...thisDocument.getElementsByClassName(className)].forEach((element) => {
         element[event] = view[callback];
       });
     });
@@ -103,25 +96,31 @@ class ViewHelper {
   //   - view.partials(): A hash containing all partials needed by template.
   //
 
-  render(view) {
+  render(view, mustacheOverride) {
+    const thisMustache = mustacheOverride || Mustache;
     const { template, context, partials } = ViewHelper.extract(view);
-    return Mustache.render(template, context, partials);
+    return thisMustache.render(template, context, partials);
   }
 
-  renderBox(view, boxConfig) {
+  renderBox(view, boxConfig, BoxViewOverride) {
     const { template, context } = ViewHelper.extract(view);
-    return new BoxView(template, context, boxConfig).render();
+    const BoxViewClass = BoxViewOverride || BoxView;
+    return new BoxViewClass(template, context, boxConfig).render();
   }
 
   // This is the only method that renders to DOM; all others render to string.
-  renderDom(view) {
+  // Only entry point views and the `update` method should call this.
+  renderDom(view, documentOverride) {
+    // Expect entry point views to pass in themselves as an argument. Memoize
+    // it, so that subsequent `update` method calls can reference it.
     if (view !== undefined) this.entryPoint = view;
-    document.body.innerHTML = this.render(this.entryPoint);
+
+    const thisDocument = documentOverride || document;
+    thisDocument.body.innerHTML = this.render(this.entryPoint);
     this.bindEvents();
 
-    // TODO temp
     // Delay to avoid rare race condition painting immediately after rendering.
-    // setTimeout(() => this.paintDemo(3), 0);
+    setTimeout(() => this.paintDemo(3), 0);
   }
 
   //
@@ -130,6 +129,22 @@ class ViewHelper {
 
   wrap(template) {
     return new FactoryView(template);
+  }
+
+  //
+  // Delegated
+  //
+
+  get BOX_LAYOUTS() { return BoxView.LAYOUTS; }
+
+  paint(x, y, width, height, colorIndex) {
+    const { imageView } = this.store.views;
+    return imageView.paint(x, y, width, height, colorIndex);
+  }
+
+  paintDemo(demoIndex) {
+    const { imageView } = this.store.views;
+    return imageView.demo(demoIndex);
   }
 
   //

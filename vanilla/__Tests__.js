@@ -21,6 +21,7 @@ import MatrixTest from './models/__tests__/MatrixTest.js';
 // View tests
 import ImageViewTest from './views/IOView/__tests__/ImageViewTest.js';
 import LevelViewTest from './views/EntryPoints/__tests__/LevelViewTest.js';
+import ViewHelperTest from './views/__tests__/ViewHelperTest.js';
 
 // View helper
 import { singleton as viewHelper } from './views/ViewHelper.js';
@@ -56,6 +57,7 @@ export default class Tests {
   static enqueueViewTests(_) {
     ImageViewTest.enqueue(_);
     LevelViewTest.enqueue(_);
+    ViewHelperTest.enqueue(_);
   }
 }
 

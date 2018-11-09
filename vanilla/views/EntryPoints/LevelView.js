@@ -12,6 +12,18 @@ import MatrixView from '../LevelView/MatrixView.js';
 import ModesView from '../LevelView/ModesView.js';
 
 export default class LevelView {
+  //
+  // Constructor
+  //
+
+  constructor() {
+    this.ioView = new IOView();
+  }
+
+  //
+  // Render
+  //
+
   get TEMPLATE() {
     return `
       <div class='LevelViewOuter --center'>
@@ -35,7 +47,7 @@ export default class LevelView {
       // TODO maybe initialize these views in constructor once
       actionsView: new ActionsView().render(),
       infoView: new InfoView().render(),
-      ioView: new IOView().render(),
+      ioView: this.ioView.render(),
       matrixView: new MatrixView().render(),
       modesView: new ModesView().render(),
     };

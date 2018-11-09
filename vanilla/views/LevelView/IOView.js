@@ -10,6 +10,19 @@ import InView from '../IOView/InView.js';
 import OutView from '../IOView/OutView.js';
 
 export default class IOView {
+  //
+  // Constructor
+  //
+
+  constructor() {
+    this.imageView = new ImageView();
+    _.update('views', { imageView: this.imageView });
+  }
+
+  //
+  // Render
+  //
+
   get TEMPLATE() {
     return `
       <div class='IOView --horizontalJustify'>
@@ -28,7 +41,7 @@ export default class IOView {
       // inViewY: new InView().render(),
       // outViewX: new OutView().render(),
       // outViewY: new OutView().render(),
-      imageView: new ImageView().render(),
+      imageView: this.imageView.render(),
     };
   }
 
