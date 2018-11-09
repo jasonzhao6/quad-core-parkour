@@ -40,11 +40,15 @@ class ViewHelper {
   //
 
   constructor() {
+    this.reset();
+  }
+
+  reset() {
     // Global state.
     this.store = {
       // SLICE REGISTRY:
       modes: {},
-      views: {}, // TODO put image view here to have access to its paint methods
+      views: {},
     };
 
     // To be rendered to DOM.

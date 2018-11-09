@@ -22,6 +22,9 @@ import MatrixTest from './models/__tests__/MatrixTest.js';
 import ImageViewTest from './views/IOView/__tests__/ImageViewTest.js';
 import LevelViewTest from './views/EntryPoints/__tests__/LevelViewTest.js';
 
+// View helper
+import { singleton as viewHelper } from './views/ViewHelper.js';
+
 export default class Tests {
   static enqueue(_) {
     this.enqueueTestingFrameworkTests(_);
@@ -70,6 +73,10 @@ console.info('--------------------');
 
 Tests.enqueue(_);
 _.executeAssertions();
+
+// Manually reset the view helper b/c it's a singleton shared by both the
+// application and tests. In dev mode, the application runs right after tests.
+viewHelper.reset();
 
 if (_.pendingCount > 0) console.info(`(${_.pendingCount} pending to do)`);
 console.info(`${_.failures.length} failed out of ${_.queue.length}`);
