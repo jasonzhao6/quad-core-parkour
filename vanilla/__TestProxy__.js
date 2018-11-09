@@ -102,6 +102,7 @@ class TestHandler {
   withArgs(args) {
     this.verifyMode(TestHandler.MODES.EXPECT, 'withArgs');
     this.expectations[this.currentMethod].argsExpected = Array.of(args).flat();
+    return this;
   }
 
   nTimes(n) {

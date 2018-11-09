@@ -226,7 +226,7 @@ export default class TestHarnessTest {
         let printed = false;
         let failures = null;
 
-        class Printer {
+        class PrinterOverride {
           constructor(arg) {
             failures = arg;
           }
@@ -255,7 +255,7 @@ export default class TestHarnessTest {
         });
 
 
-        const subject = new TestHarness('seed', Printer);
+        const subject = new TestHarness('seed', PrinterOverride);
         subject.queue = [...queue];
         subject.executeAssertions();
 

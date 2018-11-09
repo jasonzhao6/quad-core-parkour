@@ -236,10 +236,10 @@ export default class TestProxyTest {
         _.context('When used to test a method was called with args', () => {
           const args = 'args';
           const subject = new TestProxy({}, _.noop());
-          subject.allowIt().toReceive('toString');
+          subject.allowIt().toReceive('valueOf');
 
-          subject.toString(args);
-          subject.expectIt().toHaveReceived('toString').withArgs(args);
+          subject.valueOf(args);
+          subject.expectIt().toHaveReceived('valueOf').withArgs(args).nTimes(1);
 
           _.assert(
             'It was called once',
