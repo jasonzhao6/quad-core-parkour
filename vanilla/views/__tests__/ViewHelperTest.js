@@ -1,10 +1,12 @@
 import BoxView from '../ViewHelper/BoxView.js';
-import { singleton as subject } from '../ViewHelper.js';
+import { ViewHelper } from '../ViewHelper.js';
 
 export default class ViewHelperTest {
   static enqueue(_) {
     _.Class('ViewHelper', () => {
-      _.method('#constructor / #reset', () => {
+      _.method('#constructor', () => {
+        const subject = new ViewHelper();
+
         _.assert(
           'It initializes a `store` registry with at least 1 registered slice',
           () => Object.keys(subject.store).length >= 1,
@@ -12,25 +14,23 @@ export default class ViewHelperTest {
 
         _.assert(
           'It initializes each registered slice in the `store` to `{}`',
-          () => Object.keys(subject.reset().store)
-            .map(key => Object.keys(subject.store[key]).length === 0),
+          () => Object.keys(subject.store)
+            .map(key => JSON.stringify(subject.store[key]) === '{}'),
         );
 
         _.assert(
           'It initializes `entryPoint` to `null`',
-          () => subject.reset().entryPoint === null,
+          () => subject.entryPoint === null,
         );
 
         _.assert(
           'It initializes `eventsToBind` to `[]`',
-          () => [
-            subject.eventsToBind instanceof Array,
-            subject.reset().eventsToBind.length === 0,
-          ],
+          () => JSON.stringify(subject.eventsToBind) === '[]',
         );
       });
 
       _.method('#update', () => {
+        const subject = new ViewHelper();
         const slice = 'modes';
         const props = { key: 'value' };
 
@@ -43,7 +43,7 @@ export default class ViewHelperTest {
             errors.push(error);
           } finally {
             _.assert(
-              'It throws a Error',
+              'It throws an Error',
               () => [errors.length === 1, errors[0] instanceof Error],
             );
           }
@@ -53,9 +53,12 @@ export default class ViewHelperTest {
           const subjectProxy = _.proxy(subject);
           _.allow(subjectProxy).toReceive('renderDom').andReturn();
 
+          subjectProxy.update(slice, props);
+          const { key } = subjectProxy.store.modes;
+
           _.assert(
             'It updates the store',
-            () => subjectProxy.update(slice, props).modes.key === 'value',
+            () => key === props.key,
           );
         });
 
@@ -89,6 +92,7 @@ export default class ViewHelperTest {
       });
 
       _.method('#enqueue', () => {
+        const subject = new ViewHelper();
         const view = {
           EVENTS: [
             ['class1', 'event1', 'callback1'],
@@ -96,34 +100,38 @@ export default class ViewHelperTest {
           ],
         };
 
+        subject.enqueue(view);
+        const [view1, className1, event1, callback1] = subject.eventsToBind[0];
+        const [view2, className2, event2, callback2] = subject.eventsToBind[1];
+
         _.assert(
-          'It calls `EVENTS` from the view argument',
-          () => subject.enqueue(view).filter((eventToBind) => {
-            const [viewArg, className, event, callback] = eventToBind;
-            return viewArg === view &&
-              ['class1', 'class2'].includes(className) &&
-              ['event1', 'event2'].includes(event) &&
-              ['callback1', 'callback2'].includes(callback);
-          }).length === 2,
+          'It appends `EVENTS` from the view argument to `eventsToBind`',
+          () => [
+            view1 === view,
+            className1 === 'class1',
+            event1 === 'event1',
+            callback1 === 'callback1',
+            view2 === view,
+            className2 === 'class2',
+            event2 === 'event2',
+            callback2 === 'callback2',
+          ],
         );
       });
 
       _.method('#bindEvents', () => {
-        const view = { key: 'value' };
-        const className = 'className';
-        const event = 'event';
-        const callback = 'key';
+        const eventBundle = [{ key: 'value' }, 'className', 'event', 'key'];
+        const [view, className, event, callback] = eventBundle;
+        const subject = new ViewHelper();
+        subject.eventsToBind = [eventBundle];
 
         const documentProxy = _.proxy({ getElementsByClassName: null });
         const domElement = {};
-
         _.allow(documentProxy)
           .toReceive('getElementsByClassName')
           .andReturn([domElement]);
 
-        subject.eventsToBind = [[view, className, event, callback]];
         subject.bindEvents(documentProxy);
-
         _.expect(documentProxy)
           .toHaveReceived('getElementsByClassName')
           .withArgs(className);
@@ -140,6 +148,8 @@ export default class ViewHelperTest {
       });
 
       _.method('#render / #extract', () => {
+        const subject = new ViewHelper();
+
         _.context('When view has `TEMPLATE` only', () => {
           const view = { TEMPLATE: 'template' };
           const mustacheProxy = _.proxy({ render: null });
@@ -178,6 +188,7 @@ export default class ViewHelperTest {
       });
 
       _.method('#renderBox', () => {
+        const subject = new ViewHelper();
         const view = { TEMPLATE: 'template', context: () => 'context' };
         const boxConfigArg = 'boxConfig';
         const expectedArgs = {};
@@ -208,6 +219,7 @@ export default class ViewHelperTest {
       });
 
       _.method('#renderDom', () => {
+        const subject = new ViewHelper();
         const view = 'view';
 
         _.context('When called with `view` argument', () => {
@@ -217,13 +229,12 @@ export default class ViewHelperTest {
           _.allow(subjectProxy).toReceive('bindEvents').andReturn();
 
           subjectProxy.renderDom(view, documentOverride);
-          const memoizedEntryPoint = subjectProxy.entryPoint;
           _.expect(subjectProxy).toHaveReceived('render').withArgs(view);
           _.expect(subjectProxy).toHaveReceived('bindEvents');
 
           _.assert(
             'It memoizes the view argument',
-            () => memoizedEntryPoint === view,
+            () => subjectProxy.entryPoint === view,
           );
 
           _.assert(
@@ -261,6 +272,7 @@ export default class ViewHelperTest {
       });
 
       _.method('#wrap', () => {
+        const subject = new ViewHelper();
         const template = 'template';
 
         _.assert(
@@ -270,6 +282,8 @@ export default class ViewHelperTest {
       });
 
       _.method('#BOX_LAYOUTS', () => {
+        const subject = new ViewHelper();
+
         _.assert(
           'It delegates to BoxView',
           () => subject.BOX_LAYOUTS.toString() === BoxView.LAYOUTS.toString(),

@@ -21,16 +21,12 @@ import BoxView from './ViewHelper/BoxView.js';
 import FactoryView from './ViewHelper/FactoryView.js';
 import ImageView from './IOView/ImageView.js';
 
-class ViewHelper {
+export class ViewHelper {
   //
   // Constructor
   //
 
   constructor() {
-    this.reset();
-  }
-
-  reset() {
     // Global state.
     this.store = {
       // SLICE REGISTRY:
@@ -43,8 +39,6 @@ class ViewHelper {
 
     // To be bound after DOM has rendered.
     this.eventsToBind = [];
-
-    return this;
   }
 
   //
@@ -61,8 +55,6 @@ class ViewHelper {
     });
 
     if (this.entryPoint !== null) this.renderDom();
-
-    return this.store;
   }
 
   //
@@ -72,7 +64,6 @@ class ViewHelper {
   enqueue(view) {
     const eventsWithView = view.EVENTS.map(event => [view, ...event]);
     this.eventsToBind.splice(-1, 0, ...eventsWithView);
-    return this.eventsToBind;
   }
 
   bindEvents(documentOverride) {
@@ -120,7 +111,7 @@ class ViewHelper {
     this.bindEvents();
 
     // Delay to avoid rare race condition painting immediately after rendering.
-    setTimeout(() => this.paintDemo(3), 0);
+    // setTimeout(() => this.paintDemo(3), 0);
   }
 
   //
@@ -139,11 +130,13 @@ class ViewHelper {
 
   paint(x, y, width, height, colorIndex) {
     const { imageView } = this.store.views;
+    // TODO remove return
     return imageView.paint(x, y, width, height, colorIndex);
   }
 
   paintDemo(demoIndex) {
     const { imageView } = this.store.views;
+    // TODO remove return
     return imageView.demo(demoIndex);
   }
 
