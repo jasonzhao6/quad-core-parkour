@@ -5,24 +5,11 @@
 import { singleton as _ } from '../ViewHelper.js';
 
 // Partials
-import ImageView from '../IOView/ImageView.js';
+import { singleton as theImageView } from '../IOView/ImageView.js';
 import InView from '../IOView/InView.js';
 import OutView from '../IOView/OutView.js';
 
 export default class IOView {
-  //
-  // Constructor
-  //
-
-  constructor() {
-    this.imageView = new ImageView();
-    _.update('views', { imageView: this.imageView });
-  }
-
-  //
-  // Render
-  //
-
   get TEMPLATE() {
     return `
       <div class='IOView --horizontalJustify'>
@@ -41,7 +28,7 @@ export default class IOView {
       // inViewY: new InView().render(),
       // outViewX: new OutView().render(),
       // outViewY: new OutView().render(),
-      imageView: this.imageView.render(),
+      imageView: theImageView.render(),
     };
   }
 

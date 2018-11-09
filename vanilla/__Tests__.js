@@ -21,6 +21,8 @@ import MatrixTest from './models/__tests__/MatrixTest.js';
 // View tests
 import ImageViewTest from './views/IOView/__tests__/ImageViewTest.js';
 import LevelViewTest from './views/EntryPoints/__tests__/LevelViewTest.js';
+
+// View helper tests
 import ViewHelperTest from './views/__tests__/ViewHelperTest.js';
 
 export default class Tests {
@@ -28,6 +30,7 @@ export default class Tests {
     this.enqueueTestingFrameworkTests(_);
     this.enqueueModelTests(_);
     this.enqueueViewTests(_);
+    this.enqueueViewHelperTests(_);
   }
 
   //
@@ -54,6 +57,9 @@ export default class Tests {
   static enqueueViewTests(_) {
     ImageViewTest.enqueue(_);
     LevelViewTest.enqueue(_);
+  }
+
+  static enqueueViewHelperTests(_) {
     ViewHelperTest.enqueue(_);
   }
 }

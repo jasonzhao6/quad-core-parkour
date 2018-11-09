@@ -19,7 +19,7 @@
 
 import BoxView from './ViewHelper/BoxView.js';
 import FactoryView from './ViewHelper/FactoryView.js';
-import ImageView from './IOView/ImageView.js';
+import { singleton as theImageView } from './IOView/ImageView.js';
 
 export class ViewHelper {
   //
@@ -31,7 +31,6 @@ export class ViewHelper {
     this.store = {
       // SLICE REGISTRY:
       modes: {},
-      views: {},
     };
 
     // To be rendered to DOM.
@@ -111,7 +110,7 @@ export class ViewHelper {
     this.bindEvents();
 
     // Delay to avoid rare race condition painting immediately after rendering.
-    // setTimeout(() => this.paintDemo(3), 0);
+    setTimeout(() => this.paintDemo(3), 0);
   }
 
   //
@@ -129,15 +128,11 @@ export class ViewHelper {
   get BOX_LAYOUTS() { return BoxView.LAYOUTS; }
 
   paint(x, y, width, height, colorIndex) {
-    const { imageView } = this.store.views;
-    // TODO remove return
-    return imageView.paint(x, y, width, height, colorIndex);
+    theImageView.paint(x, y, width, height, colorIndex);
   }
 
   paintDemo(demoIndex) {
-    const { imageView } = this.store.views;
-    // TODO remove return
-    return imageView.demo(demoIndex);
+    theImageView.demo(demoIndex);
   }
 
   //

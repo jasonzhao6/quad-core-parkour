@@ -5,7 +5,7 @@
 import * as colors from '../ViewHelper/colors.js';
 import { singleton as _ } from '../ViewHelper.js';
 
-export default class ImageView {
+export class ImageView {
   //
   // Constants
   //
@@ -23,11 +23,11 @@ export default class ImageView {
   }
   static get DEMOS() {
     return [
-      'Whiteout', // shadow canvas md5: c7ce5636b3a52d0e217938a617b4be0e
-      'Checker', // shadow canvas md5: 6a78d4635cdad9808ec5a6650c52a13c
-      'Smiley', // shadow canvas md5: d48bd7484c44020831f8a34e13fcfc18
-      'HalfDome', // shadow canvas md5: 3493057349d7531fd31fbf22dcf3d888
-      'FireFlower', // shadow canvas md5: e0dcb2d318d94fe5b2789461e8927751
+      'Whiteout',
+      'Checker',
+      'Smiley',
+      'HalfDome',
+      'FireFlower',
     ];
   }
 
@@ -82,7 +82,7 @@ export default class ImageView {
       }
     });
 
-    if (this.shadowOnly) return this.shadowCanvas;
+    if (this.shadowOnly) return;
 
     // Paint the real canvas.
     this.initCanvasOnce();
@@ -91,8 +91,6 @@ export default class ImageView {
     const ctx = this.canvas.getContext('2d');
     ctx.fillStyle = color;
     ctx.fillRect(...scaledArgs);
-
-    return this.shadowCanvas;
   }
 
   demo(demoIndex = 0) {
@@ -122,17 +120,14 @@ export default class ImageView {
     this.canvas.width = clientWidth;
   }
 
-  resetShadowCanvas() {
-    this.paint(0, 0, 20, 20, 1);
-  }
-
   paintWhiteout() {
-    return this.paint(0, 0, 20, 20);
+    this.paint(0, 0, 20, 20);
+
+    // Expected MD5 hash of `shadowCanvas`.
+    return 'c7ce5636b3a52d0e217938a617b4be0e';
   }
 
   paintChecker() {
-    this.resetShadowCanvas();
-
     let toggle = false;
     [...new Array(ImageView.SIZE).keys()].forEach((y) => {
       // Alternate every row.
@@ -144,27 +139,29 @@ export default class ImageView {
       });
     });
 
-    return this.shadowCanvas;
+    // Expected MD5 hash of `shadowCanvas`.
+    return '6a78d4635cdad9808ec5a6650c52a13c';
   }
 
   paintSmiley() {
-    this.resetShadowCanvas();
-
     // Left eye
     this.paint(5, 4, 3, 3);
+
     // Right eye
     this.paint(12, 4, 3, 3);
+
     // Mouth from here down
     this.paint(2, 10, 3, 2);
     this.paint(3, 12, 3, 2);
     this.paint(5, 14, 10, 2);
     this.paint(14, 12, 3, 2);
-    return this.paint(15, 10, 3, 2);
+    this.paint(15, 10, 3, 2);
+
+    // Expected MD5 hash of `shadowCanvas`.
+    return 'd48bd7484c44020831f8a34e13fcfc18';
   }
 
   paintHalfDome() {
-    this.resetShadowCanvas();
-
     this.paint(5, 3, 1, 1);
     this.paint(8, 3, 5, 1);
     this.paint(5, 4, 9, 1);
@@ -177,12 +174,13 @@ export default class ImageView {
     this.paint(2, 13, 17, 1);
     this.paint(1, 14, 19, 2);
     this.paint(1, 16, 19, 2);
-    return this.paint(0, 18, 20, 2);
+    this.paint(0, 18, 20, 2);
+
+    // Expected MD5 hash of `shadowCanvas`.
+    return '3493057349d7531fd31fbf22dcf3d888';
   }
 
   paintFireFlower() {
-    this.resetShadowCanvas();
-
     // White background
     this.paint(0, 0, 20, 20);
 
@@ -230,6 +228,11 @@ export default class ImageView {
     // Green right-leaf
     this.paint(15, 12, 2, 3, 2);
     this.paint(13, 13, 4, 2, 2);
-    return this.paint(12, 14, 4, 2, 2);
+    this.paint(12, 14, 4, 2, 2);
+
+    // Expected MD5 hash of `shadowCanvas`.
+    return '0c012fc4d2c9af949fb0bc91297f2a74';
   }
 }
+
+export const singleton = new ImageView();
