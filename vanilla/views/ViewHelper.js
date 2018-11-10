@@ -127,12 +127,14 @@ export class ViewHelper {
 
   get BOX_LAYOUTS() { return BoxView.LAYOUTS; }
 
-  paint(x, y, width, height, colorIndex) {
-    theImageView.paint(x, y, width, height, colorIndex);
+  paint(x, y, width, height, colorIndex, imageViewOverride) {
+    const imageView = imageViewOverride || theImageView;
+    imageView.paint(x, y, width, height, colorIndex);
   }
 
-  paintDemo(demoIndex) {
-    theImageView.demo(demoIndex);
+  paintDemo(demoIndex, imageViewOverride) {
+    const imageView = imageViewOverride || theImageView;
+    imageView.demo(demoIndex);
   }
 
   //

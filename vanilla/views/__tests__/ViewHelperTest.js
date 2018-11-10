@@ -291,11 +291,37 @@ export default class ViewHelperTest {
       });
 
       _.method('#paint', () => {
-        // TODO
+        const subject = new ViewHelper();
+        const [x, y, width, height, colorIndex, imageViewOverride] =
+          ['x', 'y', 'width', 'height', 'colorIndex', _.proxy({ paint: null })];
+        _.allow(imageViewOverride).toReceive('paint').andReturn();
+
+        subject.paint(x, y, width, height, colorIndex, imageViewOverride);
+        _.expect(imageViewOverride)
+          .toHaveReceived('paint')
+          .withArgs([x, y, width, height, colorIndex]);
+
+        _.assert(
+          'It delegates to ImageView',
+          () => imageViewOverride.isAsExpected(),
+        );
       });
 
       _.method('#paintDemo', () => {
-        // TODO
+        const subject = new ViewHelper();
+        const [demoIndex, imageViewOverride] =
+          ['demoIndex', _.proxy({ demo: null })];
+        _.allow(imageViewOverride).toReceive('demo').andReturn();
+
+        subject.paintDemo(demoIndex, imageViewOverride);
+        _.expect(imageViewOverride)
+          .toHaveReceived('demo')
+          .withArgs([demoIndex]);
+
+        _.assert(
+          'It delegates to ImageView',
+          () => imageViewOverride.isAsExpected(),
+        );
       });
     });
   }
