@@ -244,6 +244,32 @@ export default class ImageViewTest {
       });
 
       _.method('.findAndMemoizeCanvas', () => {
+        _.context('When canvas is memoized and still in DOM', () => {
+          const subject = new ImageView();
+          const canvas = { closest: () => '<body>' };
+
+          subject.canvas = canvas;
+
+          _.assert(
+            'It returns memoized canvas',
+            () => subject.findAndMemoizeCanvas() === canvas,
+          );
+        });
+
+        _.context('When canvas is memoized, but no longer in DOM', () => {
+          const subject = new ImageView();
+          const oldCanvas = { closest: () => null };
+          const newCanvas = { clientHeight: 100, clientWidth: 100 };
+          const documentOverride = { getElementsByTagName: () => [newCanvas] };
+
+          subject.canvas = oldCanvas;
+
+          _.assert(
+            'It finds and memoizes the latest canvas from DOM',
+            () => subject.findAndMemoizeCanvas(documentOverride) === newCanvas,
+          );
+        });
+
         _.context('When canvas cannot be found', () => {
           const subject = new ImageView();
           const documentOverride = { getElementsByTagName: () => [] };
@@ -257,10 +283,55 @@ export default class ImageViewTest {
           );
         });
 
-        // TODO
+        _.context('When canvas has no height', () => {
+          const subject = new ImageView();
+          const canvas = { clientHeight: 0, clientWidth: 0 };
+          const documentOverride = { getElementsByTagName: () => [canvas] };
 
+          const error = _.rescue(subject
+            .findAndMemoizeCanvas.bind(subject, documentOverride));
+
+          _.assert(
+            'It throws a no-height error',
+            () => error.message.includes('no height'),
+          );
+        });
+
+        _.context('When canvas is not a square', () => {
+          const subject = new ImageView();
+          const canvas = { clientHeight: 10, clientWidth: 20 };
+          const documentOverride = { getElementsByTagName: () => [canvas] };
+
+          const error = _.rescue(subject
+            .findAndMemoizeCanvas.bind(subject, documentOverride));
+
+          _.assert(
+            'It throws a not square error',
+            () => error.message.includes('square'),
+          );
+        });
+
+        _.context('When canvas is a square', () => {
+          const subject = new ImageView();
+          const canvas = { clientHeight: 100, clientWidth: 100 };
+          const documentOverride = { getElementsByTagName: () => [canvas] };
+
+          subject.findAndMemoizeCanvas(documentOverride);
+
+          _.assert(
+            'It sets the `canvas` state',
+            () => subject.canvas === canvas,
+          );
+
+          _.assert(
+            'It sets aspect ratio to 1:1 by honoring client height and width',
+            () => [
+              canvas.height === canvas.clientHeight,
+              canvas.width === canvas.clientWidth,
+            ],
+          );
+        });
       });
-
     });
   }
 }

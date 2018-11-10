@@ -115,7 +115,7 @@ export class ImageView {
 
     // Raise error if canvas is not a square.
     const { clientHeight, clientWidth } = this.canvas;
-    if (clientHeight <= 0) throw new Error('<canvas> has no height.');
+    if (clientHeight === 0) throw new Error('<canvas> has no height.');
     if (clientHeight !== clientWidth) throw new Error("<canvas> isn't square.");
 
     // Set aspect ratio to 1:1 as it defaults to 2:1 (width:height).
@@ -127,7 +127,7 @@ export class ImageView {
   paintWhiteout() {
     this.paint(0, 0, 20, 20);
 
-    // Expected MD5 hash of `shadowCanvas`.
+    // Expected MD5 hash of `shadowCanvas` state.
     return 'c7ce5636b3a52d0e217938a617b4be0e';
   }
 
@@ -143,7 +143,7 @@ export class ImageView {
       });
     });
 
-    // Expected MD5 hash of `shadowCanvas`.
+    // Expected MD5 hash of `shadowCanvas` state.
     return '6a78d4635cdad9808ec5a6650c52a13c';
   }
 
@@ -161,7 +161,7 @@ export class ImageView {
     this.paint(14, 12, 3, 2);
     this.paint(15, 10, 3, 2);
 
-    // Expected MD5 hash of `shadowCanvas`.
+    // Expected MD5 hash of `shadowCanvas` state.
     return 'd48bd7484c44020831f8a34e13fcfc18';
   }
 
@@ -180,7 +180,7 @@ export class ImageView {
     this.paint(1, 16, 19, 2);
     this.paint(0, 18, 20, 2);
 
-    // Expected MD5 hash of `shadowCanvas`.
+    // Expected MD5 hash of `shadowCanvas` state.
     return '3493057349d7531fd31fbf22dcf3d888';
   }
 
@@ -234,7 +234,7 @@ export class ImageView {
     this.paint(13, 13, 4, 2, 2);
     this.paint(12, 14, 4, 2, 2);
 
-    // Expected MD5 hash of `shadowCanvas`.
+    // Expected MD5 hash of `shadowCanvas` state.
     return '0c012fc4d2c9af949fb0bc91297f2a74';
   }
 }

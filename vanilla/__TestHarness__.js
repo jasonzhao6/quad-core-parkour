@@ -168,7 +168,7 @@ export default class TestHarness {
   rescue(func) {
     try {
       func();
-      return null
+      return null;
     } catch (error) {
       return error;
     }
