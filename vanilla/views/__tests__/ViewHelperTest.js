@@ -35,18 +35,12 @@ export default class ViewHelperTest {
         const props = { key: 'value' };
 
         _.context('When updating a slice not registered with store', () => {
-          const errors = [];
+          const error = _.rescue(subject.update.bind(subject, 'unregistered'));
 
-          try {
-            subject.update('unregistered slice');
-          } catch (error) {
-            errors.push(error);
-          } finally {
-            _.assert(
-              'It throws an Error',
-              () => [errors.length === 1, errors[0] instanceof Error],
-            );
-          }
+          _.assert(
+            'It throws an Error',
+            () => error.message.includes('not registered'),
+          );
         });
 
         _.context('When updating a slice registered with store', () => {

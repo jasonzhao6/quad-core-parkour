@@ -25,7 +25,7 @@ import LevelViewTest from './views/EntryPoints/__tests__/LevelViewTest.js';
 // View helper tests
 import ViewHelperTest from './views/__tests__/ViewHelperTest.js';
 
-export default class Tests {
+class Tests {
   static enqueue(_) {
     this.enqueueTestingFrameworkTests(_);
     this.enqueueModelTests(_);

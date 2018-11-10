@@ -54,33 +54,23 @@ export default class TestProxyTest {
 
       _.method('.verify', () => {
         _.context('When instance is not from described class', () => {
-          const errors = [];
+          const func = TestProxy.verify.bind(TestProxy, null, _.noop());
+          const error = _.rescue(func);
 
-          try {
-            TestProxy.verify(null, _.noop());
-          } catch (error) {
-            errors.push(error);
-          } finally {
-            _.assert(
-              'It throws a TestException',
-              () => [errors.length === 1, errors[0] instanceof TestException],
-            );
-          }
+          _.assert(
+            'It throws an `ARG` TestException',
+            () => error.type === TestException.TYPES.ARG,
+          );
         });
 
         _.context('When instance is from described class', () => {
-          const errors = [];
+          const func = TestProxy.verify.bind(TestProxy, new TestProxy({}));
+          const error = _.rescue(func);
 
-          try {
-            TestProxy.verify(new TestProxy({}));
-          } catch (error) {
-            errors.push(error);
-          } finally {
-            _.assert(
-              'It does not throw any exception',
-              () => errors.length === 0,
-            );
-          }
+          _.assert(
+            'It does not throw any exception',
+            () => error === null,
+          );
         });
       });
 
@@ -108,82 +98,47 @@ export default class TestProxyTest {
 
         _.context('When used to stub a method that does not exist', () => {
           const subject = new TestProxy({}, _.noop());
-          const errors = [];
+          const thisArg = subject.allowIt();
+          const error = _.rescue(thisArg.toReceive.bind(thisArg, 'foo'));
 
-          try {
-            subject.allowIt().toReceive('foo');
-          } catch (error) {
-            errors.push(error);
-          } finally {
-            _.assert(
-              'It throws a `VERIFY` TestException',
-              () => [
-                errors.length === 1,
-                errors[0] instanceof TestException,
-                errors[0].type === TestException.TYPES.VERIFY,
-              ],
-            );
-          }
+          _.assert(
+            'It throws a `VERIFY` TestException',
+            () => error.type === TestException.TYPES.VERIFY,
+          );
         });
 
         _.context('When chained with expect method: `toHaveReceived`', () => {
           const subject = new TestProxy({}, _.noop());
-          const errors = [];
+          const thisArg = subject.allowIt();
+          const func = thisArg.toHaveReceived.bind(thisArg, 'toString');
+          const error = _.rescue(func);
 
-          try {
-            subject.allowIt().toHaveReceived('toString');
-          } catch (error) {
-            errors.push(error);
-          } finally {
-            _.assert(
-              'It throws a `CHAIN` TestException',
-              () => [
-                errors.length === 1,
-                errors[0] instanceof TestException,
-                errors[0].type === TestException.TYPES.CHAIN,
-              ],
-            );
-          }
+          _.assert(
+            'It throws a `CHAIN` TestException',
+            () => error.type === TestException.TYPES.CHAIN,
+          );
         });
 
         _.context('When chained with expect method: `withArgs`', () => {
           const subject = new TestProxy({}, _.noop());
-          const errors = [];
+          const thisArg = subject.allowIt().toReceive('toString');
+          const error = _.rescue(thisArg.withArgs.bind(thisArg));
 
-          try {
-            subject.allowIt().toReceive('toString').withArgs();
-          } catch (error) {
-            errors.push(error);
-          } finally {
-            _.assert(
-              'It throws a `CHAIN` TestException',
-              () => [
-                errors.length === 1,
-                errors[0] instanceof TestException,
-                errors[0].type === TestException.TYPES.CHAIN,
-              ],
-            );
-          }
+          _.assert(
+            'It throws a `CHAIN` TestException',
+            () => error.type === TestException.TYPES.CHAIN,
+          );
         });
 
         _.context('When chained with expect method: `nTimes`', () => {
           const subject = new TestProxy({}, _.noop());
-          const errors = [];
+          const thisArg = subject.allowIt().toReceive('toString');
+          const error = _.rescue(thisArg.nTimes.bind(thisArg));
 
-          try {
-            subject.allowIt().toReceive('toString').nTimes();
-          } catch (error) {
-            errors.push(error);
-          } finally {
-            _.assert(
-              'It throws a `CHAIN` TestException',
-              () => [
-                errors.length === 1,
-                errors[0] instanceof TestException,
-                errors[0].type === TestException.TYPES.CHAIN,
-              ],
-            );
-          }
+          _.assert(
+            'It throws a `CHAIN` TestException',
+            () => error.type === TestException.TYPES.CHAIN,
+          );
         });
       });
 
@@ -264,62 +219,35 @@ export default class TestProxyTest {
 
         _.context('When used to test a method that does not exist', () => {
           const subject = new TestProxy({}, _.noop());
-          const errors = [];
+          const thisArg = subject.expectIt();
+          const error = _.rescue(thisArg.toHaveReceived.bind(thisArg, 'foo'));
 
-          try {
-            subject.expectIt().toHaveReceived('foo');
-          } catch (error) {
-            errors.push(error);
-          } finally {
-            _.assert(
-              'It throws a `VERIFY` TestException',
-              () => [
-                errors.length === 1,
-                errors[0] instanceof TestException,
-                errors[0].type === TestException.TYPES.VERIFY,
-              ],
-            );
-          }
+          _.assert(
+            'It throws a `VERIFY` TestException',
+            () => error.type === TestException.TYPES.VERIFY,
+          );
         });
 
         _.context('When chained with allow method: `toReceive`', () => {
           const subject = new TestProxy({}, _.noop());
-          const errors = [];
+          const thisArg = subject.expectIt();
+          const error = _.rescue(thisArg.toReceive.bind(thisArg, 'toString'));
 
-          try {
-            subject.expectIt().toReceive('toString');
-          } catch (error) {
-            errors.push(error);
-          } finally {
-            _.assert(
-              'It throws a `CHAIN` TestException',
-              () => [
-                errors.length === 1,
-                errors[0] instanceof TestException,
-                errors[0].type === TestException.TYPES.CHAIN,
-              ],
-            );
-          }
+          _.assert(
+            'It throws a `CHAIN` TestException',
+            () => error.type === TestException.TYPES.CHAIN,
+          );
         });
 
         _.context('When chained with allow method: `andReturn`', () => {
           const subject = new TestProxy({}, _.noop());
-          const errors = [];
+          const thisArg = subject.expectIt().toHaveReceived('toString');
+          const error = _.rescue(thisArg.andReturn.bind(thisArg));
 
-          try {
-            subject.expectIt().toHaveReceived('toString').andReturn();
-          } catch (error) {
-            errors.push(error);
-          } finally {
-            _.assert(
-              'It throws a `CHAIN` TestException',
-              () => [
-                errors.length === 1,
-                errors[0] instanceof TestException,
-                errors[0].type === TestException.TYPES.CHAIN,
-              ],
-            );
-          }
+          _.assert(
+            'It throws a `CHAIN` TestException',
+            () => error.type === TestException.TYPES.CHAIN,
+          );
         });
       });
 

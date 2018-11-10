@@ -61,7 +61,14 @@ class TestHandler {
   }
 
   //
-  // Usage: `proxy.allowIt().toReceive(method)[.andReturn(response)]`
+  // Usage:
+  //
+  // ```
+  //   proxy
+  //     .allowIt()
+  //     .toReceive(method)
+  //     [.andReturn(response)]
+  // ```
   //
 
   allowIt() {
@@ -83,7 +90,15 @@ class TestHandler {
   }
 
   //
-  // Usage: `proxy.expectIt().toHaveReceived(method)[.nTimes(n)]`
+  // Usage:
+  //
+  // ```
+  //   proxy
+  //     .expectIt()
+  //     .toHaveReceived(method)
+  //     [.withArgs([arg1, arg2, etc])]
+  //     [.nTimes(n)]`
+  // ```
   //
 
   expectIt() {

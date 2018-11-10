@@ -1,5 +1,5 @@
 // 3rd party dependencies
-import './3rdParty/js/mustache.js'; // Needed by tests.
+import './3rdParty/js/mustache.js'; // Needed by tests / import before tests.
 
 // Dev / test environment
 import './__FileWatcherClient__.js';

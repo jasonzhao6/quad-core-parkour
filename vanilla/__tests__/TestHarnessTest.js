@@ -43,6 +43,53 @@ export default class TestHarnessTest {
         });
       });
 
+      _.method('#proxy', () => {
+        const subject = new TestHarness();
+
+        _.assert(
+          'It returns a proxy',
+          () => subject.proxy({}).isProxy,
+        );
+      });
+
+      _.method('#allow', () => {
+        const subject = new TestHarness();
+        const instanceProxy = subject.proxy({});
+
+        _.assert(
+          'It delegates to `allowIt` method',
+          () => subject.allow(instanceProxy) === instanceProxy.allowIt(),
+        );
+      });
+
+      _.method('#expect', () => {
+        const subject = new TestHarness();
+        const instanceProxy = subject.proxy({});
+
+        _.assert(
+          'It delegates to `expectIt` method',
+          () => subject.expect(instanceProxy) === instanceProxy.expectIt(),
+        );
+      });
+
+      _.method('#echo', () => {
+        const subject = new TestHarness();
+
+        _.assert(
+          'It returns a proxy that echos the method name on any method call',
+          () => subject.echo().toString() === 'toString',
+        );
+      });
+
+      _.method('#noop', () => {
+        const subject = new TestHarness();
+
+        _.assert(
+          'It returns a proxy that noops on any method call',
+          () => subject.noop().toString() === undefined,
+        );
+      });
+
       _.method('#Class', () => {
         const Class = 'Class';
         const subject = new TestHarness();
@@ -222,6 +269,29 @@ export default class TestHarnessTest {
         );
       });
 
+      _.method('#rescue', () => {
+        const subject = new TestHarness();
+
+        _.context('When an error is thrown', () => {
+          const message = 'message';
+          const error = subject.rescue(() => { throw Error(message); });
+
+          _.assert(
+            'It rescues the error',
+            () => error.message === message,
+          );
+        });
+
+        _.context('When no error is thrown', () => {
+          const error = subject.rescue(() => {});
+
+          _.assert(
+            'It returns `null`',
+            () => error === null,
+          );
+        });
+      });
+
       _.method('#executeAssertions', () => {
         let printed = false;
         let failures = null;
@@ -254,7 +324,6 @@ export default class TestHarnessTest {
           });
         });
 
-
         const subject = new TestHarness('seed', PrinterOverride);
         subject.queue = [...queue];
         subject.executeAssertions();
@@ -284,53 +353,6 @@ export default class TestHarnessTest {
         _.assert(
           'It prints',
           () => printed === true,
-        );
-      });
-
-      _.method('#proxy', () => {
-        const subject = new TestHarness();
-
-        _.assert(
-          'It returns a proxy',
-          () => subject.proxy({}).isProxy,
-        );
-      });
-
-      _.method('#allow', () => {
-        const subject = new TestHarness();
-        const instanceProxy = subject.proxy({});
-
-        _.assert(
-          'It delegates to `allowIt` method',
-          () => subject.allow(instanceProxy) === instanceProxy.allowIt(),
-        );
-      });
-
-      _.method('#expect', () => {
-        const subject = new TestHarness();
-        const instanceProxy = subject.proxy({});
-
-        _.assert(
-          'It delegates to `expectIt` method',
-          () => subject.expect(instanceProxy) === instanceProxy.expectIt(),
-        );
-      });
-
-      _.method('#echo', () => {
-        const subject = new TestHarness();
-
-        _.assert(
-          'It returns a proxy that echos the method name on any method call',
-          () => subject.echo().toString() === 'toString',
-        );
-      });
-
-      _.method('#noop', () => {
-        const subject = new TestHarness();
-
-        _.assert(
-          'It returns a proxy that noops on any method call',
-          () => subject.noop().toString() === undefined,
         );
       });
     });

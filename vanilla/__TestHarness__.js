@@ -1,19 +1,19 @@
 //
-// This test harness enqueues assertions, shuffles them, then executes them.
-//
 // USAGE AND EXAMPLES:
 //
 // ```
 //
 //   class Person {
-//     sayHi(person) {
-//       person.hello();
-//       // person.goodbye(); // Try uncommenting this line.
+//     sayHi(otherPerson) {
+//       otherPerson.hello();
 //     }
 //
 //     hello() {}
-//
 //     goodbye() {}
+//
+//     throwFit() {
+//       throw new Error('No broccoli!');
+//     }
 //   }
 //
 //   const seed = new Date().toLocaleTimeString();
@@ -32,24 +32,31 @@
 //       _.expect(friendProxy).toHaveReceived('hello').withArgs('hi'); // Once
 //       _.expect(friendProxy).toHaveReceived('goodbye').nTimes(0);
 //
-//       _.assert('Says hello, no goodbye', () => friendProxy.isAsExpected());
+//       _.assert('Says hello, not goodbye', () => friendProxy.isAsExpected());
+//     });
+//
+//     _.method('#throwFit', () => {
+//       const child = new Person();
+//       const error = _.rescue(child.throwFit);
+//
+//       _.assert('No to broccoli', () => error.message.includes('broccoli!'));
 //     });
 //   });
 //
 //   _.Class('TestHarness', () => {
-//     _.assert('It can and does test itself.', () => true);
-//     _.assert('It supports multiple assertions in a row', () => true);
+//     _.assert('It could, and does, test itself.', () => true);
+//     _.assert('It supports having multiple assertions in a row', () => true);
 //
 //     _.context('When an assertion has multiple sub-conditions', () => {
-//       _.assert('It can take them as an array', () => [true, true, ...]);
+//       _.assert('It can take them all in an array', () => [true, true, true]);
 //     });
 //
-//     _.context('When an assertion is being worked on', () => {
-//       _.assertOne('It can be singled out with assert[One]', () => true);
+//     _.context('When an assertion is currently being worked on', () => {
+//       _.assertOne('It can be singled out with `assertOne`', () => true);
 //     });
 //
-//     _.context('When an assertion is temporarily pending', () => {
-//       _.xassert('It can be skipped with [x]assert', () => true);
+//     _.context('When an assertion is currently pending', () => {
+//       _.xassert('It can be skipped with `xassert`', () => true);
 //     });
 //   });
 //
@@ -58,13 +65,13 @@
 // ```
 
 /* eslint class-methods-use-this: ['error', { exceptMethods:
-     ['proxy', 'allow', 'expect', 'echo', 'noop'] }] */
+     ['proxy', 'allow', 'expect', 'echo', 'noop', 'rescue'] }] */
 
-// Testing framework
+// Dependencies
 import TestCasePrinter from './__TestCasePrinter__.js';
 import TestProxy from './__TestProxy__.js';
 
-// Testing lib
+// 3rd party dependencies
 import './3rdParty/js/__seedrandom__.js';
 
 export default class TestHarness {
@@ -157,6 +164,19 @@ export default class TestHarness {
   xassert() {
     this.pendingCount += 1;
   }
+
+  rescue(func) {
+    try {
+      func();
+      return null
+    } catch (error) {
+      return error;
+    }
+  }
+
+  //
+  // Execution
+  //
 
   executeAssertions() {
     this.shuffle();
