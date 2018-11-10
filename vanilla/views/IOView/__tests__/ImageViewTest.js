@@ -242,6 +242,36 @@ export default class ImageViewTest {
           );
         });
       });
+
+      _.method('.findAndMemoizeCanvas', () => {
+        _.context('When canvas cannot be found', () => {
+          const subject = new ImageView();
+          const documentOverride = { getElementsByTagName: (arg) => [] };
+
+          const catchError = (func) => {
+            const errors = [];
+
+            try {
+              func()
+            } catch (error) {
+              errors.push(error);
+            } finally {
+              return errors;
+            }
+          }
+
+          const errors = catchError(
+            subject.findAndMemoizeCanvas.bind(subject, documentOverride)
+          );
+
+          _.assert(
+            'It throws a not-found error',
+            () => [errors.length === 1, errors[0].message.includes('found')],
+          );
+        });
+
+      });
+
     });
   }
 }
