@@ -35,10 +35,7 @@ export class ImageView {
   // Constructor
   //
 
-  constructor({ shadowOnly } = {}) {
-    // Props
-    this.shadowOnly = shadowOnly;
-
+  constructor(isSingleton = false) {
     // State
     this.canvas = null;
 
@@ -48,6 +45,9 @@ export class ImageView {
       this.shadowCanvas[i] = new Array(ImageView.SIZE);
       this.shadowCanvas[i].fill(ImageView.BACKGROUND_COLOR);
     });
+
+    // Actual app uses this view as a singleton. Tests use new instances.
+    this.isSingleton = isSingleton;
   }
 
   //
@@ -82,13 +82,13 @@ export class ImageView {
       }
     });
 
-    if (this.shadowOnly) return;
+    if (!this.isSingleton) return;
 
     // Paint the real canvas.
-    this.initCanvasOnce();
-    const scale = this.canvas.width / ImageView.SIZE;
+    const canvas = this.findAndMemoizeCanvas();
+    const scale = canvas.width / ImageView.SIZE;
     const scaledArgs = [x, y, width, height].map(n => Math.round(n * scale));
-    const ctx = this.canvas.getContext('2d');
+    const ctx = canvas.getContext('2d');
     ctx.fillStyle = color;
     ctx.fillRect(...scaledArgs);
   }
@@ -101,11 +101,14 @@ export class ImageView {
   // Private
   //
 
-  initCanvasOnce() {
-    if (this.canvas !== null) return;
+  findAndMemoizeCanvas(documentOverride) {
+    if (this.canvas !== null && this.canvas.closest('body') !== null) {
+      return this.canvas;
+    }
 
-    // Memoize <canvas> element.
-    [this.canvas] = document.getElementsByTagName('canvas');
+    // Find and memoize <canvas> element.
+    const thisDocument = documentOverride || document;
+    [this.canvas] = thisDocument.getElementsByTagName('canvas');
 
     // Raise error if canvas cannot be found.
     if (this.canvas === undefined) throw new Error('<canvas> cannot be found.');
@@ -118,6 +121,7 @@ export class ImageView {
     // Set aspect ratio to 1:1 as it defaults to 2:1 (width:height).
     this.canvas.height = clientHeight;
     this.canvas.width = clientWidth;
+    return this.canvas;
   }
 
   paintWhiteout() {
@@ -235,4 +239,4 @@ export class ImageView {
   }
 }
 
-export const singleton = new ImageView();
+export const singleton = new ImageView(true);

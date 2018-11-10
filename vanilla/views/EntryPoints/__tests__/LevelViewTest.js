@@ -14,6 +14,7 @@ export default class LevelViewTest {
 
       _.method('#TEMPLATE', () => {
         const template = subject.TEMPLATE;
+
         _.assert(
           'It includes each subview',
           () => subviews.map(subview => template.includes(`>${subview}`)),
@@ -22,6 +23,7 @@ export default class LevelViewTest {
 
       _.method('#partials', () => {
         const partials = subject.partials();
+
         _.assert(
           'It includes each subview',
           () => subviews.map(subview => subview in partials),

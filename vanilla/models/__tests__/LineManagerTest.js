@@ -111,9 +111,7 @@ export default class LineManagerTest {
           const managerProxy = _.proxy(new LineManager({ core }));
 
           _.allow(managerProxy).toReceive('executeLine');
-
           managerProxy.nextLine();
-
           _.expect(managerProxy).toHaveReceived('executeLine');
 
           _.assert(

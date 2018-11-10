@@ -13,11 +13,6 @@ export default class ImageViewTest {
           const subject = new ImageView();
 
           _.assert(
-            'It initializes `shadowOnly` prop to `undefined`',
-            () => subject.shadowOnly === undefined,
-          );
-
-          _.assert(
             'It initializes `canvas` state to `null`',
             () => subject.canvas === null,
           );
@@ -35,20 +30,44 @@ export default class ImageViewTest {
             () => subject.shadowCanvas.flat()
               .map(color => color === ImageView.BACKGROUND_COLOR),
           );
-        });
-
-        _.context('When called with `shadowOnly` set to `true`', () => {
-          const subject = new ImageView({ shadowOnly: true });
 
           _.assert(
-            'It initializes `shadowOnly` prop to `true`',
-            () => subject.shadowOnly === true,
+            'It initializes `isSingleton` to `false`',
+            () => subject.isSingleton === false,
+          );
+        });
+
+        _.context('When called with `isSingleton` set to `true`', () => {
+          const subject = new ImageView(true);
+
+          _.assert(
+            'It initializes `isSingleton` to `true`',
+            () => subject.isSingleton === true,
           );
         });
       });
 
+      _.method('#TEMPLATE', () => {
+        const subject = new ImageView();
+        const template = subject.TEMPLATE;
+
+        _.assert(
+          'It includes a <canvas>',
+          () => template.includes('<canvas></canvas>'),
+        );
+      });
+
+      _.method('#render', () => {
+        const subject = new ImageView();
+
+        _.assert(
+          'It exists in subject',
+          () => 'render' in subject,
+        );
+      });
+
       _.method('.paint', () => {
-        const subject = new ImageView({ shadowOnly: true });
+        const subject = new ImageView();
 
         _.context('When painting top-left pixel with default color', () => {
           const [x, y] = [0, 0];
@@ -74,7 +93,7 @@ export default class ImageViewTest {
 
       _.method('.demo', () => {
         _.context('When demoing Whiteout', () => {
-          const subject = new ImageView({ shadowOnly: true });
+          const subject = new ImageView();
           const hash = subject.demo();
 
           _.assert(
@@ -89,7 +108,7 @@ export default class ImageViewTest {
         });
 
         _.context('When demoing Checker', () => {
-          const subject = new ImageView({ shadowOnly: true });
+          const subject = new ImageView();
           const hash = subject.demo(1);
 
           _.assert(
@@ -114,26 +133,26 @@ export default class ImageViewTest {
         });
 
         _.context('When demoing Smiley', () => {
-          const subject = new ImageView({ shadowOnly: true });
+          const subject = new ImageView();
           const hash = subject.demo(2);
 
           _.assert(
-            'It paints a sample background pixel black',
+            'It paints aone of thee background pixels black',
             () => subject.shadowCanvas[0][10] === black,
           );
 
           _.assert(
-            'It paints a sample left-eye pixel white',
+            'It paints one of the left-eye pixels white',
             () => subject.shadowCanvas[6][6] === white,
           );
 
           _.assert(
-            'It paints a sample right-eye pixel white',
+            'It paints one of the right-eye pixels white',
             () => subject.shadowCanvas[10][15] === white,
           );
 
           _.assert(
-            'It paints a sample mouth pixel white',
+            'It paints one of the mouth pixels white',
             () => subject.shadowCanvas[6][14] === white,
           );
 
@@ -144,16 +163,16 @@ export default class ImageViewTest {
         });
 
         _.context('When demoing HalfDome', () => {
-          const subject = new ImageView({ shadowOnly: true });
+          const subject = new ImageView();
           const hash = subject.demo(3);
 
           _.assert(
-            'It paints a sample background pixel black',
+            'It paints one of the background pixels black',
             () => subject.shadowCanvas[0][10] === black,
           );
 
           _.assert(
-            'It paints a sample HalfDome pixel white',
+            'It paints one of the HalfDome pixels white',
             () => subject.shadowCanvas[6][6] === white,
           );
 
@@ -164,56 +183,56 @@ export default class ImageViewTest {
         });
 
         _.context('When demoing FireFlower', () => {
-          const subject = new ImageView({ shadowOnly: true });
+          const subject = new ImageView();
           const hash = subject.demo(4);
 
           _.assert(
-            'It paints a sample background pixel white',
+            'It paints one of the background pixels white',
             () => subject.shadowCanvas[0][10] === white,
           );
 
           _.assert(
-            'It paints a sample outline pixel black',
+            'It paints one of the outline pixels black',
             () => subject.shadowCanvas[2][10] === black,
           );
 
           _.assert(
-            'It paints a sample flower pixel orange',
+            'It paints one of the flower pixels orange',
             () => subject.shadowCanvas[3][10] === orange,
           );
 
           _.assert(
-            'It paints a sample flower pixel yellow',
+            'It paints one of the flower pixels yellow',
             () => subject.shadowCanvas[4][10] === yellow,
           );
 
           _.assert(
-            'It paints a sample eye pixel white',
+            'It paints one of the eye pixels white',
             () => subject.shadowCanvas[6][10] === white,
           );
 
           _.assert(
-            'It paints a sample left-eye pixel black',
+            'It paints one of the left-eye pixels black',
             () => subject.shadowCanvas[6][8] === black,
           );
 
           _.assert(
-            'It paints a sample right-eye pixel black',
+            'It paints one of the right-eye pixels black',
             () => subject.shadowCanvas[6][11] === black,
           );
 
           _.assert(
-            'It paints a sample stem pixel green',
+            'It paints one of the stem pixels green',
             () => subject.shadowCanvas[15][10] === green,
           );
 
           _.assert(
-            'It paints a sample left-leaf pixel green',
+            'It paints one of the left-leaf pixels green',
             () => subject.shadowCanvas[15][5] === green,
           );
 
           _.assert(
-            'It paints a sample right-leaf pixel green',
+            'It paints one of the right-leaf pixels green',
             () => subject.shadowCanvas[15][15] === green,
           );
 
