@@ -47,22 +47,12 @@ export default class ImageViewTest {
         });
       });
 
-      _.method('#TEMPLATE', () => {
-        const subject = new ImageView();
-        const template = subject.TEMPLATE;
+      _.method('#render', () => {
+        const html = new ImageView().render();
 
         _.assert(
           'It includes a <canvas>',
-          () => template.includes('<canvas></canvas>'),
-        );
-      });
-
-      _.method('#render', () => {
-        const subject = new ImageView();
-
-        _.assert(
-          'It exists in subject',
-          () => 'render' in subject,
+          () => html.includes('<canvas></canvas>'),
         );
       });
 
