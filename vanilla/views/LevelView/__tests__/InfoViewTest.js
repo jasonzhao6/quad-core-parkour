@@ -1,15 +1,14 @@
 import InfoView from '../InfoView.js';
-import { singleton as viewHelper } from '../../ViewHelper.js';
 
 export default class InfoViewTest {
   static enqueue(_) {
     _.Class('InfoView', () => {
       _.method('#render', () => {
         const [number, title, info] = ['number', 'title', ['info']];
-        viewHelper.update('level', { number, title, info });
+        const subject = new InfoView();
+        subject.context = () => ({ number, title, info });
 
-        const html = new InfoView().render();
-        viewHelper.reset();
+        const html = subject.render();
 
         _.assert(
           'It renders the level number',

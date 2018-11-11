@@ -43,9 +43,8 @@ export default class LevelViewTest {
         const html = viewHelper.render(new LevelView());
 
         _.assert(
-          'It includes expected views',
+          'It includes all the partials',
           () => [
-            html.includes('LevelView'), // Self
             html.includes('ActionsView'),
             html.includes('InfoView'),
             html.includes('IOView'),
