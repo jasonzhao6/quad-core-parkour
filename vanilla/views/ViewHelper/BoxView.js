@@ -45,7 +45,7 @@ export default class BoxView {
     return `
       <div class='BoxViewOuter'>
         {{#label}}
-          <div class='boxViewLabel' style='{{labelStyle}}'>{{label}}</div>
+          <div class='boxViewLabel' style='{{labelStyle}}'>{{>label}}</div>
         {{/label}}
         <div class='BoxView --horizontalJustify {{classes}}'>
           <div class='BoxViewInner'>
@@ -92,7 +92,12 @@ export default class BoxView {
 
   partials() {
     const [template1, template2, template3] = Array.of(this.templates).flat();
-    return { template1, template2, template3 };
+    return {
+      label: this.label,
+      template1,
+      template2,
+      template3,
+    };
   }
 
   render() {

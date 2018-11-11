@@ -30,6 +30,7 @@ export class ViewHelper {
     // Global state.
     this.store = {
       // SLICE REGISTRY:
+      level: {},
       modes: {},
     };
 

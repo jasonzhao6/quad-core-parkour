@@ -19,6 +19,7 @@ export default class Level {
 
     // Data
     const data = dataOverride || levelData[number];
+    this.number = number;
     this.title = data.title;
     this.info = data.info;
     this.givenInputX = (goBig ? data.input.xBig : data.input.x) || [];

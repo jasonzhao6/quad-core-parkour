@@ -32,7 +32,7 @@ export default class LevelViewTest {
 
       _.method('#renderDom', () => {
         _.assert(
-          'It exists in subject',
+          'It exists',
           () => 'renderDom' in subject,
         );
       });

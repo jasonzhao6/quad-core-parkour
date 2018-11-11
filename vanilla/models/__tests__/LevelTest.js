@@ -6,7 +6,8 @@ export default class LevelTest {
     _.Class('Level', () => {
       _.method('#constructor', () => {
         _.context('When creating Level 0', () => {
-          const subject = new Level({ number: 0 });
+          const number = 0;
+          const subject = new Level({ number });
 
           _.assert(
             'It initializes the `maxCycleCount` prop',
@@ -16,6 +17,7 @@ export default class LevelTest {
           _.assert(
             'It initializes data props',
             () => [
+              subject.number === number,
               typeof subject.title === 'string',
               subject.info instanceof Array,
               subject.givenInputX instanceof Array,

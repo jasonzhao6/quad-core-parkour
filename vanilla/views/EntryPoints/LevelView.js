@@ -11,7 +11,22 @@ import IOView from '../LevelView/IOView.js';
 import MatrixView from '../LevelView/MatrixView.js';
 import ModesView from '../LevelView/ModesView.js';
 
+// Models
+import Level from '../../models/Level.js';
+
 export default class LevelView {
+  //
+  // Constructor
+  //
+
+  constructor(number) {
+    if (number !== undefined) _.update('level', new Level({ number }));
+  }
+
+  //
+  // Render
+  //
+
   get TEMPLATE() {
     return `
       <div class='LevelViewOuter --center'>
