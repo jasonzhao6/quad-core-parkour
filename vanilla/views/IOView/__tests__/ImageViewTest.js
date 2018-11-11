@@ -51,6 +51,11 @@ export default class ImageViewTest {
         const html = new ImageView().render();
 
         _.assert(
+          'It includes an ImageView',
+          () => html.includes('ImageView'),
+        );
+
+        _.assert(
           'It includes a <canvas>',
           () => html.includes('<canvas></canvas>'),
         );

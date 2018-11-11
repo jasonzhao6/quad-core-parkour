@@ -37,41 +37,21 @@ export default class LevelViewTest {
           );
         });
       });
-    });
 
-    // TODO consider refactoring into a holistic render test
-    _.Class('LevelView', () => {
-      const subject = new LevelView();
-      const subviews = [
-        'actionsView',
-        'infoView',
-        'ioView',
-        'matrixView',
-        'modesView',
-      ];
-
-      _.method('#TEMPLATE', () => {
-        const template = subject.TEMPLATE;
+      _.method('#render', () => {
+        const viewHelper = new ViewHelper();
+        const html = viewHelper.render(new LevelView());
 
         _.assert(
-          'It includes each subview',
-          () => subviews.map(subview => template.includes(`>${subview}`)),
-        );
-      });
-
-      _.method('#partials', () => {
-        const partials = subject.partials();
-
-        _.assert(
-          'It includes each subview',
-          () => subviews.map(subview => subview in partials),
-        );
-      });
-
-      _.method('#renderDom', () => {
-        _.assert(
-          'It exists',
-          () => 'renderDom' in subject,
+          'It includes expected views',
+          () => [
+            html.includes('LevelView'), // Self
+            html.includes('ActionsView'),
+            html.includes('InfoView'),
+            html.includes('IOView'),
+            html.includes('MatrixView'),
+            html.includes('ModesView'),
+          ],
         );
       });
     });
