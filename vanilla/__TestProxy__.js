@@ -170,7 +170,7 @@ class TestHandler {
 
   compare(object1, object2) {
     const string1 = JSON.stringify(JSON.decycle(object1));
-    const string2 = JSON.stringify(JSON.decycle(object2))
+    const string2 = JSON.stringify(JSON.decycle(object2));
     return string1 === string2;
   }
 }

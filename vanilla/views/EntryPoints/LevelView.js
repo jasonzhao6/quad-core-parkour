@@ -19,8 +19,9 @@ export default class LevelView {
   // Constructor
   //
 
-  constructor(number) {
-    if (number !== undefined) _.update('level', new Level({ number }));
+  constructor(number, viewHelperOverride) {
+    const viewHelper = viewHelperOverride || _;
+    if (number !== undefined) viewHelper.update('level', new Level({ number }));
   }
 
   //
