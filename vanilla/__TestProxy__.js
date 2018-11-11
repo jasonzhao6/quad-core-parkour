@@ -1,7 +1,11 @@
 /* eslint class-methods-use-this: ['error', { exceptMethods:
      ['has', 'compare'] }] */
 
+// Dependencies
 import TestException from './__TestException__.js';
+
+// 3rd party dependencies
+import './3rdParty/js/__cycle__.js';
 
 class TestHandler {
   // For each setup method, see its usage above its method definition.
@@ -165,7 +169,9 @@ class TestHandler {
   }
 
   compare(object1, object2) {
-    return JSON.stringify(object1) === JSON.stringify(object2);
+    const string1 = JSON.stringify(JSON.decycle(object1));
+    const string2 = JSON.stringify(JSON.decycle(object2))
+    return string1 === string2;
   }
 }
 
