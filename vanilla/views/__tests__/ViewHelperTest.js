@@ -4,7 +4,7 @@ import { ViewHelper } from '../ViewHelper.js';
 export default class ViewHelperTest {
   static enqueue(_) {
     _.Class('ViewHelper', () => {
-      _.method('#constructor', () => {
+      _.method('#constructor / #reset', () => {
         const subject = new ViewHelper();
 
         _.assert(

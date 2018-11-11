@@ -20,6 +20,7 @@ import MatrixTest from './models/__tests__/MatrixTest.js';
 
 // View tests
 import ImageViewTest from './views/IOView/__tests__/ImageViewTest.js';
+import InfoViewTest from './views/LevelView/__tests__/InfoViewTest.js';
 import LevelViewTest from './views/EntryPoints/__tests__/LevelViewTest.js';
 
 // View helper tests
@@ -56,6 +57,7 @@ class Tests {
 
   static enqueueViewTests(_) {
     ImageViewTest.enqueue(_);
+    InfoViewTest.enqueue(_);
     LevelViewTest.enqueue(_);
   }
 

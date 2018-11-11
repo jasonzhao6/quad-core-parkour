@@ -27,6 +27,10 @@ export class ViewHelper {
   //
 
   constructor() {
+    this.reset();
+  }
+
+  reset() {
     // Global state.
     this.store = {
       // SLICE REGISTRY:
