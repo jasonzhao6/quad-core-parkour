@@ -16,6 +16,15 @@ export default class InView {
     `;
   }
 
+  context() {
+    return _.pick('level', [
+      'givenInputX',
+      'givenInputY',
+      'expectedOutputX',
+      'expectedOutputY',
+    ]);
+  }
+
   render() {
     return _.renderBox(this, { label: 'in.x' });
   }

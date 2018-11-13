@@ -45,6 +45,20 @@ export class ViewHelper {
   // Update method
   //
 
+  pick(slice, sliceKeys) {
+    if (!(slice in this.store)) {
+      throw new Error(`Slice '${slice}' is not registered in ViewHelper.`);
+    }
+
+    const partialSlice = {};
+
+    sliceKeys.forEach((key) => {
+      partialSlice[key] = this.store[slice][key];
+    });
+
+    return partialSlice;
+  }
+
   update(slice, sliceProps) {
     if (!(slice in this.store)) {
       throw new Error(`Slice '${slice}' is not registered in ViewHelper.`);
@@ -111,7 +125,7 @@ export class ViewHelper {
     this.bindEvents();
 
     // Delay to avoid rare race condition painting immediately after rendering.
-    setTimeout(() => this.paintDemo(3), 0);
+    // setTimeout(() => this.paintDemo(3), 0);
   }
 
   //

@@ -15,8 +15,7 @@ export default class InfoView {
   }
 
   context() {
-    const { number, title, info } = _.store.level;
-    return { number, title, info };
+    return _.pick('level', ['number', 'title', 'info']);
   }
 
   render() {

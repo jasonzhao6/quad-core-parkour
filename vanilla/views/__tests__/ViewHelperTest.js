@@ -29,6 +29,41 @@ export default class ViewHelperTest {
         );
       });
 
+      _.method('#pick', () => {
+        const subject = new ViewHelper();
+        const slice = 'level';
+        const props = { number: 'number', title: 'title', info: 'info' };
+        const keys = ['title', 'info'];
+
+        _.context('When picking from a slice not registered with store', () => {
+          const error = _.rescue(subject.pick.bind(subject, 'unregistered'));
+
+          _.assert(
+            'It throws an Error',
+            () => error.message.includes('not registered'),
+          );
+        });
+
+        _.context('When updating a slice registered with store', () => {
+          subject.update(slice, props);
+
+          const partialSlice = subject.pick(slice, keys);
+
+          _.assert(
+            'It picks only selected keys',
+            () => Object.keys(partialSlice).join() === keys.join(),
+          );
+
+          _.assert(
+            'It picks corresponding values for each key',
+            () => [
+              partialSlice.title === props.title,
+              partialSlice.info === props.info,
+            ],
+          );
+        });
+      });
+
       _.method('#update', () => {
         const subject = new ViewHelper();
         const slice = 'modes';
