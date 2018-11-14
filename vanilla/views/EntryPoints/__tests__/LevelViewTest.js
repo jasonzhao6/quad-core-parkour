@@ -12,10 +12,18 @@ export default class LevelViewTest {
           _.allow(viewHelperOverride).toReceive('update').andReturn();
 
           // eslint-disable-next-line no-new
-          new LevelView(number, viewHelperOverride);
+          const subject = new LevelView(number, viewHelperOverride);
           _.expect(viewHelperOverride)
             .toHaveReceived('update')
             .withArgs(['level', new Level({ number })]);
+
+          _.assert(
+            'It initializes all the props',
+            () => [
+              subject.number === number,
+              subject._ === viewHelperOverride,
+            ],
+          );
 
           _.assert(
             'It updates the `level` slice of store with Level instance',
@@ -36,6 +44,30 @@ export default class LevelViewTest {
             () => viewHelperOverride.isAsExpected(),
           );
         });
+      });
+
+      _.method('#goBig', () => {
+        const number = 0;
+        const viewHelper = new ViewHelper();
+        const subject = new LevelView(number, viewHelper);
+
+        subject.goBig();
+        const level = subject._.pick('level', [
+          'givenInputX',
+          'givenInputY',
+          'expectedOutputX',
+          'expectedOutputY',
+        ]);
+
+        _.assert(
+          'It resets the `level` store slice with big data set',
+          () => [
+            level.givenInputX.length === 100,
+            level.givenInputY.length === 100,
+            level.expectedOutputX.length === 100,
+            level.expectedOutputY.length === 100,
+          ],
+        );
       });
 
       _.method('#render', () => {

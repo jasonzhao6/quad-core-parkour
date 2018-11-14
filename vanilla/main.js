@@ -8,4 +8,6 @@ import './__Tests__.js';
 // App entry points
 import LevelView from './views/EntryPoints/LevelView.js';
 
-new LevelView(0).renderDom();
+const levelView = new LevelView(0);
+levelView.goBig(); // TODO temp
+levelView.renderDom();

@@ -5,13 +5,19 @@ import { singleton as _ } from '../ViewHelper.js';
 
 export default class InView {
   //
+  // Constants
+  //
+
+  static get MAX_COUNT() { return 16; }
+
+  //
   // Constructor
   //
 
   constructor(label, array, index) {
     // Props
     this.label = label;
-    this.array = array;
+    this.array = Array.of(array).flat().slice(0, InView.MAX_COUNT);
     this.index = index;
   }
 

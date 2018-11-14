@@ -20,8 +20,20 @@ export default class LevelView {
   //
 
   constructor(number, viewHelperOverride) {
-    const viewHelper = viewHelperOverride || _;
-    if (number !== undefined) viewHelper.update('level', new Level({ number }));
+    // Props
+    this.number = number;
+    this._ = viewHelperOverride || _;
+
+    // Load level into global store.
+    if (number !== undefined) this._.update('level', new Level({ number }));
+  }
+
+  //
+  // Stress test
+  //
+
+  goBig() {
+    this._.update('level', new Level({ number: this.number, goBig: true }));
   }
 
   //
