@@ -13,7 +13,7 @@ export default class CoreView {
         <div>sav</div>
         <div>sub left</div>
         <div>jgz keep</div>
-        <div class='--highlight'>pass-thru: mov up down</div>
+        <div class='--invert'>pass-thru: mov up down</div>
         <div>remainder: mov up down</div>
         <div>reverse: mov above acc</div>
         <div>keep: mov left acc</div>

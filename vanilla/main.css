@@ -25,13 +25,13 @@
 /* Global variables */
 :root {
   /* Mirrored to colors.js */
-  --background-color: #181818;
-  --color: #F7F7F7;
+  --background-color: #202020;
+  --color: #F9F9F9;
 
   /* Not mirrored */
-  --background-color-highlight: #37393B;
-  --background-color-lowlight: #262728;
+  --background-color-highlight: #484C4D;
   --color-comment: #5F5A60;
+  --color-shadow: #363A3B;
   --line-height: 12px;
   --size-image: 190px;
 }
@@ -116,6 +116,13 @@ body {
               5px 0 0 var(--background-color-highlight);
 }
 
+.--invert {
+  color: var(--background-color);
+  background-color: var(--color);
+  box-shadow: -5px 0 0 var(--color),
+              5px 0 0 var(--color);
+}
+
 .--noSelect {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -131,12 +138,12 @@ body {
 */
 
 .--button {
-  box-shadow: 4px 4px 0 var(--background-color-highlight);
+  box-shadow: 4px 4px 0 var(--color-shadow);
   cursor: pointer;
 }
 
 .--button.active {
-  background-color: var(--background-color-highlight);
+  background-color: var(--color-shadow);
 }
 
 .--button:hover,

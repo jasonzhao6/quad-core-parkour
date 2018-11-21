@@ -61,6 +61,8 @@ export default class LevelView {
   partials() {
     return {
       // TODO maybe initialize these views in constructor once
+      // and render only when ViewHelper is outputing html
+      // So that we can diff their context instead of rendered html
       actionsView: new ActionsView().render(),
       infoView: new InfoView().render(),
       ioView: new IOView().render(),
