@@ -47,36 +47,36 @@ export default class InView {
   }
 
   context() {
-    // write test, then refactor to following abstraction:
-    // before scroll, trailing ... only, fixed indices
-    // during scroll, leading and trailing ..., dynamic indices
-    // after scroll, leading ... only, fixed indices
+    let startIndex; // Inclusive.
+    let endIndex; // Exclusive.
 
     const startScrollIndex = InView.MAX_COUNT - InView.SCROLL_OFFSET;
     const stopScrollIndex = this.array.length - 1 - InView.SCROLL_OFFSET;
-    let startIndex = 0;
-    let endIndex = this.array.length; // Exclusive, to be passed to slice().
 
-    // We may need to scroll.
-    if (this.array.length > InView.MAX_COUNT) {
-      // When we start scrolling and need a leading `...`.
-      if (this.index >= startScrollIndex) {
-        // Add 1 to account for leading `...`.
-        // Add another 1 to account for current index.
-        startIndex = (this.index - startScrollIndex) + 1 + 1;
-      }
-
-      // Before we stop scrolling and need a trailing `...`.
-      if (this.index < stopScrollIndex) {
-        // Subtract 1 to account for trailing `...`.
-        endIndex = (startIndex + InView.MAX_COUNT) - 1;
-        // Subtract another 1 to account for leading `...`.
-        if (startIndex !== 0) endIndex -= 1;
-      } else {
-        // When we stop scrolling, `startIndex` becomes fixed.
-        // Add 1 to account for leading `...`.
-        startIndex = (this.array.length - InView.MAX_COUNT) + 1;
-      }
+    // No scroll.
+    if (this.array.length <= InView.MAX_COUNT) {
+      startIndex = 0;
+      endIndex = this.array.length;
+    // Scroll: Before.
+    } else if (this.index < startScrollIndex) {
+      startIndex = 0;
+      // Subtract 1 to account for trailing `...`.
+      endIndex = (startIndex + InView.MAX_COUNT) - 1;
+    // Scroll: During.
+    } else if (this.index >= startScrollIndex && this.index < stopScrollIndex) {
+      // Add 1 to account for leading `...`.
+      // Add another 1 to account for current index.
+      startIndex = (this.index - startScrollIndex) + 1 + 1;
+      // Subtract 1 to account for trailing `...`.
+      // Subtract another 1 to account for leading `...`.
+      endIndex = (startIndex + InView.MAX_COUNT) - 1 - 1;
+    // Scroll: After.
+    } else {
+      // When we stop scrolling, `startIndex` becomes fixed.
+      // Add 1 to account for leading `...`.
+      startIndex = (this.array.length - InView.MAX_COUNT) + 1;
+      // Subtract 1 to account for leading `...`.
+      endIndex = (startIndex + InView.MAX_COUNT) - 1;
     }
 
     return {
