@@ -31,7 +31,7 @@ export default class IOView {
     ]);
 
     return {
-      inViewX: new InView('in.x', level.givenInputX, 0).render(),
+      inViewX: new InView('in.x', level.givenInputX, 21).render(),
       inViewY: new InView('in.y', level.givenInputY, 0).render(),
       outViewX: new OutView(level.expectedOutputX, 0).render(),
       outViewY: new OutView(level.expectedOutputY, 0).render(),
